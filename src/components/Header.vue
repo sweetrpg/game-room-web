@@ -13,22 +13,24 @@
     <div class="navbar-menu">
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
-         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Applications
-        </a>
-        <div class="navbar-dropdown">
-        <router-link v-if="isAuthenticated" to="/apps" class="navbar-item">Applications</router-link>
-        </div>
-         </div>
 
-               <div class="navbar-end">
-               <div v-if="!isAuthenticated">
-        <router-link to="/register" class="navbar-item">Sign-up</router-link>
-        <router-link to="/login" class="navbar-item">Login</router-link>
-               </div>
-      </div>
+        <div v-if="isAuthenticated" class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Applications</a>
+          <div class="navbar-dropdown">
+            <router-link to="/apps" class="navbar-item">Applications</router-link>
+          </div>
+        </div>
     </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item" v-if="!isAuthenticated">
+            <div class="buttons">
+              <router-link to="/register" class="button is-primary">Sign-up</router-link>
+              <router-link to="/login" class="button">Login</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
   </nav>
 </template>
 
