@@ -14,6 +14,7 @@
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
 
+<div v-if="!isAuthLoading">
         <div v-if="isAuthenticated" class="navbar-item has-dropdown is-hoverable">
             <router-link to="/apps" class="navbar-link">Applications</router-link>
             <div class="navbar-dropdown">
@@ -22,6 +23,7 @@
         </div>
             <router-link v-if="!isAuthenticated" to="/apps" class="navbar-link">Applications</router-link>
 </div>
+      </div>
 
       <div class="navbar-end">
         <div class="navbar-item" v-if="!isAuthenticated">
@@ -42,15 +44,27 @@
           </div>
         </div>
       </div>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
-  computed: {
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
+  methods: {
+    login() {
+this.$auth.loginWithRedirect();
+    },
+    logout() {
+this.$auth.logout({ returnTo: window.location.origin })
     }
+  },
+  computed: {
+    isAuthLoading() {
+      return this.$auth.loading
+    },
+    isAuthenticated() {
+            return this.$auth.isAuthenticated
+        },
   }
 };
 </script>
