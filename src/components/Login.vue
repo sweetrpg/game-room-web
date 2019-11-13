@@ -10,28 +10,7 @@
         </section>
         <section class="section">
             <div class="container">
-                <div class="field">
-                    <label class="label is-large" for="email">Email:</label>
-                    <div class="control">
-                        <input type="email" class="input is-large" id="email" v-model="email" />
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label is-large" for="password">Password:</label>
-                    <div class="control">
-                        <input
-                            type="password"
-                            class="input is-large"
-                            id="password"
-                            v-model="password"
-                        />
-                    </div>
-                </div>
 
-                <div class="control">
-                    <a class="button is-large is-primary" @click="authenticate">Login</a>
-                    <a class="button is-large is-success" @click="register">Register</a>
-                </div>
             </div>
         </section>
     </div>
