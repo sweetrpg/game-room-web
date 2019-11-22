@@ -2,6 +2,25 @@ import axios from 'axios'
 
 const API_URL = process.env.API_URL
 
+const encounters = [
+{
+    'id': '1',
+    'name': 'Reckoning',
+    'gameSystem': 'dnd5e',
+    'participants': [
+
+    ]
+}
+]
+
+export function fetchEncounters() {
+return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(encounters)
+    }, 300)
+})
+}
+
 export function fetchSurveys() {
     return axios.get(`${API_URL}/surveys/`)
 }

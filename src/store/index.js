@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import of AJAX functions go here
 import {
+    fetchEncounters,
     fetchSurveys,
     fetchSurvey,
     saveSurveyResponse,
@@ -16,6 +17,7 @@ Vue.use(Vuex)
 
 const state = {
     // single source of data
+    encounters: [],
     surveys: [],
     currentSurvey: {},
     user: {},
@@ -24,6 +26,11 @@ const state = {
 
 const actions = {
     // asynchronous operations
+    loadEncounters(context) {
+return fetchEncounters().then((response) => {
+    context.commit('setEncounters', { encounters: response })
+})
+    },
     loadSurveys(context) {
         return fetchSurveys().then((response) => {
             // context.commit('setSurveys', { surveys: response })
@@ -68,6 +75,9 @@ const actions = {
 
 const mutations = {
     // isolated data mutations
+    setEncounters(state, payload) {
+state.encounters = payload.encounters
+    },
     setSurveys(state, payload) {
         state.surveys = payload.surveys
     },
