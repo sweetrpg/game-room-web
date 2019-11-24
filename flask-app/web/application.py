@@ -34,7 +34,7 @@ def create_app(app_name='SURVEY_API'):
     # app.config['VUE_CONFIGURATION'] = {}
     # Vue(app)
 
-    from web.blueprints import auth_blueprint
+    from web.blueprints.auth import auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
     from web.db import db
