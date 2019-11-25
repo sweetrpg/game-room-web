@@ -1,3 +1,0 @@
-
-
-PROFILE_KEY = 'profile'
