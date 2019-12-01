@@ -5,17 +5,17 @@ auth.py
 """
 
 
-from flask import Blueprint
+from flask import Blueprint, current_app
 import json
+import os
 
 
 blueprint = Blueprint("health", __name__)
 
 
-
 @blueprint.route('/')
 def health_check():
-    with open('/static/build-info.json', 'r') as bi:
+    with open(f'/{current_app.static_folder}/build-info.json', 'r') as bi:
         build_info = json.load(bi)
         return build_info
 

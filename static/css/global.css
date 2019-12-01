@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Leander";
+    src: url("/static/fonts/Leander.eot");
+    src: url("/static/fonts/Leander.eot?iefix") format("eot"),
+        url("/static/fonts/Leander.woff") format("woff"),
+        url("/static/fonts/Leander.ttf") format("truetype"),
+        url("/static/fonts/Leander.svg#Leander") format("svg");
+}
+
+body {
+    font-family: "Leander";
+}

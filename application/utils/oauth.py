@@ -3,7 +3,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 
 import os
-from authlib.integrations.flask_client import OAuth
+from authlib.flask.client import OAuth
 from application import constants
 from flask import current_app
 
