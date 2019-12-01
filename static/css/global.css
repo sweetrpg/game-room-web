@@ -10,3 +10,13 @@
 body {
     font-family: "Leander";
 }
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+}
+
+.header-logo {
+    width: 40px;
+    height: 40px;
+}

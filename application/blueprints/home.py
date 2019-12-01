@@ -5,9 +5,11 @@ auth.py
 """
 
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 import json
 import os
+from application import constants
+from . import requires_auth, render_page
 
 
 blueprint = Blueprint("home", __name__)
@@ -15,12 +17,16 @@ blueprint = Blueprint("home", __name__)
 
 @blueprint.route('/')
 def main_page():
-    # with open(f'build-info.json', 'r') as bi:
-    #     build_info = json.load(bi)
-    #     return build_info
-    return render_template('index.html')
+    """
+    Main application page, with generic non-user stuff.
+    """
+    return render_page('index.html')
 
 
 @blueprint.route('/home')
+@requires_auth
 def home_page():
-    return render_template('home.html')
+    """
+    Personal page for the user, with application usage info, etc.
+    """
+    return render_page('home.html')

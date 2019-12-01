@@ -47,6 +47,12 @@ def create_app(app_name=constants.APPLICATION_NAME):
     from application.blueprints.home import blueprint as home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/")
 
+    from application.blueprints.apps import blueprint as apps_blueprint
+    app.register_blueprint(apps_blueprint, url_prefix="/apps")
+
+    from application.blueprints.profile import blueprint as profile_blueprint
+    app.register_blueprint(profile_blueprint, url_prefix="/profile")
+
     from application.blueprints.auth import blueprint as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 

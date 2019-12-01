@@ -5,7 +5,6 @@ auth.py
 """
 
 
-from functools import wraps
 from datetime import datetime, timedelta
 from flask import Blueprint, jsonify, request, current_app, redirect, session, url_for
 from werkzeug.exceptions import HTTPException
@@ -23,16 +22,6 @@ AUTH0_CLIENT_ID = os.environ[constants.AUTH0_CLIENT_ID]
 
 
 blueprint = Blueprint("auth", __name__)
-
-
-def requires_auth(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        if constants.PROFILE_KEY not in session:
-            return redirect('/login')
-        return f(*args, **kwargs)
-
-    return decorated
 
 
 @blueprint.errorhandler(Exception)
@@ -65,10 +54,14 @@ def logout():
 @blueprint.route('/callback')
 def callback_handling():
     current_app.logger.info(f"/callback: {request}")
+    print(request.args)
 
-    auth0.authorize_access_token()
+    token = auth0.authorize_access_token()
+    print(f"token: {token}")
     resp = auth0.get('userinfo')
+    print(f"resp: {resp}")
     userinfo = resp.json()
+    print(f"userinfo: {userinfo}")
 
     session[constants.JWT_PAYLOAD] = userinfo
     session[constants.PROFILE_KEY] = {
