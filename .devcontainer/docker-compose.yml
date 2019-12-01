@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    # Uncomment the next line to use a non-root user. On Linux, this will prevent
+    # new files getting created as root, but you may need to update the USER_UID
+    # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    user: vscode
+
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=sweetrpg
+      - POSTGRES_PW=LocalPassword
+      - POSTGRES_DB=sweetrpg
+      - REDIS_HOST=redis
+
+    hostname: vscode
+
+    volumes:
+      - ..:/workspace
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    links:
+      - db
+      - redis
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: LocalPassword
+
+  redis:
+    image: redis:4
+    restart: unless-stopped
+    ports:
+      - 6379:6379
