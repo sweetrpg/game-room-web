@@ -5,14 +5,19 @@ auth.py
 """
 
 
-from flask import Blueprint, render_template, session
-import json
-import os
-from application import constants
+from flask import Blueprint, jsonify
+from werkzeug.exceptions import HTTPException
 from . import requires_auth, render_page
 
 
 blueprint = Blueprint("home", __name__)
+
+
+@blueprint.errorhandler(Exception)
+def handle_auth_error(ex):
+    response = jsonify(message=str(ex))
+    response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+    return response
 
 
 @blueprint.route('/')

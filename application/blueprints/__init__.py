@@ -29,13 +29,12 @@ def requires_auth(f):
 
 #     return decorated
 
-def render_page(page):
-    context = {}
+def render_page(page, context={}):
     userinfo = session.get(constants.PROFILE_KEY)
     if userinfo:
-        context = {
+        context.update({
             'userinfo': userinfo,
-        }
+        })
     print(f"context: {context}")
 
     return render_template(page, **context)

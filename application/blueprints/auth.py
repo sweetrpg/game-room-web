@@ -14,6 +14,8 @@ from application.models.user import User
 from application import constants
 from application.utils.oauth import auth0
 import os
+from application.models.user import User
+from application.db import db
 
 
 AUTH0_CALLBACK_URL = os.environ[constants.AUTH0_CALLBACK_URL]
@@ -63,12 +65,21 @@ def callback_handling():
     userinfo = resp.json()
     print(f"userinfo: {userinfo}")
 
+    user = User(identity_id=userinfo['sub'], email=userinfo['email'])
+    user.nickname = userinfo['nickname']
+    user.name = userinfo['name']
+    user.avatar_url = userinfo['picture']
+    db.session.add(user)
+    db.session.commit()
+    print(user)
+
     session[constants.JWT_PAYLOAD] = userinfo
     session[constants.PROFILE_KEY] = {
         'user_id': userinfo['sub'],
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
+    session[constants.CURRENT_USER_ID] = user.id
     return redirect('/profile')
 
 

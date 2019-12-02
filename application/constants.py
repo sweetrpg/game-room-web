@@ -15,3 +15,4 @@ SENTRY_DSN = 'SENTRY_DSN'
 APPLICATION_NAME = "sweetrpg-web"
 PROFILE_KEY = 'profile'
 JWT_PAYLOAD = 'jwt_payload'
+CURRENT_USER_ID = 'current_user_id'

@@ -60,6 +60,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
     app.register_blueprint(health_blueprint, url_prefix="/health")
 
     from application.db import db
+    from flask_migrate import Migrate
     db.init_app(app)
+    migrate = Migrate(app, db)
 
     return app
