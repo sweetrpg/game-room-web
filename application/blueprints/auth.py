@@ -26,11 +26,11 @@ AUTH0_CLIENT_ID = os.environ[constants.AUTH0_CLIENT_ID]
 blueprint = Blueprint("auth", __name__)
 
 
-@blueprint.errorhandler(Exception)
-def handle_auth_error(ex):
-    response = jsonify(message=str(ex))
-    response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-    return response
+# @blueprint.errorhandler(Exception)
+# def handle_auth_error(ex):
+#     response = jsonify(message=str(ex))
+#     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+#     return response
 
 
 @blueprint.route('/login')
@@ -65,12 +65,15 @@ def callback_handling():
     userinfo = resp.json()
     print(f"userinfo: {userinfo}")
 
-    user = User(identity_id=userinfo['sub'], email=userinfo['email'])
-    user.nickname = userinfo['nickname']
-    user.name = userinfo['name']
-    user.avatar_url = userinfo['picture']
-    db.session.add(user)
-    db.session.commit()
+    user = User.query.filter_by(email=userinfo['email']).first()
+    if not user:
+        user = User(identity_id=userinfo['sub'], email=userinfo['email'])
+        user.nickname = userinfo['nickname']
+        user.name = userinfo['name']
+        # https://www.gravatar.com/avatar/#(gravatarHash)?s=30
+        user.avatar_url = userinfo['picture']
+        db.session.add(user)
+        db.session.commit()
     print(user)
 
     session[constants.JWT_PAYLOAD] = userinfo

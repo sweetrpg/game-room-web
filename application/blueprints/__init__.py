@@ -4,7 +4,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 
 from functools import wraps
-from flask import redirect, session, render_template
+from flask import redirect, session, render_template, request
 from application import constants
 
 
@@ -29,10 +29,24 @@ def requires_auth(f):
 
 #     return decorated
 
+def error_page(message, code):
+    context = {
+        'code': code,
+        'message': message,
+    }
+    return render_page('error.html', context)
+
+
 def render_page(page, context={}):
+
+    show_cookie_message = True
+    if request.cookies.get('cookies-accepted'):
+        show_cookie_message = False
+
     userinfo = session.get(constants.PROFILE_KEY)
     if userinfo:
         context.update({
+            'showCookieMessage': show_cookie_message,
             'userinfo': userinfo,
         })
     print(f"context: {context}")

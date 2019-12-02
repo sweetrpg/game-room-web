@@ -8,19 +8,21 @@ auth.py
 from flask import Blueprint, jsonify
 from werkzeug.exceptions import HTTPException
 from . import requires_auth, render_page
+from application.cache import cache
 
 
 blueprint = Blueprint("home", __name__)
 
 
-@blueprint.errorhandler(Exception)
-def handle_auth_error(ex):
-    response = jsonify(message=str(ex))
-    response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-    return response
+# @blueprint.errorhandler(Exception)
+# def handle_auth_error(ex):
+#     response = jsonify(message=str(ex))
+#     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+#     return response
 
 
 @blueprint.route('/')
+@cache.cached(timeout=50)
 def main_page():
     """
     Main application page, with generic non-user stuff.
@@ -30,6 +32,7 @@ def main_page():
 
 @blueprint.route('/home')
 @requires_auth
+@cache.cached(timeout=50)
 def home_page():
     """
     Personal page for the user, with application usage info, etc.

@@ -15,6 +15,7 @@ Flask-DotEnv==0.1.2
 Flask-Migrate==2.5.2
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.1
+Flask-Vue==0.3.5
 idna==2.8
 isort==4.3.21
 itsdangerous==1.1.0

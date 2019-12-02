@@ -7,10 +7,13 @@ main.py
 
 from flask import Flask
 from flask_cors import CORS
+from flask_vue import Vue
 from dotenv import load_dotenv, find_dotenv
 from application.cache import cache
 from application import constants
 from logging.config import dictConfig
+from application.blueprints import error_page
+from werkzeug.exceptions import HTTPException
 
 
 ENV_FILE = find_dotenv()
@@ -63,5 +66,12 @@ def create_app(app_name=constants.APPLICATION_NAME):
     from flask_migrate import Migrate
     db.init_app(app)
     migrate = Migrate(app, db)
+
+    vue = Vue(app)
+
+    @app.errorhandler(Exception)
+    def handle_error(ex):
+        code = (ex.code if isinstance(ex, HTTPException) else 500)
+        return error_page(str(ex), code)
 
     return app

@@ -24,4 +24,8 @@ class BaseConfig(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'seekrat'
     CACHE_REDIS_HOST = os.environ['REDIS_HOST']
     CACHE_REDIS_PORT = int(os.environ.get('REDIS_PORT') or 6379)
-    CACHE_REDIS_DB = int(os.environ.get('REDIS_DB') or 86)
+    # CACHE_REDIS_DB = int(os.environ.get('REDIS_DB') or 7)
+    VUE_USE_MINIFIED = True
+    VUE_CDN_FORCE_SSL = True
+    VUE_LOCAL_SUBDOMAIN = None
+    VUE_CONFIGURATION = {}
