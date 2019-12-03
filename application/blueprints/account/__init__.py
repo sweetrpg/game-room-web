@@ -1,16 +1,16 @@
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
-profile.py
-- User profile endpoints.
+account.py
+- User account endpoints.
 """
 
 
 from flask import Blueprint, jsonify
 from werkzeug.exceptions import HTTPException
-from . import render_page, requires_auth
+from application.blueprints import requires_auth, render_page
 
 
-blueprint = Blueprint("profile", __name__)
+blueprint = Blueprint("account", __name__)
 
 
 # @blueprint.errorhandler(Exception)
@@ -23,10 +23,16 @@ blueprint = Blueprint("profile", __name__)
 @blueprint.route('/')
 @requires_auth
 def main_page():
-    return render_page('profile/main.html')
+    return render_page('account/main.html')
 
 
 @blueprint.route('/settings')
 @requires_auth
-def home_page():
-    return render_page('profile/settings.html')
+def settings():
+    return render_page('account/settings.html')
+
+
+@blueprint.route('/email')
+@requires_auth
+def change_email_request():
+    return render_page('account/email.html')

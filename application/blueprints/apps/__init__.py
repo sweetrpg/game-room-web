@@ -10,7 +10,7 @@ from werkzeug.exceptions import HTTPException
 import json
 import os
 from application import constants
-from . import render_page, requires_auth
+from .. import render_page, requires_auth
 
 
 blueprint = Blueprint("apps", __name__)
@@ -27,3 +27,6 @@ blueprint = Blueprint("apps", __name__)
 @requires_auth
 def initiative_app():
     return render_page('apps/initiative/main.html')
+
+
+from .encounters import *

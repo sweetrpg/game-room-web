@@ -34,7 +34,7 @@ def error_page(message, code):
         'code': code,
         'message': message,
     }
-    return render_page('error.html', context)
+    return render_page('errors/error.html', context)
 
 
 def render_page(page, context={}):

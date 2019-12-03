@@ -14,7 +14,7 @@
 </head>
 
 <body>
-{% include 'header.html' %}
+{% include 'partials/header.html' %}
 
 <div class="container mt-3">
     {% block content %}
@@ -34,7 +34,7 @@
 <script src="/static/js/cookies.js"></script>
 {% endif %}
 
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 
     <script src="/static/js/common.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -47,7 +47,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7d8cfc191d.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 {% block scripts %}{% endblock %}
     </body>
 

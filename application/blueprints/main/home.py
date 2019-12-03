@@ -7,7 +7,7 @@ auth.py
 
 from flask import Blueprint, jsonify
 from werkzeug.exceptions import HTTPException
-from . import requires_auth, render_page
+from application.blueprints import requires_auth, render_page
 from application.cache import cache
 
 

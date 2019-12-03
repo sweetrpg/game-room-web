@@ -83,7 +83,7 @@ def callback_handling():
         'picture': userinfo['picture']
     }
     session[constants.CURRENT_USER_ID] = user.id
-    return redirect('/profile')
+    return redirect('/account')
 
 
 # from . import login, register

@@ -47,19 +47,22 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-    from application.blueprints.home import blueprint as home_blueprint
+    from application.blueprints.main.home import blueprint as home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/")
+
+    from application.blueprints.api import blueprint as api_blueprint
+    app.register_blueprint(api_blueprint, url_prefix="/api/v1")
 
     from application.blueprints.apps import blueprint as apps_blueprint
     app.register_blueprint(apps_blueprint, url_prefix="/apps")
 
-    from application.blueprints.profile import blueprint as profile_blueprint
-    app.register_blueprint(profile_blueprint, url_prefix="/profile")
+    from application.blueprints.account import blueprint as account_blueprint
+    app.register_blueprint(account_blueprint, url_prefix="/account")
 
     from application.blueprints.auth import blueprint as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
-    from application.blueprints.health import blueprint as health_blueprint
+    from application.blueprints.main.health import blueprint as health_blueprint
     app.register_blueprint(health_blueprint, url_prefix="/health")
 
     from application.db import db
@@ -73,5 +76,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
     def handle_error(ex):
         code = (ex.code if isinstance(ex, HTTPException) else 500)
         return error_page(str(ex), code)
+
+    print(app.url_map)
 
     return app

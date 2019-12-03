@@ -46,3 +46,7 @@ footer, nav {
   background-color: black;
   color: lightgrey;
 }
+
+.card {
+  margin-left: 20px;
+}
