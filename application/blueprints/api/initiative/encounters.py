@@ -5,19 +5,36 @@ encounters.py
 """
 
 
+from flask import session, jsonify, request, current_app
 from application.blueprints.api import blueprint
+from application import constants
+from application.models.initiative.encounter import Encounter
+from application.blueprints.api import user_required
+from application.db import db
 
 
-@blueprint.route('/encounters')
-def get_encounters():
+@blueprint.route('/encounters', methods=['GET'])
+@user_required
+def get_encounters(current_user):
+    current_app.logger.debug(f"GET /encounters: {request}, current_user: {current_user}")
+    user_id = current_user.id
+    current_app.logger.debug(f"user_id: {user_id}")
+    encounters = Encounter.query.filter_by(creator_id=user_id)
+    current_app.logger.debug(f"encounters: {encounters}")
     return {
-        'encounters': [
-        {
-            'id': "1",
-            'name': "TODO",
-            'gameSystem': "dnd5e",
-            'participantCount': 3,
-            'isFavorite': False
-        }
-    ]
+        'encounters': [e.to_dict() for e in encounters],
     }
+
+
+@blueprint.route('/encounters', methods=['POST'])
+@user_required
+def create_encounter(current_user):
+    data = request.get_json()
+
+    encounter = Encounter(name=data['name'], gameSystem=data['game_system'])
+    encounter.creator_id = current_user.id
+
+    db.session.add(encounter)
+    db.session.commit()
+
+    return jsonify(encounter.to_dict()), 201

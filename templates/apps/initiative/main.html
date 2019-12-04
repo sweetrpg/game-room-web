@@ -1,20 +1,30 @@
 {% extends 'layout/base.html' %}
 
-{% block title %}Initiative{% endblock %}
+{% set appname = "Initiative!" %}
 
-{% block application %}
-    <li class="nav-item">
-        <a class="disabled" href="#" tabindex="-1" aria-disabled="true">Initiative!</a>
-    </li>
-{% endblock %}
+{% block title %}Initiative{% endblock %}
 
 {% block css %}
 {% endblock %}
 
 {% block content %}
 
+<div class="btn-group" role="group">
+    <button id="btnGroupCreate" type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-plus-square"></i>
+    Create
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupCreate">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createEncounterDialog">Encounter</a>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createGroupDialog">Group</a>
+    </div>
+</div>
+
 <div id="app">
 {% raw %}
+<create-encounter-dialog />
+<create-group-dialog />
 <encounter-list />
 {% endraw %}
 </div>
@@ -23,10 +33,13 @@
 
 {% block scripts %}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vuex"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+<!-- <script src="/static/vue/vue.js"></script>
+<script src="/static/vue/vuex.js"></script> -->
 <script src="/static/js/apps/initiative/common.js"></script>
+<script src="/static/components/initiative/CreateEncounterDialog.js"></script>
+<script src="/static/components/initiative/CreateGroupDialog.js"></script>
 <script src="/static/components/initiative/EncounterItem.js"></script>
 <script src="/static/components/initiative/EncounterList.js"></script>
 <script src="/static/js/apps/initiative/main.js"></script>

@@ -20,21 +20,6 @@ class User(db.Model):
     def __init__(self, identity_id, email):
         self.email = email
         self.identity_id = identity_id
-        # self.password = generate_password_hash(password, method='sha256')
-
-    # @classmethod
-    # def authenticate(cls, **kwargs):
-    #     email = kwargs.get('email')
-    #     # password = kwargs.get('password')
-
-    #     if not email or not password:
-    #         return None
-
-    #     user = cls.query.filter_by(email=email).first()
-    #     if not user or not check_password_hash(user.password, password):
-    #         return None
-
-    #     return user
 
     def to_dict(self):
         return dict(id=self.id,

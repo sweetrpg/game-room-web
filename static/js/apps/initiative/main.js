@@ -1,10 +1,10 @@
 
-$("#create-group-button").click(function () {
-  $("#create-group-modal").modal({ show: true });
-});
+// $("#create-group-button").click(function () {
+//   $("#create-group-modal").modal({ show: true });
+// });
 
 Vue.config.devtools = true;
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
 const storeState = {
   encounters: [],
@@ -48,6 +48,8 @@ const vm = new Vue({
   store: store,
   components: {
     'encounter-list': EncounterList,
+    'create-encounter-dialog': CreateEncounterDialog,
+    'create-group-dialog': CreateGroupDialog,
   },
   data: {
   },

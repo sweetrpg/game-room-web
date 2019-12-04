@@ -5,7 +5,8 @@ main.py
 """
 
 
-from flask import Flask
+from flask import Flask, session
+from flask_session import Session
 from flask_cors import CORS
 from flask_vue import Vue
 from dotenv import load_dotenv, find_dotenv
@@ -14,6 +15,7 @@ from application import constants
 from logging.config import dictConfig
 from application.blueprints import error_page
 from werkzeug.exceptions import HTTPException
+from redis.client import Redis
 
 
 ENV_FILE = find_dotenv()
@@ -45,6 +47,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
     # env = DotEnv(app)
     cache.init_app(app)
 
+    session = Session(app)
+
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
     from application.blueprints.main.home import blueprint as home_blueprint
@@ -71,11 +75,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
     migrate = Migrate(app, db)
 
     vue = Vue(app)
-
-    @app.errorhandler(Exception)
-    def handle_error(ex):
-        code = (ex.code if isinstance(ex, HTTPException) else 500)
-        return error_page(str(ex), code)
 
     print(app.url_map)
 

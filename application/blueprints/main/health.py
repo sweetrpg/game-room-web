@@ -8,16 +8,16 @@ auth.py
 from flask import Blueprint, current_app, jsonify
 from werkzeug.exceptions import HTTPException
 import json
+from application.blueprints import error_page
 
 
 blueprint = Blueprint("health", __name__)
 
 
-# @blueprint.errorhandler(Exception)
-# def handle_auth_error(ex):
-#     response = jsonify(message=str(ex))
-#     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-#     return response
+@blueprint.errorhandler(Exception)
+def handle_error(ex):
+    code = (ex.code if isinstance(ex, HTTPException) else 500)
+    return error_page(str(ex), code)
 
 
 @blueprint.route('/')

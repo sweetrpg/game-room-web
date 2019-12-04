@@ -14,6 +14,7 @@ Flask-Cors==3.0.8
 Flask-DotEnv==0.1.2
 Flask-Migrate==2.5.2
 Flask-Script==2.0.6
+Flask-Session==0.3.1
 Flask-SQLAlchemy==2.4.1
 Flask-Vue==0.3.5
 idna==2.8

@@ -6,6 +6,7 @@ config.py
 
 
 import os
+import redis
 
 
 class BaseConfig(object):
@@ -29,3 +30,5 @@ class BaseConfig(object):
     VUE_CDN_FORCE_SSL = True
     VUE_LOCAL_SUBDOMAIN = None
     VUE_CONFIGURATION = {}
+    SESSION_TYPE = 'redis'
+    SESSION_REDIS = redis.from_url(f"redis://{os.environ['REDIS_HOST']}:{int(os.environ.get('REDIS_PORT') or 6379)}")

@@ -10,6 +10,12 @@ from flask_migrate import Migrate, MigrateCommand
 
 from application.main import create_app
 from application.db import db
+from application.models.common.game_system import GameSystem, GameSystemFacetDatum, GameSystemImageDatum
+from application.models.initiative.condition import Condition, ConditionHealthAdjustment
+from application.models.initiative.encounter import Encounter, EncounterParticipant, EncounterParticipantGroup, EncounterParticipantHealthDatum, EncounterParticipantMetrics, EncounterParticipantTurnData, EncounterRegion, EncounterSession, EncounterSessionTimelineEntry
+from application.models.initiative.group import EncounterGroup
+from application.models.initiative.participant import Participant, ParticipantGroup, ParticipantHealthDatum
+from application.models.user import User
 
 app = create_app()
 
@@ -25,7 +31,12 @@ manager.add_command('db', MigrateCommand)
 @manager.shell
 def shell_ctx():
     return dict(app=app,
-                db=db)
+                db=db,
+                GameSystem=GameSystem, GameSystemFacetDatum=GameSystemFacetDatum, GameSystemImageDatum=GameSystemImageDatum,
+                Condition=Condition, ConditionHealthAdjustment=ConditionHealthAdjustment,
+                Encounter=Encounter, EncounterParticipant=EncounterParticipant, EncounterParticipantGroup=EncounterParticipantGroup, EncounterParticipantHealthDatum=EncounterParticipantHealthDatum, EncounterParticipantMetrics=EncounterParticipantMetrics, EncounterParticipantTurnData=EncounterParticipantTurnData, EncounterRegion=EncounterRegion, EncounterSession=EncounterSession, EncounterSessionTimelineEntry=EncounterSessionTimelineEntry,
+                EncounterGroup=EncounterGroup,
+                Participant=Participant, ParticipantGroup=ParticipantGroup, ParticipantHealthDatum=ParticipantHealthDatum)
 
 
 if __name__ == '__main__':
