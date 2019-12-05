@@ -3,13 +3,45 @@
 //   $("#create-group-modal").modal({ show: true });
 // });
 
+function getRandomName(type) {
+  axios.get(`/api/v1/random/name?type=${type}`)
+  .then(function (response) {
+    console.log(response);
+$('#encounterName').val(response.data.name).focus();
+  })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+}
+
+function validateNewEncounter() {
+
+}
+
 Vue.config.devtools = true;
 // Vue.use(Vuex);
 
 const storeState = {
   encounters: [],
+  gameSystems: [],
 };
 const storeActions = {
+  fetchGameSystems(context) {
+    axios.get('/api/v1/gamesystems')
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        context.commit('setGameSystems', { gameSystems: response.data.game_systems })
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+  },
   fetchEncounters(context) {
     axios.get('/api/v1/encounters')
       .then(function (response) {
@@ -27,6 +59,10 @@ const storeActions = {
   }
 };
 const storeMutations = {
+  setGameSystems: function (state, payload) {
+    console.log(payload);
+    state.gameSystems = payload.gameSystems;
+  },
   setEncounters: function (state, payload) {
     console.log(payload);
     state.encounters = payload.encounters;
@@ -56,3 +92,7 @@ const vm = new Vue({
 });
 
 window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = vm.constructor
+
+$('#createEncounterDialog').on('shown.bs.modal', function () {
+  $('#encounterName').focus();
+})

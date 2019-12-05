@@ -28,7 +28,12 @@ class GameSystem(db.Model):
 
     def to_dict(self):
         return dict(id=self.id,
+                    key=self.key,
                     name=self.name,
+                    full_name=self.full_name,
+                    edition=self.edition,
+                    details=self.details,
+                    facets=self.facets,
                     creator_id=self.creator_id,
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'))
