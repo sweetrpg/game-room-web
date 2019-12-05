@@ -1,27 +1,78 @@
 
 const CreateEncounterDialog = {
-    name: 'create-encounter-dialog',
-    data: function() {
-        return {
-            name: '',
-            gameSystem: '',
-            ordering: '',
-            theme: '',
-        }
-    },
-    computed: {
-gameSystems: function() {
-        return this.$store.state.gameSystems;
-}
-    },
-    methods: {
-      },
+  name: 'create-encounter-dialog',
+  data: function () {
+    return {
+      name: '',
+      gameSystem: 'none',
+      ordering: 'high-to-low',
+      theme: '',
+    }
+  },
+  computed: {
+    gameSystems: function () {
+      return this.$store.state.gameSystems;
+    }
+  },
+  methods: {
+    getRandomName: function() {
+      console.log("getRandomName");
+      axios.get('/api/v1/random/name?type=group')
+        .then((response) => {
+          console.log(response);
+          console.log(this);
+          this.name = response.data.name;
+          $('#encounterName').val(response.data.name).focus();
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
+},
+    submitEncounter: function () {
+      console.log("submitEncounter");
+      console.log(this);
+
+      // validate form data
+      if(this.name.length == 0) {
+$('#createEncounterName').addClass('border border-danger');
+        $('#createEncounterFeedback').html('An encounter name is required!').show();
+        return
+      }
+
+      // clear any warnings
+      $('#createEncounterName').removeClass('border border-danger');
+      $('#createEncounterFeedback').hide();
+      $('#createEncounterProgress').show();
+
+      // submit
+      axios.post('/api/v1/encounters', {
+        name: this.name,
+        gameSystem: this.gameSystem,
+        ordering: this.ordering,
+        theme: this.theme
+      })
+        .then((response) => {
+          console.log(response);
+          const id = response.data.id
+          window.location = `/apps/initiative/encounters/${id}`
+        })
+        .catch((error) => {
+          console.log(error);
+          $('#createEncounterProgress').hide();
+          // display error to user
+          $('#createEncounterFeedback').html(error).show();
+        })
+        .finally(() => {
+        })
+    }
+  },
   beforeMount: function () {
     console.log('Fetching game systems');
     this.$store.dispatch('fetchGameSystems')
   },
-    template: `
-<div class="modal fade" id="createEncounterDialog" tabindex="-1" role="dialog" aria-labelledby="createEncounterModalLabel" aria-hidden="true">
+  template: `
+<div class="modal fade shadow p-3 rounded" id="createEncounterDialog" tabindex="-1" role="dialog" aria-labelledby="createEncounterModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,13 +86,15 @@ gameSystems: function() {
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="encounterName">Name</label>
+                <label class="input-group-text" for="createEncounterName">Name</label>
               </div>
-              <input type="text" class="form-control" id="encounterName" aria-describedby="nameHelp" placeholder="..." autofocus>
+              <input type="text" id="createEncounterName"
+                     v-model="name"
+                     class="form-control" aria-describedby="nameHelp" placeholder="...">
               <div class="input-group-append">
                 <button id="button-random-name"
                         class="btn btn-outline-secondary input-group-text" type="button"
-                        onclick="getRandomName('group')">
+                        v-on:click="getRandomName">
                   <img src="/static/images/button-reset.png" alt="Random" />
                 </button>
               </div>
@@ -54,9 +107,11 @@ gameSystems: function() {
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="gameSystem">Ordering</label>
+                <label class="input-group-text" for="createEncounterOrdering">Ordering</label>
               </div>
-              <select class="form-control custom-select" id="ordering" aria-describedby="orderingHelp">
+              <select id="createEncounterOrdering"
+                      v-model="ordering"
+                      class="form-control custom-select" aria-describedby="orderingHelp">
                 <option value="high-to-low" selected>High-to-low</option>
                 <option value="low-to-high">Low-to-high</option>
                 <option value="pc-v-adversary">PC vs Adversary Grouping</option>
@@ -76,9 +131,11 @@ gameSystems: function() {
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="gameSystem">Game System</label>
+                <label class="input-group-text" for="createEncounterGameSystem">Game System</label>
               </div>
-              <select class="form-control custom-select" id="gameSystem" aria-describedby="gameSystemHelp">
+              <select id="createEncounterGameSystem"
+                      v-model="gameSystem"
+                      class="form-control custom-select" aria-describedby="gameSystemHelp">
                 <option value="none" selected>None</option>
                 <option v-for="gs in gameSystems" v-bind:value="gs.key">{{ gs.name }}</option>
               </select>
@@ -88,11 +145,21 @@ gameSystems: function() {
             that understands the rules of the system.
             </small>
           </div>
+
+          <!-- errors/info -->
+          <div class="form-group">
+          <div class="progress" id="createEncounterProgress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>
+<div id="createEncounterFeedback" class="alert alert-danger" role="alert">
+  A simple danger alert—check it out!
+</div>
+          </div>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Create</button>
+          <button type="button" @click="submitEncounter" class="btn btn-primary">Create</button>
         </div>
       </form>
     </div>

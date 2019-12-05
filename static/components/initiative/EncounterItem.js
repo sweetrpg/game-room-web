@@ -11,21 +11,16 @@ const EncounterItem = {
     },
     data() {
         return {
-            id: "",
-            name: "Reckoning",
-            gameSystem: "dnd5e",
-            participantCount: 3,
-            isFavorite: false
         };
     },
   template: `
  <div class="card" style="width: 18rem;">
     <img src="/static/images/encounter-default.png" class="card-img-top" alt="..." />
     <div class="card-body">
-      <h2 class="card-title">{{ name }}</h2>
-      <p class="card-text">D&amp;D 5e &mdash; {{ participantCount }} participants</p>
+      <h2 class="card-title">{{ encounter.name }}</h2>
+      <p class="card-text">{{ encounter.game_system.name }} &mdash; {{ encounter.participants }} participants</p>
       <p class="card-text">
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Last updated {{ encounter.updated_at }}</small>
       </p>
       <div class="container">
         <div class="left">

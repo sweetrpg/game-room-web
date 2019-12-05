@@ -3,22 +3,6 @@
 //   $("#create-group-modal").modal({ show: true });
 // });
 
-function getRandomName(type) {
-  axios.get(`/api/v1/random/name?type=${type}`)
-  .then(function (response) {
-    console.log(response);
-$('#encounterName').val(response.data.name).focus();
-  })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-}
-
-function validateNewEncounter() {
-
-}
-
 Vue.config.devtools = true;
 // Vue.use(Vuex);
 

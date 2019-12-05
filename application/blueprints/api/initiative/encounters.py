@@ -9,6 +9,7 @@ from flask import session, jsonify, request, current_app
 from application.blueprints.api import blueprint
 from application import constants
 from application.models.initiative.encounter import Encounter
+from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
 
@@ -29,9 +30,29 @@ def get_encounters(current_user):
 @blueprint.route('/encounters', methods=['POST'])
 @user_required
 def create_encounter(current_user):
-    data = request.get_json()
+    current_app.logger.debug(f"POST /encounters: {request}, current_user: {current_user}")
 
-    encounter = Encounter(name=data['name'], gameSystem=data['game_system'])
+    data = request.get_json()
+    current_app.logger.debug(f"data: {data}")
+
+    name = data.get('name')
+    if not name:
+        return {'error': "'name' not provided"}, 400
+    game_system_key = data.get('gameSystem')
+    if not game_system_key:
+        return {
+            'code': 'missing_attribute',
+            'attribute': 'gameSystem',
+            'message': "'gameSystem' not provided",
+            }, 400
+
+    game_system = GameSystem.query.filter_by(key=game_system_key).first()
+    if not game_system:
+        return {'error': f"Game system '{game_system_key}' not found'"}, 400
+
+    encounter = Encounter(name=name, game_system=game_system)
+    encounter.ordering = data.get('ordering') or 'high-to-low'
+    # TODO: theme as a flag value
     encounter.creator_id = current_user.id
 
     db.session.add(encounter)

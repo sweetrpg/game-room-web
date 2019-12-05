@@ -6,6 +6,7 @@ encounter.py
 
 from datetime import datetime
 from application.db import db
+from application.models.user import User
 from application.models.common.game_system import GameSystem
 from .participant import Participant
 from .group import EncounterGroup
@@ -33,15 +34,19 @@ class Encounter(db.Model):
         self.game_system_id = game_system.id
 
     def to_dict(self):
+        creator = User.query.filter_by(id=self.creator_id).first()
+        game_system = GameSystem.query.filter_by(id=self.game_system_id).first()
+
         return dict(id=self.id,
-                    creator_id=self.creator_id,
+                    creator=creator.to_dict(),
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                     name=self.name,
                     notes=self.notes,
                     category=self.category,
                     flags=self.flags,
-                    game_system_id=self.game_system_id)
+                    game_system=game_system.to_dict(),
+                    participants=[])
                     # TODO: participants=[p.to_dict() for p in self.participants])
                     # TODO: map_ids=[m.id for m in self.maps])
 
