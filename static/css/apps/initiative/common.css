@@ -12,3 +12,12 @@
   padding-right: 15px;
   padding-left: 15px;
 }
+
+button > img, a.dropdown-item > img {
+width: 40px;
+height: 40px;
+}
+
+.btn-group {
+  margin-right: 10px;
+}

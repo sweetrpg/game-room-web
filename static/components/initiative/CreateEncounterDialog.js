@@ -1,7 +1,7 @@
 
 const CreateEncounterDialog = {
   name: 'create-encounter-dialog',
-  data: function () {
+  data() {
     return {
       name: '',
       gameSystem: 'none',
@@ -10,32 +10,32 @@ const CreateEncounterDialog = {
     }
   },
   computed: {
-    gameSystems: function () {
+    gameSystems() {
       return this.$store.state.gameSystems;
     }
   },
   methods: {
-    getRandomName: function() {
+    getRandomName() {
       console.log("getRandomName");
       axios.get('/api/v1/random/name?type=group')
         .then((response) => {
           console.log(response);
           console.log(this);
           this.name = response.data.name;
-          $('#encounterName').val(response.data.name).focus();
+          $('#createEncounterName').val(response.data.name).focus();
         })
         .catch((error) => {
           // handle error
           console.log(error);
         })
-},
-    submitEncounter: function () {
+    },
+    submitEncounter() {
       console.log("submitEncounter");
       console.log(this);
 
       // validate form data
-      if(this.name.length == 0) {
-$('#createEncounterName').addClass('border border-danger');
+      if (this.name.length == 0) {
+        $('#createEncounterName').addClass('border border-danger');
         $('#createEncounterFeedback').html('An encounter name is required!').show();
         return
       }
@@ -67,7 +67,7 @@ $('#createEncounterName').addClass('border border-danger');
         })
     }
   },
-  beforeMount: function () {
+  beforeMount() {
     console.log('Fetching game systems');
     this.$store.dispatch('fetchGameSystems')
   },
@@ -148,12 +148,12 @@ $('#createEncounterName').addClass('border border-danger');
 
           <!-- errors/info -->
           <div class="form-group">
-          <div class="progress" id="createEncounterProgress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-</div>
-<div id="createEncounterFeedback" class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div>
+            <div class="progress" id="createEncounterProgress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+            <div id="createEncounterFeedback" class="alert alert-danger" role="alert">
+              Danger, Will Robinson!
+            </div>
           </div>
         </div>
 

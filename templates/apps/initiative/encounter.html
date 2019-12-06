@@ -1,0 +1,59 @@
+{% extends 'layout/base.html' %}
+
+{% set appname = "Initiative!" %}
+
+{% block title %}{{ name }} &ndash; Initiative{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/apps/initiative/common.css" />
+<link rel="stylesheet" href="/static/css/apps/initiative/encounter.css" />
+{% endblock %}
+
+{% block content %}
+
+<data id="encounterId" value="{{ id }}" />
+
+{% raw %}
+<div id="app">
+    <div>
+        <encounter-info />
+    </div>
+    <div>
+        <messages />
+    </div>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col align-self-start">
+                <encounter-toolbar />
+            </div>
+            <div class="col align-self-end">
+                <encounter-action-bar />
+            </div>
+        </div>
+    </div>
+    <div>
+        <add-participant-dialog />
+    </div>
+    <div>
+        <encounter-participant-list />
+    </div>
+</div>
+{% endraw %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+<script src="/static/js/apps/initiative/common.js"></script>
+<script src="/static/components/Messages.js"></script>
+<script src="/static/components/initiative/encounter/ActionBar.js"></script>
+<script src="/static/components/initiative/encounter/Toolbar.js"></script>
+<script src="/static/components/initiative/encounter/EncounterInfo.js"></script>
+<script src="/static/components/initiative/encounter/AddParticipantDialog.js"></script>
+<script src="/static/components/initiative/encounter/Participant.js"></script>
+<script src="/static/components/initiative/encounter/ParticipantList.js"></script>
+<script src="/static/js/apps/initiative/encounter.js"></script>
+{% endblock %}

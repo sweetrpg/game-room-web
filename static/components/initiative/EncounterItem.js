@@ -25,10 +25,10 @@ const EncounterItem = {
     <div class="container">
       <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group" role="group" aria-label="Action group">
-          <a href="/apps/initiative/encounters/{{ encounter.id }}" class="btn btn-primary">Open</a>
+          <a v-bind:href="'/apps/initiative/encounters/' + encounter.id" class="btn btn-primary">Open</a>
         </div>
         <div class="btn-group" role="group" aria-label="Separator group">
-        &nbsp;
+          &nbsp;
         </div>
         <div class="btn-group" role="group" aria-label="Metadata group">
           <div class="btn btn-secondary favorite-button">

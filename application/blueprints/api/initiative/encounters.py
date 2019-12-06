@@ -12,6 +12,7 @@ from application.models.initiative.encounter import Encounter
 from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
+from werkzeug.exceptions import Forbidden
 
 
 @blueprint.route('/encounters', methods=['GET'])
@@ -24,6 +25,21 @@ def get_encounters(current_user):
     current_app.logger.debug(f"encounters: {encounters}")
     return {
         'encounters': [e.to_dict() for e in encounters],
+    }
+
+
+@blueprint.route('/encounters/<int:encounter_id>', methods=['GET'])
+@user_required
+def get_encounter(current_user, encounter_id: int):
+    current_app.logger.debug(f"GET /encounters: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
+    user_id = current_user.id
+    current_app.logger.debug(f"user_id: {user_id}")
+    encounter = Encounter.query.filter_by(id=encounter_id).first()
+    if encounter.creator_id != user_id:
+        raise Forbidden("You are not allowed to access this encounter")
+    current_app.logger.debug(f"encounter: {encounter}")
+    return {
+        'encounter': encounter.to_dict(),
     }
 
 

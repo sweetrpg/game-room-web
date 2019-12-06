@@ -78,5 +78,5 @@ const vm = new Vue({
 window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = vm.constructor
 
 $('#createEncounterDialog').on('shown.bs.modal', function () {
-  $('#encounterName').focus();
+  $('#createEncounterName').focus();
 })

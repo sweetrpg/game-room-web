@@ -4,18 +4,18 @@ const EncounterList = {
     components: {
         'encounter-item': EncounterItem,
     },
-    data: function () {
+    data() {
         return {
         }
     },
     computed: {
-        encounters: function () {
+        encounters() {
             return this.$store.state.encounters;
         },
     },
     methods: {
     },
-    beforeMount: function () {
+    beforeMount() {
         console.log('Fetching encounters');
         this.$store.dispatch('fetchEncounters')
     },
