@@ -1,0 +1,58 @@
+#button-random-name img {
+    height: 18px;
+    width: 18px;
+}
+
+img.participant-type {
+    height: 24px;
+    width: 24px;
+}
+
+#addParticipantProgress {
+    display: none;
+}
+
+#addParticipantFeedback {
+    display: none;
+    width: 100%;
+}
+
+#editParticipantProgress {
+    display: none;
+}
+
+#editParticipantFeedback {
+    display: none;
+    width: 100%;
+}
+
+#editParticipantOrderProgress {
+    display: none;
+}
+
+#editParticipantOrderFeedback {
+    display: none;
+    width: 100%;
+}
+
+.encounter-participant {
+    margin-bottom: 10px;
+}
+
+.encounter-participant-type > img {
+    width: 35px;
+    height: 35px;
+}
+
+.notes {
+    width: 30px;
+    height: 30px;
+}
+
+.has-notes {
+    opacity: 1;
+}
+
+.no-notes {
+    opacity: 0.5;
+}

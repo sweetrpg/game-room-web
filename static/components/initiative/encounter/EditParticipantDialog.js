@@ -1,0 +1,258 @@
+
+const EditParticipantDialog = {
+  name: 'edit-participant-dialog',
+  props: {
+  },
+  data() {
+    return {
+      participant: {},
+      name: '--',
+      type: 'pc',
+      order: 0,
+      notes: '--',
+      removed: false,
+    }
+  },
+  computed: {
+    // gameSystems: function () {
+    //     return this.$store.state.gameSystems;
+    // }
+  },
+  methods: {
+    decrementOrder() {
+      this.order--;
+    },
+    incrementOrder() {
+      this.order++;
+    },
+    getRandomName() {
+      console.log("getRandomName");
+      axios.get('/api/v1/random/name?type=participant')
+        .then((response) => {
+          console.log(response);
+          console.log(this);
+          this.name = response.data.name;
+          $('#editParticipantName').val(response.data.name).focus();
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
+    },
+    submitChanges() {
+      console.log("submitParticipant");
+      console.log(this);
+
+      // validate form data
+      if (this.name.length == 0) {
+          $('#editParticipantName').addClass('border border-danger');
+          $('#editParticipantFeedback').addClass('alert-danger').removeClass('alert-success');
+          $('#editParticipantFeedback').html('A participant name is required!').show();
+          return
+      }
+
+      // clear any warnings
+      $('#editParticipantName').removeClass('border border-danger');
+      $('#editParticipantFeedback').hide();
+      $('#editParticipantProgress').show();
+
+      // submit
+      const encounterId = $('data#encounterId').val()
+      axios.post(`/api/v1/encounters/${encounterId}/participants`, {
+        name: this.name,
+        type: this.type,
+        order: this.order,
+        quantity: this.quantity,
+        health: this.health,
+        notes: this.notes,
+      })
+        .then((response) => {
+          console.log(response);
+          const count = response.data.participant_ids.length;
+          // window.location = `/apps/initiative/encounters/${id}`
+          $('#editParticipantProgress').hide();
+          $('#editParticipantFeedback')
+            .removeClass('alert-danger').addClass('alert-success')
+            .html(`${count} participants added to encounter.`).show();
+        })
+        .catch((error) => {
+          console.log(error);
+          $('#editParticipantProgress').hide();
+          // display error to user
+          $('#editParticipantFeedback')
+            .addClass('alert-danger').removeClass('alert-success')
+            .html(error).show();
+        })
+        .finally(() => {
+          this.$emit('update-participant-list')
+        })
+    }
+  },
+  watch: {
+    '$store.state.currentParticipant'() {
+      console.log("currentParticipant in store changed")
+      this.participant = this.$store.state.currentParticipant;
+      if (this.participant !== null) {
+        this.name = this.participant.participant.name;
+        this.type = this.participant.participant.type;
+        this.order = this.participant.order;
+        this.notes = this.participant.notes;
+        this.removed = this.participant.flags.includes('removed')
+      }
+    },
+  },
+  beforeMount() {
+    console.log('beforeMount');
+    // this.$store.dispatch('fetchGameSystems')
+  },
+  updated() {
+    console.log("updated")
+  },
+  template: `
+<div class="modal fade shadow p-3 rounded" id="editParticipantDialog" tabindex="-1" role="dialog" aria-labelledby="editParticipantModalLabel" aria-hidden="true">
+  <data id="editParticipantDialogParticipantId" value=""></data>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="editParticipantModalLabel">Participant: {{ name }}</h2>
+      </div>
+      <div class="modal-body">
+
+        <!-- Participant name -->
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="editParticipantName">Name</label>
+            </div>
+            <input type="text" id="editParticipantName"
+                  v-model="name"
+                  class="form-control" aria-describedby="nameHelp" placeholder="...">
+            <div class="input-group-append">
+              <button id="button-random-name"
+                      class="btn btn-outline-secondary input-group-text" type="button"
+                      v-on:click="getRandomName"
+                      data-toggle="tooltip"
+                      title="Generate a random name and fill it in">
+                <img src="/static/images/button-reset.png" alt="Random" />
+              </button>
+            </div>
+          </div>
+          <small id="nameHelp" class="form-text text-muted">
+          </small>
+        </div>
+
+        <!-- Participant type -->
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="editParticipantType">Type</label>
+            </div>
+            <div class="form-control">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="participantTypePC" name="editParticipantType"
+                        class="custom-control-input"
+                        v-model="type" value="pc">
+                <label class="custom-control-label" for="participantTypePC">
+                  <img class="participant-type" src="/static/images/button-participant-type-pc.png" />
+                  PC
+                </label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="participantTypeAdversary" name="editParticipantType"
+                        class="custom-control-input"
+                        v-model="type" value="adversary">
+                <label class="custom-control-label" for="participantTypeAdversary">
+                  <img class="participant-type" src="/static/images/button-participant-type-adversary.png" />
+                  Adversary
+                </label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="participantTypeObject" name="editParticipantType"
+                        class="custom-control-input"
+                        v-model="type" value="object">
+                <label class="custom-control-label" for="participantTypeObject">
+                  <img class="participant-type" src="/static/images/button-participant-type-object.png" />
+                  Object
+                </label>
+              </div>
+            </div>
+          </div>
+          <small id="typeHelp" class="form-text text-muted">
+          </small>
+        </div>
+
+        <!-- Order -->
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Order</span>
+            </div>
+            <input type="number" class="form-control" name="editParticipantOrder"
+                    v-model.number.trim="order" />
+            <div class="btn-group input-group-append" role="group" aria-label="Order stepper">
+              <button type="button" class="btn btn-secondary"
+                      @click="decrementOrder">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-secondary"
+                      @click="incrementOrder">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <small id="orderHelp" class="form-text text-muted">
+          </small>
+        </div>
+
+        <!-- Removed -->
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Removed</span>
+            </div>
+            <div class="form-control">
+              <div class="custom-control custom-switch custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="removedSwitch"
+                      v-model="removed">
+              </div>
+            </div>
+          </div>
+          <small id="removedHelp" class="form-text text-muted">
+          </small>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Notes</span>
+            </div>
+            <textarea id="editParticipantNotes" name="notes" class="form-control"
+                      aria-describedby="notesHelp" aria-label="Notes">
+                      {{ notes }}
+            </textarea>
+          </div>
+          <small id="notesHelp" class="form-text text-muted">
+          </small>
+        </div>
+
+        <!-- errors/info -->
+        <div class="form-group">
+          <div class="progress" id="editParticipantProgress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
+          <div id="editParticipantFeedback" class="alert alert-danger" role="alert">
+            Danger, Will Robinson!
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" @click="submitChanges" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+    `
+}

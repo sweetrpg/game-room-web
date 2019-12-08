@@ -8,7 +8,7 @@ main.py
 from flask import Flask, session
 from flask_session import Session
 from flask_cors import CORS
-from flask_vue import Vue
+# from flask_vue import Vue
 from dotenv import load_dotenv, find_dotenv
 from application.cache import cache
 from application import constants
@@ -74,7 +74,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
     db.init_app(app)
     migrate = Migrate(app, db)
 
-    vue = Vue(app)
+    # vue = Vue(app)
 
     print(app.url_map)
 

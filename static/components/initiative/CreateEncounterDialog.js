@@ -76,7 +76,7 @@ const CreateEncounterDialog = {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createEncounterModalLabel">Create Encounter</h5>
+        <h2 class="modal-title" id="createEncounterModalLabel">Create Encounter</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -136,7 +136,6 @@ const CreateEncounterDialog = {
               <select id="createEncounterGameSystem"
                       v-model="gameSystem"
                       class="form-control custom-select" aria-describedby="gameSystemHelp">
-                <option value="none" selected>None</option>
                 <option v-for="gs in gameSystems" v-bind:value="gs.key">{{ gs.name }}</option>
               </select>
             </div>

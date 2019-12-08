@@ -24,9 +24,9 @@ class Encounter(db.Model):
     name = db.Column(db.String(50), nullable=False)
     notes = db.Column(db.Text, nullable=True)
     category = db.Column(db.String(40), nullable=True)
-    flags = db.Column(db.PickleType, nullable=True)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
     game_system_id = db.Column(db.Integer, db.ForeignKey('game_systems.id'))
-    # participants = db.relationship('EncounterParticipant', backref='encounter', lazy=False)
+    participants = db.relationship('EncounterParticipant', backref='encounters', lazy=False)
     # maps = db.relationship('Map')
 
     def __init__(self, name:str, game_system:GameSystem):
@@ -46,8 +46,7 @@ class Encounter(db.Model):
                     category=self.category,
                     flags=self.flags,
                     game_system=game_system.to_dict(),
-                    participants=[])
-                    # TODO: participants=[p.to_dict() for p in self.participants])
+                    participants=[p.to_dict() for p in self.participants])
                     # TODO: map_ids=[m.id for m in self.maps])
 
 
@@ -67,7 +66,7 @@ class EncounterParticipant(db.Model):
     marker = db.Column(db.String(10), nullable=False, default="")
     order = db.Column(db.Integer, nullable=False, default=0)
     size = db.Column(db.Float, nullable=False, default=1)
-    flags = db.Column(db.PickleType, nullable=True)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
     tag = db.Column(db.String(10), nullable=False, default="")
     notes = db.Column(db.Text, nullable=True)
     # target_ids = db.Column(db.String(50), nullable=False)
@@ -76,7 +75,7 @@ class EncounterParticipant(db.Model):
     z = db.Column(db.Float, nullable=False, default=0)
     layer = db.Column(ENUM('normal', 'background', 'secret', 'always', name='encounter_participant_layer'),
                       nullable=False, default="normal")
-    hidden = db.Column(db.Boolean, nullable=False)
+    hidden = db.Column(db.Boolean, nullable=False, default=False)
     scale = db.Column(db.Float, nullable=False, default=1)
 
     def __init__(self, participant:Participant, encounter:Encounter, group:EncounterGroup = None):
@@ -86,10 +85,26 @@ class EncounterParticipant(db.Model):
             self.group_id = group.id
 
     def to_dict(self):
+        p = Participant.query.filter_by(id=self.participant_id).first()
+
         return dict(id=self.id,
                     creator_id=self.creator_id,
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'))
+                    updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+                    participant=p.to_dict(),
+                    color=self.color,
+                    encounter_id=self.encounter_id,
+                    group_id=self.group_id,
+                    marker=self.marker,
+                    order=self.order,
+                    size=self.size,
+                    flags=self.flags,
+                    tag=self.tag,
+                    notes=self.notes,
+                    x=self.x, y=self.y, z=self.z,
+                    layer=self.layer,
+                    hidden=self.hidden,
+                    scale=self.scale)
 
 
 class EncounterParticipantGroup(db.Model):
@@ -101,7 +116,7 @@ class EncounterParticipantGroup(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     name = db.Column(db.String(50), nullable=False)
-    flags = db.Column(db.PickleType, nullable=True)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
     encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'))
 
     def __init__(self, name:str, encounter:Encounter):
@@ -208,7 +223,7 @@ class EncounterRegion(db.Model):
 
     color = db.Column(db.String(10), nullable=True)
     # conditions = db.relationship('Condition', backref='region', lazy=False)
-    flags = db.Column(db.PickleType, nullable=True)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
     encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'))
     encounter_participant_id = db.Column(db.Integer, db.ForeignKey('encounter_participants.id'), nullable=True)
     name = db.Column(db.String(50), nullable=False)
@@ -248,7 +263,7 @@ class EncounterSession(db.Model):
     number_of_rounds = db.Column(db.Integer, nullable=False, default=0)
     number_of_turns = db.Column(db.Integer, nullable=False, default=0)
     start_date = db.Column(db.DateTime, nullable=False)
-    flags = db.Column(db.PickleType, nullable=True)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
     turn_queue = db.Column(db.PickleType, nullable=False)
     encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'))
 

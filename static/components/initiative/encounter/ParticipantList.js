@@ -2,13 +2,18 @@
 const EncounterParticipantList = {
     name: 'encounter-participant-list',
     components: {
+        'draggable': vuedraggable,
         'encounter-participant': EncounterParticipant,
     },
     data() {
         return {
+            isDragging: false,
         }
     },
     computed: {
+        encounterId() {
+            return this.$store.state.encounter.id;
+        },
         participants() {
             return this.$store.state.encounter.participants;
         },
@@ -20,10 +25,10 @@ const EncounterParticipantList = {
         // this.$store.dispatch('fetchParticipants')
     },
     template: `
- <div class="container">
-    <div class="row">
-      <encounter-participant v-for="participant in participants" :participant="participant" :key="participant.id" />
-    </div>
-  </div>
+ <draggable class="container"
+            v-model="participants" group="participants"
+            @start="isDragging=true" @end="isDragging=false">
+      <encounter-participant v-for="p in participants" :encounterId="encounterId" :participant="p" :key="p.id" />
+  </draggable>
 `
 }

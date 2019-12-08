@@ -2,8 +2,8 @@
 Vue.config.devtools = true;
 
 const storeState = {
-    encounterId: 0,
     encounter: {},
+    currentParticipant: null,
     messages: [], // { type: '<type>', message: '<text>' }
 };
 const storeActions = {
@@ -30,9 +30,17 @@ const storeActions = {
             .finally(function () {
                 // always executed
             });
+    },
+    setCurrentParticipant(context, payload) {
+        // console.log('setCurrentParticipant', context, payload)
+        context.commit('setCurrentParticipant', { participant : payload.participant })
     }
 };
 const storeMutations = {
+    setCurrentParticipant(state, payload) {
+        // console.log(payload);
+        state.currentParticipant = payload.participant
+    },
     addMessage(state, payload) {
         console.log(payload);
         state.messages.push({
@@ -63,14 +71,25 @@ const vm = new Vue({
     el: '#app',
     store: store,
     components: {
+        'draggable': vuedraggable,
         'messages': Messages,
         'encounter-info': EncounterInfo,
         'encounter-toolbar': EncounterToolbar,
         'encounter-action-bar': EncounterActionBar,
         'encounter-participant-list': EncounterParticipantList,
         'add-participant-dialog': AddParticipantDialog,
+        'edit-participant-dialog': EditParticipantDialog,
+        'edit-participant-order-dialog': EditParticipantOrderDialog,
     },
     data: {
+    },
+    methods: {
+        updateList() {
+            console.log("updateList")
+        },
+        chooseParticipant() {
+            console.log("chooseParticipant")
+        }
     },
     beforeMount() {
         console.log("beforeMount")

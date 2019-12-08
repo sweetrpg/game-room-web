@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<data id="encounterId" value="{{ id }}" />
+<data id="encounterId" value="{{ id }}"></data>
 
 {% raw %}
 <div id="app">
@@ -34,8 +34,16 @@
     <div>
         <add-participant-dialog />
     </div>
+        <div>
+            <edit-participant-dialog />
+        </div>
+        <div>
+            <edit-participant-order-dialog />
+        </div>
+    <p/>
     <div>
-        <encounter-participant-list />
+        <encounter-participant-list v-on:update-participant-list="updateList"
+                                    v-on:choose="chooseParticipant" />
     </div>
 </div>
 {% endraw %}
@@ -47,12 +55,16 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 <script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
 <script src="/static/js/apps/initiative/common.js"></script>
 <script src="/static/components/Messages.js"></script>
 <script src="/static/components/initiative/encounter/ActionBar.js"></script>
 <script src="/static/components/initiative/encounter/Toolbar.js"></script>
 <script src="/static/components/initiative/encounter/EncounterInfo.js"></script>
 <script src="/static/components/initiative/encounter/AddParticipantDialog.js"></script>
+<script src="/static/components/initiative/encounter/EditParticipantDialog.js"></script>
+<script src="/static/components/initiative/encounter/EditParticipantOrderDialog.js"></script>
 <script src="/static/components/initiative/encounter/Participant.js"></script>
 <script src="/static/components/initiative/encounter/ParticipantList.js"></script>
 <script src="/static/js/apps/initiative/encounter.js"></script>

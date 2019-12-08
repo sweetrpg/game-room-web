@@ -4,9 +4,9 @@ const EncounterInfo = {
     components: {
     },
     computed: {
-encounter() {
-    return this.$store.state.encounter;
-}
+        encounter() {
+            return this.$store.state.encounter;
+        }
     },
     data() {
         return {
@@ -15,7 +15,7 @@ encounter() {
     template: `
 <div class="container">
 <div class="row">
-<h1 class="col">
+<h1 class="col-8">
 {{ encounter.name }}
 </h1>
 
