@@ -173,7 +173,7 @@ const AddParticipantDialog = {
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="participantTypePC" name="addParticipantType"
                             class="custom-control-input"
-                            v-model="type" value="pc">
+                            v-model="type" value="pc" />
                     <label class="custom-control-label" for="participantTypePC">
                       <img class="participant-type" src="/static/images/button-participant-type-pc.png" />
                       PC
@@ -182,7 +182,7 @@ const AddParticipantDialog = {
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="participantTypeAdversary" name="addParticipantType"
                             class="custom-control-input"
-                            v-model="type" value="adversary">
+                            v-model="type" value="adversary" />
                     <label class="custom-control-label" for="participantTypeAdversary">
                       <img class="participant-type" src="/static/images/button-participant-type-adversary.png" />
                       Adversary
@@ -191,7 +191,7 @@ const AddParticipantDialog = {
                   <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="participantTypeObject" name="addParticipantType"
                             class="custom-control-input"
-                            v-model="type" value="object">
+                            v-model="type" value="object" />
                     <label class="custom-control-label" for="participantTypeObject">
                       <img class="participant-type" src="/static/images/button-participant-type-object.png" />
                       Object

@@ -27,6 +27,8 @@ class Encounter(db.Model):
     flags = db.Column(db.PickleType, nullable=True, default=[])
     game_system_id = db.Column(db.Integer, db.ForeignKey('game_systems.id'))
     participants = db.relationship('EncounterParticipant', backref='encounters', lazy=False)
+    ordering = db.Column(ENUM('high-to-low', 'low-to-high', 'pc-v-adversary', 'player-managed', name='encounter_ordering'),
+                      nullable=False, default="high-to-low")
     # maps = db.relationship('Map')
 
     def __init__(self, name:str, game_system:GameSystem):
@@ -45,6 +47,7 @@ class Encounter(db.Model):
                     notes=self.notes,
                     category=self.category,
                     flags=self.flags,
+                    ordering=self.ordering,
                     game_system=game_system.to_dict(),
                     participants=[p.to_dict() for p in self.participants])
                     # TODO: map_ids=[m.id for m in self.maps])

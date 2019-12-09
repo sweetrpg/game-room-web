@@ -5,7 +5,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 
 from functools import wraps
-from flask import Blueprint, request, render_template, session, jsonify
+from flask import Blueprint, request, render_template, session, jsonify, current_app
 from werkzeug.exceptions import HTTPException
 import json
 import os
@@ -35,6 +35,7 @@ def user_required(f):
 
 @blueprint.errorhandler(Exception)
 def error_handler(ex):
+    current_app.logger.error(f"Exception caught: {ex}")
     response = jsonify(message=str(ex))
     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
     return response

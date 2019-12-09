@@ -13,7 +13,10 @@ from application.models.initiative.participant import Participant, ParticipantGr
 from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
-from werkzeug.exceptions import Forbidden
+from application.blueprints.api.validators import validate_payload
+from application.blueprints.api.initiative.validators import CreateEncounterInput
+from werkzeug.exceptions import Forbidden, BadRequest, NotFound
+from ..exceptions import error_response
 
 
 @blueprint.route('/encounters', methods=['GET'])
@@ -49,31 +52,18 @@ def get_encounter(current_user, encounter_id: int):
 def create_encounter(current_user):
     current_app.logger.debug(f"POST /encounters: {request}, current_user: {current_user}")
 
+    validate_payload(CreateEncounterInput, request)
+
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")
 
-    name = data.get('name')
-    if not name or len(name) == 0:
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'name',
-            'message': "'name' not provided or empty in payload"
-            }, 400
-    game_system_key = data.get('gameSystem')
-    if not game_system_key or len(game_system_key) == 0:
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'gameSystem',
-            'message': "'gameSystem' not provided or empty in payload",
-            }, 400
+    name = data['name']
+    game_system_key = data['gameSystem']
 
     game_system = GameSystem.query.filter_by(key=game_system_key).first()
     if not game_system:
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'gameSystem',
-            'message': f"Game system '{game_system_key}' not found"
-            }, 400
+        raise error_response(BadRequest, 'object_not_found',
+                             f"Game system '{game_system_key}' not found", 'gameSystem')
 
     encounter = Encounter(name=name, game_system=game_system)
     encounter.ordering = data.get('ordering') or 'high-to-low'
@@ -208,7 +198,7 @@ def add_participants(current_user, encounter_id: int):
     return jsonify(response), 201
 
 
-@blueprint.route('/encounters/<int:encounter_id>/participants/<int:participant_id>', methods=['POST'])
+@blueprint.route('/encounters/<int:encounter_id>/participants/<int:participant_id>', methods=['PUT'])
 @user_required
 def update_participant(current_user, encounter_id: int, participant_id: int):
     current_app.logger.debug(f"POST /encounters/{encounter_id}/participants/{participant_id}: {request}, current_user: {current_user}")
@@ -230,31 +220,31 @@ def update_participant(current_user, encounter_id: int, participant_id: int):
         return {
             'code': 'forbidden',
             'attribute': None,
-            'message': "You are not allowed to modify this encounter"
-        }, 403
-
-    # check participant
-    participant = EncounterParticipant.query.filter_by(id=participant_id).first()
-    current_app.logger.debug(f"participant: {participant}")
-    if not participant:
-        return {
-            'code': 'no_participant',
-            'attribute': None,
-            'message': f"Participant '{participant_id}' not found"
-        }, 400
-    if participant.creator_id != current_user.id:
-        return {
-            'code': 'forbidden',
-            'attribute': None,
             'message': "You are not allowed to modify this participant"
         }, 403
 
+    # check participant
+    encounter_participant = EncounterParticipant.query.filter_by(id=participant_id).first()
+    current_app.logger.debug(f"encounter_participant: {encounter_participant}")
+    if not encounter_participant:
+        raise error_response(BadRequest, 'no_encounter_participant', f"Participant '{participant_id}' not found")
+    if encounter_participant.creator_id != current_user.id:
+        raise error_response(Forbidden, 'forbidden', "You are not allowed to modify this participant")
+
+    participant = Participant.query.filter_by(id=encounter_participant.participant.id).first()
+    current_app.logger.debug(f"participant: {participant}")
+    if not participant:
+        raise error_response(BadRequest, 'no_participant', f'Participant for {encounter_participant.participant.id} not found', 'participant.id')
+
     for k,v in data.items():
         current_app.logger.debug(f"{k}={v}")
+        setattr(encounter_participant, k, v)
         setattr(participant, k, v)
 
+    current_app.logger.debug(f"encounter_participant: {encounter_participant}")
     current_app.logger.debug(f"participant: {participant}")
 
+    db.session.add(encounter_participant)
     db.session.add(participant)
     db.session.commit()
 

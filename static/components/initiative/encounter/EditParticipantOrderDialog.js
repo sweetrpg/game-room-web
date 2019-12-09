@@ -27,8 +27,6 @@ const EditParticipantOrderDialog = {
       console.log("updateDialog")
     },
     submitChanges() {
-      console.log("submitParticipant");
-      console.log(this);
 
       // validate form data
       // if (this.name.length == 0) {

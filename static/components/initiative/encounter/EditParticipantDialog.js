@@ -40,8 +40,6 @@ const EditParticipantDialog = {
         })
     },
     submitChanges() {
-      console.log("submitParticipant");
-      console.log(this);
 
       // validate form data
       if (this.name.length == 0) {
@@ -57,8 +55,7 @@ const EditParticipantDialog = {
       $('#editParticipantProgress').show();
 
       // submit
-      const encounterId = $('data#encounterId').val()
-      axios.post(`/api/v1/encounters/${encounterId}/participants`, {
+      axios.put(`/api/v1/encounters/${this.participant.encounter_id}/participants/${this.participant.id}`, {
         name: this.name,
         type: this.type,
         order: this.order,
@@ -68,12 +65,12 @@ const EditParticipantDialog = {
       })
         .then((response) => {
           console.log(response);
-          const count = response.data.participant_ids.length;
-          // window.location = `/apps/initiative/encounters/${id}`
           $('#editParticipantProgress').hide();
           $('#editParticipantFeedback')
             .removeClass('alert-danger').addClass('alert-success')
-            .html(`${count} participants added to encounter.`).show();
+            .html(`Participant updated.`).show();
+          $('#editParticipantDialog').modal('hide');
+          $('data#editParticipantDialogParticipantId').val('');
         })
         .catch((error) => {
           console.log(error);
@@ -149,28 +146,28 @@ const EditParticipantDialog = {
             </div>
             <div class="form-control">
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="participantTypePC" name="editParticipantType"
+                <input type="radio" id="editParticipantTypePC" name="editParticipantType"
                         class="custom-control-input"
-                        v-model="type" value="pc">
-                <label class="custom-control-label" for="participantTypePC">
+                        v-model="type" value="pc" />
+                <label class="custom-control-label" for="editParticipantTypePC">
                   <img class="participant-type" src="/static/images/button-participant-type-pc.png" />
                   PC
                 </label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="participantTypeAdversary" name="editParticipantType"
+                <input type="radio" id="editParticipantTypeAdversary" name="editParticipantType"
                         class="custom-control-input"
-                        v-model="type" value="adversary">
-                <label class="custom-control-label" for="participantTypeAdversary">
+                        v-model="type" value="adversary" />
+                <label class="custom-control-label" for="editParticipantTypeAdversary">
                   <img class="participant-type" src="/static/images/button-participant-type-adversary.png" />
                   Adversary
                 </label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="participantTypeObject" name="editParticipantType"
+                <input type="radio" id="editParticipantTypeObject" name="editParticipantType"
                         class="custom-control-input"
-                        v-model="type" value="object">
-                <label class="custom-control-label" for="participantTypeObject">
+                        v-model="type" value="object" />
+                <label class="custom-control-label" for="editParticipantTypeObject">
                   <img class="participant-type" src="/static/images/button-participant-type-object.png" />
                   Object
                 </label>
@@ -204,16 +201,18 @@ const EditParticipantDialog = {
           </small>
         </div>
 
-        <!-- Removed -->
+        <!-- Options -->
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text">Removed</span>
+                <span class="input-group-text">Options</span>
             </div>
             <div class="form-control">
               <div class="custom-control custom-switch custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="removedSwitch"
-                      v-model="removed">
+                <input type="checkbox" class="custom-control-input" id="editParticipantRemovedSwitch"
+                    name="removed"
+                      v-model="removed" />
+                      <label class="custom-control-label" for="editParticipantRemovedSwitch">Removed?</label>
               </div>
             </div>
           </div>
