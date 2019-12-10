@@ -28,7 +28,7 @@ const EncounterParticipant = {
                 this.participant.flags.push('removed')
             }
 
-            axios.post(`/api/v1/encounters/${this.participant.encounter_id}/participants/${this.participant.id}`, {
+            axios.put(`/api/v1/encounters/${this.participant.encounter_id}/participants/${this.participant.id}`, {
                 flags: this.participant.flags,
             })
                 .then((response) => {
@@ -47,7 +47,9 @@ const EncounterParticipant = {
         },
         deleteParticipant() {
             console.log("deleteParticipant")
-
+            $('data#deleteParticipantDialogParticipantId').val(this.participant.id);
+            this.$store.dispatch('setCurrentParticipant', { participant: this.participant })
+            $('#deleteParticipantDialog').modal('show')
         },
         editOrder() {
             console.log("editOrder")
@@ -106,6 +108,9 @@ const EncounterParticipant = {
                 <i class="fas fa-bars"></i>
             </div>
         </div>
+    </div>
+    <div class="encounter-participant-removed"
+         v-if="participant.flags.includes('removed')">
     </div>
 </div>
 `

@@ -11,6 +11,7 @@ const EditParticipantDialog = {
       order: 0,
       notes: '--',
       removed: false,
+      flags: [],
     }
   },
   computed: {
@@ -43,10 +44,10 @@ const EditParticipantDialog = {
 
       // validate form data
       if (this.name.length == 0) {
-          $('#editParticipantName').addClass('border border-danger');
-          $('#editParticipantFeedback').addClass('alert-danger').removeClass('alert-success');
-          $('#editParticipantFeedback').html('A participant name is required!').show();
-          return
+        $('#editParticipantName').addClass('border border-danger');
+        $('#editParticipantFeedback').addClass('alert-danger').removeClass('alert-success');
+        $('#editParticipantFeedback').html('A participant name is required!').show();
+        return
       }
 
       // clear any warnings
@@ -55,13 +56,18 @@ const EditParticipantDialog = {
       $('#editParticipantProgress').show();
 
       // submit
+      const flags = (this.flags || []).filter((value) => { value !== "removed" })
+      if (this.removed) {
+        flags.push("removed")
+      }
       axios.put(`/api/v1/encounters/${this.participant.encounter_id}/participants/${this.participant.id}`, {
         name: this.name,
         type: this.type,
         order: this.order,
         quantity: this.quantity,
         health: this.health,
-        notes: this.notes,
+        notes: this.notes || '',
+        flags: flags,
       })
         .then((response) => {
           console.log(response);
@@ -82,6 +88,7 @@ const EditParticipantDialog = {
         })
         .finally(() => {
           this.$emit('update-participant-list')
+          this.$store.dispatch('fetchEncounter')
         })
     }
   },
@@ -93,13 +100,14 @@ const EditParticipantDialog = {
         this.name = this.participant.participant.name;
         this.type = this.participant.participant.type;
         this.order = this.participant.order;
-        this.notes = this.participant.notes;
-        this.removed = this.participant.flags.includes('removed')
+        this.notes = this.participant.notes || '';
+        this.flags = this.participant.flags || [];
+        this.removed = this.flags.includes('removed')
       }
     },
   },
   beforeMount() {
-    console.log('beforeMount');
+    console.log('EditParticipantDialog.js beforeMount');
     // this.$store.dispatch('fetchGameSystems')
   },
   updated() {

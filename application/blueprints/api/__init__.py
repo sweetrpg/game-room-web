@@ -35,7 +35,7 @@ def user_required(f):
 
 @blueprint.errorhandler(Exception)
 def error_handler(ex):
-    current_app.logger.error(f"Exception caught: {ex}")
+    current_app.logger.exception(f"Exception caught: {ex}")
     response = jsonify(message=str(ex))
     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
     return response

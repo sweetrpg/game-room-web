@@ -8,15 +8,18 @@ encounters.py
 from flask import session, jsonify, request, current_app
 from application.blueprints.api import blueprint
 from application import constants
-from application.models.initiative.encounter import Encounter, EncounterParticipant
+from application.models import constants as model_constants
+from application.models.initiative.tracked_encounter import TrackedEncounter
+from application.models.initiative.encounter import Encounter, EncounterParticipant, EncounterSession
 from application.models.initiative.participant import Participant, ParticipantGroup
 from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
-from application.blueprints.api.validators import validate_payload
-from application.blueprints.api.initiative.validators import CreateEncounterInput
+from application.blueprints.api.validators import validate_payload, validate_user, check_dependent_object
+from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput
+from application.blueprints.api.exceptions import error_response
 from werkzeug.exceptions import Forbidden, BadRequest, NotFound
-from ..exceptions import error_response
+from datetime import datetime
 
 
 @blueprint.route('/encounters', methods=['GET'])
@@ -24,8 +27,7 @@ from ..exceptions import error_response
 def get_encounters(current_user):
     current_app.logger.debug(f"GET /encounters: {request}, current_user: {current_user}")
     user_id = current_user.id
-    current_app.logger.debug(f"user_id: {user_id}")
-    encounters = Encounter.query.filter_by(creator_id=user_id)
+    encounters = TrackedEncounter.query.filter_by(creator_id=user_id).all()
     current_app.logger.debug(f"encounters: {encounters}")
     return {
         'encounters': [e.to_dict() for e in encounters],
@@ -38,13 +40,10 @@ def get_encounter(current_user, encounter_id: int):
     current_app.logger.debug(f"GET /encounters: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
     user_id = current_user.id
     current_app.logger.debug(f"user_id: {user_id}")
-    encounter = Encounter.query.filter_by(id=encounter_id).first()
-    if encounter.creator_id != user_id:
-        raise Forbidden("You are not allowed to access this encounter")
+    encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    validate_user(encounter, current_user)
     current_app.logger.debug(f"encounter: {encounter}")
-    return {
-        'encounter': encounter.to_dict(),
-    }
+    return encounter.to_dict()
 
 
 @blueprint.route('/encounters', methods=['POST'])
@@ -61,26 +60,68 @@ def create_encounter(current_user):
     game_system_key = data['gameSystem']
 
     game_system = GameSystem.query.filter_by(key=game_system_key).first()
-    if not game_system:
-        raise error_response(BadRequest, 'object_not_found',
-                             f"Game system '{game_system_key}' not found", 'gameSystem')
+    check_dependent_object(game_system, 'gameSystem')
 
     encounter = Encounter(name=name, game_system=game_system)
-    encounter.ordering = data.get('ordering') or 'high-to-low'
-    # TODO: theme as a flag value
+    theme = data.get('theme')
+    if theme:
+        encounter.flags = [f'theme:{theme}']
     encounter.creator_id = current_user.id
 
     db.session.add(encounter)
     db.session.commit()
 
-    return jsonify(encounter.to_dict()), 201
+    group = ParticipantGroup(name=name)
+    group.creator_id = current_user.id
+    group.flags = [model_constants.FLAG_TRACKED_ENCOUNTER]
+    db.session.add(group)
+    db.session.commit()
+
+    session = EncounterSession(start_date=datetime.utcnow(), encounter=encounter)
+    session.flags = [model_constants.FLAG_TRACKED_ENCOUNTER]
+    session.creator_id = current_user.id
+
+    db.session.add(session)
+    db.session.commit()
+
+    te = TrackedEncounter(group=group, encounter=encounter, session=session)
+    te.tie_breaker = data.get('tieBreaker') or model_constants.ENUM_TIE_BREAKER_QUERY
+    te.ordering = data.get('ordering') or model_constants.ENUM_ORDERING_HIGH_TO_LOW
+    te.creator_id = current_user.id
+
+    db.session.add(te)
+    db.session.commit()
+
+    return jsonify(te.to_dict()), 201
 
 
 @blueprint.route('/encounters/<int:encounter_id>', methods=['PUT'])
 @user_required
 def update_encounter(current_user, encounter_id: int):
-    # TODO
-    pass
+    current_app.logger.debug(
+        f"PUT /encounters/{encounter_id}: {request}, current_user: {current_user}")
+
+    validate_payload(UpdateEncounterInput, request)
+
+    data = request.get_json()
+    current_app.logger.debug(f"data: {data}")
+
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
+    current_app.logger.debug(f"encounter: {encounter}")
+    validate_user(encounter, current_user)
+
+    for k, v in data.items():
+        current_app.logger.debug(f"{k}={v}")
+        setattr(encounter, k, v)
+
+    db.session.add(encounter)
+    db.session.commit()
+
+    return jsonify(encounter.to_dict())
 
 
 @blueprint.route('/encounters/<int:encounter_id>/participants', methods=['POST'])
@@ -88,69 +129,35 @@ def update_encounter(current_user, encounter_id: int):
 def add_participants(current_user, encounter_id: int):
     current_app.logger.debug(f"POST /encounters/{encounter_id}/participants: {request}, current_user: {current_user}")
 
+    validate_payload(AddParticipantInput, request)
+
     # validate payload
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")
-    name = data.get('name')
+
+    name = data['name']
     current_app.logger.debug(f"name: {name}")
-    if not name or len(name) == 0:
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'name',
-            'message': "'name' not provided or empty in payload"
-        }, 400
-    participant_type = data.get('type')
-    current_app.logger.debug(f"participant_type: {participant_type}")
-    if not participant_type or len(participant_type) == 0:
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'type',
-            'message': "'type' not provided or empty in payload"
-        }, 400
-    if participant_type not in ['pc', 'adversary', 'object']:
-        return {
-            'code': 'invalid_value',
-            'attribute': 'type',
-            'message': f"'type' value of '{participant_type}' is not valid"
-        }, 400
-    quantity = data.get('quantity')
+    participant_type = data['type']
+    quantity = int(data.get('quantity')) or 1
     current_app.logger.debug(f"quantity: {quantity}")
-    if not quantity or not isinstance(quantity, int):
-        return {
-            'code': 'missing_attribute',
-            'attribute': 'quantity',
-            'message': "'quantity' not provided or empty in payload"
-        }, 400
     if quantity < 1 or quantity > 100:
-        return {
-            'code': 'invalid_value',
-            'attribute': 'quantity',
-            'message': f"'quantity' value of '{quantity}' is outside of range (1-100)"
-        }, 400
+        raise error_response(BadRequest, 'invalid_value',
+                             f"'quantity' value of '{quantity}' is outside of range (1-100)", 'quantity')
 
     # check encounter
-    encounter = Encounter.query.filter_by(id=encounter_id).first()
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
     current_app.logger.debug(f"encounter: {encounter}")
-    if not encounter:
-        return {
-            'code': 'no_encounter',
-            'attribute': None,
-            'message': f"Encounter '{encounter_id}' not found"
-        }, 400
-    if encounter.creator_id != current_user.id:
-        return {
-            'code': 'forbidden',
-            'attribute': None,
-            'message': "You are not allowed to modify this encounter"
-        }, 403
+    validate_user(encounter, current_user)
 
     created_participants = []
     created_encounter_participants = []
 
     # TODO: find name of existing group for encounter
-    pg = ParticipantGroup(name="group")
-    pg.creator_id = current_user.id
-    pg.flags = ['encounter']
+    pg = ParticipantGroup.query.filter_by(id=tracked_encounter.group_id).first()
     db.session.add(pg)
     current_app.logger.info("Committing participant group...")
     db.session.commit()
@@ -177,9 +184,13 @@ def add_participants(current_user, encounter_id: int):
     db.session.commit()
     current_app.logger.info("Committed.")
 
-    for p in created_participants:
+    position_offset = len(encounter.participants)
+
+    for i,p in enumerate(created_participants):
         ep = EncounterParticipant(participant=p, encounter=encounter)
         ep.creator_id = current_user.id
+        ep.position = i + position_offset
+        ep.order = i + position_offset
         db.session.add(ep)
         current_app.logger.debug(f"ep: {ep}")
 
@@ -201,40 +212,31 @@ def add_participants(current_user, encounter_id: int):
 @blueprint.route('/encounters/<int:encounter_id>/participants/<int:participant_id>', methods=['PUT'])
 @user_required
 def update_participant(current_user, encounter_id: int, participant_id: int):
-    current_app.logger.debug(f"POST /encounters/{encounter_id}/participants/{participant_id}: {request}, current_user: {current_user}")
+    current_app.logger.debug(f"PUT /encounters/{encounter_id}/participants/{participant_id}: {request}, current_user: {current_user}")
 
     # validate payload
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")
 
+    validate_payload(UpdateParticipantInput, request)
+
     # check encounter
-    encounter = Encounter.query.filter_by(id=encounter_id).first()
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
     current_app.logger.debug(f"encounter: {encounter}")
-    if not encounter:
-        return {
-            'code': 'no_encounter',
-            'attribute': None,
-            'message': f"Encounter '{encounter_id}' not found"
-        }, 400
-    if encounter.creator_id != current_user.id:
-        return {
-            'code': 'forbidden',
-            'attribute': None,
-            'message': "You are not allowed to modify this participant"
-        }, 403
+    validate_user(encounter, current_user)
 
     # check participant
     encounter_participant = EncounterParticipant.query.filter_by(id=participant_id).first()
     current_app.logger.debug(f"encounter_participant: {encounter_participant}")
-    if not encounter_participant:
-        raise error_response(BadRequest, 'no_encounter_participant', f"Participant '{participant_id}' not found")
-    if encounter_participant.creator_id != current_user.id:
-        raise error_response(Forbidden, 'forbidden', "You are not allowed to modify this participant")
+    validate_user(encounter_participant, current_user)
 
-    participant = Participant.query.filter_by(id=encounter_participant.participant.id).first()
+    participant = Participant.query.filter_by(id=encounter_participant.participant_id).first()
     current_app.logger.debug(f"participant: {participant}")
-    if not participant:
-        raise error_response(BadRequest, 'no_participant', f'Participant for {encounter_participant.participant.id} not found', 'participant.id')
+    validate_user(participant, current_user)
 
     for k,v in data.items():
         current_app.logger.debug(f"{k}={v}")
@@ -249,3 +251,34 @@ def update_participant(current_user, encounter_id: int, participant_id: int):
     db.session.commit()
 
     return participant.to_dict(), 204
+
+
+@blueprint.route('/encounters/<int:encounter_id>/participants/<int:participant_id>', methods=['DELETE'])
+@user_required
+def delete_participant(current_user, encounter_id: int, participant_id: int):
+    current_app.logger.debug(
+        f"DELETE /encounters/{encounter_id}/participants/{participant_id}: {request}, current_user: {current_user}")
+
+    # check encounter
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
+    current_app.logger.debug(f"encounter: {encounter}")
+    validate_user(encounter, current_user)
+
+    # check participant
+    encounter_participant = EncounterParticipant.query.filter_by(id=participant_id).first()
+    current_app.logger.debug(f"encounter_participant: {encounter_participant}")
+    validate_user(encounter_participant, current_user)
+
+    participant = Participant.query.filter_by(id=encounter_participant.participant_id).first()
+    current_app.logger.debug(f"participant: {participant}")
+    validate_user(participant, current_user)
+
+    db.session.delete(encounter_participant)
+    db.session.delete(participant)
+    db.session.commit()
+
+    return {}, 204

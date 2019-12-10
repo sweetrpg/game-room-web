@@ -91,6 +91,7 @@ const AddParticipantDialog = {
         })
         .finally(() => {
           this.$emit('update-participant-list')
+          this.$store.dispatch('fetchEncounter')
         })
     }
   },

@@ -11,6 +11,7 @@ from application.models.common.game_system import GameSystem
 from .participant import Participant
 from .group import EncounterGroup
 from sqlalchemy.dialects.postgresql import ENUM
+from flask import current_app
 
 
 class Encounter(db.Model):
@@ -27,8 +28,6 @@ class Encounter(db.Model):
     flags = db.Column(db.PickleType, nullable=True, default=[])
     game_system_id = db.Column(db.Integer, db.ForeignKey('game_systems.id'))
     participants = db.relationship('EncounterParticipant', backref='encounters', lazy=False)
-    ordering = db.Column(ENUM('high-to-low', 'low-to-high', 'pc-v-adversary', 'player-managed', name='encounter_ordering'),
-                      nullable=False, default="high-to-low")
     # maps = db.relationship('Map')
 
     def __init__(self, name:str, game_system:GameSystem):
@@ -39,6 +38,9 @@ class Encounter(db.Model):
         creator = User.query.filter_by(id=self.creator_id).first()
         game_system = GameSystem.query.filter_by(id=self.game_system_id).first()
 
+        self.participants.sort(key=lambda x: x.position)
+        current_app.logger.debug(f"participants: {self.participants}")
+
         return dict(id=self.id,
                     creator=creator.to_dict(),
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
@@ -47,7 +49,6 @@ class Encounter(db.Model):
                     notes=self.notes,
                     category=self.category,
                     flags=self.flags,
-                    ordering=self.ordering,
                     game_system=game_system.to_dict(),
                     participants=[p.to_dict() for p in self.participants])
                     # TODO: map_ids=[m.id for m in self.maps])
@@ -67,7 +68,8 @@ class EncounterParticipant(db.Model):
     encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('participant_groups.id'), nullable=True)
     marker = db.Column(db.String(10), nullable=False, default="")
-    order = db.Column(db.Integer, nullable=False, default=0)
+    order = db.Column(db.Integer, nullable=False, default=0) # the displayed value
+    position = db.Column(db.Integer, nullable=False, default=0) # the actual position in the list
     size = db.Column(db.Float, nullable=False, default=1)
     flags = db.Column(db.PickleType, nullable=True, default=[])
     tag = db.Column(db.String(10), nullable=False, default="")
@@ -259,7 +261,7 @@ class EncounterSession(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=True)
     current_participant_index = db.Column(db.Integer, nullable=True)
     current_round = db.Column(db.Integer, nullable=False, default=0)
     end_date = db.Column(db.DateTime, nullable=True)
@@ -267,7 +269,7 @@ class EncounterSession(db.Model):
     number_of_turns = db.Column(db.Integer, nullable=False, default=0)
     start_date = db.Column(db.DateTime, nullable=False)
     flags = db.Column(db.PickleType, nullable=True, default=[])
-    turn_queue = db.Column(db.PickleType, nullable=False)
+    turn_queue = db.Column(db.PickleType, nullable=False, default=[])
     encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'))
 
     def __init__(self, start_date: datetime, encounter: Encounter):
@@ -282,7 +284,7 @@ class EncounterSession(db.Model):
                     name=self.name,
                     current_participant_index=self.current_participant_index,
                     current_round=self.current_round,
-                    end_date=self.end_date.strftime('%Y-%m-%d %H:%M:%S'),
+                    end_date=self.end_date.strftime('%Y-%m-%d %H:%M:%S') if self.end_date else None,
                     number_of_rounds=self.number_of_rounds,
                     number_of_turns=self.number_of_turns,
                     start_date=self.start_date.strftime('%Y-%m-%d %H:%M:%S'),

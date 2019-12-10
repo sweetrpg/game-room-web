@@ -37,6 +37,18 @@ img.participant-type {
 
 .encounter-participant {
     margin-bottom: 10px;
+    position: relative;
+}
+
+.encounter-participant-removed {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    color: red;
+    background-color: red;
+    height: 2px;
+    opacity: 0.5;
 }
 
 .encounter-participant-type > img {

@@ -20,7 +20,7 @@ const storeActions = {
             .then(function (response) {
                 // handle success
                 console.log(response);
-                context.commit('setEncounter', { encounter: response.data.encounter })
+                context.commit('setEncounter', { encounter: response.data })
             })
             .catch(function (error) {
                 // handle error
@@ -78,6 +78,7 @@ const vm = new Vue({
         'encounter-action-bar': EncounterActionBar,
         'encounter-participant-list': EncounterParticipantList,
         'add-participant-dialog': AddParticipantDialog,
+        'delete-participant-dialog': DeleteParticipantDialog,
         'edit-participant-dialog': EditParticipantDialog,
         'edit-participant-order-dialog': EditParticipantOrderDialog,
     },
@@ -92,7 +93,7 @@ const vm = new Vue({
         }
     },
     beforeMount() {
-        console.log("beforeMount")
+        console.log("encounter.js beforeMount")
         this.$store.dispatch('fetchEncounter')
     },
 });
@@ -101,4 +102,10 @@ window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = vm.constructor
 
 $('#addParticipantDialog').on('shown.bs.modal', function () {
     $('#addParticipantName').focus();
+})
+$('#editParticipantDialog').on('shown.bs.modal', function () {
+    $('#editParticipantName').focus();
+})
+$('#editParticipantOrderDialog').on('shown.bs.modal', function () {
+    $('#editParticipantOrderValue').focus();
 })

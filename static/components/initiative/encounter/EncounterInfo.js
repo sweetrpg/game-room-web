@@ -12,17 +12,22 @@ const EncounterInfo = {
         return {
         };
     },
+    watch: {
+        'this.$store.state.encounter'() {
+console.log("$store encounter updated");
+        },
+    },
     template: `
 <div class="container">
 <div class="row">
 <h1 class="col-8">
-{{ encounter.name }}
+{{ encounter.encounter.name }}
 </h1>
 
 <div class="col text-right">
-<span class="text-muted">{{ encounter.game_system.full_name }}</span>
+<span class="text-muted">{{ encounter.encounter.game_system.full_name }}</span>
 <br />
-{{ encounter.participants.length }} participant{{ encounter.participants.length == 1 ? '' : 's' }}
+{{ encounter.encounter.participants.length }} participant{{ encounter.encounter.participants.length == 1 ? '' : 's' }}
 </div>
 </div>
 </div>

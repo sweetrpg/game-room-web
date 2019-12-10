@@ -12,16 +12,35 @@ const EncounterParticipantList = {
     },
     computed: {
         encounterId() {
+            console.log("get encounter ID for list")
+            console.log(this.$store.state.encounter)
             return this.$store.state.encounter.id;
         },
         participants() {
-            return this.$store.state.encounter.participants;
+            console.log("get participants for encounter")
+            console.log(this.$store.state.encounter)
+            if(this.$store.state.encounter == undefined) {
+                console.log("returning empty list of participants")
+                return [];
+            }
+            // console.log("return actual list of participants")
+            // const state = this.$store.state;
+            // console.log("state", state)
+            // const te = state.encounter;
+            // console.log("tracked encounter", te)
+            const encounter = this.$store.state.encounter.encounter;
+            if(encounter === undefined) {
+                console.log("returning empty list of participants")
+                return [];
+            }
+            console.log("encounter", encounter)
+            return encounter.participants; // this.$store.state.encounter.encounter.participants;
         },
     },
     methods: {
     },
     beforeMount() {
-        console.log('Fetching participants');
+        // console.log('Fetching participants');
         // this.$store.dispatch('fetchParticipants')
     },
     template: `

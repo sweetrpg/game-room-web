@@ -77,7 +77,7 @@ class ParticipantGroup(db.Model):
                     creator_id=self.creator_id,
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    name=self.gameSystem,
+                    name=self.name,
                     flags=self.flags,
                     participants=[p.to_dict() for p in self.participants])
 

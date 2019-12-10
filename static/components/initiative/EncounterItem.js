@@ -17,8 +17,8 @@ const EncounterItem = {
 <div class="card" style="width: 18rem;">
   <img src="/static/images/encounter-default.png" class="card-img-top" alt="..." />
   <div class="card-body">
-    <h2 class="card-title">{{ encounter.name }}</h2>
-    <p class="card-text">{{ encounter.game_system.name }} &mdash; {{ encounter.participants.length }} participants</p>
+    <h2 class="card-title">{{ encounter.encounter.name }}</h2>
+    <p class="card-text">{{ encounter.encounter.game_system.name }} &mdash; {{ encounter.encounter.participants.length }} participants</p>
     <p class="card-text">
       <small class="text-muted">Last updated {{ encounter.updated_at }}</small>
     </p>
