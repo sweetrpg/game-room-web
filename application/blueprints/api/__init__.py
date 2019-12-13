@@ -33,6 +33,20 @@ def user_required(f):
     return _get_user
 
 
+def user_optional(f):
+    @wraps(f)
+    def _get_user(*args, **kwargs):
+        user_id = session.get(constants.CURRENT_USER_ID)
+        if user_id:
+            user = User.query.filter_by(id=user_id).first()
+            if user:
+                return f(user, *args, **kwargs)
+
+        return f(None, *args, **kwargs)
+
+    return _get_user
+
+
 @blueprint.errorhandler(Exception)
 def error_handler(ex):
     current_app.logger.exception(f"Exception caught: {ex}")

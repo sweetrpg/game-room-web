@@ -136,7 +136,9 @@ const CreateEncounterDialog = {
               <select id="createEncounterGameSystem"
                       v-model="gameSystem"
                       class="form-control custom-select" aria-describedby="gameSystemHelp">
-                <option v-for="gs in gameSystems" v-bind:value="gs.key">{{ gs.name }}</option>
+                <option v-for="gs in gameSystems" v-bind:value="gs.key" v-if="!gs.locked">
+                  {{ gs.name }}
+                </option>
               </select>
             </div>
             <small id="gameSystemHelp" class="form-text text-muted">

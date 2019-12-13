@@ -8,18 +8,29 @@ game_systems.py
 from flask import session, jsonify, request, current_app
 from application.blueprints.api import blueprint
 from application import constants
+from application.models import constants as model_constants
 from application.models.common.game_system import GameSystem, GameSystemFacetDatum, GameSystemImageDatum
-from application.blueprints.api import user_required
+from application.models.entitlement import Entitlement, EntitlementGrant
+from application.blueprints.api import user_required, user_optional
 from application.db import db
 
 
 @blueprint.route('/gamesystems', methods=['GET'])
-def all_game_systems():
+@user_optional
+def all_game_systems(current_user):
     current_app.logger.debug(f"GET /gamesystems: {request}")
     game_systems = GameSystem.query.all()
     current_app.logger.debug(f"game_systems: {game_systems}")
+
+    game_systems = [gs.to_dict() for gs in game_systems]
+    if current_user:
+        grant = EntitlementGrant.for_user(current_user, model_constants.ENTITLEMENT_GAME_SYSTEMS)
+        if grant:
+            # game_systems = map(lambda gs: gs['locked'] = False; return gs, game_systems)
+            pass
+
     return {
-        'game_systems': [gs.to_dict() for gs in game_systems],
+        'game_systems': game_systems,
     }
 
 

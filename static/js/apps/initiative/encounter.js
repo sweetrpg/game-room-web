@@ -7,8 +7,8 @@ const storeState = {
     messages: [], // { type: '<type>', message: '<text>' }
 };
 const storeActions = {
-    addMessage(context) {
-        context.commit('addMessage', { type: 'danger', message: "your-message-here" })
+    addMessage(context, payload) {
+        context.commit('addMessage', { type: payload.type || 'danger', message: payload.message })
     },
     clearMessages(context) {
         context.commit('clearMessages')

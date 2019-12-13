@@ -64,7 +64,7 @@ class AddParticipantInput(Inputs):
 
 
 update_encounter_schema = {
-    '$id': 'http://sweetrpg.com/schemas/add_participant.json',
+    '$id': 'http://sweetrpg.com/schemas/update_encounter.json',
     '$schema': 'http://json-schema.org/schema#',
     'type': 'object',
     'properties': {
@@ -87,7 +87,7 @@ class UpdateEncounterInput(Inputs):
 
 
 update_participant_schema = {
-    '$id': 'http://sweetrpg.com/schemas/add_participant.json',
+    '$id': 'http://sweetrpg.com/schemas/update_participant.json',
     '$schema': 'http://json-schema.org/schema#',
     'type': 'object',
     'properties': {
@@ -149,3 +149,20 @@ update_participant_schema = {
 
 class UpdateParticipantInput(Inputs):
     json = [JsonSchema(schema=update_participant_schema)]
+
+
+update_session_schema = {
+    '$id': 'http://sweetrpg.com/schemas/update_session.json',
+    '$schema': 'http://json-schema.org/schema#',
+    'type': 'object',
+    'properties': {
+        'current_participant_index': {
+            'type': 'number'
+        }
+    },
+    'required': []
+}
+
+
+class UpdateSessionInput(Inputs):
+    json = [JsonSchema(schema=update_session_schema)]

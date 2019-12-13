@@ -11,16 +11,32 @@ const EncounterParticipant = {
         participant: {
             type: Object,
             required: true,
+        },
+        index: {
+            type: Number,
+            required: true,
         }
     },
     data() {
         return {
         };
     },
+    computed: {
+        isCurrentTurn() {
+            const encounter = this.$store.state.encounter;
+            if (encounter !== undefined &&
+                encounter.session !== undefined) {
+                if (encounter.session.current_participant_index === this.index) {
+                    return true
+                }
+            }
+            return false
+        }
+    },
     methods: {
         toggleRemoved() {
             console.log("toggleRemoved")
-            if(this.participant.flags.includes('removed')) {
+            if (this.participant.flags.includes('removed')) {
                 const index = this.participant.flags.indexOf('removed')
                 this.participant.flags.remove(index)
             }
@@ -65,7 +81,7 @@ const EncounterParticipant = {
         },
     },
     template: `
-<div :class="'encounter-participant row border rounded bg-light ' + (participant.flags.includes('removed') ? 'removed border-danger' : 'border-secondary')">
+<div :class="'encounter-participant row border rounded bg-light ' + (participant.flags.includes('removed') ? 'removed border-danger' : 'border-secondary') + (isCurrentTurn ? ' current-turn' : '')">
     <div class="col-1 encounter-participant-order">
         <h4 class="text-muted" @click="editOrder">{{ participant.order }}</h4>
     </div>

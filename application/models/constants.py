@@ -15,3 +15,9 @@ ENUM_ORDERING_PLAYER_MANAGED = 'player-managed'
 ENUM_TIE_BREAKER_QUERY = 'query'
 ENUM_TIE_BREAKER_RANDOM = 'random'
 ENUM_TIE_BREAKER_ALPHA = 'alpha'
+
+
+PARTICIPANT_SCHEME = "participant"
+
+
+ENTITLEMENT_GAME_SYSTEMS = 'game_systems'

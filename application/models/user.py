@@ -1,5 +1,7 @@
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
+user.py
+- User model object
 """
 
 from datetime import datetime

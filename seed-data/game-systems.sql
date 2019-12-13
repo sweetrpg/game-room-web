@@ -1,15 +1,20 @@
 
 INSERT INTO game_systems (
   "creator_id", "created_at", "updated_at",
-  "key", "name", "full_name", "edition", "details"
+  "key", "name", "full_name", "edition", "details", "locked"
 )
 VALUES (
   (SELECT "id" FROM users WHERE identity_id = 'system'),
   CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-  'none', 'None', 'No game system', '0', ''
+  'none', 'None', 'No game system', '0', '', false
 ),
 (
   (SELECT "id" FROM users WHERE identity_id = 'system'),
   CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-  'dnd5', 'D&D 5e', 'Dungeons & Dragons, 5th Edition', '5', ''
+  'simple', 'Simple', 'Simple game system', '0', '', false
+),
+(
+  (SELECT "id" FROM users WHERE identity_id = 'system'),
+  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
+  'dnd5', 'D&D 5e', 'Dungeons & Dragons, 5th Edition', '5', '', true
 );

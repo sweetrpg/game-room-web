@@ -47,7 +47,7 @@ const EncounterParticipantList = {
  <draggable class="container"
             v-model="participants" group="participants"
             @start="isDragging=true" @end="isDragging=false">
-      <encounter-participant v-for="p in participants" :encounterId="encounterId" :participant="p" :key="p.id" />
+      <encounter-participant v-for="(p, index) in participants" :encounterId="encounterId" :participant="p" :key="p.id" :index="index" />
   </draggable>
 `
 }

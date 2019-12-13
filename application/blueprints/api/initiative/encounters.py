@@ -16,8 +16,9 @@ from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
 from application.blueprints.api.validators import validate_payload, validate_user, check_dependent_object
-from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput
+from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput, UpdateSessionInput
 from application.blueprints.api.exceptions import error_response
+from application.controllers.encounter import EncounterController
 from werkzeug.exceptions import Forbidden, BadRequest, NotFound
 from datetime import datetime
 
@@ -37,13 +38,33 @@ def get_encounters(current_user):
 @blueprint.route('/encounters/<int:encounter_id>', methods=['GET'])
 @user_required
 def get_encounter(current_user, encounter_id: int):
-    current_app.logger.debug(f"GET /encounters: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
+    current_app.logger.debug(f"GET /encounters/{encounter_id}: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
     user_id = current_user.id
     current_app.logger.debug(f"user_id: {user_id}")
     encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
     validate_user(encounter, current_user)
     current_app.logger.debug(f"encounter: {encounter}")
     return encounter.to_dict()
+
+
+@blueprint.route('/encounters/<int:encounter_id>/next', methods=['GET'])
+@user_required
+def next_participant(current_user, encounter_id: int):
+    current_app.logger.debug(f"GET /encounters/{encounter_id}/next: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
+    user_id = current_user.id
+    current_app.logger.debug(f"user_id: {user_id}")
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    validate_user(tracked_encounter, current_user)
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+
+    controller = EncounterController(encounter_id)
+    next_participant_index = controller.get_next_index()
+    if next_participant_index:
+        participant = controller[next_participant_index]
+        if participant:
+            return jsonify({ 'index': next_participant_index, 'participant': participant })
+
+    return jsonify({ 'index': -1, 'participant': {} })
 
 
 @blueprint.route('/encounters', methods=['POST'])
@@ -250,7 +271,7 @@ def update_participant(current_user, encounter_id: int, participant_id: int):
     db.session.add(participant)
     db.session.commit()
 
-    return participant.to_dict(), 204
+    return jsonify(participant.to_dict())
 
 
 @blueprint.route('/encounters/<int:encounter_id>/participants/<int:participant_id>', methods=['DELETE'])
@@ -281,4 +302,71 @@ def delete_participant(current_user, encounter_id: int, participant_id: int):
     db.session.delete(participant)
     db.session.commit()
 
-    return {}, 204
+    return jsonify({}), 204
+
+
+@blueprint.route('/encounters/<int:encounter_id>/participants', methods=['DELETE'])
+@user_required
+def delete_participants(current_user, encounter_id: int, participant_id: int):
+    current_app.logger.debug(
+        f"DELETE /encounters/{encounter_id}/participants: {request}, current_user: {current_user}")
+
+    # check encounter
+    tracked_encounter = TrackedEncounter.query.filter_by(
+        id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(
+        id=tracked_encounter.encounter_id).first()
+    current_app.logger.debug(f"encounter: {encounter}")
+    validate_user(encounter, current_user)
+
+    encounter_participants = EncounterParticipant.query.filter_by(encounter_id=encounter.id).all()
+
+    for ep in encounter_participants:
+        current_app.logger.debug(f"encounter_participant: {ep}")
+        validate_user(ep, current_user)
+
+        participant = Participant.query.filter_by(id=ep.participant_id).first()
+        validate_user(participant, current_user)
+
+        db.session.delete(ep)
+        db.session.delete(participant)
+
+    db.session.commit()
+
+    return jsonify({}), 204
+
+
+@blueprint.route('/encounters/<int:encounter_id>/session', methods=['PUT'])
+@user_required
+def update_session(current_user, encounter_id: int):
+    current_app.logger.debug(
+        f"DELETE /encounters/{encounter_id}/session: {request}, current_user: {current_user}")
+
+    data = request.get_json()
+    current_app.logger.debug(f"data: {data}")
+
+    validate_payload(UpdateSessionInput, request)
+
+    # check encounter
+    tracked_encounter = TrackedEncounter.query.filter_by(
+        id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    session = EncounterSession.query.filter_by(id=tracked_encounter.session_id).first()
+    current_app.logger.debug(f"session: {session}")
+    validate_user(session, current_user)
+
+    for k, v in data.items():
+        current_app.logger.debug(f"{k}={v}")
+        setattr(session, k, v)
+
+    current_app.logger.debug(f"session: {session}")
+
+    db.session.add(session)
+    db.session.commit()
+
+    return jsonify(session.to_dict())

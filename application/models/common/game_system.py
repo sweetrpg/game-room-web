@@ -22,6 +22,7 @@ class GameSystem(db.Model):
     edition = db.Column(db.String(20), nullable=True)
     details = db.Column(db.Text, nullable=True)
     facets = db.Column(db.PickleType, nullable=True)
+    locked = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, name):
         self.name = name
@@ -34,6 +35,7 @@ class GameSystem(db.Model):
                     edition=self.edition,
                     details=self.details,
                     facets=self.facets,
+                    locked=self.locked,
                     creator_id=self.creator_id,
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'))
