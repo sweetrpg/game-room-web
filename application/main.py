@@ -16,6 +16,7 @@ from logging.config import dictConfig
 from application.blueprints import error_page
 from werkzeug.exceptions import HTTPException
 from redis.client import Redis
+from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
 
 
 ENV_FILE = find_dotenv()
@@ -50,6 +51,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
     session = Session(app)
 
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+    wsgi = SentryWsgiMiddleware(app)
 
     from application.blueprints.main.home import blueprint as home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/")
