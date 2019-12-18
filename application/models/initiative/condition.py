@@ -39,7 +39,7 @@ class Condition(db.Model):
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                     name=self.name,
-                    flags=set(self.flags),
+                    flags=list(set(self.flags)),
                     end_type=self.end_type,
                     end_value=self.end_value,
                     image=None, # TODO

@@ -45,7 +45,7 @@ class Participant(db.Model):
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                     name=self.name,
                     type=self.participant_type,
-                    flags=set(self.flags),
+                    flags=list(set(self.flags)),
                     color=self.color,
                     external_key=self.external_key,
                     guid=self.guid,
@@ -78,7 +78,7 @@ class ParticipantGroup(db.Model):
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                     name=self.name,
-                    flags=set(self.flags),
+                    flags=list(set(self.flags)),
                     participants=[p.to_dict() for p in self.participants])
 
 

@@ -59,4 +59,4 @@ class TrackedEncounter(db.Model):
                     group=group.to_dict(),
                     encounter=encounter.to_dict(),
                     session=session.to_dict(),
-                    flags=set(self.flags))
+                    flags=list(set(self.flags)))
