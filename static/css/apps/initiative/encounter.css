@@ -56,6 +56,22 @@ img.participant-type {
     height: 35px;
 }
 
+.encounter-participant-type-pc {
+    background-blend-mode: normal;
+}
+
+.encounter-participant-type-adversary {
+    border-color: red;
+    background-color: red;
+    background-blend-mode: lighten;
+}
+
+.encounter-participant-type-object {
+    border-color: brown;
+    background-color: brown;
+    background-blend-mode: lighten;
+}
+
 .notes {
     width: 30px;
     height: 30px;
@@ -70,5 +86,7 @@ img.participant-type {
 }
 
 .current-turn {
-    background-color: orange;
+    border-color: yellow;
+    background-color: yellow;
+    background-blend-mode: lighten;
 }

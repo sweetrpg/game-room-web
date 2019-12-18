@@ -36,28 +36,31 @@ const EncounterActionBar = {
             if (session) {
                 console.log("got a session", session)
 
-                axios.get(`/api/v1/encounters/${this.encounter.id}/next`)
+                axios.post(`/api/v1/encounters/${this.encounter.id}/next`)
                     .then((response) => {
                         console.log(response);
 
                         const nextIndex = response.data.index;
                         console.log(nextIndex);
 
-                        if(nextIndex >= 0) {
-                        axios.put(`/api/v1/encounters/${this.encounter.id}/session/${session.id}`, {
-                            current_participant_index: nextIndex,
-                        })
-                            .then((response) => {
-                                console.log(response);
+                        if (nextIndex >= 0) {
+                            axios.put(`/api/v1/encounters/${this.encounter.id}/session`, {
+                                current_participant_index: nextIndex,
                             })
-                            .catch((error) => {
-                                console.log(error);
-                                this.$store.dispatch('addMessage', { message: error })
-                            })
-                            .finally(() => {
-                                this.$emit('update-participant-list')
-                                this.$store.dispatch('fetchEncounter')
-                            })
+                                .then((response) => {
+                                    console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                    this.$store.dispatch('addMessage', { message: error })
+                                })
+                                .finally(() => {
+                                    this.$emit('update-participant-list')
+                                    this.$store.dispatch('fetchEncounter')
+                                })
+                        }
+                        else {
+                            this.$store.dispatch('addMessage', { message: "There are no participants left.", type: 'warning' })
                         }
                     })
                     .catch((error) => {

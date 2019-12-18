@@ -48,7 +48,7 @@ class Encounter(db.Model):
                     name=self.name,
                     notes=self.notes,
                     category=self.category,
-                    flags=self.flags,
+                    flags=set(self.flags),
                     game_system=game_system.to_dict(),
                     participants=[p.to_dict() for p in self.participants])
                     # TODO: map_ids=[m.id for m in self.maps])
@@ -103,7 +103,7 @@ class EncounterParticipant(db.Model):
                     marker=self.marker,
                     order=self.order,
                     size=self.size,
-                    flags=self.flags,
+                    flags=set(self.flags),
                     tag=self.tag,
                     notes=self.notes,
                     x=self.x, y=self.y, z=self.z,
@@ -250,7 +250,20 @@ class EncounterRegion(db.Model):
         return dict(id=self.id,
                     creator_id=self.creator_id,
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'))
+                    updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+                    color=self.color,
+                    flags=set(self.flags),
+                    encounter_id=self.encounter_id,
+                    encounter_participant_id=self.encounter_participant_id,
+                    name=self.name,
+                    notes=self.notes,
+                    height=self.height,
+                    width=self.width,
+                    x=self.x,
+                    y=self.y,
+                    layer=self.layer,
+                    hidden=self.hidden,
+                    scale=self.scale)
 
 
 class EncounterSession(db.Model):
@@ -288,7 +301,7 @@ class EncounterSession(db.Model):
                     number_of_rounds=self.number_of_rounds,
                     number_of_turns=self.number_of_turns,
                     start_date=self.start_date.strftime('%Y-%m-%d %H:%M:%S'),
-                    flags=self.flags,
+                    flags=set(self.flags),
                     turn_queue=self.turn_queue,
                     encounter_id=self.encounter_id)
 

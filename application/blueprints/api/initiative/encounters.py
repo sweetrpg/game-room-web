@@ -47,7 +47,7 @@ def get_encounter(current_user, encounter_id: int):
     return encounter.to_dict()
 
 
-@blueprint.route('/encounters/<int:encounter_id>/next', methods=['GET'])
+@blueprint.route('/encounters/<int:encounter_id>/next', methods=['POST'])
 @user_required
 def next_participant(current_user, encounter_id: int):
     current_app.logger.debug(f"GET /encounters/{encounter_id}/next: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
@@ -59,10 +59,12 @@ def next_participant(current_user, encounter_id: int):
 
     controller = EncounterController(encounter_id)
     next_participant_index = controller.get_next_index()
-    if next_participant_index:
+    current_app.logger.debug(f"next_participant_index: {next_participant_index}")
+    if next_participant_index is not None:
         participant = controller[next_participant_index]
+        current_app.logger.info(f"participant: {participant}")
         if participant:
-            return jsonify({ 'index': next_participant_index, 'participant': participant })
+            return jsonify({ 'index': next_participant_index, 'participant': participant.to_dict() })
 
     return jsonify({ 'index': -1, 'participant': {} })
 
@@ -343,7 +345,7 @@ def delete_participants(current_user, encounter_id: int, participant_id: int):
 @user_required
 def update_session(current_user, encounter_id: int):
     current_app.logger.debug(
-        f"DELETE /encounters/{encounter_id}/session: {request}, current_user: {current_user}")
+        f"PUT /encounters/{encounter_id}/session: {request}, current_user: {current_user}")
 
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")

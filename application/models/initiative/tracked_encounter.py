@@ -36,6 +36,7 @@ class TrackedEncounter(db.Model):
                                  constants.ENUM_TIE_BREAKER_RANDOM,
                                  name='encounter_tie_breaker'),
                          nullable=False, default=constants.ENUM_TIE_BREAKER_QUERY)
+    flags = db.Column(db.PickleType, nullable=True, default=[])
 
     def __init__(self, group: ParticipantGroup, encounter: Encounter, session: EncounterSession):
         self.group_id = group.id
@@ -57,4 +58,5 @@ class TrackedEncounter(db.Model):
                     tie_breaker=self.tie_breaker,
                     group=group.to_dict(),
                     encounter=encounter.to_dict(),
-                    session=session.to_dict())
+                    session=session.to_dict(),
+                    flags=set(self.flags))

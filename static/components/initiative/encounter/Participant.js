@@ -23,17 +23,40 @@ const EncounterParticipant = {
     },
     computed: {
         isCurrentTurn() {
+            console.log("isCurrentTurn")
             const encounter = this.$store.state.encounter;
+            console.log("encounter", encounter)
             if (encounter !== undefined &&
                 encounter.session !== undefined) {
-                if (encounter.session.current_participant_index === this.index) {
+                console.log("current participant index", encounter.session.current_participant_index)
+                console.log("this index", this.index)
+                if (encounter.session.current_participant_index == this.index) {
+                    console.log("found the one")
                     return true
                 }
             }
+            console.log("return false")
             return false
         }
     },
     methods: {
+        getClasses() {
+            var classes = 'row border rounded';
+            if (this.participant.flags.includes('removed')) {
+                classes += ' removed border-danger';
+            }
+            else {
+                if (this.isCurrentTurn) {
+                    classes += ' current-turn';
+                }
+                else {
+                    classes += ' bg-light border-secondary';
+                }
+            }
+            classes += ' encounter-participant encounter-participant-type-' + this.participant.type;
+
+            return classes;
+        },
         toggleRemoved() {
             console.log("toggleRemoved")
             if (this.participant.flags.includes('removed')) {
@@ -81,7 +104,7 @@ const EncounterParticipant = {
         },
     },
     template: `
-<div :class="'encounter-participant row border rounded bg-light ' + (participant.flags.includes('removed') ? 'removed border-danger' : 'border-secondary') + (isCurrentTurn ? ' current-turn' : '')">
+<div v-bind:class="getClasses()">
     <div class="col-1 encounter-participant-order">
         <h4 class="text-muted" @click="editOrder">{{ participant.order }}</h4>
     </div>

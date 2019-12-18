@@ -6,6 +6,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 from functools import wraps
 from flask import redirect, session, render_template, request
 from application import constants
+import jinja2
 
 
 def requires_auth(f):
@@ -34,7 +35,10 @@ def error_page(message, code):
         'code': code,
         'message': message,
     }
-    return render_page('errors/error.html', context)
+    try:
+        return render_page(f'errors/{code}.html')
+    except jinja2.TemplateNotFound:
+        return render_page('errors/error.html', context)
 
 
 def render_page(page, context={}):

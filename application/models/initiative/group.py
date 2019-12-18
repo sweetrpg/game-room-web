@@ -30,5 +30,5 @@ class EncounterGroup(db.Model):
                     created_at=self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                     updated_at=self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                     name=self.name,
-                    flags=self.flags)
+                    flags=set(self.flags))
                     # encounter_ids=[e.id for e in self.encounters])

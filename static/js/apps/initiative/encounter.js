@@ -10,6 +10,9 @@ const storeActions = {
     addMessage(context, payload) {
         context.commit('addMessage', { type: payload.type || 'danger', message: payload.message })
     },
+    removeMessage(context, payload) {
+        context.commit('removeMessage', { messageId: payload.messageId })
+    },
     clearMessages(context) {
         context.commit('clearMessages')
     },
@@ -33,7 +36,7 @@ const storeActions = {
     },
     setCurrentParticipant(context, payload) {
         // console.log('setCurrentParticipant', context, payload)
-        context.commit('setCurrentParticipant', { participant : payload.participant })
+        context.commit('setCurrentParticipant', { participant: payload.participant })
     }
 };
 const storeMutations = {
@@ -43,10 +46,15 @@ const storeMutations = {
     },
     addMessage(state, payload) {
         console.log(payload);
+        const messageId = state.messages.length;
         state.messages.push({
+            id: messageId,
             type: payload.type,
             message: payload.message,
         });
+    },
+    removeMessage(state, payload) {
+
     },
     clearMessages(state, payload) {
         state.messages = []
