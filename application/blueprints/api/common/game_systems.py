@@ -27,10 +27,8 @@ def all_game_systems(current_user):
     for gs in game_systems:
         if current_user:
             grant = EntitlementGrant.for_user(current_user, model_constants.ENTITLEMENT_GAME_SYSTEMS)
-            if grant:
+            if grant and gs.locked:
                 gs.locked = False
-            else:
-                continue
         elif gs.locked:
             continue
 
