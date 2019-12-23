@@ -16,6 +16,8 @@ from application.utils.oauth import auth0
 import os
 from application.models.user import User
 from application.db import db
+from application.cache import cache
+from application.utils.user import create_or_add_user
 
 
 AUTH0_CALLBACK_URL = os.environ[constants.AUTH0_CALLBACK_URL]
@@ -46,6 +48,7 @@ def logout():
     current_app.logger.info(f"/logout: {request}")
 
     session.clear()
+    cache.clear()
     params = {
         'returnTo': url_for('home.main_page', _external=True),
         'client_id': AUTH0_CLIENT_ID
@@ -65,24 +68,17 @@ def callback_handling():
     userinfo = resp.json()
     print(f"userinfo: {userinfo}")
 
-    user = User.query.filter_by(email=userinfo['email']).first()
-    if not user:
-        user = User(identity_id=userinfo['sub'], email=userinfo['email'])
-        user.nickname = userinfo['nickname']
-        user.name = userinfo['name']
-        # https://www.gravatar.com/avatar/#(gravatarHash)?s=30
-        user.avatar_url = userinfo['picture']
-        db.session.add(user)
-        db.session.commit()
-    print(user)
+    user, identity = create_or_add_user(userinfo)
+    print(f"user: {user}, identity: {identity}")
 
     session[constants.JWT_PAYLOAD] = userinfo
     session[constants.PROFILE_KEY] = {
-        'user_id': userinfo['sub'],
-        'name': userinfo['name'],
-        'picture': userinfo['picture']
+        'user_id': user.id,
+        'name': user.name,
+        'picture': user.avatar_url,
     }
     session[constants.CURRENT_USER_ID] = user.id
+    # TODO: find redirect url and use that, if present
     return redirect('/account')
 
 

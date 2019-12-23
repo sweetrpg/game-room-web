@@ -17,6 +17,8 @@ from application.blueprints import error_page
 from werkzeug.exceptions import HTTPException
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
+# from sassutils.wsgi import SassMiddleware
+from flask_scss import Scss
 
 
 ENV_FILE = find_dotenv()
@@ -79,6 +81,13 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     # vue = Vue(app)
 
+    # app.wsgi_app = SassMiddleware(app.wsgi_app, {
+    #     'application': ('static/sass', 'static/css', '/static/css')
+    # })
+    scss = Scss(app, static_dir='static', asset_dir='assets')
+
     print(app.url_map)
+
+    app.debug = True
 
     return app

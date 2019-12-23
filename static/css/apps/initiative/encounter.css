@@ -35,6 +35,15 @@ img.participant-type {
     width: 100%;
 }
 
+#collectInitiativeProgress {
+    display: none;
+}
+
+#collectInitiativeFeedback {
+    display: none;
+    width: 100%;
+}
+
 .encounter-participant {
     margin-bottom: 10px;
     position: relative;
@@ -81,6 +90,10 @@ img.participant-type {
     opacity: 1;
 }
 
+.hasnt-notes {
+    opacity: 1;
+}
+
 .no-notes {
     opacity: 0.5;
 }
@@ -89,4 +102,31 @@ img.participant-type {
     border-color: yellow;
     background-color: yellow;
     background-blend-mode: lighten;
+}
+
+input.collect-initiative {
+    font-size: 40pt;
+    text-align: center;
+}
+
+.collect-initiative-name > .value {
+    text-align: center;
+    width: 100%;
+}
+
+.collect-initiative-name {
+font-size: 24pt;
+}
+
+.collect-initiative-type > .value {
+    text-align: center;
+    width: 100%;
+}
+
+.collect-initiative-type {
+font-size: 16pt;
+}
+
+.advancement-buttons {
+    width: 100%;
 }

@@ -1,10 +1,17 @@
 
 INSERT INTO users (
-  "identity_id", "email", "nickname", "name", "avatar_url"
+  "email", "nickname", "name", "avatar_url"
 ) VALUES (
-  'system',
   'dm@sweetrpg.com',
-  'System',
+  'system',
   'System',
   ''
+);
+
+INSERT INTO identities (
+  "user_id", "source", "subject"
+) VALUES (
+  (SELECT "id" FROM users WHERE "nickname" = 'system'),
+  'system',
+  'system'
 );

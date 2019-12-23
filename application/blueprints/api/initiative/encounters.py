@@ -16,7 +16,7 @@ from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
 from application.blueprints.api.validators import validate_payload, validate_user, check_dependent_object
-from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput, UpdateSessionInput
+from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput, UpdateSessionInput, UpdateParticipantOrderInput
 from application.blueprints.api.exceptions import error_response
 from application.controllers.encounter import EncounterController
 from werkzeug.exceptions import Forbidden, BadRequest, NotFound
@@ -372,3 +372,49 @@ def update_session(current_user, encounter_id: int):
     db.session.commit()
 
     return jsonify(session.to_dict())
+
+
+@blueprint.route('/encounters/<int:encounter_id>/order', methods=['PUT'])
+@user_required
+def update_participant_order(current_user, encounter_id: int):
+    current_app.logger.debug(
+        f"PUT /encounters/{encounter_id}/order: {request}, current_user: {current_user}")
+
+    data = request.get_json()
+    current_app.logger.debug(f"data: {data}")
+
+    validate_payload(UpdateParticipantOrderInput, request)
+
+    # check encounter
+    tracked_encounter = TrackedEncounter.query.filter_by(
+        id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    session = EncounterSession.query.filter_by(id=tracked_encounter.session_id).first()
+    current_app.logger.debug(f"session: {session}")
+    validate_user(session, current_user)
+
+    for participant_id, value in data.items():
+        current_app.logger.debug(f"{participant_id}={value}")
+
+        participant = EncounterParticipant.query.filter_by(id=int(participant_id)).first()
+        participant.order = int(value)
+
+        db.session.add(participant)
+    #     setattr(session, k, v)
+
+    # session.turn_queue = []
+    # current_app.logger.debug(f"session: {session}")
+
+    # db.session.add(session)
+    db.session.commit()
+
+    # TODO: do ordering according to encounter controller
+    controller = EncounterController(encounter_id)
+    controller.sort_participants()
+    controller.set_turn_to(0)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
+
+    return jsonify(encounter.to_dict())

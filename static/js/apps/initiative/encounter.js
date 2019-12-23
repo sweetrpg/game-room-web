@@ -1,9 +1,17 @@
 
+// TODO: this should be looked-up per locale
+const participantTypeMap = {
+'pc': 'Player Character',
+'adversary': 'Adversary',
+'object': 'Object',
+}
+
 Vue.config.devtools = true;
 
 const storeState = {
     encounter: {},
     currentParticipant: null,
+    currentParticipantIndex: -1,
     messages: [], // { type: '<type>', message: '<text>' }
 };
 const storeActions = {
@@ -35,14 +43,30 @@ const storeActions = {
             });
     },
     setCurrentParticipant(context, payload) {
-        // console.log('setCurrentParticipant', context, payload)
-        context.commit('setCurrentParticipant', { participant: payload.participant })
+        console.log('setCurrentParticipant', context, payload)
+        context.commit('setCurrentParticipant', {
+            participant: payload.participant,
+            index: payload.index,
+         })
     }
 };
 const storeMutations = {
     setCurrentParticipant(state, payload) {
         // console.log(payload);
-        state.currentParticipant = payload.participant
+        var index = payload.index;
+        var participant = payload.participant;
+
+        if (index === undefined) {
+            console.log("trying to determine index of participant, since it wasn't provided", state.encounter)
+            index = state.encounter.encounter.participants.indexOf(payload.participant)
+        }
+        else if (participant === undefined) {
+            console.log("trying to determine participant from index, since it wasn't provided", state.encounter)
+            participant = state.encounter.encounter.participants[index];
+        }
+
+        state.currentParticipant = participant;
+        state.currentParticipantIndex = index;
     },
     addMessage(state, payload) {
         console.log(payload);
@@ -89,6 +113,7 @@ const vm = new Vue({
         'delete-participant-dialog': DeleteParticipantDialog,
         'edit-participant-dialog': EditParticipantDialog,
         'edit-participant-order-dialog': EditParticipantOrderDialog,
+        'collect-initiative-dialog': CollectInitiativeDialog,
     },
     data: {
     },
@@ -116,4 +141,7 @@ $('#editParticipantDialog').on('shown.bs.modal', function () {
 })
 $('#editParticipantOrderDialog').on('shown.bs.modal', function () {
     $('#editParticipantOrderValue').focus();
+})
+$('#collectInitiativeDialog').on('shown.bs.modal', function () {
+    $('#collectInitiativeValue').focus();
 })

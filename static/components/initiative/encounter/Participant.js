@@ -130,7 +130,7 @@ const EncounterParticipant = {
         <div class="row">
             <div class="dropdown">
                 <button id="editParticipantActionsButton"
-                        class="btn btn-light dropdown-toggle action-icon" type="button"
+                        class="btn dropdown-toggle action-icon" type="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/static/images/button-actions.png" />
                 </button>

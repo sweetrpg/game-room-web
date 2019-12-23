@@ -166,3 +166,17 @@ update_session_schema = {
 
 class UpdateSessionInput(Inputs):
     json = [JsonSchema(schema=update_session_schema)]
+
+
+update_participant_order_schema = {
+    '$id': 'http://sweetrpg.com/schemas/update_session.json',
+    '$schema': 'http://json-schema.org/schema#',
+    'type': 'object',
+    'properties': {
+    },
+    'required': []
+}
+
+
+class UpdateParticipantOrderInput(Inputs):
+    json = [JsonSchema(schema=update_participant_order_schema)]

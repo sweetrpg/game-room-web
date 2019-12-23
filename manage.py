@@ -16,7 +16,7 @@ from application.models.initiative.encounter import Encounter, EncounterParticip
 from application.models.initiative.group import EncounterGroup
 from application.models.initiative.participant import Participant, ParticipantGroup, ParticipantHealthDatum
 from application.models.initiative.tracked_encounter import TrackedEncounter
-from application.models.user import User
+from application.models.user import User, Identity, Role
 from application.models.profile import Profile
 from application.models.entitlement import Entitlement, EntitlementGrant
 
@@ -35,7 +35,8 @@ manager.add_command('db', MigrateCommand)
 def shell_ctx():
     return dict(app=app,
                 db=db,
-                User=User, Profile=Profile, Entitlement=Entitlement, EntitlmentGrant=EntitlementGrant,
+                User=User, Identity=Identity, Role=Role, Profile=Profile,
+                Entitlement=Entitlement, EntitlmentGrant=EntitlementGrant,
                 GameSystem=GameSystem, GameSystemFacetDatum=GameSystemFacetDatum, GameSystemImageDatum=GameSystemImageDatum,
                 Condition=Condition, ConditionHealthAdjustment=ConditionHealthAdjustment,
                 Encounter=Encounter, EncounterParticipant=EncounterParticipant, EncounterParticipantGroup=EncounterParticipantGroup, EncounterParticipantHealthDatum=EncounterParticipantHealthDatum, EncounterParticipantMetrics=EncounterParticipantMetrics, EncounterParticipantTurnData=EncounterParticipantTurnData, EncounterRegion=EncounterRegion, EncounterSession=EncounterSession, EncounterSessionTimelineEntry=EncounterSessionTimelineEntry,

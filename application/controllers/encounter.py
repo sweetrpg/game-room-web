@@ -145,7 +145,28 @@ class EncounterController(object):
 
     def sort_participants(self):
         current_app.logger.info("Sorting participants.")
-        pass
+
+        self._session.turn_queue = []
+        db.session.add(self._session)
+
+        # TODO: sort by game system rules
+        if self._tracked_encounter.ordering == model_constants.ENUM_ORDERING_HIGH_TO_LOW:
+            self._encounter.participants.sort(key=lambda ep: ep.order, reverse=True)
+        elif self._tracked_encounter.ordering == model_constants.ENUM_ORDERING_LOW_TO_HIGH:
+            pass
+        elif self._tracked_encounter.ordering == model_constants.ENUM_ORDERING_PCVADVERSARY:
+            pass
+        elif self._tracked_encounter.ordering == model_constants.ENUM_ORDERING_PLAYER_MANAGED:
+            pass
+
+        for i,ep in enumerate(self._encounter.participants):
+            current_app.logger.debug(f"{i}: {ep}")
+            ep.position = i
+            db.session.add(ep)
+
+        db.session.commit()
+
+        self._update_arranged_participants()
 
     def index_of(self, participant: EncounterParticipant) -> int:
         current_app.logger.info(f"Getting index of participant {participant}.")

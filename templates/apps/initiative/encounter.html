@@ -5,8 +5,8 @@
 {% block title %}{{ name }} &ndash; Initiative{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/apps/initiative/common.css" />
-<link rel="stylesheet" href="/static/css/apps/initiative/encounter.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/apps/initiative/common.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/apps/initiative/encounter.css" />
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
             <div class="col align-self-start">
                 <encounter-toolbar />
             </div>
-            <div class="col align-self-end">
+            <div class="col align-self-end d-flex flex-row-reverse">
                 <encounter-action-bar />
             </div>
         </div>
@@ -42,6 +42,9 @@
         </div>
         <div>
             <edit-participant-order-dialog />
+        </div>
+        <div>
+            <collect-initiative-dialog />
         </div>
     <p/>
     <div>
@@ -64,6 +67,7 @@
 <script src="/static/components/Messages.js"></script>
 <script src="/static/components/initiative/encounter/ActionBar.js"></script>
 <script src="/static/components/initiative/encounter/Toolbar.js"></script>
+<script src="/static/components/initiative/encounter/CollectInitiativeDialog.js"></script>
 <script src="/static/components/initiative/encounter/EncounterInfo.js"></script>
 <script src="/static/components/initiative/encounter/AddParticipantDialog.js"></script>
 <script src="/static/components/initiative/encounter/DeleteParticipantDialog.js"></script>

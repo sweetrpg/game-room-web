@@ -82,7 +82,16 @@ const EncounterActionBar = {
             }
         },
         collectInitiative() {
-
+            console.log("collectInitiative", this.encounter)
+            if(this.encounter.encounter.participants.length == 0) {
+                console.log("No participant in this encounter");
+                return;
+            }
+            const firstParticipant = this.encounter.encounter.participants[0];
+            console.log(firstParticipant)
+            // $('data#editParticipantOrderDialogParticipantId').val(this.participant.id);
+            this.$store.dispatch('setCurrentParticipant', { participant: firstParticipant })
+            $('#collectInitiativeDialog').modal('show');
         },
     },
     watch: {

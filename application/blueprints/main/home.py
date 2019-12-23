@@ -21,7 +21,7 @@ def handle_error(ex):
 
 
 @blueprint.route('/')
-@cache.cached(timeout=50)
+# @cache.cached(timeout=50)
 def main_page():
     """
     Main application page, with generic non-user stuff.
@@ -31,7 +31,7 @@ def main_page():
 
 @blueprint.route('/home')
 @requires_auth
-@cache.cached(timeout=50)
+# @cache.cached(timeout=50)
 def home_page():
     """
     Personal page for the user, with application usage info, etc.
