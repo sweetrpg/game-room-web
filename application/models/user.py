@@ -22,8 +22,10 @@ class User(db.Model):
     nickname = db.Column(db.String(30), nullable=True)
     name = db.Column(db.String(120), nullable=True)
     avatar_url = db.Column(db.String(1024), nullable=True)
+    identities = db.relationship('Identity', backref='users', lazy=False)
+    roles = db.relationship('UserRole', back_populates='users')
 
-    def __init__(self, email):
+    def __init__(self, email:str):
         self.email = email
 
     def to_dict(self):
@@ -31,7 +33,9 @@ class User(db.Model):
                     email=self.email,
                     nickname=self.nickname,
                     name=self.name,
-                    avatar_url=self.avatar_url)
+                    avatar_url=self.avatar_url,
+                    identities=map(lambda x: x.to_dict(), self.identities),
+                    roles=map(lambda x: x.to_dict(), self.roles))
 
 
 class Identity(db.Model):
@@ -56,7 +60,7 @@ class Identity(db.Model):
                        nullable=False)
     subject = db.Column(db.String(100), nullable=False) # the ID from the source auth
 
-    def __init__(self, user, source, subject):
+    def __init__(self, user:User, source:str, subject:str):
         self.user_id = user.id
         self.source = source
         self.subject = subject
@@ -73,10 +77,52 @@ class Role(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False, unique=True)
+    users = db.relationship('UserRole', back_populates='roles')
 
-    def __init__(self, name):
+    def __init__(self, name:str):
         self.name = name
 
     def to_dict(self):
         return dict(id=self.id,
                     name=self.name)
+
+
+class Permission(db.Model):
+    __tablename__ = 'permissions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    name = db.Column(db.String(30), nullable=False, unique=True)
+    # setting = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self, role:Role, name:str):
+        self.role_id = role.id
+        self.name = name
+        # self.setting = setting
+
+    def to_dict(self):
+        return dict(id=self.id,
+                    role_id=self.role_id,
+                    name=self.name)
+                    # setting=self.setting)
+
+
+class UserRole(db.Model):
+    __tablename__ = 'user_roles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    enabled = db.Column(db.Boolean, nullable=False, default=True)
+    users = db.relationship('User', back_populates='roles')
+    roles = db.relationship('Role', back_populates='users')
+
+    def __init__(self, user: User, role: Role):
+        self.user_id = user.id
+        self.role_id = role.id
+
+    def to_dict(self):
+        return dict(id=self.id,
+                    user_id=self.user_id,
+                    role_id=self.role_id,
+                    enabled=self.enabled)

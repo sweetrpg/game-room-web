@@ -3,7 +3,8 @@ INSERT INTO game_systems (
   "creator_id", "created_at", "updated_at",
   "key", "name", "full_name", "edition", "details", "locked", "order"
 )
-VALUES (
+VALUES
+(
   (SELECT "id" FROM users WHERE nickname = 'system'),
   CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
   'none', 'None', 'No game system', '0', '', false, 0
