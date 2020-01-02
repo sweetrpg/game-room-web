@@ -4,6 +4,7 @@ tracked_encounter.py
 - Encounter meta model objects.
 """
 
+from flask import current_app
 from datetime import datetime
 from application.db import db
 from application.models.user import User
@@ -45,10 +46,14 @@ class TrackedEncounter(db.Model):
 
     def to_dict(self):
         creator = User.query.filter_by(id=self.creator_id).first()
+        current_app.logger.debug(f"creator: {creator.to_dict()}")
 
         group = ParticipantGroup.query.filter_by(id=self.group_id).first()
+        current_app.logger.debug(f"group: {group.to_dict()}")
         encounter = Encounter.query.filter_by(id=self.encounter_id).first()
+        current_app.logger.debug(f"encounter: {encounter.to_dict()}")
         session = EncounterSession.query.filter_by(id=self.session_id).first()
+        current_app.logger.debug(f"session: {session.to_dict()}")
 
         return dict(id=self.id,
                     creator=creator.to_dict(),

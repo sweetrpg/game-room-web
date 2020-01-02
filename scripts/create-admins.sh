@@ -4,7 +4,6 @@ set -x
 set -e
 set -o pipefail
 
-export PGPASSWORD=$POSTGRES_PASSWORD
 cat > .$$.sql <<EOF
 INSERT INTO "user_roles"
 ("user_id", "role_id", "enabled")
@@ -14,5 +13,5 @@ VALUES
  true)
 ;
 EOF
-psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d postgres -f .$$.sql
+psql -d postgres -f .$$.sql
 rm -f .$$.sql

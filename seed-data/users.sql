@@ -27,7 +27,7 @@ INSERT INTO "permissions" (
 VALUES
 ((SELECT "id" FROM "roles" WHERE "name" = 'user'), 'basic'),
 ((SELECT "id" FROM "roles" WHERE "name" = 'admin'), 'list_users'),
-((SELECT "id" FROM "roles" WHERE "name" = 'admin'), 'modify_user').
+((SELECT "id" FROM "roles" WHERE "name" = 'admin'), 'modify_user'),
 ((SELECT "id" FROM "roles" WHERE "name" = 'admin'), 'add_game_system'),
 ((SELECT "id" FROM "roles" WHERE "name" = 'admin'), 'modify_game_system')
 ;

@@ -302,7 +302,7 @@ class EncounterSession(db.Model):
                     number_of_turns=self.number_of_turns,
                     start_date=self.start_date.strftime('%Y-%m-%d %H:%M:%S'),
                     flags=list(set(self.flags)),
-                    turn_queue=self.turn_queue,
+                    turn_queue=str(self.turn_queue),
                     encounter_id=self.encounter_id)
 
 

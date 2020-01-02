@@ -34,8 +34,8 @@ class User(db.Model):
                     nickname=self.nickname,
                     name=self.name,
                     avatar_url=self.avatar_url,
-                    identities=map(lambda x: x.to_dict(), self.identities),
-                    roles=map(lambda x: x.to_dict(), self.roles))
+                    identities=list(map(lambda x: x.to_dict(), self.identities)),
+                    roles=list(map(lambda x: x.to_dict(), self.roles)))
 
 
 class Identity(db.Model):

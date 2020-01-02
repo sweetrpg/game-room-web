@@ -27,7 +27,12 @@ ENUM_IDENTITY_SOURCE_EMAIL = 'email'
 ENUM_IDENTITY_SOURCE_SMS = 'sms'
 ENUM_IDENTITY_SOURCE_SYSTEM = 'system'
 
+
 PARTICIPANT_SCHEME = "participant"
+
+
+ROLE_ADMIN = 'admin'
+ROLE_USER = 'user'
 
 
 ENTITLEMENT_GAME_SYSTEMS = 'game_systems'
