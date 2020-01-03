@@ -309,22 +309,22 @@ def delete_participant(current_user, encounter_id: int, participant_id: int):
 
 @blueprint.route('/encounters/<int:encounter_id>/participants', methods=['DELETE'])
 @user_required
-def delete_participants(current_user, encounter_id: int, participant_id: int):
-    current_app.logger.debug(
-        f"DELETE /encounters/{encounter_id}/participants: {request}, current_user: {current_user}")
+def delete_participants(current_user, encounter_id: int):
+    current_app.logger.debug(f"DELETE /encounters/{encounter_id}/participants: {request}, current_user: {current_user}")
 
     # check encounter
-    tracked_encounter = TrackedEncounter.query.filter_by(
-        id=encounter_id).first()
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
     current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
     validate_user(tracked_encounter, current_user)
 
-    encounter = Encounter.query.filter_by(
-        id=tracked_encounter.encounter_id).first()
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
     current_app.logger.debug(f"encounter: {encounter}")
     validate_user(encounter, current_user)
 
     encounter_participants = EncounterParticipant.query.filter_by(encounter_id=encounter.id).all()
+
+    types = request.args.get('types')
+    current_app.logger.debug(f"types: {types}")
 
     for ep in encounter_participants:
         current_app.logger.debug(f"encounter_participant: {ep}")
@@ -333,8 +333,45 @@ def delete_participants(current_user, encounter_id: int, participant_id: int):
         participant = Participant.query.filter_by(id=ep.participant_id).first()
         validate_user(participant, current_user)
 
-        db.session.delete(ep)
-        db.session.delete(participant)
+        if types is None or participant.type in types:
+            current_app.logger.info(f"Participant's type matches or requsted type is empty; deleting.")
+            db.session.delete(ep)
+            db.session.delete(participant)
+
+    db.session.commit()
+
+    return jsonify({}), 204
+
+
+@blueprint.route('/encounters/<int:encounter_id>/participants/reset', methods=['POST'])
+@user_required
+def reset_participants(current_user, encounter_id: int):
+    current_app.logger.debug(f"POST /encounters/{encounter_id}/participants/reset: {request}, current_user: {current_user}")
+
+    # check encounter
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+    validate_user(tracked_encounter, current_user)
+
+    encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
+    current_app.logger.debug(f"encounter: {encounter}")
+    validate_user(encounter, current_user)
+
+    encounter_participants = EncounterParticipant.query.filter_by(encounter_id=encounter.id).all()
+
+    types = request.args.get('types')
+    current_app.logger.debug(f"types: {types}")
+
+    for ep in encounter_participants:
+        current_app.logger.debug(f"encounter_participant: {ep}")
+        validate_user(ep, current_user)
+
+        participant = Participant.query.filter_by(id=ep.participant_id).first()
+        validate_user(participant, current_user)
+
+        ep.order = 0
+
+        db.session.add(ep)
 
     db.session.commit()
 
@@ -344,8 +381,7 @@ def delete_participants(current_user, encounter_id: int, participant_id: int):
 @blueprint.route('/encounters/<int:encounter_id>/session', methods=['PUT'])
 @user_required
 def update_session(current_user, encounter_id: int):
-    current_app.logger.debug(
-        f"PUT /encounters/{encounter_id}/session: {request}, current_user: {current_user}")
+    current_app.logger.debug(f"PUT /encounters/{encounter_id}/session: {request}, current_user: {current_user}")
 
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")
@@ -353,8 +389,7 @@ def update_session(current_user, encounter_id: int):
     validate_payload(UpdateSessionInput, request)
 
     # check encounter
-    tracked_encounter = TrackedEncounter.query.filter_by(
-        id=encounter_id).first()
+    tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
     current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
     validate_user(tracked_encounter, current_user)
 

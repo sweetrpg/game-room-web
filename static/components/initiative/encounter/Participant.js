@@ -83,6 +83,20 @@ const EncounterParticipant = {
         setTurn() {
             console.log("setTurn")
 
+            axios.put(`/api/v1/encounters/${this.participant.encounter_id}/session`, {
+                current_participant_index: this.index,
+            })
+                .then((response) => {
+                    console.log(response);
+                    this.$store.dispatch('setCurrentParticipant', { participant: this.participant })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    this.$emit('update-participant-list')
+                    this.$store.dispatch('fetchEncounter')
+                })
         },
         deleteParticipant() {
             console.log("deleteParticipant")
