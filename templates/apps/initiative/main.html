@@ -5,8 +5,8 @@
 {% block title %}Initiative{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/apps/initiative/common.css" />
-    <link rel="stylesheet" href="/static/css/apps/initiative/main.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/apps/initiative/common.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/apps/initiative/main.css') }}" />
 {% endblock %}
 
 {% block content %}
@@ -41,13 +41,13 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
-<script src="/static/js/apps/initiative/common.js"></script>
-<script src="/static/components/initiative/CreateEncounterDialog.js"></script>
-<script src="/static/components/initiative/CreateGroupDialog.js"></script>
-<script src="/static/components/initiative/EncounterItem.js"></script>
-<script src="/static/components/initiative/EncounterList.js"></script>
-<script src="/static/js/apps/initiative/main.js"></script>
+<script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/CreateEncounterDialog.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/CreateGroupDialog.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/EncounterItem.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/EncounterList.js') }}"></script>
+<script src="{{ url_for('static', filename='js/apps/initiative/main.js') }}"></script>
 {% endblock %}

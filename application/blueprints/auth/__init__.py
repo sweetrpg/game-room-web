@@ -1,7 +1,7 @@
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
-auth.py
-- Authentication and authorization endpoints.
+auth
+- Authentication and authorization common endpoints.
 """
 
 
@@ -10,14 +10,13 @@ from flask import Blueprint, jsonify, request, current_app, redirect, session, u
 from werkzeug.exceptions import HTTPException
 from urllib.parse import urlencode
 import jwt
+from application.utils.oauth import auth0, kanka
 from application.models.user import User
 from application import constants
-from application.utils.oauth import auth0
 import os
 from application.models.user import User
 from application.db import db
 from application.cache import cache
-from application.utils.user import create_or_add_user
 
 
 AUTH0_CALLBACK_URL = os.environ[constants.AUTH0_CALLBACK_URL]
@@ -56,30 +55,13 @@ def logout():
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 
-@blueprint.route('/callback')
-def callback_handling():
-    current_app.logger.info(f"/callback: {request}")
-    print(request.args)
+@blueprint.route('/integrate/<service>')
+def integrate(service: str):
+    current_app.logger.info(f"/logout: {request}")
 
-    token = auth0.authorize_access_token()
-    print(f"token: {token}")
-    resp = auth0.get('userinfo')
-    print(f"resp: {resp}")
-    userinfo = resp.json()
-    print(f"userinfo: {userinfo}")
+    # TODO
 
-    user, identity = create_or_add_user(userinfo)
-    print(f"user: {user}, identity: {identity}")
-
-    session[constants.JWT_PAYLOAD] = userinfo
-    session[constants.PROFILE_KEY] = {
-        'user_id': user.id,
-        'name': user.name,
-        'picture': user.avatar_url,
-    }
-    session[constants.CURRENT_USER_ID] = user.id
-    # TODO: find redirect url and use that, if present
-    return redirect('/account')
+    return jsonify({}), 204
 
 
-# from . import login, register
+from . import auth0, kanka

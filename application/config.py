@@ -35,3 +35,5 @@ class BaseConfig(object):
     VUE_CONFIGURATION = {}
     SESSION_TYPE = 'redis'
     SESSION_REDIS = redis.from_url(f"redis://{os.environ['REDIS_HOST']}:{int(os.environ.get('REDIS_PORT') or 6379)}")
+    STRIPE_API_KEY = os.environ['STRIPE_API_KEY']
+    STRIPE_SIGNING_SECRET = os.environ['STRIPE_SIGNING_SECRET']

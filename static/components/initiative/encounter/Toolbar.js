@@ -43,7 +43,7 @@ const EncounterToolbar = {
         removeOthers() {
             console.log("removeOthers");
 
-            axios.delete(`/api/v1/encounters/${this.encounter.id}/participants?types[]=adversary,object`)
+            axios.delete(`/api/v1/encounters/${this.encounter.id}/participants?type=adversary&type=object`)
                 .then((response) => {
                     console.log(response);
 
@@ -187,7 +187,7 @@ const EncounterToolbar = {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Remove Non-participants?</h5>
+                        <h5 class="modal-title">Remove Non-PCs?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

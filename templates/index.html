@@ -10,7 +10,7 @@
     <div class="row">
         <!-- Initiative! -->
         <div class="card" style="width: 18rem;">
-            <img src="/static/images/initiative/initiative-logo-large.png" class="card-img-top" alt="Initiative!">
+            <img src="{{ url_for('static', filename='images/initiative/initiative-logo-large.png') }}" class="card-img-top" alt="Initiative!">
             <div class="card-body">
                 <h5 class="card-title">Initiative!</h5>
                 <p class="card-text">Track your structured encounter progress.</p>
@@ -20,7 +20,7 @@
 
         <!-- Journey tracker -->
         <div class="card" style="width: 18rem;">
-            <img src="/static/images/journeys/journeys-logo-large.png" class="card-img-top" alt="Journey Tracker">
+            <img src="{{ url_for('static', filename='images/journeys/journeys-logo-large.png') }}" class="card-img-top" alt="Journey Tracker">
             <div class="card-body">
                 <h5 class="card-title">Journey Tracker</h5>
                 <p class="card-text">Manage journeys in your game session.</p>
@@ -30,7 +30,7 @@
 
         <!-- Monster library -->
         <div class="card" style="width: 18rem;">
-            <img src="/static/images/monsters/monsters-logo-large.png" class="card-img-top" alt="Monster Library">
+            <img src="{{ url_for('static', filename='images/monsters/monsters-logo-large.png') }}" class="card-img-top" alt="Monster Library">
             <div class="card-body">
                 <h5 class="card-title">Monster Library</h5>
                 <p class="card-text">Find the right monster for your encounter.</p>

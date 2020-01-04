@@ -19,6 +19,7 @@ from application.blueprints.api.validators import validate_payload, validate_use
 from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput, UpdateSessionInput, UpdateParticipantOrderInput
 from application.blueprints.api.exceptions import error_response
 from application.controllers.encounter import EncounterController
+from application.utils import normalize_query
 from werkzeug.exceptions import Forbidden, BadRequest, NotFound
 from datetime import datetime
 
@@ -323,7 +324,8 @@ def delete_participants(current_user, encounter_id: int):
 
     encounter_participants = EncounterParticipant.query.filter_by(encounter_id=encounter.id).all()
 
-    types = request.args.get('types')
+    params = normalize_query(request.args)
+    types = params.get('type')
     current_app.logger.debug(f"types: {types}")
 
     for ep in encounter_participants:
@@ -333,12 +335,13 @@ def delete_participants(current_user, encounter_id: int):
         participant = Participant.query.filter_by(id=ep.participant_id).first()
         validate_user(participant, current_user)
 
-        if types is None or participant.type in types:
+        if types is None or participant.participant_type in types:
             current_app.logger.info(f"Participant's type matches or requsted type is empty; deleting.")
             db.session.delete(ep)
-            db.session.delete(participant)
+            db.session.commit()
 
-    db.session.commit()
+            db.session.delete(participant)
+            db.session.commit()
 
     return jsonify({}), 204
 
@@ -358,9 +361,6 @@ def reset_participants(current_user, encounter_id: int):
     validate_user(encounter, current_user)
 
     encounter_participants = EncounterParticipant.query.filter_by(encounter_id=encounter.id).all()
-
-    types = request.args.get('types')
-    current_app.logger.debug(f"types: {types}")
 
     for ep in encounter_participants:
         current_app.logger.debug(f"encounter_participant: {ep}")

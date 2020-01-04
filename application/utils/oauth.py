@@ -23,3 +23,17 @@ auth0 = oauth.register(
         'scope': 'openid profile email',
     },
 )
+
+
+kanka = oauth.register(
+    'kanka',
+    client_id=os.environ[constants.KANKA_CLIENT_ID],
+    client_secret=os.environ[constants.KANKA_CLIENT_SECRET],
+    api_base_url=os.environ[constants.KANKA_DOMAIN],
+    access_token_url=os.environ[constants.KANKA_DOMAIN] + '/oauth/token',
+    authorize_url=os.environ[constants.KANKA_DOMAIN] + '/authorize',
+    client_kwargs={
+        # 'scope': 'openid',
+        'scope': 'openid profile email',
+    },
+)

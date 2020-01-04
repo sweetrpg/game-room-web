@@ -11,12 +11,12 @@ import jinja2
 
 def requires_auth(f):
     @wraps(f)
-    def decorated(*args, **kwargs):
+    def _check_auth(*args, **kwargs):
         if constants.PROFILE_KEY not in session:
             return redirect('/auth/login')
         return f(*args, **kwargs)
 
-    return decorated
+    return _check_auth
 
 
 # def user_info(f):

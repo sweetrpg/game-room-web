@@ -12,11 +12,11 @@ services:
       dockerfile: .devcontainer/Dockerfile
 
     environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=sweetrpg
-      - POSTGRES_PW=sweetrpg
-      - POSTGRES_DB=sweetrpg
+      - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=sweetrpg
+      - PGPASSWORD=sweetrpg
+      - PGDATABASE=sweetrpg
       - REDIS_HOST=redis
       - REDIS_PASSWORD=redis
 
