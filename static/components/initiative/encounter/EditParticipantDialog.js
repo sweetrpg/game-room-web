@@ -235,9 +235,7 @@ const EditParticipantDialog = {
                 <span class="input-group-text">Notes</span>
             </div>
             <textarea id="editParticipantNotes" name="notes" class="form-control"
-                      aria-describedby="notesHelp" aria-label="Notes">
-                      {{ notes }}
-            </textarea>
+                      aria-describedby="notesHelp" aria-label="Notes">{{ notes }}</textarea>
           </div>
           <small id="notesHelp" class="form-text text-muted">
           </small>

@@ -135,13 +135,25 @@ window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = vm.constructor
 
 $('#addParticipantDialog').on('shown.bs.modal', function () {
     $('#addParticipantName').focus();
+    $('#addParticipantFeedback')
+        .removeClass('alert-danger').removeClass('alert-success')
+        .html(``).hide();
 })
 $('#editParticipantDialog').on('shown.bs.modal', function () {
     $('#editParticipantName').focus();
+    $('#editParticipantFeedback')
+        .removeClass('alert-danger').removeClass('alert-success')
+        .html(``).hide();
 })
 $('#editParticipantOrderDialog').on('shown.bs.modal', function () {
     $('#editParticipantOrderValue').focus();
+    $('#editParticipantOrderFeedback')
+        .removeClass('alert-danger').removeClass('alert-success')
+        .html(``).hide();
 })
 $('#collectInitiativeDialog').on('shown.bs.modal', function () {
     $('#collectInitiativeValue').focus();
+    $('#collectInitiativeFeedback')
+        .removeClass('alert-danger').removeClass('alert-success')
+        .html(``).hide();
 })

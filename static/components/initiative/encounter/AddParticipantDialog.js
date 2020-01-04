@@ -254,9 +254,7 @@ const AddParticipantDialog = {
                     <span class="input-group-text">Notes</span>
                 </div>
                 <textarea id="addParticipantNotes" name="notes" class="form-control"
-                          aria-describedby="notesHelp" aria-label="Notes">
-                          {{ notes }}
-                </textarea>
+                          aria-describedby="notesHelp" aria-label="Notes">{{ notes }}</textarea>
               </div>
               <small id="notesHelp" class="form-text text-muted">
               </small>
@@ -277,13 +275,13 @@ const AddParticipantDialog = {
 
         <!-- errors/info -->
         <div class="form-group">
-        <div class="progress" id="addParticipantProgress">
-<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-</div>
-<div id="addParticipantFeedback" class="alert alert-danger" role="alert">
-Danger, Will Robinson!
-</div>
-        </div>
+          <div class="progress" id="addParticipantProgress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
+          <div id="addParticipantFeedback" class="alert alert-danger" role="alert">
+            Danger, Will Robinson!
+          </div>
+          </div>
       </div>
 
       <div class="modal-footer">

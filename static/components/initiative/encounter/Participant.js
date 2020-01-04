@@ -111,10 +111,10 @@ const EncounterParticipant = {
             $('#editParticipantOrderDialog').modal('show');
         },
         editParticipant() {
-            console.log("editParticipant")
+            console.log("editParticipant");
             $('data#editParticipantDialogParticipantId').val(this.participant.id);
-            this.$store.dispatch('setCurrentParticipant', { participant: this.participant })
-            $('#editParticipantDialog').modal('show')
+            this.$store.dispatch('setCurrentParticipant', { participant: this.participant });
+            $('#editParticipantDialog').modal('show');
         },
     },
     template: `

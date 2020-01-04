@@ -56,6 +56,7 @@ class Identity(db.Model):
                             model_constants.ENUM_IDENTITY_SOURCE_EMAIL,
                             model_constants.ENUM_IDENTITY_SOURCE_DB,
                             model_constants.ENUM_IDENTITY_SOURCE_SYSTEM,
+                            model_constants.ENUM_IDENTITY_SOURCE_KANKA,
                             name='identity_source'),
                        nullable=False)
     subject = db.Column(db.String(100), nullable=False) # the ID from the source auth
