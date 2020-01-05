@@ -10,7 +10,8 @@ from flask import Blueprint, jsonify, request, current_app, redirect, session, u
 from werkzeug.exceptions import HTTPException
 from urllib.parse import urlencode
 import jwt
-from application.utils.oauth import auth0, kanka
+from application.utils.oauth import auth0 as auth0_util
+from application.utils.oauth import kanka as kanka_util
 from application.models.user import User
 from application import constants
 import os
@@ -39,7 +40,7 @@ def login():
     current_app.logger.info(f"/login: {request}")
 
     print(AUTH0_CALLBACK_URL, AUTH0_AUDIENCE)
-    return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE)
+    return auth0_util.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE)
 
 
 @blueprint.route('/logout')
@@ -50,9 +51,9 @@ def logout():
     cache.clear()
     params = {
         'returnTo': url_for('home.main_page', _external=True),
-        'client_id': AUTH0_CLIENT_ID
-        }
-    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+        'client_id': AUTH0_CLIENT_ID,
+    }
+    return redirect(auth0_util.api_base_url + '/v2/logout?' + urlencode(params))
 
 
 @blueprint.route('/integrate/<service>')
