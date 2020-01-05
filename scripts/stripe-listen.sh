@@ -4,6 +4,8 @@ set -x
 set -e
 set -o pipefail
 
-export $(cat .env | xargs)
+env_file=${1:.env}
+
+export $(cat $env_file | xargs)
 
 stripe listen --forward-to localhost:5000/billing/stripe/webhook

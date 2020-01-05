@@ -4,7 +4,9 @@ set -x
 set -e
 set -o pipefail
 
-scripts/reset-db.sh
+env_file=${1:.env}
+
+scripts/reset-db.sh $env_file
 rm -rf migrations
-scripts/setup-db.sh
-scripts/seed-db.sh
+scripts/setup-db.sh $env_file
+scripts/seed-db.sh $env_file

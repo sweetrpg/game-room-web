@@ -4,6 +4,8 @@ set -x
 set -e
 set -o pipefail
 
+env_file=${1:.env}
+
 export $(cat .env | xargs)
 
 cat > .$$.sql <<EOF
