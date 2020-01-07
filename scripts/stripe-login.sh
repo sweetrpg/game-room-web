@@ -4,7 +4,7 @@ set -x
 set -e
 set -o pipefail
 
-env_file=${1:.env}
+env_file=$1
 
 export $(cat $env_file | xargs)
 

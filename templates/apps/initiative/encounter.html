@@ -58,6 +58,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
@@ -65,6 +66,8 @@
 <script src="{{ url_for('static', filename='js/vendor/vue/vuedraggable.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
 <script src="{{ url_for('static', filename='components/Messages.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/GroupSelectorItem.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/GroupSelectorList.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/encounter/ActionBar.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/encounter/Toolbar.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/encounter/CollectInitiativeDialog.js') }}"></script>

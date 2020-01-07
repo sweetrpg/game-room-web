@@ -39,6 +39,23 @@ class CreateEncounterInput(Inputs):
     json = [JsonSchema(schema=create_encounter_schema)]
 
 
+
+create_group_schema = {
+    '$id': 'http://sweetrpg.com/schemas/create_group.json',
+    '$schema': 'http://json-schema.org/schema#',
+    'type': 'object',
+    'properties': {
+        'name': {
+            'type': 'string',
+        }
+    },
+    'required': ['name']
+}
+
+class CreateGroupInput(Inputs):
+    json = [JsonSchema(schema=create_group_schema)]
+
+
 add_participant_schema = {
     '$id': 'http://sweetrpg.com/schemas/add_participant.json',
     '$schema': 'http://json-schema.org/schema#',

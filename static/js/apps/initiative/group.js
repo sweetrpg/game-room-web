@@ -9,8 +9,7 @@ const participantTypeMap = {
 Vue.config.devtools = true;
 
 const storeState = {
-    encounter: {},
-    groups: [],
+    group: {},
     currentParticipant: null,
     currentParticipantIndex: -1,
     messages: [], // { type: '<type>', message: '<text>' }
@@ -40,14 +39,14 @@ axios.get('/api/v1/groups')
                 // always executed
             });
     },
-    fetchEncounter(context) {
-        const encounterId = $('data#encounterId').val();
-        console.log("encounterId", encounterId);
-        axios.get('/api/v1/encounters/' + encounterId)
+    fetchGroup(context) {
+        const groupId = $('data#groupId').val();
+        console.log("groupId", groupId);
+        axios.get('/api/v1/groups/' + groupId)
             .then((response) => {
                 // handle success
                 console.log(response);
-                context.commit('setEncounter', { encounter: response.data })
+                context.commit('setGroup', { group: response.data })
             })
             .catch((error) => {
                 // handle error
@@ -73,12 +72,12 @@ const storeMutations = {
         var participant = payload.participant;
 
         if (index === undefined) {
-            console.log("trying to determine index of participant, since it wasn't provided", state.encounter)
-            index = state.encounter.encounter.participants.indexOf(payload.participant)
+            console.log("trying to determine index of participant, since it wasn't provided", state.group)
+            index = state.group.participants.indexOf(payload.participant)
         }
         else if (participant === undefined) {
-            console.log("trying to determine participant from index, since it wasn't provided", state.encounter)
-            participant = state.encounter.encounter.participants[index];
+            console.log("trying to determine participant from index, since it wasn't provided", state.group)
+            participant = state.group.participants[index];
         }
 
         state.currentParticipant = participant;
@@ -99,9 +98,9 @@ const storeMutations = {
     clearMessages(state, payload) {
         state.messages = []
     },
-    setEncounter(state, payload) {
+    setGroup(state, payload) {
         console.log(payload);
-        state.encounter = payload.encounter;
+        state.group = payload.group;
     }
 };
 const storeGetters = {
@@ -121,16 +120,12 @@ const vm = new Vue({
     components: {
         'draggable': vuedraggable,
         'messages': Messages,
-        'encounter-info': EncounterInfo,
-        'encounter-toolbar': EncounterToolbar,
-        'encounter-action-bar': EncounterActionBar,
-        'encounter-participant-list': EncounterParticipantList,
+        'group-info': GroupInfo,
+        'group-toolbar': GroupToolbar,
+        'group-participant-list': GroupParticipantList,
         'add-participant-dialog': AddParticipantDialog,
         'delete-participant-dialog': DeleteParticipantDialog,
         'edit-participant-dialog': EditParticipantDialog,
-        'edit-participant-order-dialog': EditParticipantOrderDialog,
-        'collect-initiative-dialog': CollectInitiativeDialog,
-        'group-selector-list': GroupSelectorList,
     },
     data: {
     },
@@ -143,8 +138,8 @@ const vm = new Vue({
         }
     },
     beforeMount() {
-        console.log("encounter.js beforeMount")
-        this.$store.dispatch('fetchEncounter')
+        console.log("group.js beforeMount")
+        this.$store.dispatch('fetchGroup')
     },
 });
 
@@ -161,20 +156,6 @@ $('#editParticipantDialog').on('shown.bs.modal', function () {
     $('#editParticipantName').focus();
     $('#editParticipantProgress').hide();
     $('#editParticipantFeedback')
-        .removeClass('alert-danger').removeClass('alert-success')
-        .html(``).hide();
-})
-$('#editParticipantOrderDialog').on('shown.bs.modal', function () {
-    $('#editParticipantOrderValue').focus();
-    $('#editParticipantOrderProgress').hide();
-    $('#editParticipantOrderFeedback')
-        .removeClass('alert-danger').removeClass('alert-success')
-        .html(``).hide();
-})
-$('#collectInitiativeDialog').on('shown.bs.modal', function () {
-    $('#collectInitiativeValue').focus();
-    $('#collectInitiativeProgress').hide();
-    $('#collectInitiativeFeedback')
         .removeClass('alert-danger').removeClass('alert-success')
         .html(``).hide();
 })

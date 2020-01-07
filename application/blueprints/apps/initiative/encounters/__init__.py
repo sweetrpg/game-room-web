@@ -1,5 +1,6 @@
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
+- Encounters
 """
 
 
@@ -11,7 +12,7 @@ from application.blueprints import error_page
 
 @blueprint.route('/initiative/encounters/<int:encounter_id>')
 @requires_auth
-def encounter_main(encounter_id: int):
+def encounters_main(encounter_id: int):
     encounter = Encounter.query.filter_by(id=encounter_id).first()
     if not encounter:
         return error_page("That encounter could not be found.", 404)

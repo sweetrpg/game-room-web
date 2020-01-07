@@ -29,4 +29,5 @@ def initiative_app():
     return render_page('apps/initiative/main.html')
 
 
-from .encounters import *
+from application.blueprints.apps.initiative.encounters import *
+from application.blueprints.apps.initiative.groups import *

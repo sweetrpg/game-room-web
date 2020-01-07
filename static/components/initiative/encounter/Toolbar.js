@@ -99,7 +99,7 @@ const EncounterToolbar = {
 <div>
     <div class="btn-toolbar" role="toolbar" aria-label="Encounter main toolbar">
         <div class="btn-group" role="group" aria-label="Add group">
-            <button id="nextParticipant" type="button" class="btn btn-secondary"
+            <button id="addParticipant" type="button" class="btn btn-secondary"
                     data-toggle="tooltip" title="Add a participant to the encounter"
                     data-toggle="modal" data-target="#addParticipantDialog">
                 <img src="/static/images/button-add-participant.png" />
@@ -136,7 +136,7 @@ const EncounterToolbar = {
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="actionsGroupDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="/static/images/button-actions.png" />
                 </button>
-                <div class="dropdown-menu" aria-labelledby="resetGroupDropdownMenuButton">
+                <div class="dropdown-menu" aria-labelledby="actionsGroupDropdownMenuButton">
                     <a class="dropdown-item" href="#"
                        @click="sortEncounter"
                        title="Sort the list of participants according to their current initiative value">

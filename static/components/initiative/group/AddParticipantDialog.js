@@ -2,15 +2,11 @@
 const AddParticipantDialog = {
   name: 'add-participant-dialog',
   components: {
-'group-selector-list': GroupSelectorList,
   },
   data() {
     return {
       name: '',
       type: 'pc',
-      order: 0,
-      health: '',
-      quantity: 1,
       notes: '',
     }
   },
@@ -20,20 +16,6 @@ const AddParticipantDialog = {
     // }
   },
   methods: {
-    incrementQuantity() {
-      this.quantity += 1
-      if (this.quantity > 100) {
-        this.quantity = 100
-      }
-      $('#addParticipantQuantity').focus();
-    },
-    decrementQuantity() {
-      this.quantity -= 1
-      if (this.quantity < 1) {
-        this.quantity = 1
-      }
-      $('#addParticipantQuantity').focus();
-    },
     getRandomName() {
       console.log("getRandomName");
       axios.get('/api/v1/random/name?type=participant')
@@ -66,8 +48,8 @@ const AddParticipantDialog = {
       $('#addParticipantProgress').show();
 
       // submit
-      const encounterId = $('data#encounterId').val()
-      axios.post(`/api/v1/encounters/${encounterId}/participants`, {
+      const encounterId = $('data#groupId').val()
+      axios.post(`/api/v1/groups/${groupId}/participants`, {
         name: this.name,
         type: this.type,
         order: this.order,
@@ -82,7 +64,7 @@ const AddParticipantDialog = {
           $('#addParticipantProgress').hide();
           $('#addParticipantFeedback')
             .removeClass('alert-danger').addClass('alert-success')
-            .html(`${count} participants added to encounter.`).show();
+            .html(`${count} participants added to group.`).show();
         })
         .catch((error) => {
           console.log(error);
@@ -93,8 +75,7 @@ const AddParticipantDialog = {
             .html(error).show();
         })
         .finally(() => {
-          this.$emit('update-participant-list')
-          this.$store.dispatch('fetchEncounter')
+          this.$store.dispatch('fetchGroup')
         })
     },
     submitGroup() {
