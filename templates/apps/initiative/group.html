@@ -50,6 +50,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/vendor/moment/moment.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>

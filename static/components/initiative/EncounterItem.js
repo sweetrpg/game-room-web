@@ -20,7 +20,7 @@ const EncounterItem = {
     <h2 class="card-title">{{ encounter.encounter.name }}</h2>
     <p class="card-text">{{ encounter.encounter.game_system.name }} &mdash; {{ encounter.encounter.participants.length }} participants</p>
     <p class="card-text">
-      <small class="text-muted">Last updated {{ encounter.updated_at }}</small>
+      <small class="text-muted">Updated {{ moment(encounter.updated_at).fromNow() }}</small>
     </p>
     <div class="container">
       <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
