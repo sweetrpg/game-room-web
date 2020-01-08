@@ -4,7 +4,7 @@ const GroupInfo = {
     components: {
     },
     computed: {
-        encounter() {
+        group() {
             return this.$store.state.group;
         }
     },
@@ -14,7 +14,7 @@ const GroupInfo = {
     },
     watch: {
         'this.$store.state.group'() {
-console.log("$store group updated");
+            console.log("$store group updated");
         },
     },
     template: `

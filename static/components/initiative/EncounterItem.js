@@ -14,29 +14,53 @@ const EncounterItem = {
         };
     },
     methods: {
-openEncounter() {
+        openEncounter() {
+            console.log("openEncounter");
+            window.location = `/apps/initiative/encounters/${this.encounter.id}`
+        },
+        createGroup() {
+            console.log("createGroup");
 
-},
-createGroup() {
-
-},
-confirmDeleteEncounter() {
-
-},
-deleteEncounter() {
-
-},
-toggleFavorite() {
-
-},
+        },
+        confirmDeleteEncounter() {
+            console.log("confirmDeleteEncounter");
+            $('#deleteEncounterDialogEncounterId').val(this.encounter.id);
+            $('#deleteEncounterDialog').show();
+        },
+        toggleFavorite() {
+            console.log("toggleFavorite");
+            var flags = this.encounter.flags;
+            console.log("flags", flags);
+            if (flags.includes("favorite")) {
+                _.pull(flags, "favorite")
+            }
+            else {
+                flags.push("favorite")
+            }
+            console.log("flags", flags);
+            axios.put(`/api/v1/encounters/${this.encounter.id}`, {
+                flags: flags,
+            })
+                .then((response) => {
+                    console.log(response);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                })
+        },
     },
-  template: `
-<div class="card" style="width: 18rem;"
-     @click="openEncounter">
+    template: `
+<div class="card" style="width: 18rem;">
     <img src="/static/images/encounter-default.png" class="card-img" v-bind:alt="encounter.encounter.name" />
     <div class="card-img-overlay">
         <h2 class="card-title text-white">{{ encounter.encounter.name }}</h2>
         <div class="btn-group" role="group" aria-label="Metadata group">
+            <div class="btn btn-primary open-button" @click="openEncounter">
+                <i class="fas fa-play"></i>
+            </div>
             <div class="btn btn-secondary favorite-button"
                  @click="toggleFavorite">
                 <i v-bind:class="'fa' + (encounter.encounter.flags.includes('favorite') ? 's' : 'r') + ' fa-star'"></i>

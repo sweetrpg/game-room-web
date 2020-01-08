@@ -44,10 +44,18 @@ const GroupParticipantList = {
         // this.$store.dispatch('fetchParticipants')
     },
     template: `
- <draggable class="container"
-            v-model="participants" group="participants"
-            @start="isDragging=true" @end="isDragging=false">
-      <group-participant v-for="(p, index) in participants" :groupId="groupId" :participant="p" :key="p.id" :index="index" />
-  </draggable>
-`
+<div>
+    <div class="text-center" v-if="participants.length == 0">
+        <h2 class="text-muted">No participants</h2>
+        <h5>(Add some by clicking the helmet in the upper-left corner.)</h5>
+    </div>
+    <draggable class="container" v-if="participants.length > 0"
+               v-model="participants" group="participants"
+               @start="isDragging=true" @end="isDragging=false">
+        <group-participant v-for="(p, index) in participants"
+                           v-bind:groupId="groupId" v-bind:participant="p"
+                           v-bind:key="p.id" v-bind:index="index" />
+    </draggable>
+</div>
+ `
 }

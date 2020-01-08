@@ -1,9 +1,9 @@
 
 // TODO: this should be looked-up per locale
 const participantTypeMap = {
-'pc': 'Player Character',
-'adversary': 'Adversary',
-'object': 'Object',
+    'pc': 'Player Character',
+    'adversary': 'Adversary',
+    'object': 'Object',
 }
 
 Vue.config.devtools = true;
@@ -25,11 +25,11 @@ const storeActions = {
         context.commit('clearMessages')
     },
     fetchGroups(context) {
-axios.get('/api/v1/groups')
-.then((response) => {
-    console.log(response);
-    context.commit('setGroups', { groups: response.data })
-})
+        axios.get('/api/v1/groups')
+            .then((response) => {
+                console.log(response);
+                context.commit('setGroups', { groups: response.data })
+            })
             .catch((error) => {
                 // handle error
                 console.log(error);
@@ -62,7 +62,7 @@ axios.get('/api/v1/groups')
         context.commit('setCurrentParticipant', {
             participant: payload.participant,
             index: payload.index,
-         })
+        })
     }
 };
 const storeMutations = {

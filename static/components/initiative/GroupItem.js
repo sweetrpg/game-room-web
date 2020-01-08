@@ -20,13 +20,16 @@ type: Boolean
     },
     methods: {
         editGroup() {
-
+            console.log("editGroup");
+            window.location = `/apps/initiative/groups/${this.group.id}`
         },
         createEncounter() {
 
         },
-        deleteGroup() {
-
+        confirmDeleteGroup() {
+            console.log("confirmDeleteGroup");
+            $('#deleteGroupDialogGroupId').val(this.group.id);
+            $('#deleteGroupDialog').show();
         }
     },
     beforeMount() {
@@ -46,7 +49,7 @@ type: Boolean
                 <a class="dropdown-item" @click="editGroup">Edit...</a>
                 <a class="dropdown-item" @click="createEncounter">Create encounter</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-danger" @click="deleteGroup">Delete</a>
+                <a class="dropdown-item text-danger" @click="confirmDeleteGroup">Delete</a>
             </div>
         </div>
     </div>

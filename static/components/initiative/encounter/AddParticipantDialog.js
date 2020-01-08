@@ -210,7 +210,7 @@ const AddParticipantDialog = {
                 </div>
               </div>
               <small id="typeHelp" class="form-text text-muted">
-              Setting the type of the participant will hellp the tracker in managing the encounter.
+              Setting the type of the participant will help the tracker in managing the encounter.
               </small>
             </div>
 

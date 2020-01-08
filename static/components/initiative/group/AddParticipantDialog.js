@@ -7,6 +7,7 @@ const AddParticipantDialog = {
     return {
       name: '',
       type: 'pc',
+      quantity: 1,
       notes: '',
     }
   },
@@ -16,6 +17,20 @@ const AddParticipantDialog = {
     // }
   },
   methods: {
+    incrementQuantity() {
+      this.quantity += 1
+      if (this.quantity > 100) {
+        this.quantity = 100
+      }
+      $('#addParticipantQuantity').focus();
+    },
+    decrementQuantity() {
+      this.quantity -= 1
+      if (this.quantity < 1) {
+        this.quantity = 1
+      }
+      $('#addParticipantQuantity').focus();
+    },
     getRandomName() {
       console.log("getRandomName");
       axios.get('/api/v1/random/name?type=participant')
@@ -48,13 +63,11 @@ const AddParticipantDialog = {
       $('#addParticipantProgress').show();
 
       // submit
-      const encounterId = $('data#groupId').val()
+      const groupId = $('data#groupId').val()
       axios.post(`/api/v1/groups/${groupId}/participants`, {
         name: this.name,
         type: this.type,
-        order: this.order,
         quantity: this.quantity,
-        health: this.health,
         notes: this.notes,
       })
         .then((response) => {
@@ -108,10 +121,10 @@ const AddParticipantDialog = {
               </a>
             </li>
             <li class="nav-item">
-              <a id="add-participant-group-tab" class="nav-link"
-                data-toggle="tab" href="#add-participant-group" role="tab"
-                aria-controls="add-participant-group" aria-selected="false">
-                Group
+              <a id="add-participant-external-tab" class="nav-link"
+                data-toggle="tab" href="#add-participant-external" role="tab"
+                aria-controls="add-participant-external" aria-selected="false">
+                External
               </a>
             </li>
             <li class="nav-item">
@@ -191,7 +204,6 @@ const AddParticipantDialog = {
                 </div>
               </div>
               <small id="typeHelp" class="form-text text-muted">
-              Setting the type of the participant will hellp the tracker in managing the encounter.
               </small>
             </div>
 
@@ -219,24 +231,6 @@ const AddParticipantDialog = {
               </small>
             </div>
 
-            <!-- Health -->
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="addParticipantHealth">Health</label>
-                </div>
-                <input type="text" class="form-control" name="addParticipantHealth"
-                        placeholder="HP[/Max[/Temp]]"
-                        v-model.trim="health" />
-              </div>
-              <small id="healthHelp" class="form-text text-muted">
-              Enter the current hit points, and optionally maximum and then temporary hit
-              points, separated, by slashes ('/'). Omitting the maximum hit point value
-              will cause it to be set to the current value. Omitting the temporary hit point
-              value will cause it to be set to 0.
-              </small>
-            </div>
-
             <!-- Notes -->
             <div class="form-group">
               <div class="input-group">
@@ -256,9 +250,9 @@ const AddParticipantDialog = {
             </div>
           </div>
 
-          <div class="tab-pane fade" id="add-participant-group" role="tabpanel"
-                aria-labelledby="add-participant-group-tab">
-            <group-list />
+          <div class="tab-pane fade" id="add-participant-external" role="tabpanel"
+                aria-labelledby="add-participant-external-tab">
+                TODO: external sources: Kanka, etc.
 
             <!-- buttons -->
             <div class="float-right">

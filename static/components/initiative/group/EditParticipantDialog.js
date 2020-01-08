@@ -175,45 +175,14 @@ const EditParticipantDialog = {
           </small>
         </div>
 
-        <!-- Order -->
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Order</span>
-            </div>
-            <input type="number" class="form-control" name="editParticipantOrder"
-                    v-model.number.trim="order" />
-            <div class="btn-group input-group-append" role="group" aria-label="Order stepper">
-              <button type="button" class="btn btn-secondary"
-                      @click="decrementOrder">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-secondary"
-                      @click="incrementOrder">
-                <i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <small id="orderHelp" class="form-text text-muted">
-          </small>
-        </div>
-
         <!-- Options -->
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">Options</span>
             </div>
-            <div class="form-control">
-              <div class="custom-control custom-switch custom-control-inline">
-                <input type="checkbox" class="custom-control-input" id="editParticipantRemovedSwitch"
-                    name="removed"
-                      v-model="removed" />
-                      <label class="custom-control-label" for="editParticipantRemovedSwitch">Removed?</label>
-              </div>
-            </div>
           </div>
-          <small id="removedHelp" class="form-text text-muted">
+          <small id="optionsHelp" class="form-text text-muted">
           </small>
         </div>
 
