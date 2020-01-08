@@ -10,7 +10,8 @@ const GroupList = {
     },
     computed: {
         groups() {
-            return this.$store.state.groups;
+            console.log(this.$store.state.groups);
+            return this.$store.state.groups.filter((g) => { return !g.flags.includes("tracked") });
         },
     },
     methods: {

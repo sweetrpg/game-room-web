@@ -88,6 +88,7 @@ const vm = new Vue({
   store: store,
   components: {
     'encounter-list': EncounterList,
+    'group-list': GroupList,
     'create-encounter-dialog': CreateEncounterDialog,
     'create-group-dialog': CreateGroupDialog,
   },
