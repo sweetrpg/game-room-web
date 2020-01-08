@@ -3,6 +3,7 @@ const DeleteParticipantDialog = {
   name: 'delete-participant-dialog',
   data() {
     return {
+      participant: {},
       id: 0,
       name: '',
       type: 'pc',
@@ -12,7 +13,7 @@ const DeleteParticipantDialog = {
   },
   methods: {
     submitDelete() {
-      console.log("submitParticipant");
+      console.log("submitDelete");
 
       // validate form data
       axios.delete(`/api/v1/encounters/${this.participant.encounter_id}/participants/${this.participant.id}`)
@@ -30,11 +31,11 @@ const DeleteParticipantDialog = {
   watch: {
     '$store.state.currentParticipant'() {
       console.log("currentParticipant in store changed")
-      const participant = this.$store.state.currentParticipant;
-      if (participant !== null) {
-        this.id = participant.id;
-        this.name = participant.participant.name;
-        this.type = participant.participant.type;
+      this.participant = this.$store.state.currentParticipant;
+      if (this.participant !== null) {
+        this.id = this.participant.id;
+        this.name = this.participant.participant.name;
+        this.type = this.participant.participant.type;
       }
     },
   },

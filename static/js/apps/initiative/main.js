@@ -90,7 +90,9 @@ const vm = new Vue({
     'encounter-list': EncounterList,
     'group-list': GroupList,
     'create-encounter-dialog': CreateEncounterDialog,
+    'delete-encounter-dialog': DeleteEncounterDialog,
     'create-group-dialog': CreateGroupDialog,
+    'delete-group-dialog': DeleteGroupDialog,
   },
   data: {
   },

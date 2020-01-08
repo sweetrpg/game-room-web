@@ -29,7 +29,13 @@
         <create-encounter-dialog />
     </div>
     <div>
+        <delete-encounter-dialog />
+    </div>
+    <div>
         <create-group-dialog />
+    </div>
+    <div>
+        <delete-group-dialog />
     </div>
     <hr />
     <div>
@@ -52,7 +58,9 @@
 <script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/CreateEncounterDialog.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/DeleteEncounterDialog.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/CreateGroupDialog.js') }}"></script>
+<script src="{{ url_for('static', filename='components/initiative/DeleteGroupDialog.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/EncounterItem.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/EncounterList.js') }}"></script>
 <script src="{{ url_for('static', filename='components/initiative/GroupItem.js') }}"></script>

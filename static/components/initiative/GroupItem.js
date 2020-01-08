@@ -19,6 +19,15 @@ type: Boolean
     computed: {
     },
     methods: {
+        editGroup() {
+
+        },
+        createEncounter() {
+
+        },
+        deleteGroup() {
+
+        }
     },
     beforeMount() {
     },
@@ -27,14 +36,24 @@ type: Boolean
     <img src="/static/images/group-default.png" class="card-img" v-bind:alt="group.name" />
     <div class="card-img-overlay">
         <h2 class="card-title text-white">{{ group.name }}</h2>
-        <div class="btn btn-secondary settings-button">
-            <i class="fas fa-cog"></i>
+        <div class="btn-group" role="group">
+            <button v-bind:id="'actionsButtonGroup' + group.id" type="button"
+                    class="btn btn-secondary dropdown-toggle settings-button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-menu" v-bind:aria-labelledby="'actionsButtonGroup' + group.id">
+                <a class="dropdown-item" @click="editGroup">Edit...</a>
+                <a class="dropdown-item" @click="createEncounter">Create encounter</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" @click="deleteGroup">Delete</a>
+            </div>
         </div>
     </div>
     <div class="card-body">
         <p class="card-text">{{ group.participants.length }} participants</p>
         <p class="card-text">
-            <small class="text-muted">Updated {{ moment(group.updated_at).fromNow() }}</small>
+            <small class="text-muted">Updated {{ moment.utc(group.updated_at).fromNow() }}</small>
         </p>
     </div>
 </div>
