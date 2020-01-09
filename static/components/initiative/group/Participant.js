@@ -55,44 +55,23 @@ const GroupParticipant = {
         },
     },
     template: `
-<div v-bind:class="getClasses()">
-    <div class="col-1 encounter-participant-type">
-        <img v-bind:src="'/static/images/button-participant-type-' + participant.participant.type + '.png'"
-            class="text-hide" />
-    </div>
-    <div class="col-7 encounter-participant-info">
-        <div class="encounter-participant-name">
-            <h3 @click="editParticipant">{{ participant.participant.name }}</h3>
-        </div>
-        <div class="encounter-participant-tags">
-        </div>
-    </div>
-    <div class="col-1 encounter-participant-notes">
-        <img src="/static/images/button-notes.png"
-            v-bind:class="'notes ' + (participant.notes != null && participant.notes.length > 0 ? 'has-notes' : 'no-notes')"
-            @click="editParticipant" />
-    </div>
-    <div class="col-1 encounter-participant-actions">
-        <div class="row">
-            <div class="dropdown">
-                <button id="editParticipantActionsButton"
-                        class="btn dropdown-toggle action-icon" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="/static/images/button-actions.png" />
-                </button>
-                <div class="dropdown-menu" aria-labelledby="editParticipantActionsButton">
-                    <a class="dropdown-item" @click="editParticipant">Edit...</a>
-                    <a class="dropdown-item" @click="toggleRemoved">{{ participant.flags.includes('removed') ? 'Unmark' : 'Mark' }} Removed</a>
-                    <a class="dropdown-item" @click="setTurn">Set Turn</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" @click="deleteParticipant">Delete</a>
-                </div>
-            </div>
+<div class="container group-participant">
+    <div class="participant-image">
+        <img v-if="participant.image != null"
+                alt="Participant" class="img-thumbnail border shadow bg-light rounded-circle"
+                v-bind:src="'data:image/png;base64,' + participant.image" />
+        <img v-if="participant.image == null"
+                alt="Participant" class="img-thumbnail border shadow bg-light rounded-circle"
+                src="/static/images/initiative/participant-placeholder.png" />
 
-            <div class="action-icon">
-                <i class="fas fa-bars"></i>
-            </div>
+        <div class="participant-type">
+            <img v-bind:src="'/static/images/button-participant-type-' + participant.type + '.png'"
+                class="text-hide float-right" />
         </div>
+    </div>
+
+    <div class="text-center participant-name">
+        {{ participant.name }}
     </div>
 </div>
 `

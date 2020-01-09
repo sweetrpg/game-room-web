@@ -16,7 +16,7 @@ from application.models.common.game_system import GameSystem
 from application.blueprints.api import user_required
 from application.db import db
 from application.blueprints.api.validators import validate_payload, validate_user, check_dependent_object
-from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddParticipantInput, UpdateParticipantInput, UpdateSessionInput, UpdateParticipantOrderInput
+from application.blueprints.api.initiative.validators import CreateEncounterInput, UpdateEncounterInput, AddEncounterParticipantInput, UpdateEncounterParticipantInput, UpdateSessionInput, UpdateParticipantOrderInput
 from application.blueprints.api.exceptions import error_response
 from application.controllers.encounter import EncounterController
 from application.utils import normalize_query
@@ -31,8 +31,14 @@ def get_encounters(current_user):
     user_id = current_user.id
     encounters = TrackedEncounter.query.filter_by(creator_id=user_id).all()
     current_app.logger.debug(f"encounters: {encounters}")
+
+    tracked_encounters = [e.to_dict() for e in encounters]
+    current_app.logger.debug(f"tracked_encounters: {tracked_encounters}")
+    sorted_encounters = sorted(tracked_encounters, key=lambda e: ("favorite" in e['encounter']['flags'], e['group']['name']))
+    current_app.logger.debug(f"sorted_encounters: {sorted_encounters}")
+
     return {
-        'encounters': [e.to_dict() for e in encounters],
+        'encounters': sorted_encounters,
     }
 
 
@@ -51,7 +57,7 @@ def get_encounter(current_user, encounter_id: int):
 @blueprint.route('/encounters/<int:encounter_id>/next', methods=['POST'])
 @user_required
 def next_participant(current_user, encounter_id: int):
-    current_app.logger.debug(f"GET /encounters/{encounter_id}/next: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
+    current_app.logger.debug(f"POST /encounters/{encounter_id}/next: {request}, current_user: {current_user}, encounter_id: {encounter_id}")
     user_id = current_user.id
     current_app.logger.debug(f"user_id: {user_id}")
     tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
@@ -81,10 +87,10 @@ def create_encounter(current_user):
     current_app.logger.debug(f"data: {data}")
 
     name = data['name']
-    game_system_key = data['gameSystem']
+    game_system_key = data['game_system']
 
     game_system = GameSystem.query.filter_by(key=game_system_key).first()
-    check_dependent_object(game_system, 'gameSystem')
+    check_dependent_object(game_system, 'game_system')
 
     encounter = Encounter(name=name, game_system=game_system)
     theme = data.get('theme')
@@ -122,8 +128,7 @@ def create_encounter(current_user):
 @blueprint.route('/encounters/<int:encounter_id>', methods=['PUT'])
 @user_required
 def update_encounter(current_user, encounter_id: int):
-    current_app.logger.debug(
-        f"PUT /encounters/{encounter_id}: {request}, current_user: {current_user}")
+    current_app.logger.debug(f"PUT /encounters/{encounter_id}: {request}, current_user: {current_user}")
 
     validate_payload(UpdateEncounterInput, request)
 
@@ -150,10 +155,10 @@ def update_encounter(current_user, encounter_id: int):
 
 @blueprint.route('/encounters/<int:encounter_id>/participants', methods=['POST'])
 @user_required
-def add_participants(current_user, encounter_id: int):
+def add_encounter_participants(current_user, encounter_id: int):
     current_app.logger.debug(f"POST /encounters/{encounter_id}/participants: {request}, current_user: {current_user}")
 
-    validate_payload(AddParticipantInput, request)
+    validate_payload(AddEncounterParticipantInput, request)
 
     # validate payload
     data = request.get_json()
@@ -196,7 +201,7 @@ def add_participants(current_user, encounter_id: int):
             participant_name = f"{name} {i + 1}"
         current_app.logger.debug(f"participant_name: {participant_name}")
 
-        p = Participant(name=participant_name, group_id=pg.id)
+        p = Participant(name=participant_name, group=pg)
         p.creator_id = current_user.id
         p.participant_type = participant_type
         db.session.add(p)
@@ -242,7 +247,7 @@ def update_participant(current_user, encounter_id: int, participant_id: int):
     data = request.get_json()
     current_app.logger.debug(f"data: {data}")
 
-    validate_payload(UpdateParticipantInput, request)
+    validate_payload(UpdateEncounterParticipantInput, request)
 
     # check encounter
     tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
@@ -453,3 +458,23 @@ def update_participant_order(current_user, encounter_id: int):
     encounter = Encounter.query.filter_by(id=tracked_encounter.encounter_id).first()
 
     return jsonify(encounter.to_dict())
+
+
+@blueprint.route('/encounters/from/<int:group_id>', methods=['POST'])
+@user_required
+def create_encounter_from_group(current_user, group_id: int):
+    current_app.logger.debug(f"POST /encounters/from/{group_id}: {request}, current_user: {current_user}")
+    user_id = current_user.id
+    current_app.logger.debug(f"user_id: {user_id}")
+    # tracked_encounter = TrackedEncounter.query.filter_by(id=encounter_id).first()
+    # validate_user(tracked_encounter, current_user)
+    # current_app.logger.debug(f"tracked_encounter: {tracked_encounter}")
+
+    pg = ParticipantGroup.query.filter_by(id=group_id).first()
+    current_app.logger.debug("pg: %s", pg)
+    validate_user(pg, current_user)
+
+    encounter = Encounter(name=pg.name, game_system='TODO')
+    # TODO: create encounter from group
+
+    return jsonify(encounter.to_dict()), 201

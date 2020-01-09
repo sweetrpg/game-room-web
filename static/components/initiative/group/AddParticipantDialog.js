@@ -89,9 +89,10 @@ const AddParticipantDialog = {
         })
         .finally(() => {
           this.$store.dispatch('fetchGroup')
+          $('#addParticipantName').focus();
         })
     },
-    submitGroup() {
+    submitExternal() {
 
     },
     submitSpecial() {
@@ -207,6 +208,19 @@ const AddParticipantDialog = {
               </small>
             </div>
 
+            <!-- Notes -->
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Notes</span>
+                </div>
+                <textarea id="addParticipantNotes" name="notes" class="form-control"
+                          aria-describedby="notesHelp" aria-label="Notes">{{ notes }}</textarea>
+              </div>
+              <small id="notesHelp" class="form-text text-muted">
+              </small>
+            </div>
+
             <!-- Quantity -->
             <div class="form-group">
               <div class="input-group">
@@ -225,28 +239,11 @@ const AddParticipantDialog = {
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
+                <button type="button" @click="submitParticipant" class="btn btn-primary">Add</button>
               </div>
               <small id="quantityHelp" class="form-text text-muted">
               How many of this participant do you want to add?
               </small>
-            </div>
-
-            <!-- Notes -->
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Notes</span>
-                </div>
-                <textarea id="addParticipantNotes" name="notes" class="form-control"
-                          aria-describedby="notesHelp" aria-label="Notes">{{ notes }}</textarea>
-              </div>
-              <small id="notesHelp" class="form-text text-muted">
-              </small>
-            </div>
-
-            <!-- buttons -->
-            <div class="float-right">
-              <button type="button" @click="submitParticipant" class="btn btn-primary">Add</button>
             </div>
           </div>
 
@@ -256,7 +253,7 @@ const AddParticipantDialog = {
 
             <!-- buttons -->
             <div class="float-right">
-              <button type="button" @click="submitGroup" class="btn btn-primary">Add</button>
+              <button type="button" @click="submitExternal" class="btn btn-primary">Add</button>
             </div>
           </div>
 

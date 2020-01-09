@@ -20,7 +20,16 @@ const EncounterItem = {
         },
         createGroup() {
             console.log("createGroup");
-
+            axios.post(`/api/v1/groups/from/${this.encounter.id}`)
+                .then((response) => {
+                    console.log(response);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                })
         },
         confirmDeleteEncounter() {
             console.log("confirmDeleteEncounter");

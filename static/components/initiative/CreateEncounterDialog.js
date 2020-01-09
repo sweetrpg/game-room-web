@@ -48,7 +48,7 @@ const CreateEncounterDialog = {
       // submit
       axios.post('/api/v1/encounters', {
         name: this.name,
-        gameSystem: this.gameSystem,
+        game_system: this.gameSystem,
         ordering: this.ordering,
         theme: this.theme
       })

@@ -95,6 +95,7 @@ const AddParticipantDialog = {
         .finally(() => {
           this.$emit('update-participant-list')
           this.$store.dispatch('fetchEncounter')
+          $('#addParticipantName').focus();
         })
     },
     submitGroup() {
@@ -214,30 +215,6 @@ const AddParticipantDialog = {
               </small>
             </div>
 
-            <!-- Quantity -->
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="addParticipantQuantity">Quantity</label>
-                </div>
-                <input type="number" class="form-control" name="addParticipantQuantity"
-                        v-model.number.trim="quantity" />
-                <div class="btn-group input-group-append" role="group" aria-label="Quantity stepper">
-                  <button type="button" class="btn btn-secondary"
-                          @click="decrementQuantity">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-secondary"
-                          @click="incrementQuantity">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-              <small id="quantityHelp" class="form-text text-muted">
-              How many of this participant do you want to add?
-              </small>
-            </div>
-
             <!-- Health -->
             <div class="form-group">
               <div class="input-group">
@@ -269,9 +246,29 @@ const AddParticipantDialog = {
               </small>
             </div>
 
-            <!-- buttons -->
-            <div class="float-right">
-              <button type="button" @click="submitParticipant" class="btn btn-primary">Add</button>
+            <!-- Quantity -->
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="addParticipantQuantity">Quantity</label>
+                </div>
+                <input type="number" class="form-control" name="addParticipantQuantity"
+                        v-model.number.trim="quantity" />
+                <div class="btn-group input-group-append" role="group" aria-label="Quantity stepper">
+                  <button type="button" class="btn btn-secondary"
+                          @click="decrementQuantity">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-secondary"
+                          @click="incrementQuantity">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <button type="button" @click="submitParticipant" class="btn btn-primary">Add</button>
+              </div>
+              <small id="quantityHelp" class="form-text text-muted">
+              How many of this participant do you want to add?
+              </small>
             </div>
           </div>
 
@@ -280,8 +277,10 @@ const AddParticipantDialog = {
             <group-list />
 
             <!-- buttons -->
-            <div class="float-right">
-              <button type="button" @click="submitGroup" class="btn btn-primary">Add</button>
+            <div class="form-group">
+              <div class="float-right">
+                <button type="button" @click="submitGroup" class="btn btn-primary">Add</button>
+              </div>
             </div>
           </div>
 
@@ -290,8 +289,10 @@ const AddParticipantDialog = {
                 TODO: lair actions, etc.
 
             <!-- buttons -->
-            <div class="float-right">
-              <button type="button" @click="submitSpecial" class="btn btn-primary">Add</button>
+            <div class="form-group">
+              <div class="float-right">
+                <button type="button" @click="submitSpecial" class="btn btn-primary">Add</button>
+              </div>
             </div>
           </div>
         </div>

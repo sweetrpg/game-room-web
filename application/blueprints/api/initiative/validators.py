@@ -17,27 +17,30 @@ create_encounter_schema = {
         'name': {
             'type': 'string',
         },
-        'gameSystem': {
+        'game_system': {
             'type': 'string'
         },
         'ordering': {
             'type': 'string',
             'pattern': '^(high-to-low|low-to-high|pc-v-adversary|player-managed)$'
         },
-        'tieBreaker': {
+        'tie_breaker': {
             'type': 'string',
             'pattern': '^(query|random|alpha)$'
         },
         'theme': {
             'type': 'string'
-        }
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
     },
-    'required': ['name', 'gameSystem']
+    'required': ['name', 'game_system']
 }
 
 class CreateEncounterInput(Inputs):
     json = [JsonSchema(schema=create_encounter_schema)]
-
 
 
 create_group_schema = {
@@ -47,7 +50,11 @@ create_group_schema = {
     'properties': {
         'name': {
             'type': 'string',
-        }
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
     },
     'required': ['name']
 }
@@ -56,8 +63,8 @@ class CreateGroupInput(Inputs):
     json = [JsonSchema(schema=create_group_schema)]
 
 
-add_participant_schema = {
-    '$id': 'http://sweetrpg.com/schemas/add_participant.json',
+add_encounter_participant_schema = {
+    '$id': 'http://sweetrpg.com/schemas/add_encounter_participant.json',
     '$schema': 'http://json-schema.org/schema#',
     'type': 'object',
     'properties': {
@@ -70,14 +77,18 @@ add_participant_schema = {
         },
         'quantity': {
             'type': 'number',
-        }
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
     },
     'required': ['name', 'type']
 }
 
 
-class AddParticipantInput(Inputs):
-    json = [JsonSchema(schema=add_participant_schema)]
+class AddEncounterParticipantInput(Inputs):
+    json = [JsonSchema(schema=add_encounter_participant_schema)]
 
 
 update_encounter_schema = {
@@ -88,23 +99,20 @@ update_encounter_schema = {
         'name': {
             'type': 'string',
         },
-        'type': {
-            'type': 'string',
-            'pattern': '^(pc|adversary|object)$'
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
         },
-        'quantity': {
-            'type': 'number',
-        }
     },
-    'required': ['name', 'type']
+    'required': []
 }
 
 class UpdateEncounterInput(Inputs):
     json = [JsonSchema(schema=update_encounter_schema)]
 
 
-update_participant_schema = {
-    '$id': 'http://sweetrpg.com/schemas/update_participant.json',
+update_encounter_participant_schema = {
+    '$id': 'http://sweetrpg.com/schemas/update_encounter_participant.json',
     '$schema': 'http://json-schema.org/schema#',
     'type': 'object',
     'properties': {
@@ -164,8 +172,8 @@ update_participant_schema = {
     'required': []
 }
 
-class UpdateParticipantInput(Inputs):
-    json = [JsonSchema(schema=update_participant_schema)]
+class UpdateEncounterParticipantInput(Inputs):
+    json = [JsonSchema(schema=update_encounter_participant_schema)]
 
 
 update_session_schema = {
@@ -175,7 +183,11 @@ update_session_schema = {
     'properties': {
         'current_participant_index': {
             'type': 'number'
-        }
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
     },
     'required': []
 }
@@ -197,3 +209,73 @@ update_participant_order_schema = {
 
 class UpdateParticipantOrderInput(Inputs):
     json = [JsonSchema(schema=update_participant_order_schema)]
+
+
+add_group_participant_schema = {
+    '$id': 'http://sweetrpg.com/schemas/add_group_participant.json',
+    '$schema': 'http://json-schema.org/schema#',
+    'type': 'object',
+    'properties': {
+        'name': {
+            'type': 'string',
+        },
+        'type': {
+            'type': 'string',
+            'pattern': '^(pc|adversary|object)$'
+        },
+        'quantity': {
+            'type': 'number',
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
+    },
+    'required': ['name', 'type']
+}
+
+class AddGroupParticipantInput(Inputs):
+    json = [JsonSchema(schema=add_group_participant_schema)]
+
+
+update_group_participant_schema = {
+    '$id': 'http://sweetrpg.com/schemas/update_group_participant.json',
+    '$schema': 'http://json-schema.org/schema#',
+    'type': 'object',
+    'properties': {
+        'name': {
+            'type': 'string',
+        },
+        'type': {
+            'type': 'string',
+            'pattern': '^(pc|adversary|object)$'
+        },
+        'color': {
+            'type': 'string',
+            'pattern': r'^\#\d{6}$'
+        },
+        'marker': {
+            'type': 'string'
+        },
+        'size': {
+            'type': 'number'
+        },
+        'flags': {
+            'type': 'array',
+            'items': { 'type': 'string' }
+        },
+        'notes': {
+            'type': 'string'
+        },
+        'image': {
+            'type': 'string'
+        },
+        'external_key': {
+            'type': 'string'
+        }
+    },
+    'required': []
+}
+
+class UpdateGroupParticipantInput(Inputs):
+    json = [JsonSchema(schema=update_group_participant_schema)]

@@ -24,7 +24,17 @@ type: Boolean
             window.location = `/apps/initiative/groups/${this.group.id}`
         },
         createEncounter() {
-
+            console.log("createEncounter")
+            axios.post(`/api/v1/groups/from/${this.encounter.id}`)
+                .then((response) => {
+                    console.log(response);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                })
         },
         confirmDeleteGroup() {
             console.log("confirmDeleteGroup");
