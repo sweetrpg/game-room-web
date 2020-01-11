@@ -4,10 +4,12 @@ const DeleteEncounterDialog = {
     data() {
         return {
             id: 0,
-            name: '',
         }
     },
     computed: {
+      name() {
+        return 'TODO'
+      }
     },
     methods: {
         submitDelete() {
@@ -32,13 +34,12 @@ const DeleteEncounterDialog = {
         // this.$store.dispatch('fetchGameSystems')
     },
     template: `
-  <div class="modal fade shadow p-3 rounded" id="deleteEncounterDialog" tabindex="-1" role="dialog"
-       aria-labelledby="deleteEncounterModalLabel" aria-hidden="true">
-       <data id="deleteEncounterDialogEncounterId" value=""></data>
+<div class="modal fade" id="deleteEncounterDialog" tabindex="-1" role="dialog"
+     aria-labelledby="deleteEncounterModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Delete Encounter</h5>
+        <h5 class="modal-title" id="deleteEncounterModalLabel">Delete Encounter</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

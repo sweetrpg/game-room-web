@@ -10,6 +10,8 @@ const storeState = {
   encounters: [],
   groups: [],
   gameSystems: [],
+  currentGroup: {},
+  currentEncounter: {},
 };
 const storeActions = {
   fetchGameSystems(context) {

@@ -57,7 +57,8 @@ const CreateGroupDialog = {
     }
   },
       template: `
-<div class="modal fade" id="createGroupDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createGroupDialog" tabindex="-1" role="dialog"
+     aria-labelledby="createGroupModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
