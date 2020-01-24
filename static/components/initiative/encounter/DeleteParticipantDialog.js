@@ -44,7 +44,7 @@ const DeleteParticipantDialog = {
     // this.$store.dispatch('fetchGameSystems')
   },
   template: `
-  <div class="modal fade shadow p-3 rounded" id="deleteParticipantDialog" tabindex="-1" role="dialog"
+  <div class="modal fade shadow p-3 rounded" id="deleteParticipantDialog" role="dialog"
        aria-labelledby="deleteParticipantModalLabel" aria-hidden="true">
        <data id="deleteParticipantDialogParticipantId" value=""></data>
   <div class="modal-dialog" role="document">

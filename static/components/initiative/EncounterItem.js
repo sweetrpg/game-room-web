@@ -33,6 +33,7 @@ const EncounterItem = {
         },
         confirmDeleteEncounter() {
             console.log("confirmDeleteEncounter");
+            this.$store.dispatch('setCurrentEncounter', { encounter: this.encounter });
             $('#deleteEncounterDialogEncounterId').val(this.encounter.id);
             $('#deleteEncounterDialog').show();
         },

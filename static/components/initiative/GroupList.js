@@ -22,8 +22,11 @@ const GroupList = {
     },
     template: `
  <div class="container">
+    <div class="container-label text-muted">
+        Groups
+    </div>
     <div class="row">
-      <group-item v-for="pg in groups" :group="pg" :key="pg.id" />
+        <group-item v-for="pg in groups" :group="pg" :key="pg.id" />
     </div>
   </div>
 `

@@ -11,3 +11,10 @@
     display: none;
     width: 100%;
 }
+
+.container-label {
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    font-size: 20pt;
+    float: inline;
+}

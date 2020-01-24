@@ -21,7 +21,6 @@ def has_role(user: User, role_name: str):
 
 
 def create_or_add_user(userinfo: dict, role_name: str = model_constants.ROLE_USER):
-    email = userinfo['email']
     subject = userinfo['sub']
 
     # find the role
@@ -31,38 +30,53 @@ def create_or_add_user(userinfo: dict, role_name: str = model_constants.ROLE_USE
         return None, None
 
     # find the user object
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        user = User(email=email)
-        user.nickname = userinfo['nickname']
-        user.name = userinfo['name']
-        if userinfo.get('picture'):
-            current_app.logger.info("Using provided picture URL for avatar.")
-            user.avatar_url = userinfo['picture']
-        else:
-            current_app.logger.info("Calculating hash for gravatar...")
-            canonical_email = email.strip().lower()
-            email_hash = hashlib.md5(canonical_email).hexdigest()
-            current_app.logger.debug(f"email_hash: {email_hash}")
-            user.avatar_url = f'https://www.gravatar.com/avatar/{email_hash}?s=30'
+    user = None
 
+    email = userinfo.get('email')
+    nickname = userinfo.get('nickname')
+    name = userinfo.get('name')
+
+    if email:
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User(email=email)
+            user.nickname = userinfo['nickname']
+            user.name = userinfo['name']
+            if userinfo.get('picture'):
+                current_app.logger.info("Using provided picture URL for avatar.")
+                user.avatar_url = userinfo['picture']
+            else:
+                current_app.logger.info("Calculating hash for gravatar...")
+                canonical_email = email.strip().lower()
+                email_hash = hashlib.md5(canonical_email).hexdigest()
+                current_app.logger.debug(f"email_hash: {email_hash}")
+                user.avatar_url = f'https://www.gravatar.com/avatar/{email_hash}?s=30'
+    elif nickname:
+        pass # TODO
+    elif name:
+        pass # TODO
+    else:
+        # TODO
+        raise Exception('invalid user info')
+
+    if user:
         db.session.add(user)
         db.session.commit()
 
         role_assoc = UserRole(user, role)
         db.session.add(role_assoc)
         db.session.commit()
-    print(user)
+        print(user)
 
-    # find identity object
-    identity = Identity.query.filter_by(subject=subject).first()
-    if not identity:
-        source = subject.split('|', 2)[0]
-        identity = Identity(user=user, source=source, subject=subject)
-        # TODO
+        # find identity object
+        identity = Identity.query.filter_by(subject=subject).first()
+        if not identity:
+            source = subject.split('|', 2)[0]
+            identity = Identity(user=user, source=source, subject=subject)
+            # TODO
 
-        db.session.add(identity)
-        db.session.commit()
-    print(identity)
+            db.session.add(identity)
+            db.session.commit()
+        print(identity)
 
     return user, identity

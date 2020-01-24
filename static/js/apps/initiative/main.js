@@ -58,6 +58,9 @@ const storeActions = {
       .finally(() => {
         // always executed
       });
+  },
+  setCurrentEncounter(context, payload) {
+
   }
 };
 const storeMutations = {

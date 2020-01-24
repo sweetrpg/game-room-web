@@ -21,8 +21,11 @@ const EncounterList = {
     },
     template: `
  <div class="container">
+    <div class="container-label text-muted">
+        Encounters
+    </div>
     <div class="row">
-      <encounter-item v-for="te in encounters" :encounter="te" :key="te.id" />
+        <encounter-item v-for="te in encounters" :encounter="te" :key="te.id" />
     </div>
   </div>
 `

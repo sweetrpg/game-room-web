@@ -34,7 +34,7 @@ const DeleteEncounterDialog = {
         // this.$store.dispatch('fetchGameSystems')
     },
     template: `
-<div class="modal fade" id="deleteEncounterDialog" tabindex="-1" role="dialog"
+<div class="modal fade shadow p-3 rounded" id="deleteEncounterDialog" role="dialog"
      aria-labelledby="deleteEncounterModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
