@@ -7,8 +7,9 @@ import Fluent
 import FluentMongoDriver
 import Leaf
 import Vapor
-import SendGrid
+// import SendGrid
 import Redis
+import Common
 
 
 // configures your application
@@ -37,5 +38,5 @@ public func configure(_ app : Application) throws {
     // register routes
     try routes(app)
 
-    app.sendgrid.initialize()
+    // app.sendgrid.initialize()
 }

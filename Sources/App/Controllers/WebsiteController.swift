@@ -5,6 +5,7 @@
 
 import Leaf
 import Vapor
+import ProfilesModel
 
 
 struct WebsiteController : RouteCollection {
@@ -24,17 +25,17 @@ struct WebsiteController : RouteCollection {
 //        authSessionRoutes.get("resetPassword", use: resetPasswordHandler)
 
         authSessionRoutes.get(use: indexHandler)
-        authSessionRoutes.get("acronyms", ":acronymId", use: acronymHandler)
-        authSessionRoutes.get("users", ":userId", use: userHandler)
-        authSessionRoutes.get("users", use: allUsersHandler)
-        authSessionRoutes.get("categories", use: allCategoriesHandler)
-        authSessionRoutes.get("categories", ":categoryId", use: categoryHandler)
+//        authSessionRoutes.get("acronyms", ":acronymId", use: acronymHandler)
+//        authSessionRoutes.get("users", ":userId", use: userHandler)
+//        authSessionRoutes.get("users", use: allUsersHandler)
+//        authSessionRoutes.get("categories", use: allCategoriesHandler)
+//        authSessionRoutes.get("categories", ":categoryId", use: categoryHandler)
 
-        let protectedRoutes = authSessionRoutes.grouped(User.redirectMiddleware(path: "/auth/login"))
-        protectedRoutes.get("acronyms", "create", use: createAcronymHandler)
-        protectedRoutes.post("acronyms", "create", use: createAcronymPostHandler)
-        protectedRoutes.get("acronyms", ":acronymId", "edit", use: editAcronymHandler)
-        protectedRoutes.post("acronyms", ":acronymId", "edit", use: editAcronymPostHandler)
-        protectedRoutes.post("acronyms", ":acronymId", "delete", use: deleteAcronymHandler)
+//        let protectedRoutes = authSessionRoutes.grouped(User.redirectMiddleware(path: "/auth/login"))
+//        protectedRoutes.get("acronyms", "create", use: createAcronymHandler)
+//        protectedRoutes.post("acronyms", "create", use: createAcronymPostHandler)
+//        protectedRoutes.get("acronyms", ":acronymId", "edit", use: editAcronymHandler)
+//        protectedRoutes.post("acronyms", ":acronymId", "edit", use: editAcronymPostHandler)
+//        protectedRoutes.post("acronyms", ":acronymId", "delete", use: deleteAcronymHandler)
     }
 }

@@ -2,9 +2,8 @@
 
 import PackageDescription
 
-
 let package = Package(
-        name: "sweetrpg-web",
+        name: "sweetrpg-library-web",
         platforms: [
             .macOS(.v10_15),
         ],
@@ -18,13 +17,18 @@ let package = Package(
             .package(url: "https://github.com/vapor-community/sendgrid.git", from: "4.0.0"),
             .package(url: "https://github.com/vapor/redis.git", from: "4.0.0"),
             // .package(name: "sweetrpg-users-model", path: "../UsersModel"),
-            .package(name: "sweetrpg-common", path: "../Common"),
+            .package(name: "sweetrpg-common", path: "../../Libraries/Common"),
+            .package(name: "sweetrpg-api-common", path: "../../Libraries/APICommon"),
+            .package(name: "sweetrpg-profiles-model", path: "../../Libraries/ProfilesModel"),
+            .package(name: "Auth0", url: "https://github.com/auth0/Auth0.swift.git", from: "1.33.1"),
         ],
         targets: [
             .target(
                     name: "App",
                     dependencies: [
-                        .product(name: "SweetRPGCommon", package: "sweetrpg-common"),
+                        .product(name: "Common", package: "sweetrpg-common"),
+                        .product(name: "APICommon", package: "sweetrpg-api-common"),
+                        .product(name: "ProfilesModel", package: "sweetrpg-profiles-model"),
                         .product(name: "Fluent", package: "fluent"),
                         .product(name: "FluentMongoDriver", package: "fluent-mongo-driver"),
                         .product(name: "Leaf", package: "leaf"),
@@ -34,6 +38,7 @@ let package = Package(
 //                        .product(name: "ImperialGitHub", package: "Imperial"),
 //                        .product(name: "SendGrid", package: "sendgrid"),
                         .product(name: "Redis", package: "redis"),
+                        .product(name: "Auth0", package: "Auth0"),
                     ],
                     swiftSettings: [
                         // Enable better optimizations when building in Release configuration. Despite the use of
