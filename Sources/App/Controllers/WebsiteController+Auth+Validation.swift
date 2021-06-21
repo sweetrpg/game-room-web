@@ -5,3 +5,4 @@
 
 import Leaf
 import Vapor
+import ProfilesModel

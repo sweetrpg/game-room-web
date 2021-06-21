@@ -6,6 +6,7 @@
 //import ImperialAuth0
 import Leaf
 import Vapor
+import ProfilesModel
 
 
 extension WebsiteController {
