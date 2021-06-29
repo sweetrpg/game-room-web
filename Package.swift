@@ -17,11 +17,15 @@ let package = Package(
             // .package(url: "https://github.com/vapor-community/sendgrid.git", from: "4.0.0"),
             .package(url: "https://github.com/vapor/redis.git", from: "4.0.0"),
             // .package(name: "sweetrpg-users-model", path: "../UsersModel"),
-            .package(name: "sweetrpg-common", path: "../../Libraries/Common"),
-            .package(name: "sweetrpg-api-common", path: "../../Libraries/APICommon"),
-            .package(name: "sweetrpg-profiles-model", path: "../../Libraries/ProfilesModel"),
-            .package(name: "sweetrpg-library-model", path: "../../Libraries/LibraryModel"),
-            .package(name: "Auth0", url: "https://github.com/auth0/Auth0.swift.git", from: "1.33.1"),
+            // .package(name: "sweetrpg-common", path: "../../Libraries/Common"),
+            // .package(name: "sweetrpg-api-common", path: "../../Libraries/APICommon"),
+            // .package(name: "sweetrpg-profiles-model", path: "../../Libraries/ProfilesModel"),
+            // .package(name: "sweetrpg-library-model", path: "../../Libraries/LibraryModel"),
+            .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-common.git", .branch("develop")),
+            .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-api-common.git", .branch("develop")),
+            .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-profiles-model.git", .branch("develop")),
+            .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-library-model.git", .branch("develop")),
+            // .package(name: "Auth0", url: "https://github.com/auth0/Auth0.swift.git", from: "1.33.1"),
         ],
         targets: [
             .target(
@@ -40,7 +44,7 @@ let package = Package(
 //                        .product(name: "ImperialGitHub", package: "Imperial"),
 //                        .product(name: "SendGrid", package: "sendgrid"),
                         .product(name: "Redis", package: "redis"),
-                        .product(name: "Auth0", package: "Auth0"),
+                        // .product(name: "Auth0", package: "Auth0"),
                     ],
                     swiftSettings: [
                         // Enable better optimizations when building in Release configuration. Despite the use of

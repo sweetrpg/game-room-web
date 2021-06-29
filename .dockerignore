@@ -3,3 +3,6 @@
 .git/
 .vscode/
 .idea/
+example.env
+.gitignore
+build.sh
