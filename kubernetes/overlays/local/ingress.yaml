@@ -4,10 +4,9 @@ kind: Ingress
 
 metadata:
   name: sweetrpg-library-web
-  labels:
-    name: sweetrpg-library-web
 
 spec:
+  ingressClassName: traefik
   rules:
     - host: library.sweetrpg.com
       http:
@@ -18,4 +17,4 @@ spec:
               service:
                 name: sweetrpg-library-web
                 port:
-                  number: 8080
+                  number: 8280

@@ -4,8 +4,6 @@ kind: Deployment
 
 metadata:
   name: sweetrpg-library-web
-  labels:
-    app: sweetrpg-library-web
 
 spec:
   strategy:
@@ -41,7 +39,7 @@ spec:
               value: 0.0.0.0
           ports:
             - containerPort: 8080
-              name: web
+              name: http
           resources:
             requests:
               cpu: "20m"

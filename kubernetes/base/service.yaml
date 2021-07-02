@@ -10,6 +10,6 @@ spec:
     app: sweetrpg-library-web
   type: LoadBalancer
   ports:
-    - name: web
-      port: 8080
-      targetPort: web
+    - name: http
+      port: 8280
+      targetPort: http
