@@ -4,7 +4,5 @@ kind: ConfigMap
 
 metadata:
   name: sweetrpg-library-web
-  labels:
-    app: sweetrpg-library-web
 
 data: {}
