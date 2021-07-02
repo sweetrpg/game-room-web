@@ -19,6 +19,7 @@ spec:
       labels:
         app: sweetrpg-library-web
     spec:
+      serviceAccountName: sweetrpg-library-web
       imagePullSecrets:
         - name: sweetrpg-registry
       containers:
