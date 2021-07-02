@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: sweetrpg-library-web
+  labels:
+    name: sweetrpg-library-web
+
+spec:
+  rules:
+    - host: library.sweetrpg.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: sweetrpg-library-web
+                port:
+                  number: 8080

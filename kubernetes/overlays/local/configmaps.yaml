@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: sweetrpg-library-web-env
+  labels:
+    app: sweetrpg-library-web
+
+data: {}

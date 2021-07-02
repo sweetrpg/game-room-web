@@ -7,8 +7,12 @@ if [ -z "${version}" ]; then
     version=0.0.0
 fi
 
+export DOCKER_BUILDKIT=1
+registry=registry.sweetrpg.com
+name=sweetrpg-library-web
+
 docker build \
-    -t registry.sweetrpg.com/sweetrpg-library-web:latest \
-    -t registry.sweetrpg.com/sweetrpg-library-web:$(semver -i patch ${version}) \
+    -t ${registry}/${name}:latest \
+    -t ${registry}/${name}:$(semver -i patch ${version}) \
     --ssh default \
     .
