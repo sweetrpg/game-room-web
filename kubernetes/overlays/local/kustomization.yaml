@@ -17,3 +17,6 @@ secretGenerator:
 
 commonLabels:
   app: sweetrpg-library-web
+
+generatorOptions:
+  disableNameSuffixHash: true
