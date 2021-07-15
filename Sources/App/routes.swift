@@ -14,5 +14,5 @@ func routes(_ app: Application) throws {
     // try app.register(collection: CategoriesController())
     try app.register(collection: WebsiteController())
     // try app.register(collection: AuthController())
-    try app.register(collection: HealthController())
+    try app.register(collection: HealthController<LibraryHealthInfo>(healthCallback: healthCallback))
 }

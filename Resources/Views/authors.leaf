@@ -1,0 +1,24 @@
+#extend("base"):
+#export("content"):
+<img src="/images/logo.png"
+      class="mx-auto d-block" alt="TIL Logo" />
+
+<h1>Authors</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    #for(author in authors)
+    <tr>
+        <td>#(author.name)</td>
+    </tr>
+    #endfor
+    </tbody>
+</table>
+
+#endexport
+#endextend
