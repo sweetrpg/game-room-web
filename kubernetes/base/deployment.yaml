@@ -13,19 +13,33 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: sweetrpg-library-web
+      platform: sweetrpg
+      app: library
+      component: web
   template:
     metadata:
       labels:
-        app: sweetrpg-library-web
+        platform: sweetrpg
+        app: library
+        component: web
     spec:
       serviceAccountName: sweetrpg-library-web
       imagePullSecrets:
         - name: sweetrpg-registry
       containers:
-        - name: web
+        - name: library-web-app
           image: registry.sweetrpg.com/sweetrpg-library-web:latest
           imagePullPolicy: Always
+          args:
+            [
+              "serve",
+              "--env",
+              "development",
+              "--hostname",
+              "0.0.0.0",
+              "--port",
+              "8280",
+            ]
           envFrom:
             - configMapRef:
                 name: sweetrpg-library-web
@@ -35,11 +49,11 @@ spec:
             #     name: sweetrpg-library-web
           env:
             - name: VAPOR_HTTP_PORT
-              value: "8080"
+              value: "8280"
             - name: VAPOR_HTTP_BIND_ADDRESS
               value: 0.0.0.0
           ports:
-            - containerPort: 8080
+            - containerPort: 8280
               name: http
           resources:
             requests:
@@ -47,14 +61,14 @@ spec:
               memory: "55M"
           livenessProbe:
             httpGet:
-              path: /health/status
-              port: 8080
+              path: /health/ping
+              port: 8280
             initialDelaySeconds: 90
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              path: /health/status
-              port: 8080
+              path: /health/ping
+              port: 8280
             initialDelaySeconds: 30
             timeoutSeconds: 10
           volumeMounts:

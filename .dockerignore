@@ -7,3 +7,5 @@ example.env
 .gitignore
 build.sh
 .dockerconfigjson
+create-registry-secret.sh
+auth.txt
