@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    #for(author in authors)
+    #for(author in authors):
     <tr>
         <td>#(author.name)</td>
     </tr>

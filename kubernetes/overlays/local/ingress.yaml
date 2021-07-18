@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: library.sweetrpg.com
+    - host: library.local.sweetrpg.com
       http:
         paths:
           - pathType: Prefix

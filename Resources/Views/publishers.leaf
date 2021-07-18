@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    #for(publisher in publishers)
+    #for(publisher in publishers):
     <tr>
         <td>#(publisher.name)</td>
     </tr>
