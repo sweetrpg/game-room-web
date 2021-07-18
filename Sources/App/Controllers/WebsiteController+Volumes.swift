@@ -10,24 +10,26 @@ import LibraryModel
 
 
 extension WebsiteController {
-    func addVolumeRoutes(_ routes : RoutesBuilder) {
+    func addVolumeRoutes(to routes : RoutesBuilder) {
         let volumeRoutes = routes.grouped("volumes")
         volumeRoutes.get(use: getVolumesHandler)
         volumeRoutes.get(":volumeId", use: getVolumeHandler)
     }
 
-    func getVolumesHandler(_ req : Request) -> EventLoopFuture<View> {
+    func getVolumesHandler(_ req : Request) throws -> EventLoopFuture<View> {
+        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
         let context = VolumesContext(title: "Volumes",
                 volumes: [
-                    Volume(name: "V1"),
-                    Volume(name: "V3"),
-                    Volume(name: "V2"),
+                    Volume(name: "V1", systemId: try system.requireID()),
+                    Volume(name: "V3", systemId: try system.requireID()),
+                    Volume(name: "V2", systemId: try system.requireID()),
                 ])
         return req.view.render("volumes", context)
     }
 
-    func getVolumeHandler(_ req : Request) -> EventLoopFuture<View> {
-        let context = VolumeContext(title: "Volume - V1", volume: Volume(name: "V1"))
+    func getVolumeHandler(_ req : Request) throws -> EventLoopFuture<View> {
+        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
+        let context = VolumeContext(title: "Volume - V1", volume: Volume(name: "V1", systemId: try system.requireID()))
         return req.view.render("volume", context)
     }
 }

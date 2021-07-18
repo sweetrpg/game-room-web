@@ -10,7 +10,7 @@ import LibraryModel
 
 
 extension WebsiteController {
-    func addAuthorRoutes(_ routes : RoutesBuilder) {
+    func addAuthorRoutes(to routes : RoutesBuilder) {
         let authorRoutes = routes.grouped("authors")
         authorRoutes.get(use: getAuthorsHandler)
         authorRoutes.get(":authorId", use: getAuthorHandler)

@@ -8,7 +8,7 @@ resources:
   - namespace.yaml
   - ../../base
   - configmaps.yaml
-  - ingress.yaml
+  - ingress-route.yaml
 secretGenerator:
   - name: sweetrpg-registry
     type: kubernetes.io/dockerconfigjson
@@ -16,7 +16,9 @@ secretGenerator:
       - .dockerconfigjson
 
 commonLabels:
-  app: sweetrpg-library-web
+  platform: sweetrpg
+  app: library
+  component: web
 
 generatorOptions:
   disableNameSuffixHash: true

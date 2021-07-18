@@ -32,7 +32,9 @@ struct WebsiteController : RouteCollection {
 //        authSessionRoutes.get("categories", use: allCategoriesHandler)
 //        authSessionRoutes.get("categories", ":categoryId", use: categoryHandler)
 
-    addVolumeRoutes(sessionRoutes)
+        addVolumeRoutes(to: sessionRoutes)
+        addPublisherRoutes(to: sessionRoutes)
+        addAuthorRoutes(to: sessionRoutes)
 //        let protectedRoutes = authSessionRoutes.grouped(User.redirectMiddleware(path: "/auth/login"))
 //        protectedRoutes.get("acronyms", "create", use: createAcronymHandler)
 //        protectedRoutes.post("acronyms", "create", use: createAcronymPostHandler)

@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    #for(volume in volumes)
+    #for(volume in volumes):
     <tr>
         <td>#(volume.name)</td>
     </tr>
