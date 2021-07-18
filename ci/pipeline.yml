@@ -1,0 +1,100 @@
+groups:
+- name: build
+  jobs:
+  - build-app
+
+jobs:
+- name: build-app
+  max_in_flight: 1
+  plan:
+  - get: git
+    trigger: true
+  - task: test
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: swift
+          tag: 5.4
+      run:
+        path: swift build -c debug
+
+resources:
+- name: git
+  type: git
+  icon: github
+  source:
+    uri: ssh://git@github.com/paulyhedral/sweetrpg-library-web.git
+    branch: develop
+    username: paulyhedral
+    # git_config:
+    # - name: email
+    #   value: paul@schifferers.net
+    # - name: name
+    #   value: Paul Schifferer
+    private_key: |
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        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
+        -----END OPENSSH PRIVATE KEY-----
+# - name: swift
+#   type: docker-image
+#   source:
+#     repository: swift:5.4
+
+
+# var_sources:
+# - name: vault
+#   type: vault
+#   config:
+#     url: https://vault.dev.sweetrpg.com
+#     auth_backend: approle
+#     auth_params:
+#         role_id: 35c75019-2f26-afb9-1f9f-0d224240814d
+#         secret_id: f852afd3-2cb9-d19b-1ae6-2d30d2eba422
