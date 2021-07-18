@@ -19,14 +19,17 @@ extension WebsiteController {
     func getAuthorsHandler(_ req : Request) -> EventLoopFuture<View> {
         let context = AuthorsContext(title: "Authors",
                 authors: [
-                    Author(name: "V1"),
-                    Author(name: "V3"),
-                    Author(name: "V2"),
+                    Author(name: "A1"),
+                    Author(name: "A3"),
+                    Author(name: "A2"),
                 ])
         return req.view.render("authors", context)
     }
 
-    func getAuthorHandler(_ req : Request) -> EventLoopFuture<View> {
+    func getAuthorHandler(_ req : Request) throws -> EventLoopFuture<View> {
+        guard let authorId = req.parameters.get("authorId") else {
+            throw Abort(.badRequest)
+        }
         let context = AuthorContext(title: "Author - A1", author: Author(name: "A1"))
         return req.view.render("author", context)
     }
