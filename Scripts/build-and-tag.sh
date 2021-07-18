@@ -4,7 +4,7 @@ set -e
 
 scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-version=$(semvar -i patch $(git tag -l | head -1))
+version=$(semver -i patch $(git tag -l | head -1))
 if [ -z "${version}" ]; then
     version=0.0.0
 fi
