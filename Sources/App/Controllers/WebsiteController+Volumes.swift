@@ -20,15 +20,18 @@ extension WebsiteController {
     func getVolumesHandler(_ req : Request) throws -> EventLoopFuture<View> {
         let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
         let pagination = getPagination(from: req)
-        let volumes = SDK.Volumes.all(range: .startingAt(offset: pagination.offset, limit: pagination.limit))
-        let context = VolumesContext(title: "Volumes",
-                prefix: getPrefix(from: req),
-                volumes: volumes /*[
+        let volumesReq = SDK.Volumes.all(range: .startingAt(offset: pagination.offset, limit: pagination.limit))
+         return client.run(volumesReq) { result in
+             let context = VolumesContext(title: "Volumes",
+                     prefix: getPrefix(from: req),
+                     volumes: result.value /*[
                     Volume(name: "V1", systemId: try system.requireID()),
                     Volume(name: "V3", systemId: try system.requireID()),
                     Volume(name: "V2", systemId: try system.requireID()),
                 ]*/)
-        return req.view.render("volumes", context)
+             return req.view.render("volumes", context)
+        }
+
     }
 
     func getVolumeHandler(_ req : Request) throws -> EventLoopFuture<View> {

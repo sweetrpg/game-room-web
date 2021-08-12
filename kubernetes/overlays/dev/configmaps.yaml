@@ -5,4 +5,5 @@ kind: ConfigMap
 metadata:
   name: sweetrpg-library-web-env
 
-data: {}
+data:
+  SWEETRPG_API_BASE_URL: https://dev.sweetrpg.com/api/0
