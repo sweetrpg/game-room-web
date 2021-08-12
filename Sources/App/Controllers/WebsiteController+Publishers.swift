@@ -18,6 +18,7 @@ extension WebsiteController {
 
     func getPublishersHandler(_ req : Request) -> EventLoopFuture<View> {
         let context = PublishersContext(title: "Publishers",
+                prefix: getPrefix(from: req),
                 publishers: [
                     Publisher(name: "P1"),
                     Publisher(name: "P3"),
@@ -27,17 +28,21 @@ extension WebsiteController {
     }
 
     func getPublisherHandler(_ req : Request) -> EventLoopFuture<View> {
-        let context = PublisherContext(title: "Publisher - P1", publisher: Publisher(name: "P1"))
+        let context = PublisherContext(title: "Publisher - P1",
+                prefix: getPrefix(from: req),
+                publisher: Publisher(name: "P1"))
         return req.view.render("publisher", context)
     }
 }
 
 struct PublishersContext : Encodable {
     let title : String
+    let prefix : String = "/"
     let publishers : [Publisher]
 }
 
 struct PublisherContext : Encodable {
     let title : String
+    let prefix : String = "/"
     let publisher : Publisher
 }

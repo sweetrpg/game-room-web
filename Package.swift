@@ -21,6 +21,7 @@ let package = Package(
             // .package(name: "sweetrpg-api-common", path: "../../Libraries/APICommon"),
             // .package(name: "sweetrpg-profiles-model", path: "../../Libraries/ProfilesModel"),
             // .package(name: "sweetrpg-library-model", path: "../../Libraries/LibraryModel"),
+            .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-sdk.git", .branch("develop")),
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-common.git", .branch("develop")),
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-api-common.git", .branch("develop")),
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-profiles-model.git", .branch("develop")),
@@ -31,6 +32,7 @@ let package = Package(
             .target(
                     name: "App",
                     dependencies: [
+                        .product(name: "SDK", package: "sweetrpg-sdk"),
                         .product(name: "Common", package: "sweetrpg-common"),
                         .product(name: "APICommon", package: "sweetrpg-api-common"),
                         .product(name: "ProfilesModel", package: "sweetrpg-profiles-model"),

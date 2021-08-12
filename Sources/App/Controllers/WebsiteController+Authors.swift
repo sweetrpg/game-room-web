@@ -18,6 +18,7 @@ extension WebsiteController {
 
     func getAuthorsHandler(_ req : Request) -> EventLoopFuture<View> {
         let context = AuthorsContext(title: "Authors",
+                prefix: getPrefix(from: req),
                 authors: [
                     Author(name: "A1"),
                     Author(name: "A3"),
@@ -30,17 +31,21 @@ extension WebsiteController {
         guard let authorId = req.parameters.get("authorId") else {
             throw Abort(.badRequest)
         }
-        let context = AuthorContext(title: "Author - A1", author: Author(name: "A1"))
+        let context = AuthorContext(title: "Author - A1",
+                prefix: getPrefix(from: req),
+                author: Author(name: "A1"))
         return req.view.render("author", context)
     }
 }
 
 struct AuthorsContext : Encodable {
     let title : String
+    let prefix : String = "/"
     let authors : [Author]
 }
 
 struct AuthorContext : Encodable {
     let title : String
+    let prefix : String = "/"
     let author : Author
 }

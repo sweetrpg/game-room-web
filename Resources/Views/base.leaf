@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="#(prefix)/styles/style.css"/>
     <title>#(title) | SweetRPG Library</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,7 +15,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">SweetRPG Library</a>
+    <a class="navbar-brand" href="#(prefix)">SweetRPG Library</a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -27,24 +27,24 @@
          id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item #if(title == "Home page"): active #endif">
-            <a href="/" class="nav-link">Home</a>
+            <a href="#(prefix)" class="nav-link">Home</a>
             </li>
 
             <li class="nav-item #if(slug == "volumes"): active #endif">
-            <a href="/volumes" class="nav-link">Volumes</a>
+            <a href="#(prefix)/volumes" class="nav-link">Volumes</a>
             </li>
 
             <li class="nav-item #if(slug == "publishers"): active #endif">
-            <a href="/publishers" class="nav-link">Publishers</a>
+            <a href="#(prefix)/publishers" class="nav-link">Publishers</a>
             </li>
 
             <li class="nav-item #if(slug == "authors"): active #endif">
-            <a href="/authors" class="nav-link">Authors</a>
+            <a href="#(prefix)/authors" class="nav-link">Authors</a>
             </li>
         </ul>
 
         #if(userLoggedIn):
-        <form class="form-inline" action="/auth/logout" method="POST">
+        <form class="form-inline" action="#(prefix)/auth/logout" method="POST">
             <input class="nav-link btn btn-secondary mr-sm-2"
                    type="submit" value="Log out">
         </form>
@@ -65,7 +65,7 @@
       </span>
     </div>
 </footer>
-<script src="/scripts/cookies.js"></script>
+<script src="#(prefix)/scripts/cookies.js"></script>
 #endif
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
