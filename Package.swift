@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
         name: "sweetrpg-library-web",
         platforms: [
-            .macOS(.v10_15),
+            .macOS(.v11),
         ],
         dependencies: [
             // 💧 A server-side Swift web framework.
@@ -27,6 +27,7 @@ let package = Package(
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-profiles-model.git", .branch("develop")),
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-library-model.git", .branch("develop")),
             // .package(name: "Auth0", url: "https://github.com/auth0/Auth0.swift.git", from: "1.33.1"),
+            .package(url: "ssh://git@github.com/paulyhedral/PilgrimageCommon.git", .branch("develop")),
         ],
         targets: [
             .target(
@@ -47,6 +48,7 @@ let package = Package(
 //                        .product(name: "SendGrid", package: "sendgrid"),
                         .product(name: "Redis", package: "redis"),
                         // .product(name: "Auth0", package: "Auth0"),
+                        .product(name: "PilgrimageCommon", package: "PilgrimageCommon"),
                     ],
                     swiftSettings: [
                         // Enable better optimizations when building in Release configuration. Despite the use of

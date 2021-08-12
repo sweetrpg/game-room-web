@@ -6,9 +6,15 @@
 import Leaf
 import Vapor
 import ProfilesModel
+import PilgrimageCommon
+import SDK
 
 
 struct WebsiteController : RouteCollection {
+
+    @Injected(.apiClient)
+    var client : SDK.Client
+
     func boot(routes : RoutesBuilder) throws {
         let sessionRoutes = routes.grouped(User.sessionAuthenticator())
         let authRoutes = sessionRoutes.grouped("auth")

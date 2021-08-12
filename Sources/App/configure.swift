@@ -10,6 +10,7 @@ import Vapor
 // import SendGrid
 import Redis
 import Common
+import PilgrimageCommon
 
 
 // configures your application
@@ -34,6 +35,13 @@ public func configure(_ app : Application) throws {
     app.views.use(.leaf)
     app.sessions.use(.redis)
     app.caches.use(.fluent)
+
+    // setup environment
+    guard let apiURL = Environment.get("SWEETRPG_API_BASE_URL") else {
+        fatalError("SWEETRPG_API_BASE_URL is not set in environment")
+    }
+    let client = SDK.Client(baseURL: apiURL)
+    EnvironmentContainer.shared[.apiClient] = client
 
     // register routes
     try routes(app)
