@@ -19,4 +19,4 @@ spec:
           responseForwarding:
             flushInterval: 1ms
       middlewares:
-        - strip-prefix
+        - name: strip-prefix

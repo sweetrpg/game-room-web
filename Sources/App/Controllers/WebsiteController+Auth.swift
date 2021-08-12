@@ -4,6 +4,7 @@
 //
 
 //import ImperialAuth0
+
 import Leaf
 import Vapor
 import ProfilesModel
@@ -14,14 +15,18 @@ extension WebsiteController {
         let context : LoginContext
 
         if let error = req.query[Bool.self, at: "error"], error {
-            context = LoginContext(loginError: "\(error)")
+            context = LoginContext(title: "Log In",
+                    prefix: getPrefix(from: req),
+                    loginError: "\(error)")
         }
         else {
-            context = LoginContext()
+            context = LoginContext(title: "Log In",
+                    prefix: getPrefix(from: req))
         }
 
         return req.view.render("login", context)
     }
+
 //
 //    //   func loginAuth0Handler(_ req: Request) throws -> EventLoopFuture<Response> {
 //    //     let auth = Auth0Auth()
@@ -44,16 +49,17 @@ extension WebsiteController {
         req.auth.logout(User.self)
         return req.redirect(to: "/")
     }
-
 }
-
 
 struct LoginContext : Encodable {
 
-    init(loginError : String? = nil) {
+    init(title : String, prefix : String, loginError : String? = nil) {
+        self.title = title
+        self.prefix = prefix
         self.loginError = loginError
     }
 
     let title = "Log In"
+    let prefix : String = "/"
     let loginError : String?
 }

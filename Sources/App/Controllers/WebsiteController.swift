@@ -42,4 +42,8 @@ struct WebsiteController : RouteCollection {
 //        protectedRoutes.post("acronyms", ":acronymId", "edit", use: editAcronymPostHandler)
 //        protectedRoutes.post("acronyms", ":acronymId", "delete", use: deleteAcronymHandler)
     }
+
+    func getPrefix(from req : Request) -> String {
+        return req.headers.get("X-Forwarded-Prefix") ?? "/"
+    }
 }

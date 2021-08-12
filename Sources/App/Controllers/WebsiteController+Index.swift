@@ -26,6 +26,7 @@ extension WebsiteController {
 
 struct IndexContext : Encodable {
     let title : String
+    let prefix : String = "/"
 //    let acronyms : [Acronym]
 //    let userLoggedIn : Bool
     let showCookieMessage : Bool
