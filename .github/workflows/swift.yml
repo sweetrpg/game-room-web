@@ -19,11 +19,11 @@ jobs:
       run: |
            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-    - name: Build
-      env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: swift build -v
     - name: Run tests
       env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: swift test -v
+    - name: Build the Docker image
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: docker build . --file Dockerfile --tag sweetrpg-library-web:$(date +%s)
