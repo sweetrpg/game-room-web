@@ -6,7 +6,6 @@
 import Leaf
 import Vapor
 import ProfilesModel
-import PilgrimageCommon
 import SDK
 
 
