@@ -2,11 +2,8 @@
 
 import PackageDescription
 
-let package = Package(
-        name: "sweetrpg-library-web",
-        platforms: [
-            .macOS(.v11),
-        ],
+
+let package = Package(name: "sweetrpg-library-web",
         dependencies: [
             // 💧 A server-side Swift web framework.
             .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
@@ -27,11 +24,10 @@ let package = Package(
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-profiles-model.git", .branch("develop")),
             .package(url: "ssh://git@github.com/paulyhedral/sweetrpg-library-model.git", .branch("develop")),
             // .package(name: "Auth0", url: "https://github.com/auth0/Auth0.swift.git", from: "1.33.1"),
-            .package(url: "ssh://git@github.com/paulyhedral/PilgrimageCommon.git", .branch("develop")),
+            // .package(url: "ssh://git@github.com/paulyhedral/PilgrimageCommon.git", .branch("develop")),
         ],
         targets: [
-            .target(
-                    name: "App",
+            .target(name: "App",
                     dependencies: [
                         .product(name: "SDK", package: "sweetrpg-sdk"),
                         .product(name: "Common", package: "sweetrpg-common"),
@@ -48,7 +44,7 @@ let package = Package(
 //                        .product(name: "SendGrid", package: "sendgrid"),
                         .product(name: "Redis", package: "redis"),
                         // .product(name: "Auth0", package: "Auth0"),
-                        .product(name: "PilgrimageCommon", package: "PilgrimageCommon"),
+                        // .product(name: "PilgrimageCommon", package: "PilgrimageCommon"),
                     ],
                     swiftSettings: [
                         // Enable better optimizations when building in Release configuration. Despite the use of

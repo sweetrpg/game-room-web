@@ -10,7 +10,8 @@ import Vapor
 // import SendGrid
 import Redis
 import Common
-import PilgrimageCommon
+// import PilgrimageCommon
+import SDK
 
 
 // configures your application
