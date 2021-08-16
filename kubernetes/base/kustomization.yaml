@@ -7,3 +7,8 @@ resources:
   - configmaps.yaml
   - deployment.yaml
   - service.yaml
+secretGenerator:
+  - name: sweetrpg-library-api
+    type: Opaque
+    envs:
+      - secrets.env
