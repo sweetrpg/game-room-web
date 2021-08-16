@@ -15,6 +15,10 @@ secretGenerator:
     type: kubernetes.io/dockerconfigjson
     files:
       - .dockerconfigjson
+  - name: sweetrpg-library-web-env
+    type: Opaque
+    envs:
+      - secrets.env
 
 commonLabels:
   platform: sweetrpg

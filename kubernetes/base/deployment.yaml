@@ -45,8 +45,10 @@ spec:
                 name: sweetrpg-library-web
             - configMapRef:
                 name: sweetrpg-library-web-env
-            # - secretRef:
-            #     name: sweetrpg-library-web
+            - secretRef:
+                name: sweetrpg-library-web
+            - secretRef:
+                name: sweetrpg-library-web-env
           env:
             - name: VAPOR_HTTP_PORT
               value: "8280"

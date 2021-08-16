@@ -7,5 +7,4 @@ package-lock.json
 .idea
 .swiftpm
 Package.resolved
-.dockerconfigjson
 auth.txt
