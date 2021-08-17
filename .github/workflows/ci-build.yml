@@ -3,8 +3,16 @@ name: CI - Test and build Docker image
 on:
   push:
     branches: [develop]
+    paths:
+      - "Sources/**"
+      - "Tests/**"
+      - Package.swift
   pull_request:
     branches: [develop]
+    paths:
+      - "Sources/**"
+      - "Tests/**"
+      - Package.swift
 
 jobs:
   build:
@@ -36,11 +44,12 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           DOCKER_BUILDKIT: "1"
-        run: >
-          docker build
-             --file Dockerfile
-             --tag sweetrpg-library-web:$(date +%s)
-             --tag sweetrpg-library-web:latest
-             --tag sweetrpg-library-web:${{ steps.semver.outputs.patch }}
-             --ssh default
-             .
+        run: |-
+          name=$(echo ${{ env.GITHUB_REPOSITORY }} | cut -d'/' -f 2)
+          docker build \
+                 --file Dockerfile \
+                 --tag ${name}:$(date +%s) \
+                 --tag ${name}:latest \
+                 --tag ${name}:${{ steps.semver.outputs.patch }} \
+                 --ssh default \
+                 .
