@@ -1,5 +1,5 @@
 //
-// WebsiteController+Index.swift
+// WebsiteController+Volumes.swift
 // Copyright (c) 2021 Paul Schifferer.
 //
 
@@ -18,9 +18,9 @@ extension WebsiteController {
     }
 
     func getVolumesHandler(_ req : Request) throws -> EventLoopFuture<View> {
-        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
-        let pagination = getPagination(from: req)
-        let volumesReq = SDK.Volumes.all(range: .startingAt(offset: pagination.offset, limit: pagination.limit))
+//        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
+//        let pagination = getPagination(from: req)
+        let volumesReq = SDK.Volumes.all(range: .startingAt(offset: 0 /*pagination.offset*/, limit: 50 /*pagination.limit*/))
          return client.run(volumesReq) { result in
              let context = VolumesContext(title: "Volumes",
                      prefix: getPrefix(from: req),
@@ -35,10 +35,12 @@ extension WebsiteController {
     }
 
     func getVolumeHandler(_ req : Request) throws -> EventLoopFuture<View> {
-        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
+//        let system = LibraryModel.System(id: UUID(), gameSystemIdentifier: "dnd", editionIdentifier: "5")
+    let volumeId = req.parameters.get("volumeId")
+    let volume = SDK.Volumes.volume(volumeId)
         let context = VolumeContext(title: "Volume - V1",
                 prefix: getPrefix(from: req),
-                volume: Volume(name: "V1", systemId: try system.requireID()))
+                volume: volume /*Volume(name: "V1", systemId: try system.requireID())*/)
         return req.view.render("volume", context)
     }
 }

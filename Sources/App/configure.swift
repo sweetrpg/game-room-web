@@ -38,7 +38,8 @@ public func configure(_ app : Application) throws {
     app.caches.use(.fluent)
 
     // setup environment
-    guard let apiURL = Environment.get("SWEETRPG_API_BASE_URL") else {
+    guard let apiURLString = Environment.get("SWEETRPG_API_BASE_URL"),
+            let apiURL = URL(string: apiURLString) else {
         fatalError("SWEETRPG_API_BASE_URL is not set in environment")
     }
     let client = SDK.Client(baseURL: apiURL)
