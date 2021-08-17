@@ -2,51 +2,45 @@ name: CI - Test and build Docker image
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup SSH Keys and known_hosts
-      env:
+      - uses: actions/checkout@v2
+      - name: Setup SSH Keys and known_hosts
+        env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: |
-           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-           ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-    - name: Run tests
-      env:
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+      - name: Run tests
+        env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: swift test # -v
-    - name: 'Get previous tag'
-      id: previous-tag
-      uses: "WyriHaximus/github-action-get-previous-tag@v1"
-      with:
-        fallback: 0.0.0 # Optional fallback tag to use when no tag can be found
-    - name: 'Get next patch version'
-      id: semver
-      uses: "WyriHaximus/github-action-next-semvers@v1"
-      with:
-        version: ${{ steps.previous-tag.outputs.tag }}
-#     - name: Increment version
-#       id: increment-semver-patch
-#       uses: Benbentwo/increment-semver@master
-#       with:
-#         version-level: '-p'
-    - name: Build the Docker image
-      env:
+        run: swift test # -v
+      - name: "Get previous tag"
+        id: previous-tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.0.0 # Optional fallback tag to use when no tag can be found
+      - name: "Get next patch version"
+        id: semver
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ steps.previous-tag.outputs.tag }}
+      - name: Build the Docker image
+        env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           DOCKER_BUILDKIT: "1"
-      run: |
-           docker build \
-              --file Dockerfile \
-              --tag sweetrpg-library-web:$(date +%s) \
-              --tag sweetrpg-library-web:latest \
-              --tag sweetrpg-library-web:${{ steps.semver.outputs.patch }}
-              --ssh default \
-              .
+        run: >
+          docker build \
+             --file Dockerfile \
+             --tag sweetrpg-library-web:$(date +%s) \
+             --tag sweetrpg-library-web:latest \
+             --tag sweetrpg-library-web:${{ steps.semver.outputs.patch }}
+             --ssh default \
+             .
