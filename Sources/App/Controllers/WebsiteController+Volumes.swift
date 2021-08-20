@@ -11,6 +11,7 @@ import SDK
 
 
 extension WebsiteController {
+
     func addVolumeRoutes(to routes : RoutesBuilder) {
         let volumeRoutes = routes.grouped("volumes")
         volumeRoutes.get(use: getVolumesHandler)
