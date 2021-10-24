@@ -1,0 +1,22 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: sweetrpg-library-api
+
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`dev.sweetrpg.com`) && (PathPrefix(`/api/0/library`) || PathPrefix(`/api/1/library`))
+      kind: Rule
+      services:
+        - kind: Service
+          name: sweetrpg-library-api
+          port: 8281
+          passHostHeader: true
+          responseForwarding:
+            flushInterval: 1ms
+      middlewares:
+        - name: strip-prefix
