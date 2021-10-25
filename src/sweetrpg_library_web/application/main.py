@@ -101,16 +101,17 @@ def create_app(app_name=constants.APPLICATION_NAME):
     app.logger.info("Setting up endpoints...")
 
     from sweetrpg_library_web.application.blueprints import blueprint as main_blueprint
-    app.register_blueprint(main_blueprint, url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
 
     from sweetrpg_library_web.application.blueprints.volumes import blueprint as volumes_blueprint
-    main_blueprint.register_blueprint(volumes_blueprint, url_prefix="/volumes")
+    main_blueprint.register_blueprint(volumes_blueprint)
 
     from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
-    main_blueprint.register_blueprint(health_blueprint, url_prefix="/health")
+    main_blueprint.register_blueprint(health_blueprint)
 
     # from application.blueprints.billing import blueprint as billing_blueprint
     # app.register_blueprint(billing_blueprint, url_prefix="/billing")
+
+    app.register_blueprint(main_blueprint, url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
 
     # vue = Vue(app)
 
