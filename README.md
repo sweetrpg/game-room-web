@@ -1,3 +1,17 @@
-# SweetRPG Library Web UI
+# Library Web
 
-[![Build](https://github.com/paulyhedral/sweetrpg-library-web/actions/workflows/ci-build.yml/badge.svg)](https://github.com/paulyhedral/sweetrpg-library-web/actions/workflows/ci-build.yml)
+[![Unit tests](https://github.com/sweetrpg/library-web/actions/workflows/python-ci.yml/badge.svg)](https://github.com/sweetrpg/library-web/actions/workflows/python-ci.yml)
+[![Coverage](https://github.com/sweetrpg/library-web/blob/develop/coverage.svg)](https://github.com/sweetrpg/library-web)
+[![License](https://img.shields.io/github/license/sweetrpg/library-web.svg)](https://img.shields.io/github/license/sweetrpg/library-web.svg)
+[![Issues](https://img.shields.io/github/issues/sweetrpg/library-web.svg)](https://img.shields.io/github/issues/sweetrpg/library-web.svg)
+[![PRs](https://img.shields.io/github/issues-pr/sweetrpg/library-web.svg)](https://img.shields.io/github/issues-pr/sweetrpg/library-web.svg)
+[![Dependabot](https://badgen.net/github/dependabot/sweetrpg/library-web)](https://badgen.net/github/dependabot/sweetrpg/library-web)
+
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+[![Built with love](https://ForTheBadge.com/images/badges/built-with-love.svg)](https://ForTheBadge.com/images/badges/built-with-love.svg)
+
+Put something useful here.
+
+## Documentation
+
+Documentation for this package can be found [here](https://sweetrpg.github.io/library-web).

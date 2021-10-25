@@ -1,7 +1,0 @@
-{
-    "name": "sweetrpg-library-web",
-    "image_name": "sweetrpg-library-web",
-    "ports": [
-        8280
-    ]
-}

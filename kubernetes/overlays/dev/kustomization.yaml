@@ -15,15 +15,19 @@ secretGenerator:
     type: kubernetes.io/dockerconfigjson
     files:
       - .dockerconfigjson
-  - name: sweetrpg-library-web-env
+  - name: sweetrpg-library-api-env
     type: Opaque
     envs:
       - secrets.env
+  - name: sweetrpg-library-api-config-env
+    type: Opaque
+    files:
+      - newrelic.ini
 
 commonLabels:
   platform: sweetrpg
   app: library
-  component: web
+  component: api
 
 generatorOptions:
   disableNameSuffixHash: true
