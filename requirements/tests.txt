@@ -55,7 +55,7 @@ flask==2.0.2
     #   flask-migrate
     #   flask-session
     #   flask-sqlalchemy
-    #   sweetrpg-library-model
+    #   sweetrpg-library-objects
     #   sweetrpg-web-core
 flask-caching==1.10.1
     # via -r requirements/app.in
@@ -98,11 +98,11 @@ marshmallow==3.13
     # via
     #   sweetrpg-db
     #   sweetrpg-model-core
-    #   sweetrpg-sdk
+    #   sweetrpg-client
 mongoengine==0.23.1
     # via
     #   sweetrpg-db
-    #   sweetrpg-library-model
+    #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
 packaging==21.0
@@ -171,15 +171,15 @@ sqlalchemy==1.4.25
     #   alembic
     #   flask-sqlalchemy
 sweetrpg-db==0.0.11
-    # via sweetrpg-library-model
-sweetrpg-library-model @ git+https://github.com/sweetrpg/library-model.git@develop
+    # via sweetrpg-library-objects
+sweetrpg-library-objects @ git+https://github.com/sweetrpg/library-objects.git@develop
     # via -r requirements/app.in
 sweetrpg-model-core==0.0.19
     # via
     #   sweetrpg-db
-    #   sweetrpg-library-model
-    #   sweetrpg-sdk
-sweetrpg-sdk @ git+https://github.com/sweetrpg/sdk.git@develop
+    #   sweetrpg-library-objects
+    #   sweetrpg-client
+sweetrpg-client @ git+https://github.com/sweetrpg/sdk.git@develop
     # via -r requirements/app.in
 sweetrpg-web-core @ git+https://github.com/sweetrpg/web-core.git@develop
     # via -r requirements/app.in

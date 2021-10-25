@@ -23,8 +23,8 @@ setup(
         "sentry-sdk",
         "analytics-python<2.0",
         "sweetrpg-web-core",
-        "sweetrpg-library-model",
-        "sweetrpg-sdk",
+        "sweetrpg-library-objects",
+        "sweetrpg-client",
     ],
     extras_require={},
 )

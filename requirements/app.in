@@ -8,7 +8,7 @@ Flask-Migrate
 Flask-Session
 Flask==2.0.2
 git+https://github.com/sweetrpg/web-core.git@develop
-git+https://github.com/sweetrpg/library-model.git@develop
+git+https://github.com/sweetrpg/library-objects.git@develop
 git+https://github.com/sweetrpg/sdk.git@develop
 gunicorn
 kanka
