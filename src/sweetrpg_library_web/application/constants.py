@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""
-constants.py
-- Contstants for keys and environment variable names
+"""constants.py
+Constants for keys and environment variable names
 """
 
 AUTH0_CLIENT_ID = "AUTH0_CLIENT_ID"
@@ -21,10 +20,11 @@ KANKA_AUDIENCE = "KANKA_AUDIENCE"
 SENTRY_DSN = "SENTRY_DSN"
 SENTRY_ENV = "SENTRY_ENV"
 
-APPLICATION_NAME = "sweetrpg-library-api"
+APPLICATION_NAME = "sweetrpg-library-web"
 PROFILE_KEY = "profile"
 JWT_PAYLOAD = "jwt_payload"
 CURRENT_USER_ID = "current_user_id"
+LIBRARY_API_CLIENT_KEY = "sweetrpg-library-api-client"
 
 SEGMENT_WRITE_KEY = "SEGMENT_WRITE_KEY"
 
@@ -40,7 +40,11 @@ DB_NAME = "DB_NAME"
 DB_OPTS = "DB_OPTS"
 REDIS_HOST = "REDIS_HOST"
 REDIS_PORT = "REDIS_PORT"
+REDIS_DB = "REDIS_DB"
 LOGSTASH_HOST = "LOGSTASH_HOST"
 LOGSTASH_DB_PATH = "LOGSTASH_DB_PATH"
 LOGSTASH_TRANSPORT = "LOGSTASH_TRANSPORT"
 LOGSTASH_PORT = "LOGSTASH_PORT"
+
+LIBRARY_API_BASE_URL = 'LIBRARY_API_BASE_URL'
+APPLICATION_BASE_PATH = 'APPLICATION_BASE_PATH'

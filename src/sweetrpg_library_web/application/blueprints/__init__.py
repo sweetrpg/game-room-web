@@ -48,9 +48,9 @@ def error_page(message, code):
         "message": message,
     }
     try:
-        return render_page(f"errors/{code}.json")
+        return render_page(f"errors/{code}.html")
     except jinja2.TemplateNotFound:
-        return render_page("errors/error.json", context)
+        return render_page("errors/error.html", context)
 
 
 def render_page(page, context={}):
@@ -132,7 +132,7 @@ class UserAuthorizationException(Exception):
 #     return _get_user
 
 
-blueprint = Blueprint("api", __name__)
+blueprint = Blueprint("web", __name__)
 
 
 @blueprint.errorhandler(Exception)
@@ -143,12 +143,13 @@ def error_handler(ex):
     return response
 
 
-from flask_rest_jsonapi import Api
+@blueprint.route("/")
+def main_page():
+    return render_template("index.html")
 
-api = Api()
 
 # from sweetrpg_library_web.application.blueprints.api.common import game_systems, utils
 # from sweetrpg_library_web.application.blueprints.api.initiative import encounters, groups
-from sweetrpg_api_core.blueprints import health
+from sweetrpg_web_core.blueprints import health
 from sweetrpg_library_web.application.blueprints import volumes
-from sweetrpg_library_web.application.blueprints import authors
+# from sweetrpg_library_web.application.blueprints import authors

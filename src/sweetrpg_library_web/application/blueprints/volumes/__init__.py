@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""
+"""Volume routes.
 """
 
 import functools
-# from flask_rest_jsonapi import Api
-from .manager import VolumeList, VolumeDetail, VolumeAuthorRelationship
-from ...blueprints import api
+from flask import Blueprint, current_app, render_template, request, g
+from sweetrpg_library_web.application import constants
+from sweetrpg_web_core.helpers.context import get_context
 
 
-def setup_routes(app):
-    # app.logger.info("Registering volume models...")
-    # for model_name, model_info in volume_model_info.items():
-    #     APIData.add_model(model_name, model_info)
+blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
 
-    app.logger.info("Setting up routes for Volumes API")
-    # api = Api(app)
-    api.route(VolumeList, "volume_list", "/volumes/")
-    api.route(VolumeDetail, "volume_detail", "/volumes/<id>")
-    api.route(VolumeAuthorRelationship, "volume_authors", "/volumes/<id>/relationships/authors")
+
+@blueprint.route("/", methods=["GET"])
+def get_volumes():
+    api_client = g[constants.API_CLIENT_KEY]
+    context = get_context().update({'volumes':[]})
+    return render_template("volumes/index.html", **context)
+
+@blueprint.route("/<id>", methods=["GET"])
+def get_volume(id:str):
+    api_client = g[constants.API_CLIENT_KEY]
+    context = {}
+    return render_template("volumes/single.html", **context)

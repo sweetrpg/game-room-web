@@ -27,9 +27,7 @@ blinker==1.4
     #   -r requirements/app.in
     #   -r requirements/tests.in
 cachelib==0.4.1
-    # via
-    #   flask-oauthlib
-    #   flask-session
+    # via flask-session
 certifi==2021.10.8
     # via
     #   requests
@@ -52,15 +50,12 @@ distlib==0.3.3
 dnspython==1.16.0
     # via
     #   -r requirements/app.in
-    #   email-validator
     #   pymongo
 docutils==0.16
     # via
     #   rstcheck
     #   sphinx
     #   sphinx-tabs
-email-validator==1.1.3
-    # via wtforms
 filelock==3.3.1
     # via
     #   tox
@@ -72,12 +67,9 @@ flask==2.0.2
     #   flask-cors
     #   flask-dotenv
     #   flask-migrate
-    #   flask-mongoengine
-    #   flask-oauthlib
-    #   flask-rest-jsonapi
     #   flask-session
     #   flask-sqlalchemy
-    #   flask-wtf
+    #   sweetrpg-library-model
     #   sweetrpg-web-core
 flask-caching==1.10.1
     # via -r requirements/app.in
@@ -87,18 +79,10 @@ flask-dotenv==0.1.2
     # via -r requirements/app.in
 flask-migrate==3.1.0
     # via -r requirements/app.in
-flask-mongoengine==1.0.0
-    # via -r requirements/app.in
-flask-oauthlib==0.9.6
-    # via -r requirements/app.in
-flask-rest-jsonapi==0.31.2
-    # via -r requirements/app.in
 flask-session==0.4.0
     # via -r requirements/app.in
 flask-sqlalchemy==2.5.1
     # via flask-migrate
-flask-wtf==0.15.1
-    # via flask-mongoengine
 greenlet==1.1.2
     # via
     #   -r requirements/app.in
@@ -107,17 +91,13 @@ greenlet==1.1.2
 gunicorn==20.1.0
     # via -r requirements/app.in
 idna==3.3
-    # via
-    #   email-validator
-    #   requests
+    # via requests
 imagesize==1.2.0
     # via sphinx
 iniconfig==1.1.1
     # via pytest
 itsdangerous==2.0.1
-    # via
-    #   flask
-    #   flask-wtf
+    # via flask
 jinja2==3.0.2
     # via
     #   flask
@@ -132,25 +112,19 @@ markupsafe==2.0.1
     # via
     #   jinja2
     #   mako
-    #   wtforms
-marshmallow==3.13.0
+marshmallow==3.13
     # via
-    #   flask-rest-jsonapi
-    #   marshmallow-jsonapi
+    #   sweetrpg-db
     #   sweetrpg-model-core
     #   sweetrpg-sdk
-marshmallow-jsonapi==0.24.0
-    # via flask-rest-jsonapi
 mongoengine==0.23.1
-    # via flask-mongoengine
+    # via
+    #   sweetrpg-db
+    #   sweetrpg-library-model
 monotonic==1.6
     # via analytics-python
 mypy-extensions==0.4.3
     # via black
-oauthlib==2.1.0
-    # via
-    #   flask-oauthlib
-    #   requests-oauthlib
 packaging==21.0
     # via
     #   pallets-sphinx-themes
@@ -187,7 +161,7 @@ pymongo[srv,tls]==3.12.0
     # via
     #   mongoengine
     #   sweetrpg-model-core
-pyparsing==3.0.0
+pyparsing==3.0.1
     # via packaging
 pytest==6.2.5
     # via
@@ -221,10 +195,7 @@ requests==2.26.0
     #   analytics-python
     #   kanka
     #   python-logstash-async
-    #   requests-oauthlib
     #   sphinx
-requests-oauthlib==1.1.0
-    # via flask-oauthlib
 rstcheck==3.3.1
     # via -r requirements/docs.in
 sentry-sdk==1.4.3
@@ -233,7 +204,6 @@ six==1.16.0
     # via
     #   analytics-python
     #   flask-cors
-    #   flask-rest-jsonapi
     #   limits
     #   python-dateutil
     #   tox
@@ -269,10 +239,16 @@ sqlalchemy==1.4.25
     # via
     #   -r requirements/app.in
     #   alembic
-    #   flask-rest-jsonapi
     #   flask-sqlalchemy
+sweetrpg-db==0.0.11
+    # via sweetrpg-library-model
+sweetrpg-library-model @ git+https://github.com/sweetrpg/library-model.git@develop
+    # via -r requirements/app.in
 sweetrpg-model-core==0.0.19
-    # via sweetrpg-sdk
+    # via
+    #   sweetrpg-db
+    #   sweetrpg-library-model
+    #   sweetrpg-sdk
 sweetrpg-sdk @ git+https://github.com/sweetrpg/sdk.git@develop
     # via -r requirements/app.in
 sweetrpg-web-core @ git+https://github.com/sweetrpg/web-core.git@develop
@@ -301,10 +277,6 @@ werkzeug==2.0.2
     # via flask
 wheel==0.37.0
     # via pip-tools
-wtforms[email]==2.3.3
-    # via
-    #   flask-mongoengine
-    #   flask-wtf
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

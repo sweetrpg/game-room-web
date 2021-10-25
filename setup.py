@@ -2,19 +2,16 @@ from setuptools import setup
 
 # Metadata goes in setup.cfg. These are here for GitHub's dependency graph.
 setup(
-    name="sweetrpg-library-model",
+    name="sweetrpg-library-web",
     install_requires=[
         "Authlib",
         "blinker",
         "dnspython<2.0.0",
         "Flask-Caching",
-        "Flask-Cors",
+        "Flask-CORS",
         "Flask-DotEnv",
-        "Flask-REST-JSONAPI",
         "Flask-Session",
-        "Flask>=2.0",
-        "Flask-Migrate",
-        "Flask-MongoEngine",
+        "Flask==2.0.2",
         "gunicorn",
         "kanka",
         "python-dateutil",
@@ -25,10 +22,9 @@ setup(
         "requests",
         "sentry-sdk",
         "analytics-python<2.0",
-        "sweetrpg-db",
-        "sweetrpg-model-core",
-        "sweetrpg-api-core",
+        "sweetrpg-web-core",
         "sweetrpg-library-model",
+        "sweetrpg-sdk",
     ],
     extras_require={},
 )

@@ -3,3 +3,11 @@ node_modules/
 .gitignore
 .editorconfig
 README.md
+tests/
+.devcontainer/
+.github/
+kubernetes/
+docs/
+LICENSE
+tox.ini
+*.pyc

@@ -5,14 +5,13 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 Creates a Flask app instance and registers various services and middleware.
 """
 
-from flask import Flask, session
+from flask import Flask, session, g
 from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_session import Session
 from dotenv import load_dotenv, find_dotenv
 from sweetrpg_library_web.application.cache import cache
 from sweetrpg_library_web.application import constants
-from sweetrpg_library_web.application.auth import oauth
+from sweetrpg_sdk.client import Client as APIClient
 from logging.config import dictConfig
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
@@ -37,17 +36,18 @@ def create_app(app_name=constants.APPLICATION_NAME):
                 },
                 "logstash": {
                     "class": "logstash_async.formatter.FlaskLogstashFormatter",
-                    "metadata": {"beat": "sweetrpg-library-api"},
+                    "metadata": {"beat": "sweetrpg-library-web"},
                 }
             },
             "handlers": {"wsgi": {"class": "logging.StreamHandler", "stream": "ext://flask.logging.wsgi_errors_stream", "formatter": "default"},
-                         "logstash": {"class": "logstash_async.handler.AsynchronousLogstashHandler", "formatter": "logstash",
-                                      "host": os.environ[constants.LOGSTASH_HOST],
-                                      "port": int(os.environ[constants.LOGSTASH_PORT]),
-                                      "database_path": "/tmp/sweetrpg_library_web_flask_logstash.db",
-                                      "transport": "logstash_async.transport.BeatsTransport",
-                                      }},
-            "root": {"level": os.environ.get(constants.LOG_LEVEL) or "INFO", "handlers": ["wsgi", "logstash"]},
+                         # "logstash": {"class": "logstash_async.handler.AsynchronousLogstashHandler", "formatter": "logstash",
+                         #              "host": os.environ[constants.LOGSTASH_HOST],
+                         #              "port": int(os.environ[constants.LOGSTASH_PORT]),
+                         #              "database_path": "/tmp/sweetrpg_library_web_flask_logstash.db",
+                         #              "transport": "logstash_async.transport.BeatsTransport",
+                         #              },
+                         },
+            "root": {"level": os.environ.get(constants.LOG_LEVEL) or "INFO", "handlers": ["wsgi", ]}, # "logstash"]},
         }
     )
 
@@ -95,47 +95,19 @@ def create_app(app_name=constants.APPLICATION_NAME):
     #                    'scope': 'openid profile email',
     #                })
 
+    app.logger.info("Setting up API client...")
+    app.config[constants.LIBRARY_API_CLIENT_KEY] = APIClient(os.environ[constants.LIBRARY_API_BASE_URL])
+
     app.logger.info("Setting up endpoints...")
 
-    # from sweetrpg_library_web.application.blueprints.volumes import blueprint as volumes_blueprint
-    # app.register_blueprint(volumes_blueprint, url_prefix="/volumes")
+    from sweetrpg_library_web.application.blueprints import blueprint as main_blueprint
+    app.register_blueprint(main_blueprint, url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
 
-    # from sweetrpg_library_web.application.blueprints.volumes import setup_routes as setup_volume_routes
-    # setup_volume_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.authors import setup_routes as setup_author_routes
-    # setup_author_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.publishers import setup_routes as setup_publisher_routes
-    # setup_publisher_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.reviews import setup_routes as setup_review_routes
-    # setup_review_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.studios import setup_routes as setup_studio_routes
-    # setup_studio_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.systems import setup_routes as setup_system_routes
-    # setup_system_routes(app)
-    #
-    # from sweetrpg_library_web.application.blueprints.tags import setup_routes as setup_tag_routes
-    # setup_tag_routes(app)
-
-    # from application.blueprints.api import blueprint as api_blueprint
-    # app.register_blueprint(api_blueprint, url_prefix="/api/v1")
-    #
-    # from application.blueprints.apps import blueprint as apps_blueprint
-    # app.register_blueprint(apps_blueprint, url_prefix="/apps")
-    #
-    # from application.blueprints.account import blueprint as account_blueprint
-    # app.register_blueprint(account_blueprint, url_prefix="/account")
-    #
-    # from application.blueprints.auth import blueprint as auth_blueprint
-    # app.register_blueprint(auth_blueprint, url_prefix="/auth")
+    from sweetrpg_library_web.application.blueprints.volumes import blueprint as volumes_blueprint
+    main_blueprint.register_blueprint(volumes_blueprint, url_prefix="/volumes")
 
     from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
-
-    app.register_blueprint(health_blueprint, url_prefix="/health")
+    main_blueprint.register_blueprint(health_blueprint, url_prefix="/health")
 
     # from application.blueprints.billing import blueprint as billing_blueprint
     # app.register_blueprint(billing_blueprint, url_prefix="/billing")
