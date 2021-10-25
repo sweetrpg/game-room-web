@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: sweetrpg-library-web
+  name: sweetrpg-library-api
 
 spec:
   strategy:
@@ -15,68 +15,67 @@ spec:
     matchLabels:
       platform: sweetrpg
       app: library
-      component: web
+      component: api
   template:
     metadata:
       labels:
         platform: sweetrpg
         app: library
-        component: web
+        component: api
     spec:
-      serviceAccountName: sweetrpg-library-web
+      serviceAccountName: sweetrpg-library-api
       imagePullSecrets:
         - name: sweetrpg-registry
       containers:
-        - name: library-web-app
-          image: registry.sweetrpg.com/sweetrpg-library-web:latest
+        - name: library-api-app
+          image: registry.sweetrpg.com/sweetrpg-library-api:latest
           imagePullPolicy: Always
-          args:
-            [
-              "serve",
-              "--env",
-              "development",
-              "--hostname",
-              "0.0.0.0",
-              "--port",
-              "8280",
-            ]
           envFrom:
             - configMapRef:
-                name: sweetrpg-library-web
+                name: sweetrpg-library-api
             - configMapRef:
-                name: sweetrpg-library-web-env
+                name: sweetrpg-library-api-env
             - secretRef:
-                name: sweetrpg-library-web
+                name: sweetrpg-library-api
             - secretRef:
-                name: sweetrpg-library-web-env
+                name: sweetrpg-library-api-env
           env:
-            - name: VAPOR_HTTP_PORT
-              value: "8280"
-            - name: VAPOR_HTTP_BIND_ADDRESS
-              value: 0.0.0.0
+            - name: NEW_RELIC_CONFIG_FILE
+              value: /config/newrelic.ini
           ports:
-            - containerPort: 8280
+            - containerPort: 8281
               name: http
           resources:
             requests:
               cpu: "20m"
               memory: "55M"
+            limits:
+              cpu: "100m"
+              memory: "256M"
           livenessProbe:
             httpGet:
               path: /health/ping
-              port: 8280
+              port: 8281
             initialDelaySeconds: 90
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /health/ping
-              port: 8280
+              port: 8281
             initialDelaySeconds: 30
             timeoutSeconds: 10
           volumeMounts:
             - mountPath: /data
               name: data
+            - mountPath: /config
+              name: config
       volumes:
+        - name: config
+          secret:
+            secretName: sweetrpg-library-api-config-env
+            items:
+              - key: newrelic.ini
+                path: newrelic.ini
         - name: data
           emptyDir: {}
       restartPolicy: Always

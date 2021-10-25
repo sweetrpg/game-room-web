@@ -3,13 +3,13 @@ kind: Service
 apiVersion: v1
 
 metadata:
-  name: sweetrpg-library-web
+  name: sweetrpg-library-api
 
 spec:
   selector:
-    app: sweetrpg-library-web
+    app: sweetrpg-library-api
   type: LoadBalancer
   ports:
     - name: http
-      port: 8280
+      port: 8281
       targetPort: http
