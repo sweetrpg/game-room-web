@@ -1,11 +1,6 @@
 #!/bin/bash
 
-set -x
 set -e
 
-printenv
-pwd
-ls -la
-ls -la /config
-
-newrelic-admin run-program gunicorn wsgi:app
+#newrelic-admin run-program gunicorn wsgi:app
+uwsgi --http :${PORT} --module wsgi:app --master --processes 4 --threads 2

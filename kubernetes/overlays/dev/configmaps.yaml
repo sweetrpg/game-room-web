@@ -3,17 +3,9 @@ apiVersion: v1
 kind: ConfigMap
 
 metadata:
-  name: sweetrpg-library-api-env
+  name: web-env
 
 data:
-  DB_HOST: cluster0.z9nxg.mongodb.net
-  DB_USER: sweetrpg-library
-  DB_NAME: sweetrpg-library
-  DB_OPTS: "retryWrites=true&w=majority"
-  AUTH0_CALLBACK_URL: http://dev.sweetrpg.com/auth/callback/auth0
-  AUTH0_DOMAIN: sweetrpg-dev.us.auth0.com
-  AUTH0_LOGIN_URL: https://sweetrpg-dev.us.auth0.com/authorize
-  PORT: "8281"
+  PORT: "8282"
   SERVICE_CHECK_URL: http://dev.sweetrpg.com/health/ping
   HEALTH_CHECK_URL: http://dev.sweetrpg.com/health/status
-  REDIS_HOST: redis
