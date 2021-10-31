@@ -96,7 +96,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
     #                })
 
     app.logger.info("Setting up API client...")
-    app.config[constants.LIBRARY_API_CLIENT_KEY] = APIClient(os.environ[constants.LIBRARY_API_BASE_URL])
+    app.config[constants.SWEETRPG_API_CLIENT_KEY] = APIClient(os.environ[constants.LIBRARY_API_BASE_URL])
 
     app.logger.info("Setting up endpoints...")
 
