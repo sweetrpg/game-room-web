@@ -37,8 +37,6 @@ spec:
             - configMapRef:
                 name: web-env
             - secretRef:
-                name: web-db
-            - secretRef:
                 name: web-auth
             - secretRef:
                 name: web-misc
