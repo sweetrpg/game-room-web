@@ -28,7 +28,7 @@ jobs:
           # context: .
           push: true
           no-cache: true
-          tags: registry.sweetrpg.com/sweetrpg-library-api:latest
+          tags: registry.sweetrpg.com/sweetrpg-library-web:latest
       # - name: Scan image
       #   uses: sysdiglabs/scan-action@v1
       #   with:
