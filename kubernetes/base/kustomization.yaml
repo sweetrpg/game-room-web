@@ -7,8 +7,3 @@ resources:
   - configmaps.yaml
   - deployment.yaml
   - service.yaml
-secretGenerator:
-  - name: api
-    type: Opaque
-    envs:
-      - secrets.env
