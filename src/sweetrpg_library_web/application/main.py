@@ -11,7 +11,7 @@ from flask_session import Session
 from dotenv import load_dotenv, find_dotenv
 from sweetrpg_library_web.application.cache import cache
 from sweetrpg_library_web.application import constants
-from sweetrgp_client.client import Client as APIClient
+from sweetrpg_client.client import Client as APIClient
 from logging.config import dictConfig
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
