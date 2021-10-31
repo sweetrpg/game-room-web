@@ -7,8 +7,8 @@ import functools
 from flask import Blueprint, current_app, render_template, request, g
 from sweetrpg_library_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_sdk.types import VOLUME
-
+from sweetrpg_client.types import VOLUME
+from sweetrpg_client.exceptions import ObjectNotFound
 
 blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
 
