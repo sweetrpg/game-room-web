@@ -24,7 +24,7 @@ APPLICATION_NAME = "sweetrpg-library-web"
 PROFILE_KEY = "profile"
 JWT_PAYLOAD = "jwt_payload"
 CURRENT_USER_ID = "current_user_id"
-LIBRARY_API_CLIENT_KEY = "sweetrpg-library-api-client"
+SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
 
 SEGMENT_WRITE_KEY = "SEGMENT_WRITE_KEY"
 
