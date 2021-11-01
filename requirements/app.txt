@@ -79,6 +79,8 @@ mongoengine==0.23.1
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
+newrelic==7.2.2.169
+    # via -r requirements/app.in
 pylogbeat==2.0.0
     # via python-logstash-async
 pymongo[srv,tls]==3.12.1
