@@ -111,7 +111,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
     # from application.blueprints.billing import blueprint as billing_blueprint
     # app.register_blueprint(billing_blueprint, url_prefix="/billing")
 
-    app.register_blueprint(main_blueprint, url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
+    app.register_blueprint(main_blueprint)  # , url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
 
     # vue = Vue(app)
 
