@@ -18,7 +18,7 @@ backoff==1.10.0
     # via analytics-python
 backports.entry-points-selectable==1.1.0
     # via virtualenv
-black==21.9b0
+black==21.10b0
     # via -r requirements/dev.in
 blinker==1.4
     # via
@@ -122,6 +122,8 @@ monotonic==1.6
     # via analytics-python
 mypy-extensions==0.4.3
     # via black
+newrelic==7.2.2.169
+    # via -r requirements/app.in
 packaging==21.2
     # via
     #   pallets-sphinx-themes
