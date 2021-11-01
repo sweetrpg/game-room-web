@@ -102,8 +102,6 @@ mongoengine==0.23.1
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
-newrelic==7.2.2.169
-    # via -r requirements/app.in
 packaging==21.2
     # via
     #   pytest
@@ -188,7 +186,7 @@ sweetrpg-model-core==0.0.22
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.3
+sweetrpg-web-core==0.0.4
     # via -r requirements/app.in
 toml==0.10.2
     # via
