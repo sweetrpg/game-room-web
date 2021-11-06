@@ -4,8 +4,18 @@
 #
 #    pip-compile requirements/app.in
 #
+aiohttp==3.8.0
+    # via jsonapi-client
+aiosignal==1.2.0
+    # via aiohttp
 analytics-python==1.4.0
     # via -r requirements/app.in
+async-timeout==4.0.0
+    # via aiohttp
+attrs==21.2.0
+    # via
+    #   aiohttp
+    #   jsonschema
 backoff==1.10.0
     # via analytics-python
 blinker==1.4
@@ -17,7 +27,9 @@ certifi==2021.10.8
     #   requests
     #   sentry-sdk
 charset-normalizer==2.0.7
-    # via requests
+    # via
+    #   aiohttp
+    #   requests
 click==8.0.3
     # via flask
 dnspython==1.16.0
@@ -45,16 +57,26 @@ flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.4.0
     # via -r requirements/app.in
+frozenlist==1.2.0
+    # via
+    #   aiohttp
+    #   aiosignal
 greenlet==1.1.2
     # via
     #   -r requirements/app.in
     #   sqlalchemy
 idna==3.3
-    # via requests
+    # via
+    #   requests
+    #   yarl
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.2
     # via flask
+jsonapi-client==0.9.9
+    # via -r requirements/app.in
+jsonschema==4.2.1
+    # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
 limits==1.5.1
@@ -79,12 +101,18 @@ mongoengine==0.23.1
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
+multidict==5.2.0
+    # via
+    #   aiohttp
+    #   yarl
 pylogbeat==2.0.0
     # via python-logstash-async
 pymongo[srv,tls]==3.12.1
     # via
     #   mongoengine
     #   sweetrpg-model-core
+pyrsistent==0.18.0
+    # via jsonschema
 python-dateutil==2.8.2
     # via
     #   -r requirements/app.in
@@ -103,6 +131,7 @@ requests==2.26.0
     # via
     #   -r requirements/app.in
     #   analytics-python
+    #   jsonapi-client
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
@@ -119,26 +148,28 @@ sqlalchemy==1.4.26
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.19
+sweetrpg-api-core==0.0.23
     # via sweetrpg-client
 sweetrpg-client==0.0.3
     # via -r requirements/app.in
-sweetrpg-db==0.0.18
+sweetrpg-db==0.0.20
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.29
+sweetrpg-library-objects==0.0.31
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.22
+sweetrpg-model-core==0.0.24
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.4
+sweetrpg-web-core==0.0.6
     # via -r requirements/app.in
+typing-extensions==3.10.0.2
+    # via async-timeout
 urllib3==1.26.7
     # via
     #   -r requirements/app.in
@@ -148,3 +179,5 @@ uwsgi==2.0.20
     # via -r requirements/app.in
 werkzeug==2.0.2
     # via flask
+yarl==1.7.2
+    # via aiohttp

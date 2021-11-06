@@ -4,12 +4,21 @@
 #
 #    pip-compile requirements/tests.in
 #
+aiohttp==3.8.0
+    # via jsonapi-client
+aiosignal==1.2.0
+    # via aiohttp
 analytics-python==1.4.0
     # via -r requirements/app.in
 asgiref==3.4.1
     # via -r requirements/tests.in
+async-timeout==4.0.0
+    # via aiohttp
 attrs==21.2.0
-    # via pytest
+    # via
+    #   aiohttp
+    #   jsonschema
+    #   pytest
 backoff==1.10.0
     # via analytics-python
 backports.entry-points-selectable==1.1.0
@@ -25,7 +34,9 @@ certifi==2021.10.8
     #   requests
     #   sentry-sdk
 charset-normalizer==2.0.7
-    # via requests
+    # via
+    #   aiohttp
+    #   requests
 click==8.0.3
     # via flask
 coverage[toml]==5.5
@@ -65,19 +76,29 @@ flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.4.0
     # via -r requirements/app.in
+frozenlist==1.2.0
+    # via
+    #   aiohttp
+    #   aiosignal
 greenlet==1.1.2
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
     #   sqlalchemy
 idna==3.3
-    # via requests
+    # via
+    #   requests
+    #   yarl
 iniconfig==1.1.1
     # via pytest
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.2
     # via flask
+jsonapi-client==0.9.9
+    # via -r requirements/app.in
+jsonschema==4.2.1
+    # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
 limits==1.5.1
@@ -102,6 +123,10 @@ mongoengine==0.23.1
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
+multidict==5.2.0
+    # via
+    #   aiohttp
+    #   yarl
 packaging==21.2
     # via
     #   pytest
@@ -112,7 +137,7 @@ pluggy==1.0.0
     # via
     #   pytest
     #   tox
-py==1.10.0
+py==1.11.0
     # via
     #   pytest
     #   tox
@@ -124,6 +149,8 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==2.4.7
     # via packaging
+pyrsistent==0.18.0
+    # via jsonschema
 pytest==6.2.5
     # via
     #   -r requirements/tests.in
@@ -150,6 +177,7 @@ requests==2.26.0
     # via
     #   -r requirements/app.in
     #   analytics-python
+    #   jsonapi-client
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
@@ -168,25 +196,25 @@ sqlalchemy==1.4.26
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.19
+sweetrpg-api-core==0.0.23
     # via sweetrpg-client
 sweetrpg-client==0.0.3
     # via -r requirements/app.in
-sweetrpg-db==0.0.18
+sweetrpg-db==0.0.20
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.29
+sweetrpg-library-objects==0.0.31
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.22
+sweetrpg-model-core==0.0.24
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.4
+sweetrpg-web-core==0.0.6
     # via -r requirements/app.in
 toml==0.10.2
     # via
@@ -195,6 +223,8 @@ toml==0.10.2
     #   tox
 tox==3.24.4
     # via -r requirements/tests.in
+typing-extensions==3.10.0.2
+    # via async-timeout
 urllib3==1.26.7
     # via
     #   -r requirements/app.in
@@ -202,7 +232,9 @@ urllib3==1.26.7
     #   sentry-sdk
 uwsgi==2.0.20
     # via -r requirements/app.in
-virtualenv==20.9.0
+virtualenv==20.10.0
     # via tox
 werkzeug==2.0.2
     # via flask
+yarl==1.7.2
+    # via aiohttp
