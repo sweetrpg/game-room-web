@@ -35,12 +35,12 @@ spec:
               - "--single-branch"
               - "--"
               - "https://$(GIT_USERNAME):$(GIT_PASSWORD)@github.com/$(GIT_REPO).git"
-              - "/templates"
+              - "/work/."
           envFrom:
             - secretRef:
                 name: template-credentials
           volumeMounts:
-          - mountPath: /templates
+          - mountPath: /work
             name: templates
       containers:
         - name: web-app
