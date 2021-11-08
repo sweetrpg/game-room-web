@@ -87,6 +87,7 @@ spec:
               name: config
             - mountPath: /app/templates
               name: templates
+              subPath: templates
       volumes:
         - name: config
           secret:
