@@ -5,8 +5,8 @@
 {% block title %}{{ name }} &ndash; Initiative{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/apps/initiative/common.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/apps/initiative/group.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ static_asset_prefix }}/css/apps/initiative/common.css" />
+<link rel="stylesheet" type="text/css" href="{{ static_asset_prefix }}/css/apps/initiative/group.css" />
 {% endblock %}
 
 {% block content %}
@@ -50,21 +50,21 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/vendor/moment/moment.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/sortable/sortable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vuedraggable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
-<script src="{{ url_for('static', filename='components/Messages.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/GroupInfo.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/AddParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/EditParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/DeleteParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/Participant.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/ParticipantList.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/group/Toolbar.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/group.js') }}"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/moment/moment.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/jquery/jquery.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/axios/axios.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vue.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vuex.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/sortable/sortable.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vuedraggable.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/common.js"></script>
+<script src="{{ static_asset_prefix }}/components/Messages.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/GroupInfo.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/AddParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/EditParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/DeleteParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/Participant.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/ParticipantList.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/group/Toolbar.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/group.js"></script>
 {% endblock %}

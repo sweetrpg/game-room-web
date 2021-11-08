@@ -5,8 +5,8 @@
 {% block title %}Initiative{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/initiative/common.css') }}" />
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/initiative/main.css') }}" />
+<link rel="stylesheet" href="{{ static_asset_prefix }}/css/apps/initiative/common.css" />
+<link rel="stylesheet" href="{{ static_asset_prefix }}/css/apps/initiative/main.css" />
 {% endblock %}
 
 {% block content %}
@@ -52,19 +52,19 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/vendor/moment/moment.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/lodash/lodash.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/CreateEncounterDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/DeleteEncounterDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/CreateGroupDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/DeleteGroupDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/EncounterItem.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/EncounterList.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/GroupItem.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/GroupList.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/main.js') }}"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/moment/moment.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/lodash/lodash.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/axios/axios.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vue.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vuex.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/common.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/CreateEncounterDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/DeleteEncounterDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/CreateGroupDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/DeleteGroupDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/EncounterItem.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/EncounterList.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/GroupItem.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/GroupList.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/main.js"></script>
 {% endblock %}

@@ -5,8 +5,8 @@
 {% block title %}{{ name }} &ndash; Initiative{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/apps/initiative/common.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/apps/initiative/encounter.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ static_asset_prefix }}/css/apps/initiative/common.css" />
+<link rel="stylesheet" type="text/css" href="{{ static_asset_prefix }}/css/apps/initiative/encounter.css" />
 {% endblock %}
 
 {% block content %}
@@ -58,26 +58,26 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/vendor/moment/moment.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/axios/axios.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vue.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vuex.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/sortable/sortable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/vue/vuedraggable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/common.js') }}"></script>
-<script src="{{ url_for('static', filename='components/Messages.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/GroupSelectorItem.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/GroupSelectorList.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/ActionBar.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/Toolbar.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/CollectInitiativeDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/EncounterInfo.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/AddParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/DeleteParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/EditParticipantDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/EditParticipantOrderDialog.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/Participant.js') }}"></script>
-<script src="{{ url_for('static', filename='components/initiative/encounter/ParticipantList.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/initiative/encounter.js') }}"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/moment/moment.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/jquery/jquery.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/axios/axios.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vue.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vuex.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/sortable/sortable.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/vendor/vue/vuedraggable.min.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/common.js"></script>
+<script src="{{ static_asset_prefix }}/components/Messages.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/GroupSelectorItem.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/GroupSelectorList.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/ActionBar.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/Toolbar.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/CollectInitiativeDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/EncounterInfo.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/AddParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/DeleteParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/EditParticipantDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/EditParticipantOrderDialog.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/Participant.js"></script>
+<script src="{{ static_asset_prefix }}/components/initiative/encounter/ParticipantList.js"></script>
+<script src="{{ static_asset_prefix }}/js/apps/initiative/encounter.js"></script>
 {% endblock %}
