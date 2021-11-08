@@ -12,3 +12,4 @@ data:
   SERVICE_REGISTRATION_URL: "http://consul.sweetrpg-support.svc.cluster.local:1234"
   APPLICATION_BASE_PATH: "/library/"
   LIBRARY_API_BASE_URL: "http://api-v1.sweetrpg-library.svc.cluster.local:8281"
+  STATIC_ASSET_PREFIX: "https://dev.sweetrpg.com/static"
