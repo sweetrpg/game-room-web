@@ -14,6 +14,7 @@ import json
 import os
 from sweetrpg_library_web.application import constants
 import analytics
+from sweetrpg_web_core.helpers.context import get_context
 
 
 def error_page(message, code):
@@ -102,12 +103,13 @@ def error_handler(ex):
 
 @blueprint.route("/")
 def main_page():
-    context = {
-        'user_info': session.get(constants.SWEETRPG_AUTH_KEY)
-    }
+    context = get_context()
+    context.update({
+        # 'user_info': session.get(constants.SWEETRPG_AUTH_KEY)
+    })
 
     print(f"context: {context}")
-    return render_page("index.html", context)
+    return render_page("index.html", context=context)
 
 
 from sweetrpg_web_core.blueprints import health

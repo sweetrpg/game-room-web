@@ -11,6 +11,7 @@ from sweetrpg_client.types import VOLUME
 from sweetrpg_client.exceptions import NotFound
 from jsonapi_client import Session
 import os
+from sweetrpg_library_web.application.blueprints import render_page
 
 
 blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
@@ -31,7 +32,7 @@ def get_volumes():
         current_app.logger.exception("Unable to fetch volumes!")
         flash('Unable to fetch volumes!')
 
-    return render_template("volumes/index.html", **context)
+    return render_page("volumes/index.html", context=context)
 
 
 @blueprint.route("/<id>", methods=["GET"])
@@ -41,4 +42,4 @@ def get_volume(id:str):
     if not volume:
         raise NotFound(id)
     context = get_context().update({'volume': volume})
-    return render_template("volumes/single.html", **context)
+    return render_page("volumes/single.html", context=context)
