@@ -15,6 +15,7 @@ import os
 from sweetrpg_library_web.application import constants
 import analytics
 from sweetrpg_web_core.helpers.context import get_context
+import datetime
 
 
 def error_page(message, code):
@@ -109,7 +110,7 @@ def main_page():
     })
 
     print(f"context: {context}")
-    return render_page("index.html", context=context)
+    return render_page("apps/library/index.html", context=context)
 
 
 from sweetrpg_web_core.blueprints import health
