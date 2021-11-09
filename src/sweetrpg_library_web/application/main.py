@@ -120,8 +120,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
     # })
     # scss = Scss(app, static_dir='static', asset_dir='assets')
 
-    # stripe.api_key = app.config['STRIPE_API_KEY']
-
     print(app.url_map)
 
     return app
