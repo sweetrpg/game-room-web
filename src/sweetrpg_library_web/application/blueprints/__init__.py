@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""
+"""Main blueprint.
 """
 
+import datetime
 
-from functools import wraps
-from flask import redirect, session, render_template, request
-from sweetrpg_library_web.application import constants
+import analytics
 import jinja2
 from flask import Blueprint, request, render_template, session, jsonify, current_app
-from werkzeug.exceptions import HTTPException
-import json
-import os
 from sweetrpg_library_web.application import constants
-import analytics
 from sweetrpg_web_core.helpers.context import get_context
-import datetime
+from werkzeug.exceptions import HTTPException
 
 
 def error_page(message, code):
@@ -69,9 +64,9 @@ def _populate():
     elif constants.SWEETRPG_AUTH_KEY in request.cookies:
         userinfo = request.cookies[constants.SWEETRPG_AUTH_KEY]
         session[constants.PROFILE_KEY] = userinfo
-    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get('# X-Forwarded-Access-Token')
-    session[constants.SESSION_EMAIL] = request.headers.get('# X-Forwarded-Email')
-    session[constants.SESSION_USER_ID] = request.headers.get('# X-Forwarded-User')
+    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get('X-Forwarded-Access-Token')
+    session[constants.SESSION_EMAIL] = request.headers.get('X-Forwarded-Email')
+    session[constants.SESSION_USER_ID] = request.headers.get('X-Forwarded-User')
 
     print(f"(updated) session: {session}")
     print(f"userinfo: {userinfo}")
@@ -106,13 +101,11 @@ def error_handler(ex):
 def main_page():
     context = get_context()
     context.update({
-        # 'user_info': session.get(constants.SWEETRPG_AUTH_KEY)
+        # 'user_info': session.get(constants.SWEETRPG_SESSION_USER_INFO),
+        'appname': "Library",
     })
 
     print(f"context: {context}")
     return render_page("apps/library/index.html", context=context)
 
-
-from sweetrpg_web_core.blueprints import health
-from sweetrpg_library_web.application.blueprints import volumes
 # from sweetrpg_library_web.application.blueprints import authors
