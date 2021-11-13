@@ -19,6 +19,9 @@ blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
 
 @blueprint.route("/", methods=["GET"])
 def get_volumes():
+    """Get all volumes.
+
+    """
     context = get_context()
     current_app.logger.debug("context: %s", context)
     # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
@@ -37,6 +40,9 @@ def get_volumes():
 
 @blueprint.route("/<id>", methods=["GET"])
 def get_volume(id:str):
+    """Get a specific volume.
+
+    """
     api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
     volume = api_client.get(VOLUME, id)
     if not volume:
