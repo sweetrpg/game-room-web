@@ -32,7 +32,7 @@ def get_volumes():
         current_app.logger.exception("Unable to fetch volumes!")
         flash('Unable to fetch volumes!')
 
-    return render_page("volumes/index.html", context=context)
+    return render_page("apps/library/volumes/many.html", context=context)
 
 
 @blueprint.route("/<id>", methods=["GET"])
@@ -42,4 +42,4 @@ def get_volume(id:str):
     if not volume:
         raise NotFound(id)
     context = get_context().update({'volume': volume})
-    return render_page("volumes/single.html", context=context)
+    return render_page("apps/library/volumes/single.html", context=context)
