@@ -144,7 +144,7 @@ six==1.16.0
     #   flask-rest-jsonapi
     #   limits
     #   python-dateutil
-sqlalchemy==1.4.26
+sqlalchemy==1.4.27
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
