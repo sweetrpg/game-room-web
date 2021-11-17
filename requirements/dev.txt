@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/dev.in
 #
-aiohttp==3.8.0
+aiohttp==3.8.1
     # via jsonapi-client
 aiosignal==1.2.0
     # via aiohttp
@@ -48,24 +48,27 @@ click==8.0.3
     #   black
     #   flask
     #   pip-tools
-coverage[toml]==5.5
+coverage[toml]==6.1.2
     # via
     #   coverage-badge
     #   pytest-cov
 coverage-badge==1.1.0
     # via -r requirements/tests.in
+deprecated==1.2.13
+    # via redis
 distlib==0.3.3
     # via virtualenv
 dnspython==2.1.0
     # via
     #   -r requirements/app.in
     #   pymongo
+    #   sweetrpg-db
 docutils==0.16
     # via
     #   rstcheck
     #   sphinx
     #   sphinx-tabs
-filelock==3.3.2
+filelock==3.4.0
     # via
     #   tox
     #   virtualenv
@@ -114,7 +117,9 @@ jinja2==3.0.3
     #   flask
     #   sphinx
 jsonapi-client==0.9.9
-    # via -r requirements/app.in
+    # via
+    #   -r requirements/app.in
+    #   sweetrpg-client
 jsonschema==4.2.1
     # via jsonapi-client
 kanka==0.1.2
@@ -123,7 +128,7 @@ limits==1.5.1
     # via python-logstash-async
 markupsafe==2.0.1
     # via jinja2
-marshmallow==3.14.0
+marshmallow==3.14.1
     # via
     #   flask-rest-jsonapi
     #   marshmallow-jsonapi
@@ -182,6 +187,7 @@ pylogbeat==2.0.0
 pymongo[srv,tls]==3.12.1
     # via
     #   mongoengine
+    #   sweetrpg-db
     #   sweetrpg-model-core
 pyparsing==2.4.7
     # via packaging
@@ -209,7 +215,7 @@ pytz==2021.3
     # via babel
 pyyaml==6.0
     # via -r requirements/app.in
-redis==3.5.3
+redis==4.0.1
     # via -r requirements/app.in
 regex==2021.11.10
     # via black
@@ -235,7 +241,7 @@ six==1.16.0
     #   python-dateutil
     #   tox
     #   virtualenv
-snowballstemmer==2.1.0
+snowballstemmer==2.2.0
     # via sphinx
 sphinx==4.3.0
     # via
@@ -266,13 +272,13 @@ sqlalchemy==1.4.27
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.37
+sweetrpg-api-core==0.0.44
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.3
+sweetrpg-client==0.0.4
     # via -r requirements/app.in
-sweetrpg-db==0.0.34
+sweetrpg-db==0.0.40
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -280,7 +286,7 @@ sweetrpg-library-objects==0.0.59
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.49
+sweetrpg-model-core==0.0.51
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
@@ -290,16 +296,16 @@ sweetrpg-web-core==0.0.58
     # via -r requirements/app.in
 toml==0.10.2
     # via
-    #   coverage
     #   pytest
     #   tox
 tomli==1.2.2
     # via
     #   black
+    #   coverage
     #   pep517
 tox==3.24.4
     # via -r requirements/tests.in
-typing-extensions==3.10.0.2
+typing-extensions==4.0.0
     # via
     #   async-timeout
     #   black
@@ -316,6 +322,8 @@ werkzeug==2.0.2
     # via flask
 wheel==0.37.0
     # via pip-tools
+wrapt==1.13.3
+    # via deprecated
 yarl==1.7.2
     # via aiohttp
 
