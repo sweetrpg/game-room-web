@@ -33,6 +33,7 @@ blinker==1.4
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
+    #   sentry-sdk
 cachelib==0.4.1
     # via flask-session
 certifi==2021.10.8
@@ -48,7 +49,7 @@ click==8.0.3
     #   black
     #   flask
     #   pip-tools
-coverage[toml]==6.1.2
+coverage[toml]==6.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -80,6 +81,7 @@ flask==2.0.2
     #   flask-dotenv
     #   flask-rest-jsonapi
     #   flask-session
+    #   sentry-sdk
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
@@ -124,7 +126,7 @@ jsonschema==4.2.1
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==1.5.1
+limits==2.0.0
     # via python-logstash-async
 markupsafe==2.0.1
     # via jinja2
@@ -230,7 +232,7 @@ requests==2.26.0
     #   sweetrpg-client
 rstcheck==3.3.1
     # via -r requirements/docs.in
-sentry-sdk==1.5.0
+sentry-sdk[flask]==1.5.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -292,7 +294,7 @@ sweetrpg-model-core==0.0.51
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.64
+sweetrpg-web-core==0.0.65
     # via -r requirements/app.in
 toml==0.10.2
     # via
