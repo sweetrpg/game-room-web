@@ -28,7 +28,7 @@ certifi==2021.10.8
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==2.0.8
+charset-normalizer==2.0.9
     # via
     #   aiohttp
     #   requests
@@ -87,7 +87,7 @@ jsonschema==4.2.1
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.0.0
+limits==2.0.3
     # via python-logstash-async
 markupsafe==2.0.1
     # via jinja2
@@ -151,35 +151,34 @@ six==1.16.0
     #   analytics-python
     #   flask-cors
     #   flask-rest-jsonapi
-    #   limits
     #   python-dateutil
 sqlalchemy==1.4.27
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.52
+sweetrpg-api-core==0.0.53
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.20
     # via -r requirements/app.in
-sweetrpg-db==0.0.42
+sweetrpg-db==0.0.44
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.61
+sweetrpg-library-objects==0.0.62
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.52
+sweetrpg-model-core==0.0.53
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.72
+sweetrpg-web-core==0.0.73
     # via -r requirements/app.in
-typing-extensions==4.0.0
+typing-extensions==4.0.1
     # via async-timeout
 urllib3==1.26.7
     # via
