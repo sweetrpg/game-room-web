@@ -14,17 +14,19 @@ spec:
         type: RollingUpdate
     selector:
         matchLabels:
-            platform: sweetrpg
-            app: library
-            component: web
+            app: library-web
             version: v1
+            platform: sweetrpg
+            package: library
+            component: web
     template:
         metadata:
             labels:
-                platform: sweetrpg
-                app: library
-                component: web
+                app: library-web
                 version: v1
+                platform: sweetrpg
+                package: library
+                component: web
         spec:
             serviceAccountName: web
             imagePullSecrets:
