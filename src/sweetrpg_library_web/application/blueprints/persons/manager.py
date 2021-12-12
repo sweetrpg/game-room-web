@@ -5,42 +5,42 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 from flask import current_app
 from flask_rest_jsonapi import ResourceList, ResourceDetail, ResourceRelationship
-from .schema import AuthorAPISchema
-from sweetrpg_library_model.model.author import Author
+from .schema import PersonAPISchema
+from sweetrpg_library_model.model.person import Person
 from sweetrpg_api_core.data import APIData
 from sweetrpg_library_web.application.db import db
 from sweetrpg_library_web.application.blueprints.setup import model_info
 from sweetrpg_library_web.application.auth import oauth
 
 
-class AuthorList(ResourceList):
+class PersonList(ResourceList):
     disable_oauth = True
-    schema = AuthorAPISchema
-    data_layer = {"class": APIData, "type": "author", "model": Author, "db": db, "model_info": model_info}
+    schema = PersonAPISchema
+    data_layer = {"class": APIData, "type": "person", "model": Person, "db": db, "model_info": model_info}
 
-    @oauth.require_oauth('create_author')
+    @oauth.require_oauth('create_person')
     def post(*args, **kwargs):
         current_app.logger.debug("args: %s, kwargs: %s", args, kwargs)
         return "TODO"
 
 
-class AuthorDetail(ResourceDetail):
+class PersonDetail(ResourceDetail):
     disable_oauth = True
-    schema = AuthorAPISchema
-    data_layer = {"class": APIData, "type": "author", "model": Author, "db": db, "model_info": model_info}
+    schema = PersonAPISchema
+    data_layer = {"class": APIData, "type": "person", "model": Person, "db": db, "model_info": model_info}
 
-    @oauth.require_oauth('update_author')
+    @oauth.require_oauth('update_person')
     def patch(*args, **kwargs):
         current_app.logger.debug("args: %s, kwargs: %s", args, kwargs)
         return "TODO"
 
-    @oauth.require_oauth('delete_author')
+    @oauth.require_oauth('delete_person')
     def delete(*args, **kwargs):
         current_app.logger.debug("args: %s, kwargs: %s", args, kwargs)
         return "TODO"
 
 
-class AuthorVolumeRelationship(ResourceRelationship):
+class PersonVolumeRelationship(ResourceRelationship):
     disable_oauth = True
-    schema = AuthorAPISchema
-    data_layer = {"class": APIData, "type": "author", "model": Author, "db": db, "model_info": model_info}
+    schema = PersonAPISchema
+    data_layer = {"class": APIData, "type": "person", "model": Person, "db": db, "model_info": model_info}
