@@ -176,7 +176,7 @@ sweetrpg-model-core==0.0.54
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.80
+sweetrpg-web-core==0.0.81
     # via -r requirements/app.in
 typing-extensions==4.0.1
     # via async-timeout
