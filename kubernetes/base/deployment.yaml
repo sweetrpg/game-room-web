@@ -47,7 +47,7 @@ spec:
                       - mountPath: /work
                         name: templates
             containers:
-                - name: web-app
+                - name: app
                   image: registry.sweetrpg.com/sweetrpg-library-web:latest
                   imagePullPolicy: Always
                   envFrom:
