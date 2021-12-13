@@ -3,15 +3,17 @@ kind: Service
 apiVersion: v1
 
 metadata:
-  name: web
+    name: web-v1
 
 spec:
-  selector:
-    app: library
-    component: web
-    platform: sweetrpg
-  type: LoadBalancer
-  ports:
-    - name: http
-      port: 8282
-      targetPort: http
+    selector:
+        app: library-web
+        version: v1
+        platform: sweetrpg
+        package: library
+        component: web
+    type: LoadBalancer
+    ports:
+        - name: http
+          port: 8282
+          targetPort: http

@@ -3,20 +3,20 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 
 metadata:
-  name: web
+    name: web
 
 spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`dev.sweetrpg.com`) && PathPrefix(`/library`)
-      kind: Rule
-      services:
-        - kind: Service
-          name: web
-          port: 8282
-          passHostHeader: true
-          responseForwarding:
-            flushInterval: 1ms
-      middlewares:
-        - name: strip-prefix
+    entryPoints:
+        - web
+    routes:
+        - match: Host(`dev.sweetrpg.com`) && PathPrefix(`/library`)
+          kind: Rule
+          services:
+              - kind: Service
+                name: web-v1
+                port: 8282
+                passHostHeader: true
+                responseForwarding:
+                    flushInterval: 1ms
+          middlewares:
+              - name: strip-prefix
