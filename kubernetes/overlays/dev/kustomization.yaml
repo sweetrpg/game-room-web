@@ -5,16 +5,18 @@ kind: Kustomization
 namespace: sweetrpg-library
 
 resources:
-  - namespace.yaml
-  - ../../base
-  - configmaps.yaml
+    - namespace.yaml
+    - ../../base
+    - configmaps.yaml
 patchesStrategicMerge:
-  - replicas.yaml
+    - replicas.yaml
 
 commonLabels:
-  platform: sweetrpg
-  app: library
-  component: web
+    platform: sweetrpg
+    app: sweetrpg-library-web-v1
+    package: library
+    component: web
+    version: v1
 
 generatorOptions:
-  disableNameSuffixHash: true
+    disableNameSuffixHash: true
