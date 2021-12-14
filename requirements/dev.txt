@@ -281,7 +281,7 @@ sweetrpg-db==0.0.45
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.67
+sweetrpg-library-objects==0.0.68
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -297,7 +297,7 @@ toml==0.10.2
     # via
     #   pytest
     #   tox
-tomli==1.2.2
+tomli==1.2.3
     # via
     #   black
     #   coverage
