@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: web
+    name: web-v1
 
 spec:
-  replicas: 1
+    replicas: 1
