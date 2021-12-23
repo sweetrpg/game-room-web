@@ -14,7 +14,7 @@ spec:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: sweetrpg-library-web-v1
+            app: library-web
             version: v1
             platform: sweetrpg
             package: library
@@ -22,7 +22,7 @@ spec:
     template:
         metadata:
             labels:
-                app: sweetrpg-library-web-v1
+                app: library-web
                 version: v1
                 platform: sweetrpg
                 package: library
