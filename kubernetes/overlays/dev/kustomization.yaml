@@ -12,11 +12,11 @@ patchesStrategicMerge:
     - replicas.yaml
 
 commonLabels:
+    app: library-web
+    version: v1
     platform: sweetrpg
-    app: sweetrpg-library-web-v1
     package: library
     component: web
-    version: v1
 
 generatorOptions:
     disableNameSuffixHash: true
