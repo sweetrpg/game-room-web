@@ -55,7 +55,7 @@ dnspython==2.1.0
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-filelock==3.4.0
+filelock==3.4.2
     # via
     #   tox
     #   virtualenv
@@ -137,8 +137,9 @@ multidict==5.2.0
 packaging==21.3
     # via
     #   pytest
+    #   redis
     #   tox
-platformdirs==2.4.0
+platformdirs==2.4.1
     # via virtualenv
 pluggy==1.0.0
     # via
@@ -179,7 +180,7 @@ python-logstash-async==2.3.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.0.2
+redis==4.1.0
     # via -r requirements/app.in
 requests==2.26.0
     # via
@@ -223,7 +224,7 @@ sweetrpg-model-core==0.0.54
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.89
+sweetrpg-web-core==0.0.91
     # via -r requirements/app.in
 toml==0.10.2
     # via
