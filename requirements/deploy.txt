@@ -164,7 +164,7 @@ sweetrpg-api-core==0.0.64
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.32
+sweetrpg-client==0.0.33
     # via -r requirements/app.in
 sweetrpg-db==0.0.47
     # via
@@ -180,7 +180,7 @@ sweetrpg-model-core==0.0.55
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.93
+sweetrpg-web-core==0.0.94
     # via -r requirements/app.in
 urllib3==1.26.7
     # via
