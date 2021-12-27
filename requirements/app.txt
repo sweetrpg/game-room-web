@@ -113,6 +113,8 @@ multidict==5.2.0
     # via
     #   aiohttp
     #   yarl
+packaging==21.3
+    # via redis
 pylogbeat==2.0.0
     # via python-logstash-async
 pymongo[srv,tls]==3.12.1
@@ -120,6 +122,8 @@ pymongo[srv,tls]==3.12.1
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
+pyparsing==3.0.6
+    # via packaging
 pyrsistent==0.18.0
     # via jsonschema
 python-dateutil==2.8.2
@@ -134,7 +138,7 @@ python-logstash-async==2.3.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.0.2
+redis==4.1.0
     # via -r requirements/app.in
 requests==2.26.0
     # via
@@ -160,7 +164,7 @@ sweetrpg-api-core==0.0.62
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.30
+sweetrpg-client==0.0.31
     # via -r requirements/app.in
 sweetrpg-db==0.0.45
     # via
@@ -176,7 +180,7 @@ sweetrpg-model-core==0.0.54
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.88
+sweetrpg-web-core==0.0.91
     # via -r requirements/app.in
 urllib3==1.26.7
     # via
