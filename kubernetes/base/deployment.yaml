@@ -28,7 +28,7 @@ spec:
                 package: library
                 component: web
         spec:
-            serviceAccountName: web
+            serviceAccountName: library-web
             imagePullSecrets:
                 - name: sweetrpg-registry
             initContainers:
