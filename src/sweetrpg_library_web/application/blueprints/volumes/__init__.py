@@ -17,8 +17,29 @@ blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
 
 
 @blueprint.route("/", methods=["GET"])
-def get_volumes():
-    """Get all volumes.
+def get_volumes_page():
+    """Get all volumes page.
+
+    """
+    context = get_context()
+    current_app.logger.debug("context: %s", context)
+    # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
+    # try:
+    #     # url = os.environ[constants.LIBRARY_API_BASE_URL]
+    #     # current_app.logger.debug("(LIBRARY_API_BASE_URL) url: %s", url)
+    #     volumes = api_client.query(VOLUME)
+    #     context.update({'volumes': volumes})
+    # except:
+    #     current_app.logger.exception("Unable to fetch volumes!")
+    #     flash('Unable to fetch volumes!')
+    context.update({'pagination': {}})  # TODO
+
+    return render_page("apps/library/volumes/many.html", context=context)
+
+
+@blueprint.route("/data", methods=["GET"])
+def get_volumes_data():
+    """Get all volumes data.
 
     """
     context = get_context()
@@ -28,17 +49,36 @@ def get_volumes():
         # url = os.environ[constants.LIBRARY_API_BASE_URL]
         # current_app.logger.debug("(LIBRARY_API_BASE_URL) url: %s", url)
         volumes = api_client.query(VOLUME)
-        context.update({'volumes': volumes})
+        # context.update({'volumes': volumes})
+        return volumes
     except:
         current_app.logger.exception("Unable to fetch volumes!")
-        flash('Unable to fetch volumes!')
-
-    return render_page("apps/library/volumes/many.html", context=context)
+        # flash('Unable to fetch volumes!')
+        return []
 
 
 @blueprint.route("/<id>", methods=["GET"])
-def get_volume(id:str):
-    """Get a specific volume.
+def get_volume_page(id: str):
+    """Get a specific volume page.
+
+    """
+    context = get_context()
+    current_app.logger.debug("context: %s", context)
+    # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
+    # try:
+    #     volume = api_client.get(VOLUME, id)
+    #     context.update({'volume': volume})
+    # except:
+    #     current_app.logger.exception(f"Unable to fetch volume {id}!")
+    #     flash(f'Unable to fetch volume {id}!')
+    context.update({'id': id})
+
+    return render_page("apps/library/volumes/single.html", context=context)
+
+
+@blueprint.route("/<id>/data", methods=["GET"])
+def get_volume_data(id: str):
+    """Get a specific volume data.
 
     """
     context = get_context()
@@ -46,9 +86,9 @@ def get_volume(id:str):
     api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
     try:
         volume = api_client.get(VOLUME, id)
-        context.update({'volume': volume})
+        # context.update({'volume': volume})
+        return volume
     except:
         current_app.logger.exception(f"Unable to fetch volume {id}!")
-        flash(f'Unable to fetch volume {id}!')
-
-    return render_page("apps/library/volumes/single.html", context=context)
+        # flash(f'Unable to fetch volume {id}!')
+        raise NotFound(f'Unable to fetch volume {id}!')
