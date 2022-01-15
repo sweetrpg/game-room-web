@@ -11,7 +11,8 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 
 
 sentry_sdk.init(dsn=os.environ[constants.SENTRY_DSN],
+                traces_sample_rate=0.2,
                 environment=os.environ.get(constants.SENTRY_ENV) or 'Unknown',
                 integrations=[
-                    FlaskIntegration(), RedisIntegration()
+                    FlaskIntegration(), RedisIntegration(),
                     ])
