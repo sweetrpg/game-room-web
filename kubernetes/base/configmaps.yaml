@@ -10,3 +10,5 @@ data:
   FLASK_APP: sweetrpg_library_web.application.main:create_app
   FLASK_ENV: production
   NEW_RELIC_CONFIG_FILE: /config/newrelic.ini
+  VUE_USE_MINIFIED: "True"
+  VUE_CDN_FORCE_SSL: "True"

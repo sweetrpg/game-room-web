@@ -17,6 +17,7 @@ from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
 import analytics
 import os
+from flask_vue import Vue
 
 
 ENV_FILE = find_dotenv()
@@ -113,7 +114,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     app.register_blueprint(main_blueprint)  # , url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
 
-    # vue = Vue(app)
+    vue = Vue(app)
 
     # app.wsgi_app = SassMiddleware(app.wsgi_app, {
     #     'application': ('static/sass', 'static/css', '/static/css')
