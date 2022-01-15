@@ -26,7 +26,7 @@ setup(
         "sentry-sdk[flask]==1.5.0",
         "greenlet==1.1.2",
         "SQLAlchemy==1.4.29",
-        "urllib3==1.26.7",
+        "urllib3==1.26.8",
         "python-logstash-async",
         "jsonapi-client",
     ],
