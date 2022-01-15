@@ -83,7 +83,7 @@ jinja2==3.0.3
     # via flask
 jsonapi-client==0.9.9
     # via sweetrpg-client
-jsonschema==4.3.3
+jsonschema==4.4.0
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
@@ -124,7 +124,7 @@ pymongo[srv,tls]==3.12.1
     #   sweetrpg-model-core
 pyparsing==3.0.6
     # via packaging
-pyrsistent==0.18.0
+pyrsistent==0.18.1
     # via jsonschema
 python-dateutil==2.8.2
     # via
@@ -170,7 +170,7 @@ sweetrpg-db==0.0.49
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.73
+sweetrpg-library-objects==0.0.74
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
