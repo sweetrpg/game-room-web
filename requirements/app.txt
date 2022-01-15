@@ -49,6 +49,7 @@ flask==2.0.2
     #   flask-dotenv
     #   flask-rest-jsonapi
     #   flask-session
+    #   flask-vue
     #   sentry-sdk
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -62,6 +63,8 @@ flask-dotenv==0.1.2
 flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.4.0
+    # via -r requirements/app.in
+flask-vue==0.3.5
     # via -r requirements/app.in
 frozenlist==1.2.0
     # via
@@ -164,7 +167,7 @@ sweetrpg-api-core==0.0.69
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.39
+sweetrpg-client==0.0.40
     # via -r requirements/app.in
 sweetrpg-db==0.0.49
     # via
@@ -180,7 +183,7 @@ sweetrpg-model-core==0.0.56
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.104
+sweetrpg-web-core==0.0.106
     # via -r requirements/app.in
 urllib3==1.26.8
     # via
