@@ -306,8 +306,6 @@ tomli==2.0.0
     #   pep517
 tox==3.24.5
     # via -r requirements/tests.in
-typing-extensions==4.0.1
-    # via black
 urllib3==1.26.8
     # via
     #   -r requirements/app.in
