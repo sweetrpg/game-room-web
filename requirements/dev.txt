@@ -47,7 +47,7 @@ click==8.0.3
     #   black
     #   flask
     #   pip-tools
-coverage[toml]==6.3
+coverage[toml]==6.3.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -127,7 +127,7 @@ jsonschema==4.4.0
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.3.2
+limits==2.3.3
     # via python-logstash-async
 markupsafe==2.0.1
     # via jinja2
@@ -197,7 +197,7 @@ pyparsing==3.0.7
     # via packaging
 pyrsistent==0.18.1
     # via jsonschema
-pytest==6.2.5
+pytest==7.0.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -273,37 +273,36 @@ sqlalchemy==1.4.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.73
+sweetrpg-api-core==0.0.74
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.44
+sweetrpg-client==0.0.45
     # via -r requirements/app.in
-sweetrpg-db==0.0.51
+sweetrpg-db==0.0.52
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.77
+sweetrpg-library-objects==0.0.78
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.57
+sweetrpg-model-core==0.0.58
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.111
+sweetrpg-web-core==0.0.113
     # via -r requirements/app.in
 toml==0.10.2
-    # via
-    #   pytest
-    #   tox
+    # via tox
 tomli==2.0.0
     # via
     #   black
     #   coverage
     #   pep517
+    #   pytest
 tox==3.24.5
     # via -r requirements/tests.in
 typing-extensions==4.0.1
@@ -313,7 +312,7 @@ urllib3==1.26.8
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.13.0
+virtualenv==20.13.1
     # via tox
 werkzeug==2.0.2
     # via flask

@@ -90,7 +90,7 @@ jsonschema==4.4.0
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.3.2
+limits==2.3.3
     # via python-logstash-async
 markupsafe==2.0.1
     # via jinja2
@@ -167,7 +167,7 @@ sweetrpg-api-core==0.0.73
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
-sweetrpg-client==0.0.42
+sweetrpg-client==0.0.44
     # via -r requirements/app.in
 sweetrpg-db==0.0.51
     # via
@@ -177,13 +177,13 @@ sweetrpg-library-objects==0.0.77
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.57
+sweetrpg-model-core==0.0.58
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.110
+sweetrpg-web-core==0.0.113
     # via -r requirements/app.in
 urllib3==1.26.8
     # via
