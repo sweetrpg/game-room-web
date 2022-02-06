@@ -32,7 +32,10 @@ def get_volumes_page():
     # except:
     #     current_app.logger.exception("Unable to fetch volumes!")
     #     flash('Unable to fetch volumes!')
-    context.update({'pagination': {}})  # TODO
+    context.update({
+                    'pagination': {},  # TODO
+                    'api_base_url': os.environ['LIBRARY_API_BASE_URL'],
+                    })
 
     return render_page("apps/library/volumes/many.html", context=context)
 
