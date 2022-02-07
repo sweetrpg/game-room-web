@@ -201,7 +201,7 @@ six==1.16.0
     #   python-dateutil
     #   tox
     #   virtualenv
-sqlalchemy==1.4.29
+sqlalchemy==1.4.31
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
