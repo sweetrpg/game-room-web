@@ -7,11 +7,12 @@ metadata:
 
 data:
     PORT: "8282"
-    SERVICE_CHECK_URL: "http://web.sweetrpg-library.svc.cluster.local:8281/health/ping"
-    HEALTH_CHECK_URL: "http://web.sweetrpg-library.svc.cluster.local:8281/health/status"
+    SERVICE_CHECK_URL: "http://web.sweetrpg-library.svc.cluster.local:8282/health/ping"
+    HEALTH_CHECK_URL: "http://web.sweetrpg-library.svc.cluster.local:8282/health/status"
     SERVICE_REGISTRATION_URL: "http://consul.sweetrpg-support.svc.cluster.local:1234"
     APPLICATION_BASE_PATH: "/library/"
     LIBRARY_API_BASE_URL: "http://api-v1.sweetrpg-library.svc.cluster.local:8281"
+    LIBRARY_API_EXTERNAL_BASE_URL: "https://dev.sweetrpg.com/api/1/library"
     STATIC_ASSET_PREFIX: "https://dev.sweetrpg.com/static"
     BUILD_INFO_PATH: /app/build-info.json
     JAEGER_SERVICE_NAME: library-web.sweetrpg-library
