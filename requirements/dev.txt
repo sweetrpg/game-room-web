@@ -105,8 +105,6 @@ greenlet==1.1.2
     #   -r requirements/app.in
     #   -r requirements/tests.in
     #   sqlalchemy
-hiredis==2.0.0
-    # via -r requirements/app.in
 idna==3.3
     # via
     #   requests
@@ -232,7 +230,7 @@ requests==2.27.1
     #   sweetrpg-client
 rstcheck==3.3.1
     # via -r requirements/docs.in
-sentry-sdk[flask]==1.5.0
+sentry-sdk[flask]==1.5.5
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -269,7 +267,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.29
+sqlalchemy==1.4.31
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
