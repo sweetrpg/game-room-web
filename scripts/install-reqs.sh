@@ -4,4 +4,4 @@ set -x
 set -e
 set -o pipefail
 
-pip3 install -r requirements.txt
+$(pyenv which python) -m pip install -r requirements.txt
