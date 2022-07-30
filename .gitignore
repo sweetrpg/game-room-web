@@ -53,3 +53,4 @@ venv/
 htmlcov/
 .flaskenv
 src/templates/
+.DS_Store
