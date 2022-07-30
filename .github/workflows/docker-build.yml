@@ -40,7 +40,7 @@ jobs:
               uses: docker/metadata-action@v3
               with:
                   images: |
-                      registry.sweetrpg.com/sweetrpg-library-web
+                      ghcr.io/sweetrpg/library-web
                   tags: |
                       type=raw,value=latest
                       type=raw,value=${{ steps.previoustag.outputs.tag }}
@@ -58,9 +58,9 @@ jobs:
             - name: Login to registry
               uses: docker/login-action@v1
               with:
-                  registry: registry.sweetrpg.com
-                  username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-                  password: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
             - name: Build and push
               id: docker_build
               uses: docker/build-push-action@v2
@@ -84,8 +84,8 @@ jobs:
             - name: Create Sentry release
               uses: getsentry/action-release@v1
               env:
-                SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-                SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-                SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+                  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+                  SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
               with:
-                environment: production
+                  environment: production
