@@ -24,12 +24,14 @@ babel==2.9.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.4
+blinker==1.5
     # via
     #   -r requirements/app.in
     #   sentry-sdk
 cachelib==0.6.0
-    # via flask-session
+    # via
+    #   flask-caching
+    #   flask-session
 certifi==2021.10.8
     # via
     #   requests
@@ -72,7 +74,7 @@ flask==2.0.2
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==1.10.1
+flask-caching==1.11.1
     # via -r requirements/app.in
 flask-cors==3.0.10
     # via -r requirements/app.in
@@ -171,7 +173,7 @@ python-dotenv==0.19.2
     # via -r requirements/app.in
 python-editor==1.0.4
     # via -r requirements/app.in
-python-logstash-async==2.3.0
+python-logstash-async==2.5.0
     # via -r requirements/app.in
 pytz==2021.3
     # via babel
@@ -179,7 +181,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.3.4
     # via -r requirements/app.in
-requests==2.27.1
+requests==2.28.1
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -245,7 +247,7 @@ sweetrpg-db==0.0.52
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.80
+sweetrpg-library-objects==0.0.86
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
