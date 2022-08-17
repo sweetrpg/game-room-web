@@ -68,7 +68,7 @@ deprecated==1.2.13
     # via redis
 distlib==0.3.4
     # via virtualenv
-dnspython==2.2.0
+dnspython==2.2.1
     # via
     #   -r requirements/app.in
     #   pymongo

@@ -50,7 +50,7 @@ commonmark==0.9.1
     # via rich
 deprecated==1.2.13
     # via redis
-dnspython==2.2.0
+dnspython==2.2.1
     # via
     #   -r requirements/app.in
     #   pymongo
