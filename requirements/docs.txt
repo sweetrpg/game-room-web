@@ -50,7 +50,7 @@ commonmark==0.9.1
     # via rich
 deprecated==1.2.13
     # via redis
-dnspython==2.2.0
+dnspython==2.2.1
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -257,7 +257,7 @@ sweetrpg-model-core==0.0.59
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.119
+sweetrpg-web-core==0.0.131
     # via -r requirements/app.in
 typer[all]==0.6.1
     # via rstcheck
