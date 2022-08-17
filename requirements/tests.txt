@@ -10,7 +10,7 @@ aiosignal==1.2.0
     # via aiohttp
 analytics-python==1.4.0
     # via -r requirements/app.in
-asgiref==3.5.0
+asgiref==3.5.2
     # via -r requirements/tests.in
 async-timeout==4.0.2
     # via
@@ -52,7 +52,7 @@ deprecated==1.2.13
     # via redis
 distlib==0.3.4
     # via virtualenv
-dnspython==2.2.0
+dnspython==2.2.1
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.59
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.119
+sweetrpg-web-core==0.0.131
     # via -r requirements/app.in
 toml==0.10.2
     # via tox
