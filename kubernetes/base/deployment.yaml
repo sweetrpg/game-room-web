@@ -95,7 +95,7 @@ spec:
             volumes:
                 - name: config
                   secret:
-                      secretName: web-files
+                      secretName: web-v1-files
                       items:
                           - key: newrelic.ini
                             path: newrelic.ini
