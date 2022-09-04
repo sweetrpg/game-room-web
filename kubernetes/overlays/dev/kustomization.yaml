@@ -7,7 +7,9 @@ namespace: sweetrpg-library
 resources:
     - ../../base
     - configmaps.yaml
+    - hpa.yaml
     - destination-rules.yaml
+    - secrets.yaml
 patchesStrategicMerge:
     - replicas.yaml
 
