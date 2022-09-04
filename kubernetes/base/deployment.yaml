@@ -56,11 +56,11 @@ spec:
                       - configMapRef:
                             name: web-env
                       - secretRef:
-                            name: web-v1-auth
+                            name: web-auth
                       - secretRef:
-                            name: web-v1-misc
+                            name: web-misc
                       - secretRef:
-                            name: web-v1-cache
+                            name: web-cache
                   env: []
                   ports:
                       - containerPort: 8282
@@ -95,7 +95,7 @@ spec:
             volumes:
                 - name: config
                   secret:
-                      secretName: web-v1-files
+                      secretName: web-files
                       items:
                           - key: newrelic.ini
                             path: newrelic.ini
