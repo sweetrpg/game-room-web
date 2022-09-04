@@ -10,11 +10,11 @@ pushd ${scriptdir}
 
 echo "Deleting old secrets..."
 # kubectl delete -n "${ns}" secret template-credentials sweetrpg-registry web-newrelic web-v1-cache web-v1-auth web-v1-misc web-v1-common web-v1-files || true
-kubectl delete -n "${ns}" secret template-credentials web-v1-files || true
+# kubectl delete -n "${ns}" secret template-credentials web-v1-files || true
 
 echo "Git credentials for template copying..."
-kubectl create -n "${ns}" secret generic template-credentials \
-    --from-env-file=../git-templates.env
+# kubectl create -n "${ns}" secret generic template-credentials \
+#     --from-env-file=../git-templates.env
 
 echo "Docker registry config..."
 # kubectl create -n "${ns}" secret docker-registry sweetrpg-registry \
@@ -29,8 +29,8 @@ echo "Docker registry config..."
 #    --from-file=.dockerconfigjson
 
 echo "NewRelic and logging config..."
-kubectl create -n "${ns}" secret generic web-v1-files \
-    --from-file=newrelic.ini
+# kubectl create -n "${ns}" secret generic web-v1-files \
+#     --from-file=newrelic.ini
 
 echo "Other secrets..."
 # kubectl create -n "${ns}" secret generic web-cache \
