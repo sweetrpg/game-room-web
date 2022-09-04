@@ -9,7 +9,7 @@ scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 pushd ${scriptdir}
 
 echo "Deleting old secrets..."
-# kubectl delete -n "${ns}" secret template-credentials sweetrpg-registry web-newrelic web-cache web-auth web-misc web-common web-files || true
+# kubectl delete -n "${ns}" secret template-credentials sweetrpg-registry web-newrelic web-v1-cache web-v1-auth web-v1-misc web-v1-common web-v1-files || true
 kubectl delete -n "${ns}" secret template-credentials web-common web-files || true
 
 echo "Git credentials for template copying..."
@@ -29,7 +29,7 @@ echo "Docker registry config..."
 #    --from-file=.dockerconfigjson
 
 echo "NewRelic and logging config..."
-kubectl create -n "${ns}" secret generic web-files \
+kubectl create -n "${ns}" secret generic web-v1-files \
     --from-file=newrelic.ini
 
 echo "Other secrets..."
@@ -41,7 +41,7 @@ echo "Other secrets..."
 #     --from-env-file=misc.env
 #kubectl create -n "${ns}" secret generic web-stripe \
 #    --from-env-file=stripe.env
-kubectl create -n "${ns}" secret generic web-common \
+kubectl create -n "${ns}" secret generic web-v1-common \
     --from-env-file=../common.env
 
 popd

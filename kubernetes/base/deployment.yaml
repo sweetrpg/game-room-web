@@ -56,11 +56,11 @@ spec:
                       - configMapRef:
                             name: web-env
                       - secretRef:
-                            name: web-auth
+                            name: web-v1-auth
                       - secretRef:
-                            name: web-misc
+                            name: web-v1-misc
                       - secretRef:
-                            name: web-cache
+                            name: web-v1-cache
                   env: []
                   ports:
                       - containerPort: 8282
