@@ -10,7 +10,7 @@ pushd ${scriptdir}
 
 echo "Deleting old secrets..."
 # kubectl delete -n "${ns}" secret template-credentials sweetrpg-registry web-newrelic web-v1-cache web-v1-auth web-v1-misc web-v1-common web-v1-files || true
-kubectl delete -n "${ns}" secret template-credentials web-common web-files || true
+kubectl delete -n "${ns}" secret template-credentials web-v1-files || true
 
 echo "Git credentials for template copying..."
 kubectl create -n "${ns}" secret generic template-credentials \
@@ -41,7 +41,7 @@ echo "Other secrets..."
 #     --from-env-file=misc.env
 #kubectl create -n "${ns}" secret generic web-stripe \
 #    --from-env-file=stripe.env
-kubectl create -n "${ns}" secret generic web-v1-common \
-    --from-env-file=../common.env
+# kubectl create -n "${ns}" secret generic web-v1-common \
+#     --from-env-file=../common.env
 
 popd
