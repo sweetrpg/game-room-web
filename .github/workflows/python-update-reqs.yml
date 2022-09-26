@@ -6,6 +6,8 @@ on:
             - library-objects-published
             - client-published
             - web-core-published
+    schedule:
+        - cron: '0 1 * * 2'
 
 jobs:
     update-reqs:
