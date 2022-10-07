@@ -6,7 +6,6 @@ Flask-CORS
 Flask-DotEnv
 Flask-Session
 Flask
-Flask-Vue
 sweetrpg-web-core
 sweetrpg-library-objects
 sweetrpg-client
