@@ -11,7 +11,7 @@ resources:
     - pdb.yaml
     - destination-rules.yaml
     - secrets.yaml
-    - virtual-service.yaml
+    # - virtual-service.yaml
 patchesStrategicMerge:
     - replicas.yaml
 

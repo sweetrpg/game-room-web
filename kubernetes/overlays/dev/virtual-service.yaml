@@ -12,14 +12,6 @@ spec:
   gateways:
     - sweetrpg-main/sweetrpg-gateway
   http:
-    - match:
-        - uri:
-            prefix: /library/
-      route:
-        - destination:
-            host: web-v1.sweetrpg-library.svc.cluster.local
-            port:
-              number: 8282
 #   tls:
 #     - match:
 #         - uri:
