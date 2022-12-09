@@ -11,7 +11,7 @@ aiosignal==1.2.0
 alabaster==0.7.12
     # via sphinx
 analytics-python==1.4.0
-    # via -r requirements/app.in
+    # via -r app.in
 async-timeout==4.0.2
     # via
     #   aiohttp
@@ -26,13 +26,13 @@ backoff==1.10.0
     # via analytics-python
 blinker==1.5
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   sentry-sdk
 cachelib==0.9.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2022.9.24
+certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
@@ -54,7 +54,7 @@ deprecated==1.2.13
     #   redis
 dnspython==2.2.1
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   pymongo
     #   sweetrpg-db
 docutils==0.18.1
@@ -65,7 +65,7 @@ docutils==0.18.1
     #   sphinx-tabs
 flask==2.0.2
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   flask-caching
     #   flask-cors
     #   flask-dotenv
@@ -76,22 +76,22 @@ flask==2.0.2
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
 flask-caching==2.0.1
-    # via -r requirements/app.in
+    # via -r app.in
 flask-cors==3.0.10
-    # via -r requirements/app.in
+    # via -r app.in
 flask-dotenv==0.1.2
-    # via -r requirements/app.in
+    # via -r app.in
 flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.4.0
-    # via -r requirements/app.in
+    # via -r app.in
 frozenlist==1.3.1
     # via
     #   aiohttp
     #   aiosignal
 greenlet==2.0.1
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   sqlalchemy
 idna==3.4
     # via
@@ -110,7 +110,7 @@ jsonapi-client==0.9.9
 jsonschema==4.16.0
     # via jsonapi-client
 kanka==0.1.2
-    # via -r requirements/app.in
+    # via -r app.in
 limits==2.7.0
     # via python-logstash-async
 markupsafe==2.1.1
@@ -146,7 +146,7 @@ packaging==21.3
     #   redis
     #   sphinx
 pallets-sphinx-themes==2.0.2
-    # via -r requirements/docs.in
+    # via -r docs.in
 pydantic==1.10.2
     # via
     #   rstcheck
@@ -169,23 +169,23 @@ pyrsistent==0.18.1
     # via jsonschema
 python-dateutil==2.8.2
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   analytics-python
 python-dotenv==0.21.0
-    # via -r requirements/app.in
+    # via -r app.in
 python-editor==1.0.4
-    # via -r requirements/app.in
+    # via -r app.in
 python-logstash-async==2.5.0
-    # via -r requirements/app.in
+    # via -r app.in
 pytz==2022.4
     # via babel
 pyyaml==6.0
-    # via -r requirements/app.in
+    # via -r app.in
 redis==4.3.4
-    # via -r requirements/app.in
+    # via -r app.in
 requests==2.28.1
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   analytics-python
     #   jsonapi-client
     #   kanka
@@ -195,11 +195,11 @@ requests==2.28.1
 rich==12.6.0
     # via typer
 rstcheck==6.1.0
-    # via -r requirements/docs.in
+    # via -r docs.in
 rstcheck-core==1.0.2
     # via rstcheck
 sentry-sdk[flask]==1.9.10
-    # via -r requirements/app.in
+    # via -r app.in
 shellingham==1.5.0
     # via typer
 six==1.16.0
@@ -212,15 +212,15 @@ snowballstemmer==2.2.0
     # via sphinx
 sphinx==5.3.0
     # via
-    #   -r requirements/docs.in
+    #   -r docs.in
     #   pallets-sphinx-themes
     #   sphinx-issues
     #   sphinx-tabs
     #   sphinxcontrib-log-cabinet
 sphinx-issues==3.0.1
-    # via -r requirements/docs.in
+    # via -r docs.in
 sphinx-tabs==3.4.1
-    # via -r requirements/docs.in
+    # via -r docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -230,28 +230,28 @@ sphinxcontrib-htmlhelp==2.0.0
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-log-cabinet==1.0.1
-    # via -r requirements/docs.in
+    # via -r docs.in
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlalchemy==1.4.41
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   flask-rest-jsonapi
 sweetrpg-api-core==0.0.81
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
-    # via -r requirements/app.in
+    # via -r app.in
 sweetrpg-db==0.0.54
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
 sweetrpg-library-objects==0.0.86
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   sweetrpg-client
 sweetrpg-model-core==0.0.63
     # via
@@ -260,7 +260,7 @@ sweetrpg-model-core==0.0.63
     #   sweetrpg-db
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.131
-    # via -r requirements/app.in
+    # via -r app.in
 typer[all]==0.6.1
     # via rstcheck
 types-docutils==0.18.3
@@ -273,7 +273,7 @@ typing-extensions==4.4.0
     #   pydantic
 urllib3==1.26.12
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   requests
     #   sentry-sdk
 werkzeug==2.2.2
