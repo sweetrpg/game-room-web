@@ -55,3 +55,4 @@ htmlcov/
 src/templates/
 .DS_Store
 kubernetes/secrets/dev/tokens.txt
+_OMD
