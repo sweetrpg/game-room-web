@@ -24,7 +24,7 @@ setup(
         "hiredis",
         "requests",
         "sentry-sdk[flask]==1.5.0",
-        "greenlet==1.1.3",
+        "greenlet==2.0.1",
         "SQLAlchemy==1.4.44",
         "urllib3==1.26.12",
         "python-logstash-async",
