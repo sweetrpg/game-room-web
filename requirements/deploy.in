@@ -1,3 +1,0 @@
--r app.in
-uwsgi
-hiredis
