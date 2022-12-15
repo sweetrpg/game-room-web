@@ -5,6 +5,12 @@ on:
     branches: [develop]
     paths:
       - "src/**"
+      - "public/**"
+      - "cypress/**"
+      - package.json
+      - vite.config.js
+      - index.html
+      - cypress.config.js
 
 jobs:
   tests:
