@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - "src/**"
+
+jobs:
+  tests:
+    name: Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    concurrency: ci
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup-node-${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: tests
+        run: |
+          yarn install
+          yarn run test:unit
+
+  tag:
+    needs: [tests]
+    runs-on: ubuntu-latest
+    concurrency: publish
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: bump-version
+        id: package_version
+        uses: KageKirin/bump-node-package-version@v0
+        with:
+          patch: true
+      - name: commit-version
+        run: |
+          git add package.json
+          git commit -m "CI: update version to ${{ steps.package_version.outputs.version }}"
+          git tag -m "CI: create new tag" ${{ steps.package_version.outputs.version }}
+          git push --follow-tags https://${{ github.token }}@github.com/sweetrpg/library-web
