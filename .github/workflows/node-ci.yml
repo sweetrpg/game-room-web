@@ -48,6 +48,8 @@ jobs:
           patch: true
       - name: commit-version
         run: |
+          git config --global user.email "ci@sweetrpg.com"
+          git config --global user.name "SweetRPG CI"
           git add package.json
           git commit -m "CI: update version to ${{ steps.package_version.outputs.version }}"
           git tag -m "CI: create new tag" ${{ steps.package_version.outputs.version }}
