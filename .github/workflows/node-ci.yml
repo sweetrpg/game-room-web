@@ -52,6 +52,6 @@ jobs:
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
           git add package.json
-          git commit -m "CI: update version to ${{ steps.package_version.outputs.version }}"
-          git tag -m "CI: create new tag" ${{ steps.package_version.outputs.version }}
+          git commit -m "CI: update version to v${{ steps.package_version.outputs.version }}"
+          git tag -m "CI: create new tag" v${{ steps.package_version.outputs.version }}
           git push --follow-tags https://${{ github.token }}@github.com/sweetrpg/library-web
