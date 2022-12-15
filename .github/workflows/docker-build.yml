@@ -8,6 +8,7 @@ on:
       - develop
     paths:
       - Dockerfile
+      - .dockerignore
   workflow_run:
     workflows: ["CI"]
     branches: [develop]
