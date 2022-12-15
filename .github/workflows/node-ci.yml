@@ -54,4 +54,4 @@ jobs:
           git add package.json
           git commit -m "CI: update version to v${{ steps.package_version.outputs.version }}"
           git tag -m "CI: create new tag" v${{ steps.package_version.outputs.version }}
-          git push --follow-tags https://${{ github.token }}@github.com/sweetrpg/library-web
+          git push --follow-tags ssh://git@github.com/sweetrpg/library-web
