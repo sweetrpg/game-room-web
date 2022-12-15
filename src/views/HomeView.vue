@@ -1,6 +1,3 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
 
 <template>
   <main>
@@ -8,3 +5,7 @@ import TheWelcome from '../components/TheWelcome.vue'
     {{ xyz }}
   </main>
 </template>
+
+<script setup>
+import TheWelcome from '../components/TheWelcome.vue'
+</script>

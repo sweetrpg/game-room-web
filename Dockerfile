@@ -16,6 +16,7 @@ ENV NODE_ENV=development
 
 WORKDIR /app
 COPY package*.json /app
+COPY yarn.lock /app
 RUN npm install
 COPY . /app
 # RUN npm run test:unit
