@@ -47,10 +47,21 @@ jobs:
         with:
           patch: true
       - name: commit-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.email "ci@sweetrpg.com"
-          git config --global user.name "SweetRPG CI"
-          git add package.json
-          git commit -m "CI: update version to v${{ steps.package_version.outputs.version }}"
-          git tag -m "CI: create new tag" v${{ steps.package_version.outputs.version }}
-          git push origin
+          export SHA=$(git rev-parse develop:package.json)
+          export CONTENT=$(base64 -i package.json)
+          gh api --method PUT /repos/:owner/:repo/contents/package.json \
+              --field message="CI: update version to v${{ steps.package_version.outputs.version }}" \
+              --field content="$CONTENT" \
+              --field encoding="base64" \
+              --field branch="develop" \
+              --field sha="$SHA"
+
+        #   git config --global user.email "ci@sweetrpg.com"
+        #   git config --global user.name "SweetRPG CI"
+        #   git add package.json
+        #   git commit -m "CI: update version to v${{ steps.package_version.outputs.version }}"
+        #   git tag -m "CI: create new tag" v${{ steps.package_version.outputs.version }}
+        #   git push origin
