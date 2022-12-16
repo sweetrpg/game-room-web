@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 0
       - name: bump-version
         id: package_version
-        uses: KageKirin/bump-node-package-version@v0
+        uses: KageKirin/bump-node-package-version@v1
         with:
           patch: true
       - name: commit-version
