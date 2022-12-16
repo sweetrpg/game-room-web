@@ -63,7 +63,7 @@ spec:
                             name: web-cache
                   env: []
                   ports:
-                      - containerPort: 8282
+                      - containerPort: 80
                         name: http
                   resources:
                       requests:
