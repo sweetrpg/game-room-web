@@ -12,6 +12,5 @@ kubernetes/
 LICENSE
 node_modules/
 README.md
-scripts/
 tests/
 tox.ini
