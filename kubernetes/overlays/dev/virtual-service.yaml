@@ -4,14 +4,14 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 
 metadata:
-  name: web
+    name: web
 
 spec:
-  hosts:
-    - dev.sweetrpg.com
-  gateways:
-    - sweetrpg-main/sweetrpg-gateway
-  http:
+    hosts:
+        - dev.sweetrpg.com
+    gateways:
+        - sweetrpg-main/gateway
+    http:
 #   tls:
 #     - match:
 #         - uri:
