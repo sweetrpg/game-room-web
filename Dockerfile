@@ -3,6 +3,22 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
+# # Node build
+# FROM node:18 as node-build
+
+# ENV NODE_ENV=development
+
+# WORKDIR /app
+# COPY web/package*.json /app
+# COPY web/yarn.lock /app
+# RUN yarn install
+# COPY web/ /app
+
+# ENV NODE_ENV=production
+# RUN yarn run build
+
+
+# Main
 FROM python:3.10
 
 # Avoid warnings by switching to noninteractive
@@ -16,7 +32,7 @@ ENV PYTHONUNBUFFERED 1
 # https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=sweetrpg
 ARG USER_UID=1001
-ARG USER_GID=$USER_UID
+ARG USER_GID=${USER_UID}
 ARG REQUIREMENTS=requirements/deploy.txt
 ARG BUILD_NUMBER=unset
 ARG BUILD_JOB=unset
@@ -27,7 +43,7 @@ ARG BUILD_VERSION=unset
 # Uncomment the following COPY line and the corresponding lines in the `RUN` command if you wish to
 # include your requirements in the image itself. It is suggested that you only do this if your
 # requirements rarely (if ever) change.
-COPY $REQUIREMENTS /tmp/pip-tmp/requirements.txt
+COPY ${REQUIREMENTS} /tmp/pip-tmp/requirements.txt
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -37,7 +53,7 @@ RUN apt-get update \
     && apt-get install -y git iproute2 procps lsb-release \
     #
     # Install pylint
-    && pip install pylint newrelic \
+    && pip install pylint \
     #
     # Other stuff
     # && apt-get install -y postgresql-client \
@@ -47,8 +63,8 @@ RUN apt-get update \
     && rm -rf /tmp/pip-tmp \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
-    && groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && groupadd --gid ${USER_GID} ${USERNAME} \
+    && useradd -s /bin/bash --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -56,6 +72,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY src /app
+# COPY --from=node-build /app/dist /app/public
 ADD scripts/entrypoint.sh /
 RUN chown -R ${USER_UID}:${USER_GID} /app
 RUN echo "{\"number\":\"${BUILD_NUMBER}\",\"job\":\"${BUILD_JOB}\",\"sha\":\"${BUILD_SHA}\",\"date\":\"${BUILD_DATE}\",\"version\":\"${BUILD_VERSION}\"}" > /app/build-info.json
@@ -67,4 +84,3 @@ ENV DEBIAN_FRONTEND=
 USER ${USERNAME}
 
 ENTRYPOINT [ "/entrypoint.sh" ]
-#CMD [ "newrelic-admin", "run-program", "gunicorn", "wsgi:app" ]
