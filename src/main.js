@@ -13,7 +13,6 @@ app.config.errorHandler = (err) => {
 }
 
 app.config.globalProperties = {
-    xyz: '123'
 }
 
 app.use(createPinia())

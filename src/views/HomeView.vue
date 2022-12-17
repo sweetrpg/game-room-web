@@ -1,10 +1,9 @@
 <template>
   <main>
-    <TheWelcome />
-    {{ xyz }}
+    <VolumesButton />
   </main>
 </template>
 
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import VolumesButton from "../components/volumes/VolumesButton.vue";
 </script>
