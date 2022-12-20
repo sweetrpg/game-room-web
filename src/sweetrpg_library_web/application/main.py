@@ -104,6 +104,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     from sweetrpg_library_web.application.blueprints.volumes import blueprint as volumes_blueprint
     main_blueprint.register_blueprint(volumes_blueprint)
+    from sweetrpg_library_web.application.blueprints.persons import blueprint as persons_blueprint
+    main_blueprint.register_blueprint(persons_blueprint)
 
     from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
     main_blueprint.register_blueprint(health_blueprint)
