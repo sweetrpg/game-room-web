@@ -121,8 +121,6 @@ idna==3.4
     #   yarl
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.2.0
-    # via sphinx
 iniconfig==1.1.1
     # via pytest
 itsdangerous==2.1.2
@@ -175,7 +173,7 @@ packaging==22.0
     #   pytest
     #   sphinx
     #   tox
-pallets-sphinx-themes==2.0.2
+pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
 pathspec==0.10.3
     # via black
@@ -328,7 +326,6 @@ types-docutils==0.19.1.1
     # via rstcheck-core
 typing-extensions==4.4.0
     # via
-    #   black
     #   limits
     #   pydantic
 urllib3==1.26.13
@@ -346,8 +343,6 @@ wrapt==1.14.1
     # via deprecated
 yarl==1.8.2
     # via aiohttp
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
