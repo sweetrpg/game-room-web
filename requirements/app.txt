@@ -14,7 +14,7 @@ async-timeout==4.0.2
     # via
     #   aiohttp
     #   redis
-attrs==22.1.0
+attrs==22.2.0
     # via
     #   aiohttp
     #   jsonschema
@@ -89,7 +89,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.7.2
+limits==2.8.0
     # via python-logstash-async
 markupsafe==2.1.1
     # via
@@ -113,7 +113,7 @@ mongoengine==0.24.2
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
-multidict==6.0.3
+multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
