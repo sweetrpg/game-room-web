@@ -96,8 +96,6 @@ idna==3.4
     #   yarl
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==5.2.0
-    # via sphinx
 itsdangerous==2.1.2
     # via flask
 jinja2==3.1.2
@@ -204,7 +202,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==5.3.0
+sphinx==6.0.0
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -274,8 +272,6 @@ wrapt==1.14.1
     # via deprecated
 yarl==1.8.2
     # via aiohttp
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
