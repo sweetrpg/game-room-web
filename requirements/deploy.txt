@@ -108,7 +108,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.24.2
+mongoengine==0.25.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -128,7 +128,7 @@ pymongo[srv]==4.0.2
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyrsistent==0.19.2
+pyrsistent==0.19.3
     # via jsonschema
 python-dateutil==2.8.2
     # via
