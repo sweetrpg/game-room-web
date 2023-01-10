@@ -89,7 +89,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.8.0
+limits==3.1.4
     # via python-logstash-async
 markupsafe==2.1.1
     # via
@@ -140,7 +140,7 @@ python-logstash-async==2.5.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.4.0
+redis==4.4.1
     # via -r requirements/app.in
 requests==2.28.1
     # via
@@ -158,7 +158,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==1.4.45
+sqlalchemy==1.4.46
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi

@@ -110,7 +110,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==2.8.0
+limits==3.1.4
     # via python-logstash-async
 markupsafe==2.1.1
     # via
@@ -175,7 +175,7 @@ pytz==2022.7
     # via babel
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.4.0
+redis==4.4.1
     # via -r requirements/app.in
 requests==2.28.1
     # via
@@ -194,7 +194,7 @@ rstcheck-core==1.0.3
     # via rstcheck
 sentry-sdk[flask]==1.12.1
     # via -r requirements/app.in
-shellingham==1.5.0
+shellingham==1.5.0.post1
     # via typer
 six==1.16.0
     # via
@@ -204,7 +204,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==6.0.0
+sphinx==6.1.2
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -215,7 +215,7 @@ sphinx-issues==3.0.1
     # via -r requirements/docs.in
 sphinx-tabs==3.4.1
     # via -r requirements/docs.in
-sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-applehelp==1.0.3
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
     # via sphinx
@@ -229,7 +229,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.45
+sqlalchemy==1.4.46
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
