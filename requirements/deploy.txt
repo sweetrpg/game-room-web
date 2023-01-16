@@ -57,7 +57,7 @@ flask==2.0.2
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.0.1
+flask-caching==2.0.2
     # via -r requirements/app.in
 flask-cors==3.0.10
     # via -r requirements/app.in
