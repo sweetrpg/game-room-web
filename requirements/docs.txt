@@ -50,7 +50,7 @@ commonmark==0.9.1
     # via rich
 deprecated==1.2.13
     # via limits
-dnspython==2.2.1
+dnspython==2.3.0
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -95,8 +95,6 @@ idna==3.4
     #   requests
     #   yarl
 imagesize==1.4.1
-    # via sphinx
-importlib-metadata==6.0.0
     # via sphinx
 itsdangerous==2.1.2
     # via flask
@@ -274,8 +272,6 @@ wrapt==1.14.1
     # via deprecated
 yarl==1.8.2
     # via aiohttp
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

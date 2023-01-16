@@ -52,7 +52,7 @@ deprecated==1.2.13
     # via limits
 distlib==0.3.6
     # via virtualenv
-dnspython==2.2.1
+dnspython==2.3.0
     # via
     #   -r requirements/app.in
     #   pymongo
