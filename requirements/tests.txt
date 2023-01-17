@@ -42,7 +42,7 @@ charset-normalizer==2.1.1
     #   requests
 click==8.1.3
     # via flask
-coverage[toml]==7.0.4
+coverage[toml]==7.0.5
     # via
     #   coverage-badge
     #   pytest-cov
@@ -52,7 +52,7 @@ deprecated==1.2.13
     # via limits
 distlib==0.3.6
     # via virtualenv
-dnspython==2.2.1
+dnspython==2.3.0
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -75,7 +75,7 @@ flask==2.0.2
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.0.1
+flask-caching==2.0.2
     # via -r requirements/app.in
 flask-cors==3.0.10
     # via -r requirements/app.in
@@ -110,7 +110,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.1.4
+limits==3.1.6
     # via python-logstash-async
 markupsafe==2.1.1
     # via
@@ -138,7 +138,7 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-packaging==22.0
+packaging==23.0
     # via
     #   limits
     #   pytest
@@ -160,7 +160,7 @@ pymongo[srv]==4.0.2
     #   sweetrpg-model-core
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -180,9 +180,9 @@ python-logstash-async==2.5.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.4.1
+redis==4.4.2
     # via -r requirements/app.in
-requests==2.28.1
+requests==2.28.2
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -190,7 +190,7 @@ requests==2.28.1
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.12.1
+sentry-sdk[flask]==1.13.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -234,7 +234,7 @@ tox==3.26.0
     # via -r requirements/tests.in
 typing-extensions==4.4.0
     # via limits
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   -r requirements/app.in
     #   requests

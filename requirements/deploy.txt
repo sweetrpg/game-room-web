@@ -40,7 +40,7 @@ click==8.1.3
     # via flask
 deprecated==1.2.13
     # via limits
-dnspython==2.2.1
+dnspython==2.3.0
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -57,7 +57,7 @@ flask==2.0.2
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.0.1
+flask-caching==2.0.2
     # via -r requirements/app.in
 flask-cors==3.0.10
     # via -r requirements/app.in
@@ -75,7 +75,7 @@ greenlet==2.0.1
     # via
     #   -r requirements/app.in
     #   sqlalchemy
-hiredis==2.1.0
+hiredis==2.1.1
     # via -r requirements/deploy.in
 idna==3.4
     # via
@@ -91,7 +91,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.1.4
+limits==3.1.6
     # via python-logstash-async
 markupsafe==2.1.1
     # via
@@ -119,7 +119,7 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-packaging==22.0
+packaging==23.0
     # via limits
 pylogbeat==2.0.0
     # via python-logstash-async
@@ -142,9 +142,9 @@ python-logstash-async==2.5.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.4.1
+redis==4.4.2
     # via -r requirements/app.in
-requests==2.28.1
+requests==2.28.2
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -152,7 +152,7 @@ requests==2.28.1
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.12.1
+sentry-sdk[flask]==1.13.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -188,7 +188,7 @@ sweetrpg-web-core==0.0.131
     # via -r requirements/app.in
 typing-extensions==4.4.0
     # via limits
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   -r requirements/app.in
     #   requests
