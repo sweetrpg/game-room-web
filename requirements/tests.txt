@@ -112,7 +112,7 @@ kanka==0.1.2
     # via -r requirements/app.in
 limits==3.1.6
     # via python-logstash-async
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   jinja2
     #   werkzeug
@@ -127,7 +127,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.25.0
+mongoengine==0.26.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -190,7 +190,7 @@ requests==2.28.2
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.13.0
+sentry-sdk[flask]==1.14.0
     # via -r requirements/app.in
 six==1.16.0
     # via
