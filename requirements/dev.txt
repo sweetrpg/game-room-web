@@ -139,7 +139,7 @@ kanka==0.1.2
     # via -r requirements/app.in
 limits==3.1.6
     # via python-logstash-async
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   jinja2
     #   werkzeug
@@ -154,7 +154,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.25.0
+mongoengine==0.26.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -248,7 +248,7 @@ rstcheck==6.1.1
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.13.0
+sentry-sdk[flask]==1.14.0
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -272,7 +272,7 @@ sphinx-issues==3.0.1
     # via -r requirements/docs.in
 sphinx-tabs==3.4.1
     # via -r requirements/docs.in
-sphinxcontrib-applehelp==1.0.3
+sphinxcontrib-applehelp==1.0.4
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
     # via sphinx
@@ -324,7 +324,7 @@ tox==3.26.0
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.1
+types-docutils==0.19.1.2
     # via rstcheck-core
 typing-extensions==4.4.0
     # via
