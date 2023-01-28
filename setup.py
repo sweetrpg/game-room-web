@@ -17,7 +17,7 @@ setup(
         "sweetrpg-client",
         "kanka",
         "python-dateutil",
-        "python-dotenv==0.21.0",
+        "python-dotenv==0.21.1",
         "python-editor",
         "PyYAML==6.0",
         "redis",
