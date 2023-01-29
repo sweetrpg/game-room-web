@@ -86,7 +86,7 @@ frozenlist==1.3.3
     # via
     #   aiohttp
     #   aiosignal
-greenlet==2.0.1
+greenlet==2.0.2
     # via
     #   -r requirements/app.in
     #   sqlalchemy
@@ -95,6 +95,8 @@ idna==3.4
     #   requests
     #   yarl
 imagesize==1.4.1
+    # via sphinx
+importlib-metadata==6.0.0
     # via sphinx
 itsdangerous==2.1.2
     # via flask
@@ -108,7 +110,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.1.6
+limits==3.2.0
     # via python-logstash-async
 markupsafe==2.1.2
     # via
@@ -227,7 +229,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.46
+sqlalchemy==2.0.0
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -241,11 +243,11 @@ sweetrpg-db==0.0.54
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.86
+sweetrpg-library-objects==0.0.121
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.63
+sweetrpg-model-core==0.0.98
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
@@ -261,6 +263,7 @@ typing-extensions==4.4.0
     # via
     #   limits
     #   pydantic
+    #   sqlalchemy
 urllib3==1.26.14
     # via
     #   -r requirements/app.in
@@ -272,6 +275,8 @@ wrapt==1.14.1
     # via deprecated
 yarl==1.8.2
     # via aiohttp
+zipp==3.12.0
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

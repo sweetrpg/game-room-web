@@ -64,7 +64,7 @@ colorama==0.4.6
     #   typer
 commonmark==0.9.1
     # via rich
-coverage[toml]==7.0.5
+coverage[toml]==7.1.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -127,6 +127,8 @@ idna==3.4
     #   yarl
 imagesize==1.4.1
     # via sphinx
+importlib-metadata==6.0.0
+    # via sphinx
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
@@ -141,7 +143,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.1.6
+limits==3.2.0
     # via python-logstash-async
 markupsafe==2.1.2
     # via
@@ -182,7 +184,7 @@ packaging==23.0
     #   tox
 pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
-pathspec==0.10.3
+pathspec==0.11.0
     # via black
 pip-tools==6.12.1
     # via -r requirements/dev.in
@@ -291,7 +293,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==1.4.46
+sqlalchemy==2.0.0
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -305,11 +307,11 @@ sweetrpg-db==0.0.54
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.86
+sweetrpg-library-objects==0.0.121
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.63
+sweetrpg-model-core==0.0.98
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
@@ -334,8 +336,10 @@ types-docutils==0.19.1.2
     # via rstcheck-core
 typing-extensions==4.4.0
     # via
+    #   black
     #   limits
     #   pydantic
+    #   sqlalchemy
 urllib3==1.26.14
     # via
     #   -r requirements/app.in
@@ -351,6 +355,8 @@ wrapt==1.14.1
     # via deprecated
 yarl==1.8.2
     # via aiohttp
+zipp==3.12.0
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
