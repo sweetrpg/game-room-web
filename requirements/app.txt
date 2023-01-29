@@ -71,7 +71,7 @@ frozenlist==1.3.3
     # via
     #   aiohttp
     #   aiosignal
-greenlet==2.0.1
+greenlet==2.0.2
     # via
     #   -r requirements/app.in
     #   sqlalchemy
@@ -89,7 +89,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.1.6
+limits==3.2.0
     # via python-logstash-async
 markupsafe==2.1.2
     # via
@@ -158,7 +158,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==1.4.46
+sqlalchemy==2.0.0
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -172,11 +172,11 @@ sweetrpg-db==0.0.54
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.86
+sweetrpg-library-objects==0.0.121
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.63
+sweetrpg-model-core==0.0.98
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
@@ -185,7 +185,9 @@ sweetrpg-model-core==0.0.63
 sweetrpg-web-core==0.0.131
     # via -r requirements/app.in
 typing-extensions==4.4.0
-    # via limits
+    # via
+    #   limits
+    #   sqlalchemy
 urllib3==1.26.14
     # via
     #   -r requirements/app.in
