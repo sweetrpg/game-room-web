@@ -169,7 +169,7 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-mypy-extensions==0.4.3
+mypy-extensions==1.0.0
     # via black
 packaging==23.0
     # via
