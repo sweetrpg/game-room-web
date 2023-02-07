@@ -160,7 +160,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.1
+sqlalchemy==2.0.2
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
