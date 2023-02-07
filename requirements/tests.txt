@@ -207,7 +207,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.1
+sqlalchemy==2.0.2
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -250,7 +250,7 @@ urllib3==1.26.14
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.17.1
+virtualenv==20.18.0
     # via tox
 werkzeug==2.2.2
     # via flask
