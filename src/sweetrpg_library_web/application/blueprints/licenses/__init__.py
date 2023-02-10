@@ -18,9 +18,7 @@ blueprint = Blueprint("licenses", __name__, url_prefix="/licenses")
 
 @blueprint.route("/", methods=["GET"])
 def get_licenses_page():
-    """Get all licenses page.
-
-    """
+    """Get all licenses page."""
     context = get_context()
     current_app.logger.debug("context: %s", context)
     # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
@@ -32,19 +30,19 @@ def get_licenses_page():
     # except:
     #     current_app.logger.exception("Unable to fetch licenses!")
     #     flash('Unable to fetch licenses!')
-    context.update({
-                    'pagination': {},  # TODO
-                    'api_base_url': os.environ['LIBRARY_API_EXTERNAL_BASE_URL'],
-                    })
+    context.update(
+        {
+            "pagination": {},  # TODO
+            "api_base_url": os.environ["LIBRARY_API_EXTERNAL_BASE_URL"],
+        }
+    )
 
     return render_page("apps/library/licenses/many.html", context=context)
 
 
 @blueprint.route("/data", methods=["GET"])
 def get_licenses_data():
-    """Get all licenses data.
-
-    """
+    """Get all licenses data."""
     context = get_context()
     current_app.logger.debug("context: %s", context)
     api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
@@ -62,9 +60,7 @@ def get_licenses_data():
 
 @blueprint.route("/<id>", methods=["GET"])
 def get_license_page(id: str):
-    """Get a specific license page.
-
-    """
+    """Get a specific license page."""
     context = get_context()
     current_app.logger.debug("context: %s", context)
     # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
@@ -74,16 +70,14 @@ def get_license_page(id: str):
     # except:
     #     current_app.logger.exception(f"Unable to fetch license {id}!")
     #     flash(f'Unable to fetch license {id}!')
-    context.update({'id': id})
+    context.update({"id": id})
 
-    return render_page("apps/library/licenses/single.html", context=context)
+    return render_page("apps/library/licenses/detail.html", context=context)
 
 
 @blueprint.route("/<id>/data", methods=["GET"])
 def get_license_data(id: str):
-    """Get a specific license data.
-
-    """
+    """Get a specific license data."""
     context = get_context()
     current_app.logger.debug("context: %s", context)
     api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
@@ -94,4 +88,4 @@ def get_license_data(id: str):
     except:
         current_app.logger.exception(f"Unable to fetch license {id}!")
         # flash(f'Unable to fetch license {id}!')
-        raise NotFound(f'Unable to fetch license {id}!')
+        raise NotFound(f"Unable to fetch license {id}!")
