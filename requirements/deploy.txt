@@ -142,7 +142,7 @@ python-logstash-async==2.5.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.4.2
+redis==4.5.1
     # via -r requirements/app.in
 requests==2.28.2
     # via
@@ -152,7 +152,7 @@ requests==2.28.2
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.14.0
+sentry-sdk[flask]==1.15.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -160,7 +160,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.2
+sqlalchemy==2.0.3
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
