@@ -121,7 +121,7 @@ packaging==23.0
     # via limits
 pylogbeat==2.0.0
     # via python-logstash-async
-pymongo[srv]==4.0.2
+pymongo[srv]==4.3.3
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -168,11 +168,11 @@ sweetrpg-api-core==0.0.81
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.54
+sweetrpg-db==0.0.91
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.123
+sweetrpg-library-objects==0.0.172
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -182,7 +182,7 @@ sweetrpg-model-core==0.0.106
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.175
+sweetrpg-web-core==0.0.176
     # via -r requirements/app.in
 typing-extensions==4.5.0
     # via
