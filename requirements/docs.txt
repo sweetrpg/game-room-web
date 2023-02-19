@@ -60,7 +60,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-flask==2.0.2
+flask==2.2.3
     # via
     #   -r requirements/app.in
     #   flask-caching
@@ -229,7 +229,7 @@ sqlalchemy==2.0.4
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.81
+sweetrpg-api-core==0.0.95
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -239,7 +239,7 @@ sweetrpg-db==0.0.91
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.172
+sweetrpg-library-objects==0.0.173
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
