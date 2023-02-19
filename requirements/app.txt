@@ -156,7 +156,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.3
+sqlalchemy==2.0.4
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -170,7 +170,7 @@ sweetrpg-db==0.0.54
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.154
+sweetrpg-library-objects==0.0.123
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -182,7 +182,7 @@ sweetrpg-model-core==0.0.102
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.153
     # via -r requirements/app.in
-typing-extensions==4.4.0
+typing-extensions==4.5.0
     # via
     #   limits
     #   sqlalchemy
@@ -191,7 +191,7 @@ urllib3==1.26.14
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-werkzeug==2.2.2
+werkzeug==2.2.3
     # via flask
 wrapt==1.14.1
     # via deprecated
