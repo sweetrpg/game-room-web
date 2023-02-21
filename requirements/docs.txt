@@ -253,7 +253,7 @@ sweetrpg-web-core==0.0.178
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.4
+types-docutils==0.19.1.5
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
