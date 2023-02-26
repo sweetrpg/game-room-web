@@ -64,7 +64,7 @@ colorama==0.4.6
     #   typer
 commonmark==0.9.1
     # via rich
-coverage[toml]==7.1.0
+coverage[toml]==7.2.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -293,13 +293,13 @@ sqlalchemy==2.0.4
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.95
+sweetrpg-api-core==0.0.96
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.91
+sweetrpg-db==0.0.92
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -313,7 +313,7 @@ sweetrpg-model-core==0.0.106
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.178
+sweetrpg-web-core==0.0.179
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -324,11 +324,11 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.4.5
+tox==4.4.6
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.5
+types-docutils==0.19.1.6
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
