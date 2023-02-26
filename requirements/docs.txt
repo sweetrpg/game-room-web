@@ -243,13 +243,13 @@ sweetrpg-library-objects==0.0.174
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.106
+sweetrpg-model-core==0.0.107
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.181
+sweetrpg-web-core==0.0.182
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
