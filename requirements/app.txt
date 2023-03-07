@@ -32,7 +32,7 @@ certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via
     #   aiohttp
     #   requests
@@ -156,7 +156,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.4
+sqlalchemy==2.0.5.post1
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi

@@ -48,7 +48,7 @@ certifi==2022.12.7
     #   sentry-sdk
 chardet==5.1.0
     # via tox
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via
     #   aiohttp
     #   requests
@@ -287,7 +287,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.4
+sqlalchemy==2.0.5.post1
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
