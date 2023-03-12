@@ -141,7 +141,7 @@ packaging==23.0
     #   sphinx
 pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
-pydantic==1.10.5
+pydantic==1.10.6
     # via rstcheck-core
 pygments==2.14.0
     # via
@@ -227,17 +227,17 @@ sqlalchemy==2.0.5.post1
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.102
+sweetrpg-api-core==0.0.103
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.95
+sweetrpg-db==0.0.96
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.181
+sweetrpg-library-objects==0.0.182
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -247,7 +247,7 @@ sweetrpg-model-core==0.0.108
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.192
+sweetrpg-web-core==0.0.193
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
@@ -258,7 +258,7 @@ typing-extensions==4.5.0
     #   limits
     #   pydantic
     #   sqlalchemy
-urllib3==1.26.14
+urllib3==1.26.15
     # via
     #   -r requirements/app.in
     #   requests
