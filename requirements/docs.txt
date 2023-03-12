@@ -247,7 +247,7 @@ sweetrpg-model-core==0.0.109
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.198
+sweetrpg-web-core==0.0.199
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
