@@ -84,7 +84,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
     # via pytest
 filelock==3.9.0
     # via
@@ -207,7 +207,7 @@ pymongo[srv]==4.3.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.5.0
+pyproject-api==1.5.1
     # via tox
 pyproject-hooks==1.0.0
     # via build
@@ -246,7 +246,7 @@ requests==2.28.2
     #   sweetrpg-client
 rich==12.6.0
     # via typer
-rstcheck==6.1.1
+rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
@@ -287,7 +287,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.5.post1
+sqlalchemy==2.0.6
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -322,7 +322,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.4.6
+tox==4.4.7
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
@@ -338,7 +338,7 @@ urllib3==1.26.15
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.20.0
+virtualenv==20.21.0
     # via tox
 werkzeug==2.2.3
     # via flask
