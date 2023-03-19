@@ -148,7 +148,7 @@ requests==2.28.2
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.16.0
+sentry-sdk[flask]==1.17.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -156,21 +156,21 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.6
+sqlalchemy==2.0.7
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.105
+sweetrpg-api-core==0.0.106
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.97
+sweetrpg-db==0.0.98
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.185
+sweetrpg-library-objects==0.0.186
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -180,7 +180,7 @@ sweetrpg-model-core==0.0.109
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.199
+sweetrpg-web-core==0.0.200
     # via -r requirements/app.in
 typing-extensions==4.5.0
     # via
