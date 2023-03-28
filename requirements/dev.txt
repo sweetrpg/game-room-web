@@ -86,7 +86,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.5
+filelock==3.10.7
     # via
     #   tox
     #   virtualenv
@@ -324,11 +324,11 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.4.7
+tox==4.4.8
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.6
+types-docutils==0.19.1.7
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
