@@ -65,7 +65,7 @@ dnspython==2.3.0
     #   sweetrpg-db
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.5
+filelock==3.10.7
     # via
     #   tox
     #   virtualenv
@@ -238,7 +238,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.4.7
+tox==4.4.8
     # via -r requirements/tests.in
 typing-extensions==4.5.0
     # via
