@@ -24,7 +24,7 @@ babel==2.12.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.5
+blinker==1.6
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -257,6 +257,7 @@ types-docutils==0.19.1.7
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
+    #   blinker
     #   limits
     #   pydantic
     #   sqlalchemy
