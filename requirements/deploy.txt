@@ -20,7 +20,7 @@ attrs==22.2.0
     #   jsonschema
 backoff==1.10.0
     # via analytics-python
-blinker==1.5
+blinker==1.6
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -188,6 +188,7 @@ sweetrpg-web-core==0.0.220
     # via -r requirements/app.in
 typing-extensions==4.5.0
     # via
+    #   blinker
     #   limits
     #   sqlalchemy
 urllib3==1.26.15

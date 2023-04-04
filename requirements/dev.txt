@@ -29,7 +29,7 @@ backoff==1.10.0
     # via analytics-python
 black==23.3.0
     # via -r requirements/dev.in
-blinker==1.5
+blinker==1.6
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -332,6 +332,7 @@ types-docutils==0.19.1.7
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
+    #   blinker
     #   limits
     #   pydantic
     #   sqlalchemy
