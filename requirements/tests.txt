@@ -20,7 +20,6 @@ attrs==22.2.0
     # via
     #   aiohttp
     #   jsonschema
-    #   pytest
 backoff==1.10.0
     # via analytics-python
 blinker==1.6
@@ -48,7 +47,7 @@ click==8.1.3
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.2.2
+coverage[toml]==7.2.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -65,7 +64,7 @@ dnspython==2.3.0
     #   sweetrpg-db
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.7
+filelock==3.11.0
     # via
     #   tox
     #   virtualenv
@@ -168,7 +167,7 @@ pyproject-api==1.5.1
     # via tox
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.2.2
+pytest==7.3.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -198,7 +197,7 @@ requests==2.28.2
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.18.0
+sentry-sdk[flask]==1.19.1
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -206,21 +205,21 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.8
+sqlalchemy==2.0.9
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.116
+sweetrpg-api-core==0.0.117
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.103
+sweetrpg-db==0.0.104
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.196
+sweetrpg-library-objects==0.0.197
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -230,7 +229,7 @@ sweetrpg-model-core==0.0.112
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.220
+sweetrpg-web-core==0.0.221
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -238,7 +237,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.4.8
+tox==4.4.11
     # via -r requirements/tests.in
 typing-extensions==4.5.0
     # via
