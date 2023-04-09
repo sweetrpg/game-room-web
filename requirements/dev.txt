@@ -22,7 +22,6 @@ attrs==22.2.0
     # via
     #   aiohttp
     #   jsonschema
-    #   pytest
 babel==2.12.1
     # via sphinx
 backoff==1.10.0
@@ -64,7 +63,7 @@ colorama==0.4.6
     #   typer
 commonmark==0.9.1
     # via rich
-coverage[toml]==7.2.2
+coverage[toml]==7.2.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -86,7 +85,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.7
+filelock==3.11.0
     # via
     #   tox
     #   virtualenv
@@ -215,7 +214,7 @@ pyproject-hooks==1.0.0
     # via build
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.2.2
+pytest==7.3.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -252,7 +251,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.18.0
+sentry-sdk[flask]==1.19.1
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -289,21 +288,21 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.8
+sqlalchemy==2.0.9
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.116
+sweetrpg-api-core==0.0.117
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.103
+sweetrpg-db==0.0.104
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.196
+sweetrpg-library-objects==0.0.197
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -313,7 +312,7 @@ sweetrpg-model-core==0.0.112
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.220
+sweetrpg-web-core==0.0.221
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -324,7 +323,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.4.8
+tox==4.4.11
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
