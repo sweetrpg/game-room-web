@@ -24,7 +24,7 @@ babel==2.12.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.6
+blinker==1.6.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -145,7 +145,7 @@ pallets-sphinx-themes==2.0.3
     # via -r requirements/docs.in
 pydantic==1.10.7
     # via rstcheck-core
-pygments==2.14.0
+pygments==2.15.0
     # via
     #   rich
     #   sphinx

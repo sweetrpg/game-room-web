@@ -20,7 +20,7 @@ attrs==22.2.0
     #   jsonschema
 backoff==1.10.0
     # via analytics-python
-blinker==1.6
+blinker==1.6.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
