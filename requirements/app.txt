@@ -20,7 +20,7 @@ attrs==22.2.0
     #   jsonschema
 backoff==1.10.0
     # via analytics-python
-blinker==1.6
+blinker==1.6.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -172,7 +172,7 @@ sweetrpg-db==0.0.105
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.199
+sweetrpg-library-objects==0.0.200
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
