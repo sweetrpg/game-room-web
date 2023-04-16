@@ -22,7 +22,7 @@ attrs==22.2.0
     #   jsonschema
 backoff==1.10.0
     # via analytics-python
-blinker==1.6.1
+blinker==1.6.2
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -142,7 +142,7 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-packaging==23.0
+packaging==23.1
     # via
     #   limits
     #   pyproject-api
@@ -167,7 +167,7 @@ pyproject-api==1.5.1
     # via tox
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.3.0
+pytest==7.3.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -209,17 +209,17 @@ sqlalchemy==2.0.9
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.120
+sweetrpg-api-core==0.0.121
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.105
+sweetrpg-db==0.0.106
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.200
+sweetrpg-library-objects==0.0.201
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -229,7 +229,7 @@ sweetrpg-model-core==0.0.113
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.227
+sweetrpg-web-core==0.0.228
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -237,11 +237,10 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.4.11
+tox==4.4.12
     # via -r requirements/tests.in
 typing-extensions==4.5.0
     # via
-    #   blinker
     #   limits
     #   sqlalchemy
 urllib3==1.26.15

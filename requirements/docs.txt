@@ -24,7 +24,7 @@ babel==2.12.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.6.1
+blinker==1.6.2
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -136,7 +136,7 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-packaging==23.0
+packaging==23.1
     # via
     #   limits
     #   pallets-sphinx-themes
@@ -235,11 +235,11 @@ sweetrpg-api-core==0.0.120
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.105
+sweetrpg-db==0.0.106
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.200
+sweetrpg-library-objects==0.0.201
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -249,7 +249,7 @@ sweetrpg-model-core==0.0.113
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.227
+sweetrpg-web-core==0.0.228
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
@@ -257,7 +257,6 @@ types-docutils==0.19.1.7
     # via rstcheck-core
 typing-extensions==4.5.0
     # via
-    #   blinker
     #   limits
     #   pydantic
     #   sqlalchemy
