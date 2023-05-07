@@ -60,7 +60,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-flask==2.2.4
+flask==2.2.5
     # via
     #   -r requirements/app.in
     #   flask-caching
@@ -173,7 +173,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.5.4
     # via -r requirements/app.in
-requests==2.29.0
+requests==2.30.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -188,7 +188,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.21.1
+sentry-sdk[flask]==1.22.1
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -235,7 +235,7 @@ sweetrpg-api-core==0.0.132
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.111
+sweetrpg-db==0.0.112
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -249,11 +249,11 @@ sweetrpg-model-core==0.0.116
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.248
+sweetrpg-web-core==0.0.249
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.8
+types-docutils==0.19.1.9
     # via rstcheck-core
 typing-extensions==4.5.0
     # via

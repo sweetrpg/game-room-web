@@ -68,7 +68,7 @@ filelock==3.12.0
     # via
     #   tox
     #   virtualenv
-flask==2.2.4
+flask==2.2.5
     # via
     #   -r requirements/app.in
     #   flask-caching
@@ -189,7 +189,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.5.4
     # via -r requirements/app.in
-requests==2.29.0
+requests==2.30.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -197,7 +197,7 @@ requests==2.29.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.21.1
+sentry-sdk[flask]==1.22.1
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -215,7 +215,7 @@ sweetrpg-api-core==0.0.132
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.111
+sweetrpg-db==0.0.112
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -229,7 +229,7 @@ sweetrpg-model-core==0.0.116
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.248
+sweetrpg-web-core==0.0.249
     # via -r requirements/app.in
 tomli==2.0.1
     # via
