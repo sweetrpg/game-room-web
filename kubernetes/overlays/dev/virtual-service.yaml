@@ -1,26 +1,31 @@
-# ---
-# # See more at https://istio.io/docs/reference/config/networking/virtual-service/
-# apiVersion: networking.istio.io/v1alpha3
-# kind: VirtualService
+---
+# See more at https://istio.io/docs/reference/config/networking/virtual-service/
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
 
-# metadata:
-#     name: web
+metadata:
+    name: web-v1
 
-# spec:
-#     hosts:
-#         - dev.sweetrpg.com
-#     gateways:
-#         - sweetrpg-main/gateway
-#     http:
-# #   tls:
-# #     - match:
-# #         - uri:
-# #             prefix: /api/0/library
-# #         - port: 443
-# #           sniHosts:
-# #             - dev.sweetrpg.com
-# #       route:
-# #         - destination:
-# #             host: api-v1.sweetrpg-library.svc.cluster.local
-# #             port:
-# #               number: 8281
+spec:
+    hosts:
+        - dev.sweetrpg.com
+    gateways:
+        - sweetrpg-main/gateway
+    http:
+        - route:
+              - destination:
+                    host: web-v1
+                    port:
+                        number: 8282
+#   tls:
+#     - match:
+#         - uri:
+#             prefix: /api/0/library
+#         - port: 443
+#           sniHosts:
+#             - dev.sweetrpg.com
+#       route:
+#         - destination:
+#             host: api-v1.sweetrpg-library.svc.cluster.local
+#             port:
+#               number: 8281
