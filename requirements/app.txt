@@ -95,6 +95,7 @@ limits==3.4.0
 markupsafe==2.1.2
     # via
     #   jinja2
+    #   sentry-sdk
     #   werkzeug
 marshmallow==3.14.1
     # via
@@ -151,7 +152,7 @@ requests==2.30.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.22.2
+sentry-sdk[flask]==1.23.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -183,7 +184,7 @@ sweetrpg-model-core==0.0.118
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.261
+sweetrpg-web-core==0.0.262
     # via -r requirements/app.in
 typing-extensions==4.5.0
     # via

@@ -97,6 +97,7 @@ limits==3.4.0
 markupsafe==2.1.2
     # via
     #   jinja2
+    #   sentry-sdk
     #   werkzeug
 marshmallow==3.14.1
     # via
@@ -153,7 +154,7 @@ requests==2.30.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.22.2
+sentry-sdk[flask]==1.23.0
     # via -r requirements/app.in
 six==1.16.0
     # via
