@@ -109,7 +109,7 @@ jsonschema==4.17.3
     # via jsonapi-client
 kanka==0.1.2
     # via -r requirements/app.in
-limits==3.4.0
+limits==3.5.0
     # via python-logstash-async
 markupsafe==2.1.2
     # via
@@ -190,7 +190,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.23.0
+sentry-sdk[flask]==1.23.1
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -227,17 +227,17 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.13
+sqlalchemy==2.0.15
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.140
+sweetrpg-api-core==0.0.141
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.115
+sweetrpg-db==0.0.116
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -251,7 +251,7 @@ sweetrpg-model-core==0.0.118
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.262
+sweetrpg-web-core==0.0.263
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
