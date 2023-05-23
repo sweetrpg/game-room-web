@@ -191,7 +191,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.5.5
     # via -r requirements/app.in
-requests==2.30.0
+requests==2.31.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -241,7 +241,7 @@ tomli==2.0.1
     #   tox
 tox==4.5.1
     # via -r requirements/tests.in
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via
     #   limits
     #   sqlalchemy

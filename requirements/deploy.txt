@@ -146,7 +146,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.5.5
     # via -r requirements/app.in
-requests==2.30.0
+requests==2.31.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -188,7 +188,7 @@ sweetrpg-model-core==0.0.119
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.268
     # via -r requirements/app.in
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via
     #   limits
     #   sqlalchemy
