@@ -175,7 +175,7 @@ pyyaml==6.0
     # via -r requirements/app.in
 redis==4.5.5
     # via -r requirements/app.in
-requests==2.30.0
+requests==2.31.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -257,7 +257,7 @@ typer[all]==0.7.0
     # via rstcheck
 types-docutils==0.19.1.9
     # via rstcheck-core
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via
     #   limits
     #   pydantic
