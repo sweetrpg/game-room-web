@@ -39,7 +39,7 @@ charset-normalizer==3.1.0
     #   requests
 click==8.1.3
     # via flask
-deprecated==1.2.13
+deprecated==1.2.14
     # via limits
 dnspython==2.3.0
     # via
@@ -152,7 +152,7 @@ requests==2.31.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.23.1
+sentry-sdk[flask]==1.24.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -164,17 +164,17 @@ sqlalchemy==2.0.15
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.152
+sweetrpg-api-core==0.0.155
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.122
+sweetrpg-db==0.0.123
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.230
+sweetrpg-library-objects==0.0.231
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -184,13 +184,13 @@ sweetrpg-model-core==0.0.123
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.281
+sweetrpg-web-core==0.0.282
     # via -r requirements/app.in
-typing-extensions==4.6.0
+typing-extensions==4.6.2
     # via
     #   limits
     #   sqlalchemy
-urllib3==1.26.15
+urllib3==1.26.16
     # via
     #   -r requirements/app.in
     #   requests

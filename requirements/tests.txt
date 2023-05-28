@@ -10,7 +10,7 @@ aiosignal==1.3.1
     # via aiohttp
 analytics-python==1.4.post1
     # via -r requirements/app.in
-asgiref==3.6.0
+asgiref==3.7.2
     # via -r requirements/tests.in
 async-timeout==4.0.2
     # via
@@ -32,7 +32,7 @@ cachelib==0.9.0
     # via
     #   flask-caching
     #   flask-session
-cachetools==5.3.0
+cachetools==5.3.1
     # via tox
 certifi==2023.5.7
     # via
@@ -48,13 +48,13 @@ click==8.1.3
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.2.5
+coverage[toml]==7.2.6
     # via
     #   coverage-badge
     #   pytest-cov
 coverage-badge==1.1.0
     # via -r requirements/tests.in
-deprecated==1.2.13
+deprecated==1.2.14
     # via limits
 distlib==0.3.6
     # via virtualenv
@@ -199,7 +199,7 @@ requests==2.31.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.23.1
+sentry-sdk[flask]==1.24.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -211,17 +211,17 @@ sqlalchemy==2.0.15
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.153
+sweetrpg-api-core==0.0.155
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.122
+sweetrpg-db==0.0.123
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.231
+sweetrpg-library-objects==0.0.232
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -231,7 +231,7 @@ sweetrpg-model-core==0.0.123
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.281
+sweetrpg-web-core==0.0.282
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -239,13 +239,14 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.5.1
+tox==4.5.2
     # via -r requirements/tests.in
-typing-extensions==4.6.0
+typing-extensions==4.6.2
     # via
+    #   asgiref
     #   limits
     #   sqlalchemy
-urllib3==1.26.15
+urllib3==1.26.16
     # via
     #   -r requirements/app.in
     #   requests
