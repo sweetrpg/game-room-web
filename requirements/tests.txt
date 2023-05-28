@@ -231,7 +231,7 @@ sweetrpg-model-core==0.0.124
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.286
+sweetrpg-web-core==0.0.287
     # via -r requirements/app.in
 tomli==2.0.1
     # via
