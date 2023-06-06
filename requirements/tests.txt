@@ -239,7 +239,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.5.2
+tox==4.6.0
     # via -r requirements/tests.in
 typing-extensions==4.6.3
     # via
