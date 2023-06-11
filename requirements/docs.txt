@@ -143,9 +143,9 @@ packaging==23.1
     #   limits
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.1.0
+pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==1.10.8
+pydantic==1.10.9
     # via rstcheck-core
 pygments==2.15.1
     # via
@@ -190,7 +190,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.25.0
+sentry-sdk[flask]==1.25.1
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -227,7 +227,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.15
+sqlalchemy==2.0.16
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -237,7 +237,7 @@ sweetrpg-api-core==0.0.161
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.125
+sweetrpg-db==0.0.126
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -251,7 +251,7 @@ sweetrpg-model-core==0.0.125
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.294
+sweetrpg-web-core==0.0.295
     # via -r requirements/app.in
 typer[all]==0.7.0
     # via rstcheck
@@ -262,12 +262,12 @@ typing-extensions==4.6.3
     #   limits
     #   pydantic
     #   sqlalchemy
-urllib3==2.0.2
+urllib3==2.0.3
     # via
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-werkzeug==2.3.4
+werkzeug==2.3.6
     # via flask
 wrapt==1.15.0
     # via deprecated
