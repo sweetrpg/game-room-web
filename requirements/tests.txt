@@ -165,7 +165,7 @@ pymongo[srv]==4.3.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.5.1
+pyproject-api==1.5.2
     # via tox
 pyrsistent==0.19.3
     # via jsonschema
@@ -211,17 +211,17 @@ sqlalchemy==2.0.16
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.165
+sweetrpg-api-core==0.0.166
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.127
+sweetrpg-db==0.0.128
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.242
+sweetrpg-library-objects==0.0.243
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -231,7 +231,7 @@ sweetrpg-model-core==0.0.126
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.301
+sweetrpg-web-core==0.0.302
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -239,7 +239,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.6.0
+tox==4.6.2
     # via -r requirements/tests.in
 typing-extensions==4.6.3
     # via
@@ -251,7 +251,7 @@ urllib3==2.0.3
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.23.0
+virtualenv==20.23.1
     # via tox
 werkzeug==2.3.6
     # via flask
