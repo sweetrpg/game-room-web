@@ -125,7 +125,7 @@ packaging==23.1
     # via limits
 pylogbeat==2.0.0
     # via python-logstash-async
-pymongo[srv]==4.3.3
+pymongo[srv]==4.4.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -154,7 +154,7 @@ requests==2.31.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-sentry-sdk[flask]==1.25.1
+sentry-sdk[flask]==1.26.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -162,7 +162,7 @@ six==1.16.0
     #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.16
+sqlalchemy==2.0.17
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -176,7 +176,7 @@ sweetrpg-db==0.0.129
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.246
+sweetrpg-library-objects==0.0.247
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
