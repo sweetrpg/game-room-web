@@ -187,12 +187,12 @@ pathspec==0.11.1
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
-platformdirs==3.6.0
+platformdirs==3.8.0
     # via
     #   black
     #   tox
     #   virtualenv
-pluggy==1.0.0
+pluggy==1.2.0
     # via
     #   pytest
     #   tox
@@ -205,7 +205,7 @@ pygments==2.15.1
     #   sphinx-tabs
 pylogbeat==2.0.0
     # via python-logstash-async
-pymongo[srv]==4.3.3
+pymongo[srv]==4.4.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -216,7 +216,7 @@ pyproject-hooks==1.0.0
     # via build
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.3.2
+pytest==7.4.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -253,7 +253,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.25.1
+sentry-sdk[flask]==1.26.0
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
@@ -290,7 +290,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlalchemy==2.0.16
+sqlalchemy==2.0.17
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -304,7 +304,7 @@ sweetrpg-db==0.0.129
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.246
+sweetrpg-library-objects==0.0.247
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -325,7 +325,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.6.2
+tox==4.6.3
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
