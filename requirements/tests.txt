@@ -83,7 +83,7 @@ flask==2.3.2
     #   sweetrpg-web-core
 flask-caching==2.0.2
     # via -r requirements/app.in
-flask-cors==3.0.10
+flask-cors==4.0.0
     # via -r requirements/app.in
 flask-dotenv==0.1.2
     # via -r requirements/app.in
@@ -189,7 +189,7 @@ python-logstash-async==2.5.0
     # via -r requirements/app.in
 pyyaml==6.0
     # via -r requirements/app.in
-redis==4.5.5
+redis==4.6.0
     # via -r requirements/app.in
 requests==2.31.0
     # via
@@ -204,7 +204,6 @@ sentry-sdk[flask]==1.26.0
 six==1.16.0
     # via
     #   analytics-python
-    #   flask-cors
     #   flask-rest-jsonapi
     #   python-dateutil
 sqlalchemy==2.0.17
