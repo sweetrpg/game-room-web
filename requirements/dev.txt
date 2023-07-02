@@ -196,7 +196,7 @@ pluggy==1.2.0
     # via
     #   pytest
     #   tox
-pydantic==1.10.9
+pydantic==1.10.10
     # via rstcheck-core
 pygments==2.15.1
     # via
@@ -293,17 +293,17 @@ sqlalchemy==2.0.17
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.171
+sweetrpg-api-core==0.0.172
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.131
+sweetrpg-db==0.0.132
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.250
+sweetrpg-library-objects==0.0.251
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -313,7 +313,7 @@ sweetrpg-model-core==0.0.128
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.309
+sweetrpg-web-core==0.0.310
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -330,7 +330,7 @@ typer[all]==0.7.0
     # via rstcheck
 types-docutils==0.19.1.9
     # via rstcheck-core
-typing-extensions==4.6.3
+typing-extensions==4.7.0
     # via
     #   asgiref
     #   limits
