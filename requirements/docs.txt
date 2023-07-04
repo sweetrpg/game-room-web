@@ -256,7 +256,7 @@ typer[all]==0.7.0
     # via rstcheck
 types-docutils==0.19.1.9
     # via rstcheck-core
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   limits
     #   pydantic

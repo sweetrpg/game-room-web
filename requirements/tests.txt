@@ -63,7 +63,7 @@ dnspython==2.3.0
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via pytest
 filelock==3.12.2
     # via
@@ -240,7 +240,7 @@ tomli==2.0.1
     #   tox
 tox==4.6.3
     # via -r requirements/tests.in
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   asgiref
     #   limits
