@@ -84,7 +84,7 @@ docutils==0.18.1
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via pytest
 filelock==3.12.2
     # via
@@ -330,7 +330,7 @@ typer[all]==0.7.0
     # via rstcheck
 types-docutils==0.19.1.9
     # via rstcheck-core
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   asgiref
     #   limits
