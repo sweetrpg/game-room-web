@@ -192,7 +192,7 @@ sweetrpg-model-core==0.0.129
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.318
+sweetrpg-web-core==0.0.319
     # via -r requirements/app.in
 typing-extensions==4.7.1
     # via
