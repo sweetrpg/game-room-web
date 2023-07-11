@@ -27,7 +27,7 @@ babel==2.12.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-black==23.3.0
+black==23.7.0
     # via -r requirements/dev.in
 blinker==1.6.2
     # via
@@ -262,7 +262,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.27.1
+sentry-sdk[flask]==1.28.0
     # via -r requirements/app.in
 shellingham==1.5.0.post1
     # via typer
