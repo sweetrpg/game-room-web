@@ -167,7 +167,7 @@ requests==2.31.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-rpds-py==0.8.10
+rpds-py==0.8.11
     # via
     #   jsonschema
     #   referencing
