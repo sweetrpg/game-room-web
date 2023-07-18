@@ -60,7 +60,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 deprecated==1.2.14
     # via limits
-distlib==0.3.6
+distlib==0.3.7
     # via virtualenv
 dnspython==2.4.0
     # via
@@ -214,7 +214,7 @@ requests==2.31.0
     #   kanka
     #   python-logstash-async
     #   sweetrpg-client
-rpds-py==0.8.10
+rpds-py==0.8.11
     # via
     #   jsonschema
     #   referencing

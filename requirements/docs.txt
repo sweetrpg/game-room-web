@@ -201,7 +201,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==12.6.0
     # via typer
-rpds-py==0.8.10
+rpds-py==0.8.11
     # via
     #   jsonschema
     #   referencing
