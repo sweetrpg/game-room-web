@@ -10,8 +10,6 @@ aiosignal==1.3.1
     # via aiohttp
 analytics-python==1.4.post1
     # via -r requirements/app.in
-anyio==3.7.1
-    # via httpcore
 asgiref==3.7.2
     # via -r requirements/tests.in
 async-timeout==4.0.2
@@ -39,7 +37,6 @@ cachetools==5.3.1
     # via tox
 certifi==2023.7.22
     # via
-    #   httpcore
     #   requests
     #   sentry-sdk
 chardet==5.1.0
@@ -62,15 +59,13 @@ deprecated==1.2.14
     # via limits
 distlib==0.3.7
     # via virtualenv
-dnspython==2.4.0
+dnspython==2.4.1
     # via
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
 exceptiongroup==1.1.2
-    # via
-    #   anyio
-    #   pytest
+    # via pytest
 filelock==3.12.2
     # via
     #   tox
@@ -103,13 +98,8 @@ frozenlist==1.4.0
     #   aiosignal
 greenlet==2.0.2
     # via sqlalchemy
-h11==0.14.0
-    # via httpcore
-httpcore==0.17.3
-    # via dnspython
 idna==3.4
     # via
-    #   anyio
     #   requests
     #   yarl
 importlib-resources==6.0.0
@@ -225,11 +215,6 @@ six==1.16.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sniffio==1.3.0
-    # via
-    #   anyio
-    #   dnspython
-    #   httpcore
 sqlalchemy==2.0.19
     # via
     #   -r requirements/app.in
@@ -248,7 +233,7 @@ sweetrpg-library-objects==0.0.261
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.131
+sweetrpg-model-core==0.0.135
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
