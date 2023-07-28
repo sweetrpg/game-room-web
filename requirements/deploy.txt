@@ -113,7 +113,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.26.0
+mongoengine==0.27.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -174,7 +174,7 @@ sqlalchemy==2.0.19
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.184
+sweetrpg-api-core==0.0.186
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -184,7 +184,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.263
+sweetrpg-library-objects==0.0.264
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -194,7 +194,7 @@ sweetrpg-model-core==0.0.136
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.334
+sweetrpg-web-core==0.0.335
     # via -r requirements/app.in
 typing-extensions==4.7.1
     # via
@@ -205,7 +205,7 @@ urllib3==2.0.4
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-uwsgi==2.0.21
+uwsgi==2.0.22
     # via -r requirements/deploy.in
 werkzeug==2.3.6
     # via flask
