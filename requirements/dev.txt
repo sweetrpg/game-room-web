@@ -179,11 +179,11 @@ packaging==23.1
     #   tox
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pathspec==0.11.1
+pathspec==0.11.2
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
-platformdirs==3.9.1
+platformdirs==3.10.0
     # via
     #   black
     #   tox
@@ -290,7 +290,7 @@ sqlalchemy==2.0.19
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.187
+sweetrpg-api-core==0.0.188
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -300,7 +300,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.265
+sweetrpg-library-objects==0.0.266
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -310,7 +310,7 @@ sweetrpg-model-core==0.0.136
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.339
+sweetrpg-web-core==0.0.340
     # via -r requirements/app.in
 tomli==2.0.1
     # via
