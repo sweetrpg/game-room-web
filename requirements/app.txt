@@ -148,7 +148,7 @@ rpds-py==0.9.2
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.28.1
+sentry-sdk[flask]==1.29.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -179,7 +179,7 @@ sweetrpg-model-core==0.0.137
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.343
+sweetrpg-web-core==0.0.344
     # via -r requirements/app.in
 typing-extensions==4.7.1
     # via sqlalchemy
