@@ -310,7 +310,7 @@ sweetrpg-model-core==0.0.138
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.350
+sweetrpg-web-core==0.0.351
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -321,7 +321,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.6.4
+tox==4.7.0
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
