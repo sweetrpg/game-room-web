@@ -40,7 +40,7 @@ charset-normalizer==3.2.0
     #   requests
 click==8.1.6
     # via flask
-dnspython==2.4.1
+dnspython==2.4.2
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.138
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.351
+sweetrpg-web-core==0.0.352
     # via -r requirements/app.in
 typing-extensions==4.7.1
     # via sqlalchemy
