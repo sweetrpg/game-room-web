@@ -45,7 +45,7 @@ dnspython==2.4.2
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-flask==2.3.2
+flask==2.3.3
     # via
     #   -r requirements/app.in
     #   flask-caching
