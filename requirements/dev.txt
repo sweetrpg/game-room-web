@@ -35,7 +35,7 @@ blinker==1.6.2
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
-build==0.10.0
+build==1.0.0
     # via pip-tools
 cachelib==0.9.0
     # via
@@ -204,11 +204,11 @@ pymongo[srv]==4.5.0
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.5.4
+pyproject-api==1.6.1
     # via tox
 pyproject-hooks==1.0.0
     # via build
-pytest==7.4.0
+pytest==7.4.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -250,7 +250,7 @@ rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.3
     # via rstcheck
-sentry-sdk[flask]==1.29.2
+sentry-sdk[flask]==1.30.0
     # via -r requirements/app.in
 shellingham==1.5.3
     # via typer
@@ -261,7 +261,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.4
+sphinx==7.2.5
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -295,7 +295,7 @@ sqlalchemy==2.0.20
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.200
+sweetrpg-api-core==0.0.201
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -315,7 +315,7 @@ sweetrpg-model-core==0.0.141
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.371
+sweetrpg-web-core==0.0.372
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -326,7 +326,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.10.0
+tox==4.11.1
     # via -r requirements/tests.in
 typer[all]==0.7.0
     # via rstcheck
@@ -343,7 +343,7 @@ urllib3==2.0.4
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.24.3
+virtualenv==20.24.4
     # via tox
 werkzeug==2.3.7
     # via flask
