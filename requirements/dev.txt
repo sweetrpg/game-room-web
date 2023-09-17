@@ -85,7 +85,7 @@ docutils==0.18.1
     #   sphinx-tabs
 exceptiongroup==1.1.3
     # via pytest
-filelock==3.12.3
+filelock==3.12.4
     # via
     #   tox
     #   virtualenv
@@ -248,7 +248,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.5.2
     # via typer
-rpds-py==0.10.2
+rpds-py==0.10.3
     # via
     #   jsonschema
     #   referencing
@@ -256,7 +256,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.1.1
     # via rstcheck
-sentry-sdk[flask]==1.30.0
+sentry-sdk[flask]==1.31.0
     # via -r requirements/app.in
 shellingham==1.5.3
     # via typer
@@ -267,7 +267,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.5
+sphinx==7.2.6
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -301,7 +301,7 @@ sqlalchemy==2.0.20
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.205
+sweetrpg-api-core==0.0.206
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -311,7 +311,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.290
+sweetrpg-library-objects==0.0.291
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -321,7 +321,7 @@ sweetrpg-model-core==0.0.143
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.383
+sweetrpg-web-core==0.0.384
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -340,7 +340,6 @@ typing-extensions==4.7.1
     # via
     #   asgiref
     #   black
-    #   filelock
     #   pydantic
     #   pydantic-core
     #   sqlalchemy

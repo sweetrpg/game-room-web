@@ -185,7 +185,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.5.2
     # via typer
-rpds-py==0.10.2
+rpds-py==0.10.3
     # via
     #   jsonschema
     #   referencing
@@ -193,7 +193,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.1.1
     # via rstcheck
-sentry-sdk[flask]==1.30.0
+sentry-sdk[flask]==1.31.0
     # via -r requirements/app.in
 shellingham==1.5.3
     # via typer
@@ -204,7 +204,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.2.5
+sphinx==7.2.6
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -248,7 +248,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.290
+sweetrpg-library-objects==0.0.291
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.143
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.383
+sweetrpg-web-core==0.0.384
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via rstcheck
