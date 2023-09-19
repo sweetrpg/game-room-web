@@ -203,7 +203,7 @@ six==1.16.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.20
+sqlalchemy==2.0.21
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -237,7 +237,7 @@ tomli==2.0.1
     #   tox
 tox==4.11.3
     # via -r requirements/tests.in
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   asgiref
     #   sqlalchemy
