@@ -183,7 +183,7 @@ requests==2.31.0
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==13.5.2
+rich==13.5.3
     # via typer
 rpds-py==0.10.3
     # via
@@ -234,7 +234,7 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.20
+sqlalchemy==2.0.21
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -262,7 +262,7 @@ sweetrpg-web-core==0.0.389
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via rstcheck
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   pydantic
     #   pydantic-core
