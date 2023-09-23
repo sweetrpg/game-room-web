@@ -83,7 +83,7 @@ jinja2==3.1.2
     # via flask
 jsonapi-client==0.9.9
     # via sweetrpg-client
-jsonschema==4.19.0
+jsonschema==4.19.1
     # via jsonapi-client
 jsonschema-specifications==2023.7.1
     # via jsonschema
@@ -179,11 +179,11 @@ sweetrpg-model-core==0.0.144
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.389
+sweetrpg-web-core==0.0.390
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
-urllib3==2.0.4
+urllib3==2.0.5
     # via
     #   -r requirements/app.in
     #   requests
