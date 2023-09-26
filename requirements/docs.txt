@@ -145,9 +145,9 @@ packaging==23.1
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.4.0
+pydantic==2.4.1
     # via rstcheck-core
-pydantic-core==2.10.0
+pydantic-core==2.10.1
     # via pydantic
 pygments==2.16.1
     # via
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.147
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.407
+sweetrpg-web-core==0.0.408
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via rstcheck
