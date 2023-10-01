@@ -159,7 +159,7 @@ sqlalchemy==2.0.21
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.214
+sweetrpg-api-core==0.0.215
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -169,17 +169,17 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.303
+sweetrpg-library-objects==0.0.304
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.147
+sweetrpg-model-core==0.0.148
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.413
+sweetrpg-web-core==0.0.414
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
