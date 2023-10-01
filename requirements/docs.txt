@@ -40,7 +40,7 @@ certifi==2023.7.22
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via
     #   aiohttp
     #   requests
@@ -145,7 +145,7 @@ packaging==23.1
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.4.1
+pydantic==2.4.2
     # via rstcheck-core
 pydantic-core==2.10.1
     # via pydantic
@@ -183,7 +183,7 @@ requests==2.31.0
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==13.5.3
+rich==13.6.0
     # via typer
 rpds-py==0.10.3
     # via
@@ -238,7 +238,7 @@ sqlalchemy==2.0.21
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.213
+sweetrpg-api-core==0.0.214
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -248,7 +248,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.302
+sweetrpg-library-objects==0.0.303
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.147
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.411
+sweetrpg-web-core==0.0.412
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via rstcheck
@@ -273,7 +273,7 @@ urllib3==2.0.5
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-werkzeug==2.3.7
+werkzeug==3.0.0
     # via flask
 yarl==1.9.2
     # via aiohttp
