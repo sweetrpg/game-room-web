@@ -65,7 +65,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.3.1
+coverage[toml]==7.3.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -115,7 +115,7 @@ frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==2.0.2
+greenlet==3.0.0
     # via sqlalchemy
 idna==3.4
     # via
@@ -172,7 +172,7 @@ multidict==6.0.4
     #   yarl
 mypy-extensions==1.0.0
     # via black
-packaging==23.1
+packaging==23.2
     # via
     #   black
     #   build
@@ -187,7 +187,7 @@ pathspec==0.11.2
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
-platformdirs==3.10.0
+platformdirs==3.11.0
     # via
     #   black
     #   tox
@@ -344,7 +344,7 @@ typing-extensions==4.8.0
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   -r requirements/app.in
     #   requests

@@ -49,7 +49,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.3.1
+coverage[toml]==7.3.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -94,7 +94,7 @@ frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==2.0.2
+greenlet==3.0.0
     # via sqlalchemy
 idna==3.4
     # via
@@ -141,12 +141,12 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
-packaging==23.1
+packaging==23.2
     # via
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==3.10.0
+platformdirs==3.11.0
     # via
     #   tox
     #   virtualenv
@@ -241,7 +241,7 @@ typing-extensions==4.8.0
     # via
     #   asgiref
     #   sqlalchemy
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   -r requirements/app.in
     #   requests

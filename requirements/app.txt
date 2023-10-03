@@ -71,7 +71,7 @@ frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==2.0.2
+greenlet==3.0.0
     # via sqlalchemy
 idna==3.4
     # via
@@ -183,7 +183,7 @@ sweetrpg-web-core==0.0.420
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   -r requirements/app.in
     #   requests
