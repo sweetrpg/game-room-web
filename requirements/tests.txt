@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/tests.in
 #
-aiohttp==3.8.5
+aiohttp==3.8.6
     # via jsonapi-client
 aiosignal==1.3.1
     # via aiohttp
@@ -23,7 +23,7 @@ attrs==23.1.0
     #   referencing
 backoff==1.10.0
     # via analytics-python
-blinker==1.6.2
+blinker==1.6.3
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -192,7 +192,7 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.10.3
+rpds-py==0.10.4
     # via
     #   jsonschema
     #   referencing
@@ -207,7 +207,7 @@ sqlalchemy==2.0.21
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.217
+sweetrpg-api-core==0.0.218
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +217,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.308
+sweetrpg-library-objects==0.0.309
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.149
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.420
+sweetrpg-web-core==0.0.421
     # via -r requirements/app.in
 tomli==2.0.1
     # via
