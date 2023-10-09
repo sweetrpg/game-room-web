@@ -101,7 +101,7 @@ flask==2.3.3
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.0.2
+flask-caching==2.1.0
     # via -r requirements/app.in
 flask-cors==4.0.0
     # via -r requirements/app.in
@@ -311,11 +311,11 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.312
+sweetrpg-library-objects==0.0.313
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.150
+sweetrpg-model-core==0.0.151
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
