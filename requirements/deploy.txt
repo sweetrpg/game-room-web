@@ -146,18 +146,18 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.10.4
+rpds-py==0.10.6
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.31.0
+sentry-sdk[flask]==1.32.0
     # via -r requirements/app.in
 six==1.16.0
     # via
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.21
+sqlalchemy==2.0.22
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.151
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.429
+sweetrpg-web-core==0.0.430
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
