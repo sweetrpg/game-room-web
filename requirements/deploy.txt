@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.151
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.430
+sweetrpg-web-core==0.0.431
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
