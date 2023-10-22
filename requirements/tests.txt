@@ -197,7 +197,9 @@ rpds-py==0.10.6
     #   jsonschema
     #   referencing
 sentry-sdk[flask]==1.32.0
-    # via -r requirements/app.in
+    # via
+    #   -r requirements/app.in
+    #   sentry-sdk
 six==1.16.0
     # via
     #   analytics-python
@@ -207,7 +209,7 @@ sqlalchemy==2.0.22
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.225
+sweetrpg-api-core==0.0.226
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +219,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.318
+sweetrpg-library-objects==0.0.319
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +229,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.440
+sweetrpg-web-core==0.0.441
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -241,7 +243,7 @@ typing-extensions==4.8.0
     # via
     #   asgiref
     #   sqlalchemy
-urllib3==2.0.6
+urllib3==2.0.7
     # via
     #   -r requirements/app.in
     #   requests

@@ -194,7 +194,9 @@ rstcheck==6.2.0
 rstcheck-core==1.1.1
     # via rstcheck
 sentry-sdk[flask]==1.32.0
-    # via -r requirements/app.in
+    # via
+    #   -r requirements/app.in
+    #   sentry-sdk
 shellingham==1.5.3
     # via typer
 six==1.16.0
@@ -238,7 +240,7 @@ sqlalchemy==2.0.22
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.225
+sweetrpg-api-core==0.0.226
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -248,7 +250,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.318
+sweetrpg-library-objects==0.0.319
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,17 +260,19 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.440
+sweetrpg-web-core==0.0.441
     # via -r requirements/app.in
 typer[all]==0.9.0
-    # via rstcheck
+    # via
+    #   rstcheck
+    #   typer
 typing-extensions==4.8.0
     # via
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.0.6
+urllib3==2.0.7
     # via
     #   -r requirements/app.in
     #   requests
