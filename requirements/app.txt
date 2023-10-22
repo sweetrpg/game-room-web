@@ -149,7 +149,9 @@ rpds-py==0.10.6
     #   jsonschema
     #   referencing
 sentry-sdk[flask]==1.32.0
-    # via -r requirements/app.in
+    # via
+    #   -r requirements/app.in
+    #   sentry-sdk
 six==1.16.0
     # via
     #   analytics-python
@@ -183,7 +185,7 @@ sweetrpg-web-core==0.0.440
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
-urllib3==2.0.6
+urllib3==2.0.7
     # via
     #   -r requirements/app.in
     #   requests
