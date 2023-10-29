@@ -71,7 +71,7 @@ frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.0
+greenlet==3.0.1
     # via sqlalchemy
 idna==3.4
     # via
@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.320
+sweetrpg-library-objects==0.0.321
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -190,7 +190,7 @@ urllib3==2.0.7
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-werkzeug==3.0.0
+werkzeug==3.0.1
     # via flask
 yarl==1.9.2
     # via aiohttp
