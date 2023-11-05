@@ -31,7 +31,7 @@ backoff==1.10.0
     # via analytics-python
 black==23.10.1
     # via -r requirements/dev.in
-blinker==1.6.3
+blinker==1.7.0
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -51,7 +51,7 @@ certifi==2023.7.22
     #   sentry-sdk
 chardet==5.2.0
     # via tox
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via
     #   aiohttp
     #   requests
@@ -205,7 +205,7 @@ pygments==2.16.1
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.5.0
+pymongo[srv]==4.6.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -248,7 +248,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.6.0
     # via typer
-rpds-py==0.10.6
+rpds-py==0.12.0
     # via
     #   jsonschema
     #   referencing
@@ -256,7 +256,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.1.1
     # via rstcheck
-sentry-sdk[flask]==1.32.0
+sentry-sdk[flask]==1.34.0
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -299,7 +299,7 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.22
+sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -323,7 +323,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.449
+sweetrpg-web-core==0.0.450
     # via -r requirements/app.in
 tomli==2.0.1
     # via
