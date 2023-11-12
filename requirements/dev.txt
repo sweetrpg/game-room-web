@@ -29,7 +29,7 @@ babel==2.13.1
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-black==23.10.1
+black==23.11.0
     # via -r requirements/dev.in
 blinker==1.7.0
     # via
@@ -303,7 +303,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.231
+sweetrpg-api-core==0.0.232
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -313,7 +313,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.324
+sweetrpg-library-objects==0.0.325
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -323,7 +323,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.453
+sweetrpg-web-core==0.0.454
     # via -r requirements/app.in
 tomli==2.0.1
     # via
