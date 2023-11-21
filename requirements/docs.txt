@@ -147,7 +147,7 @@ pydantic==2.5.1
     # via rstcheck-core
 pydantic-core==2.14.3
     # via pydantic
-pygments==2.17.0
+pygments==2.17.1
     # via
     #   rich
     #   sphinx
@@ -183,7 +183,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.7.0
     # via typer
-rpds-py==0.13.0
+rpds-py==0.13.1
     # via
     #   jsonschema
     #   referencing
@@ -277,5 +277,5 @@ urllib3==2.1.0
     #   sentry-sdk
 werkzeug==3.0.1
     # via flask
-yarl==1.9.2
+yarl==1.9.3
     # via aiohttp

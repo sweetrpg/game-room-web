@@ -142,7 +142,7 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.13.0
+rpds-py==0.13.1
     # via
     #   jsonschema
     #   referencing
@@ -190,5 +190,5 @@ urllib3==2.1.0
     #   sentry-sdk
 werkzeug==3.0.1
     # via flask
-yarl==1.9.2
+yarl==1.9.3
     # via aiohttp
