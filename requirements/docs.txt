@@ -86,7 +86,7 @@ frozenlist==1.4.0
     #   aiosignal
 greenlet==3.0.1
     # via sqlalchemy
-idna==3.4
+idna==3.6
     # via
     #   requests
     #   yarl
@@ -143,11 +143,11 @@ packaging==23.2
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.5.1
+pydantic==2.5.2
     # via rstcheck-core
-pydantic-core==2.14.3
+pydantic-core==2.14.5
     # via pydantic
-pygments==2.17.1
+pygments==2.17.2
     # via
     #   rich
     #   sphinx
@@ -191,7 +191,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.35.0
+sentry-sdk[flask]==1.37.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -238,7 +238,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.235
+sweetrpg-api-core==0.0.236
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -248,7 +248,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.328
+sweetrpg-library-objects==0.0.329
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.462
+sweetrpg-web-core==0.0.463
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via

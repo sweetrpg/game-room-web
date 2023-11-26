@@ -71,7 +71,7 @@ frozenlist==1.4.0
     #   aiosignal
 greenlet==3.0.1
     # via sqlalchemy
-idna==3.4
+idna==3.6
     # via
     #   requests
     #   yarl
@@ -146,7 +146,7 @@ rpds-py==0.13.1
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.35.0
+sentry-sdk[flask]==1.37.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -159,7 +159,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.235
+sweetrpg-api-core==0.0.236
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -169,7 +169,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.328
+sweetrpg-library-objects==0.0.329
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -179,7 +179,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.462
+sweetrpg-web-core==0.0.463
     # via -r requirements/app.in
 typing-extensions==4.8.0
     # via sqlalchemy
