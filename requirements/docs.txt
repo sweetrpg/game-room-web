@@ -102,7 +102,7 @@ jsonapi-client==0.9.9
     # via sweetrpg-client
 jsonschema==4.20.0
     # via jsonapi-client
-jsonschema-specifications==2023.11.1
+jsonschema-specifications==2023.11.2
     # via jsonschema
 kanka==0.1.2
     # via -r requirements/app.in
@@ -152,7 +152,7 @@ pygments==2.17.2
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.0
+pymongo[srv]==4.6.1
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -169,7 +169,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.31.0
+referencing==0.31.1
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -183,7 +183,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.7.0
     # via typer
-rpds-py==0.13.1
+rpds-py==0.13.2
     # via
     #   jsonschema
     #   referencing
@@ -191,7 +191,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.37.1
+sentry-sdk[flask]==1.38.0
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -238,7 +238,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.237
+sweetrpg-api-core==0.0.238
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -248,7 +248,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.330
+sweetrpg-library-objects==0.0.331
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.467
+sweetrpg-web-core==0.0.468
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via
