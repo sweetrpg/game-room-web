@@ -113,7 +113,7 @@ frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.1
+greenlet==3.0.2
     # via sqlalchemy
 idna==3.6
     # via
@@ -181,7 +181,7 @@ packaging==23.2
     #   tox
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pathspec==0.11.2
+pathspec==0.12.0
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
@@ -232,7 +232,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.31.1
+referencing==0.32.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -301,7 +301,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.239
+sweetrpg-api-core==0.0.240
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -321,7 +321,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.472
+sweetrpg-web-core==0.0.473
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -357,7 +357,7 @@ werkzeug==3.0.1
     # via flask
 wheel==0.42.0
     # via pip-tools
-yarl==1.9.3
+yarl==1.9.4
     # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
