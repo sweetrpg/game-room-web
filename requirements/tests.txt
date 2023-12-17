@@ -47,13 +47,13 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.3.2
+coverage[toml]==7.3.3
     # via
     #   coverage-badge
     #   pytest-cov
 coverage-badge==1.1.0
     # via -r requirements/tests.in
-distlib==0.3.7
+distlib==0.3.8
     # via virtualenv
 dnspython==2.4.2
     # via
@@ -88,7 +88,7 @@ flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.5.0
     # via -r requirements/app.in
-frozenlist==1.4.0
+frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
@@ -190,11 +190,11 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.13.2
+rpds-py==0.14.1
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.38.0
+sentry-sdk[flask]==1.39.1
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -207,7 +207,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.241
+sweetrpg-api-core==0.0.242
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +217,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.334
+sweetrpg-library-objects==0.0.335
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.478
+sweetrpg-web-core==0.0.479
     # via -r requirements/app.in
 tomli==2.0.1
     # via
