@@ -71,7 +71,7 @@ frozenlist==1.4.1
     #   aiosignal
 greenlet==3.0.2
     # via sqlalchemy
-hiredis==2.2.3
+hiredis==2.3.2
     # via -r requirements/deploy.in
 idna==3.6
     # via
@@ -144,7 +144,7 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.14.1
+rpds-py==0.15.2
     # via
     #   jsonschema
     #   referencing

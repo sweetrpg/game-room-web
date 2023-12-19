@@ -190,7 +190,7 @@ requests==2.31.0
     #   jsonapi-client
     #   kanka
     #   sweetrpg-client
-rpds-py==0.14.1
+rpds-py==0.15.2
     # via
     #   jsonschema
     #   referencing
