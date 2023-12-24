@@ -84,7 +84,7 @@ frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.2
+greenlet==3.0.3
     # via sqlalchemy
 idna==3.6
     # via
@@ -143,9 +143,9 @@ packaging==23.2
     #   sphinx
 pallets-sphinx-themes==2.1.1
     # via -r requirements/docs.in
-pydantic==2.5.2
+pydantic==2.5.3
     # via rstcheck-core
-pydantic-core==2.14.5
+pydantic-core==2.14.6
     # via pydantic
 pygments==2.17.2
     # via
@@ -248,7 +248,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.336
+sweetrpg-library-objects==0.0.337
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -258,7 +258,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.483
+sweetrpg-web-core==0.0.484
     # via -r requirements/app.in
 typer[all]==0.9.0
     # via

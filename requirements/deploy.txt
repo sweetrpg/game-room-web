@@ -69,7 +69,7 @@ frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.2
+greenlet==3.0.3
     # via sqlalchemy
 hiredis==2.3.2
     # via -r requirements/deploy.in
@@ -161,7 +161,7 @@ sqlalchemy==2.0.23
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.243
+sweetrpg-api-core==0.0.244
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.336
+sweetrpg-library-objects==0.0.337
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.483
+sweetrpg-web-core==0.0.484
     # via -r requirements/app.in
 typing-extensions==4.9.0
     # via sqlalchemy
