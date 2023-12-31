@@ -63,7 +63,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.3.4
+coverage[toml]==7.4.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -246,7 +246,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.7.0
     # via typer
-rpds-py==0.15.2
+rpds-py==0.16.2
     # via
     #   jsonschema
     #   referencing
@@ -297,11 +297,11 @@ sphinxcontrib-qthelp==1.0.6
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
-sqlalchemy==2.0.23
+sqlalchemy==2.0.24
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.245
+sweetrpg-api-core==0.0.246
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -311,7 +311,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.338
+sweetrpg-library-objects==0.0.339
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -321,7 +321,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.488
+sweetrpg-web-core==0.0.489
     # via -r requirements/app.in
 tomli==2.0.1
     # via
