@@ -133,7 +133,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.32.0
+referencing==0.32.1
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -157,11 +157,11 @@ six==1.16.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.24
+sqlalchemy==2.0.25
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.247
+sweetrpg-api-core==0.0.248
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.340
+sweetrpg-library-objects==0.0.341
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.493
+sweetrpg-web-core==0.0.494
     # via -r requirements/app.in
 typing-extensions==4.9.0
     # via sqlalchemy
