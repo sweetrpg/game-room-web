@@ -8,7 +8,7 @@ aiohttp==3.9.1
     # via jsonapi-client
 aiosignal==1.3.1
     # via aiohttp
-alabaster==0.7.15
+alabaster==0.7.16
     # via sphinx
 analytics-python==1.4.post1
     # via -r requirements/app.in
@@ -125,7 +125,7 @@ iniconfig==2.0.0
     # via pytest
 itsdangerous==2.1.2
     # via flask
-jinja2==3.1.2
+jinja2==3.1.3
     # via
     #   flask
     #   sphinx
@@ -246,7 +246,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.7.0
     # via typer
-rpds-py==0.16.2
+rpds-py==0.17.1
     # via
     #   jsonschema
     #   referencing
@@ -254,7 +254,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.39.1
+sentry-sdk[flask]==1.39.2
     # via
     #   -r requirements/app.in
     #   sentry-sdk
@@ -273,35 +273,30 @@ sphinx==7.2.6
     #   pallets-sphinx-themes
     #   sphinx-issues
     #   sphinx-tabs
-    #   sphinxcontrib-applehelp
-    #   sphinxcontrib-devhelp
-    #   sphinxcontrib-htmlhelp
     #   sphinxcontrib-log-cabinet
-    #   sphinxcontrib-qthelp
-    #   sphinxcontrib-serializinghtml
 sphinx-issues==3.0.1
     # via -r requirements/docs.in
 sphinx-tabs==3.4.4
     # via -r requirements/docs.in
-sphinxcontrib-applehelp==1.0.7
+sphinxcontrib-applehelp==1.0.8
     # via sphinx
-sphinxcontrib-devhelp==1.0.5
+sphinxcontrib-devhelp==1.0.6
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.4
+sphinxcontrib-htmlhelp==2.0.5
     # via sphinx
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-log-cabinet==1.0.1
     # via -r requirements/docs.in
-sphinxcontrib-qthelp==1.0.6
+sphinxcontrib-qthelp==1.0.7
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.9
+sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 sqlalchemy==2.0.25
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.249
+sweetrpg-api-core==0.0.250
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -311,7 +306,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.342
+sweetrpg-library-objects==0.0.343
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -321,7 +316,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.498
+sweetrpg-web-core==0.0.499
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -332,7 +327,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.11.4
+tox==4.12.0
     # via -r requirements/tests.in
 typer[all]==0.9.0
     # via
