@@ -169,7 +169,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.346
+sweetrpg-library-objects==0.0.347
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -179,7 +179,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.506
+sweetrpg-web-core==0.0.507
     # via -r requirements/app.in
 typing-extensions==4.9.0
     # via sqlalchemy
