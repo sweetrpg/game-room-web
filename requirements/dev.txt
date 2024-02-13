@@ -29,7 +29,7 @@ babel==2.14.0
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-black==24.1.1
+black==24.2.0
     # via -r requirements/dev.in
 blinker==1.7.0
     # via
@@ -292,7 +292,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.25
+sqlalchemy==2.0.26
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
