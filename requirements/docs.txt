@@ -48,7 +48,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via typer
-dnspython==2.5.0
+dnspython==2.6.0
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -183,7 +183,7 @@ requests==2.31.0
     #   sweetrpg-client
 rich==13.7.0
     # via typer
-rpds-py==0.17.1
+rpds-py==0.18.0
     # via
     #   jsonschema
     #   referencing
@@ -191,10 +191,8 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.40.3
-    # via
-    #   -r requirements/app.in
-    #   sentry-sdk
+sentry-sdk[flask]==1.40.4
+    # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
 six==1.16.0
@@ -229,11 +227,11 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.26
+sqlalchemy==2.0.27
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.259
+sweetrpg-api-core==0.0.260
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -243,7 +241,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.352
+sweetrpg-library-objects==0.0.353
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -253,12 +251,10 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.520
+sweetrpg-web-core==0.0.521
     # via -r requirements/app.in
 typer[all]==0.9.0
-    # via
-    #   rstcheck
-    #   typer
+    # via rstcheck
 typing-extensions==4.9.0
     # via
     #   pydantic
