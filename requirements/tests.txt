@@ -55,7 +55,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.8
     # via virtualenv
-dnspython==2.6.0
+dnspython==2.6.1
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -194,7 +194,7 @@ rpds-py==0.18.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.40.4
+sentry-sdk[flask]==1.40.5
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -239,7 +239,7 @@ typing-extensions==4.9.0
     # via
     #   asgiref
     #   sqlalchemy
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   -r requirements/app.in
     #   requests

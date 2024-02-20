@@ -71,7 +71,7 @@ coverage-badge==1.1.0
     # via -r requirements/tests.in
 distlib==0.3.8
     # via virtualenv
-dnspython==2.6.0
+dnspython==2.6.1
     # via
     #   -r requirements/app.in
     #   pymongo
@@ -254,7 +254,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.40.4
+sentry-sdk[flask]==1.40.5
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -337,7 +337,7 @@ typing-extensions==4.9.0
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   -r requirements/app.in
     #   requests
