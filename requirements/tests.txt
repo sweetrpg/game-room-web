@@ -47,7 +47,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.4.1
+coverage[toml]==7.4.3
     # via
     #   coverage-badge
     #   pytest-cov
@@ -152,14 +152,14 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.6.1
+pymongo[srv]==4.6.2
     # via
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.6.1
     # via tox
-pytest==8.0.1
+pytest==8.0.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -225,7 +225,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.525
+sweetrpg-web-core==0.0.526
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -244,7 +244,7 @@ urllib3==2.2.1
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via tox
 werkzeug==3.0.1
     # via flask
