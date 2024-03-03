@@ -37,7 +37,7 @@ blinker==1.7.0
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
-build==1.0.3
+build==1.1.1
     # via pip-tools
 cachelib==0.9.0
     # via
@@ -157,7 +157,7 @@ marshmallow-jsonapi==0.24.0
     #   sweetrpg-library-objects
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.27.0
+mongoengine==0.28.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -194,7 +194,7 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pydantic==2.6.2
+pydantic==2.6.3
     # via rstcheck-core
 pydantic-core==2.16.3
     # via pydantic
@@ -218,7 +218,7 @@ pytest==8.0.2
     #   pytest-cov
 pytest-cov==4.0.0
     # via -r requirements/tests.in
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -244,7 +244,7 @@ requests==2.31.0
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==13.7.0
+rich==13.7.1
     # via typer
 rpds-py==0.18.0
     # via
@@ -254,7 +254,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.40.5
+sentry-sdk[flask]==1.40.6
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -294,7 +294,7 @@ sqlalchemy==2.0.27
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.263
+sweetrpg-api-core==0.0.264
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -304,7 +304,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.356
+sweetrpg-library-objects==0.0.357
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -314,7 +314,7 @@ sweetrpg-model-core==0.0.153
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.529
+sweetrpg-web-core==0.0.530
     # via -r requirements/app.in
 tomli==2.0.1
     # via
