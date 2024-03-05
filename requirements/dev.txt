@@ -157,7 +157,7 @@ marshmallow-jsonapi==0.24.0
     #   sweetrpg-library-objects
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.0
+mongoengine==0.28.1
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -290,7 +290,7 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.27
+sqlalchemy==2.0.28
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
