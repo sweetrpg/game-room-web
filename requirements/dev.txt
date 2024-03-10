@@ -157,7 +157,7 @@ marshmallow-jsonapi==0.24.0
     #   sweetrpg-library-objects
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.1
+mongoengine==0.28.2
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -212,7 +212,7 @@ pyproject-api==1.6.1
     # via tox
 pyproject-hooks==1.0.0
     # via build
-pytest==8.0.2
+pytest==8.1.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -254,7 +254,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.40.6
+sentry-sdk[flask]==1.41.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -294,7 +294,7 @@ sqlalchemy==2.0.28
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.266
+sweetrpg-api-core==0.0.267
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -304,7 +304,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.360
+sweetrpg-library-objects==0.0.361
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -314,7 +314,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.535
+sweetrpg-web-core==0.0.536
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -325,7 +325,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.13.0
+tox==4.14.1
     # via -r requirements/tests.in
 typer[all]==0.9.0
     # via rstcheck
