@@ -170,7 +170,7 @@ multidict==6.0.5
     #   yarl
 mypy-extensions==1.0.0
     # via black
-packaging==23.2
+packaging==24.0
     # via
     #   black
     #   build
@@ -346,7 +346,7 @@ virtualenv==20.25.1
     # via tox
 werkzeug==3.0.1
     # via flask
-wheel==0.42.0
+wheel==0.43.0
     # via pip-tools
 yarl==1.9.4
     # via aiohttp
