@@ -29,7 +29,7 @@ babel==2.14.0
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-black==24.2.0
+black==24.3.0
     # via -r requirements/dev.in
 blinker==1.7.0
     # via
@@ -63,7 +63,7 @@ colorama==0.4.6
     # via
     #   tox
     #   typer
-coverage[toml]==7.4.3
+coverage[toml]==7.4.4
     # via
     #   coverage-badge
     #   pytest-cov
@@ -194,7 +194,7 @@ pluggy==1.4.0
     # via
     #   pytest
     #   tox
-pydantic==2.6.3
+pydantic==2.6.4
     # via rstcheck-core
 pydantic-core==2.16.3
     # via pydantic
@@ -232,7 +232,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.33.0
+referencing==0.34.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -254,7 +254,7 @@ rstcheck==6.2.0
     # via -r requirements/docs.in
 rstcheck-core==1.2.0
     # via rstcheck
-sentry-sdk[flask]==1.41.0
+sentry-sdk[flask]==1.42.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -294,7 +294,7 @@ sqlalchemy==2.0.28
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.268
+sweetrpg-api-core==0.0.269
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -304,7 +304,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.362
+sweetrpg-library-objects==0.0.363
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -314,7 +314,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.539
+sweetrpg-web-core==0.0.540
     # via -r requirements/app.in
 tomli==2.0.1
     # via
