@@ -33,9 +33,7 @@ blinker==1.7.0
     #   flask
     #   sentry-sdk
 cachelib==0.9.0
-    # via
-    #   flask-caching
-    #   flask-session
+    # via flask-caching
 certifi==2024.2.2
     # via
     #   requests
@@ -78,7 +76,7 @@ flask-dotenv==0.1.2
     # via -r requirements/app.in
 flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
-flask-session==0.6.0
+flask-session==0.7.0
     # via -r requirements/app.in
 frozenlist==1.4.1
     # via
@@ -133,6 +131,8 @@ mongoengine==0.28.2
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
+msgspec==0.18.6
+    # via flask-session
 multidict==6.0.5
     # via
     #   aiohttp
