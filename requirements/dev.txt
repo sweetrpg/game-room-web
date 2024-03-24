@@ -14,7 +14,7 @@ analytics-python==1.4.post1
     # via -r requirements/app.in
 annotated-types==0.6.0
     # via pydantic
-asgiref==3.7.2
+asgiref==3.8.1
     # via -r requirements/tests.in
 async-timeout==4.0.3
     # via
@@ -250,11 +250,11 @@ rpds-py==0.18.0
     # via
     #   jsonschema
     #   referencing
-rstcheck==6.2.0
+rstcheck==6.2.1
     # via -r requirements/docs.in
-rstcheck-core==1.2.0
+rstcheck-core==1.2.1
     # via rstcheck
-sentry-sdk[flask]==1.42.0
+sentry-sdk[flask]==1.43.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -290,11 +290,11 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.28
+sqlalchemy==2.0.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.270
+sweetrpg-api-core==0.0.271
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -314,7 +314,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.543
+sweetrpg-web-core==0.0.544
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -325,9 +325,9 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tox==4.14.1
+tox==4.14.2
     # via -r requirements/tests.in
-typer[all]==0.9.0
+typer[all]==0.10.0
     # via rstcheck
 typing-extensions==4.10.0
     # via
