@@ -27,7 +27,9 @@ blinker==1.7.0
     #   flask
     #   sentry-sdk
 cachelib==0.9.0
-    # via flask-caching
+    # via
+    #   flask-caching
+    #   flask-session
 certifi==2024.2.2
     # via
     #   requests
@@ -61,7 +63,7 @@ flask-dotenv==0.1.2
     # via -r requirements/app.in
 flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
-flask-session==0.7.0
+flask-session==0.8.0
     # via -r requirements/app.in
 frozenlist==1.4.1
     # via
@@ -114,7 +116,7 @@ multidict==6.0.5
     # via
     #   aiohttp
     #   yarl
-pymongo[srv]==4.6.2
+pymongo[srv]==4.6.3
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -146,7 +148,7 @@ rpds-py==0.18.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==1.43.0
+sentry-sdk[flask]==1.44.0
     # via -r requirements/app.in
 six==1.16.0
     # via
@@ -157,7 +159,7 @@ sqlalchemy==2.0.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.272
+sweetrpg-api-core==0.0.273
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -167,7 +169,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.366
+sweetrpg-library-objects==0.0.367
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -177,7 +179,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.547
+sweetrpg-web-core==0.0.548
     # via -r requirements/app.in
 typing-extensions==4.10.0
     # via sqlalchemy
