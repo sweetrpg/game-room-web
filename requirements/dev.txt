@@ -327,7 +327,7 @@ tomli==2.0.1
     #   tox
 tox==4.14.2
     # via -r requirements/tests.in
-typer[all]==0.12.1
+typer[all]==0.12.2
     # via rstcheck
 typing-extensions==4.11.0
     # via
