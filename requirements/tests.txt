@@ -23,7 +23,7 @@ attrs==23.2.0
     #   referencing
 backoff==1.10.0
     # via analytics-python
-blinker==1.7.0
+blinker==1.8.0
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -47,7 +47,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.4.4
+coverage[toml]==7.5.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -78,7 +78,7 @@ flask==2.3.3
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.1.0
+flask-caching==2.2.0
     # via -r requirements/app.in
 flask-cors==4.0.0
     # via -r requirements/app.in
@@ -146,7 +146,7 @@ packaging==24.0
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   tox
     #   virtualenv
@@ -154,14 +154,14 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.6.3
+pymongo[srv]==4.7.0
     # via
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.6.1
     # via tox
-pytest==8.1.1
+pytest==8.2.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -181,7 +181,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.34.0
+referencing==0.35.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -207,7 +207,7 @@ sqlalchemy==2.0.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.280
+sweetrpg-api-core==0.0.281
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +217,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.374
+sweetrpg-library-objects==0.0.375
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.565
+sweetrpg-web-core==0.0.566
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -235,7 +235,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.14.2
+tox==4.15.0
     # via -r requirements/tests.in
 typing-extensions==4.11.0
     # via
@@ -246,7 +246,7 @@ urllib3==2.2.1
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.25.3
+virtualenv==20.26.0
     # via tox
 werkzeug==3.0.2
     # via flask
