@@ -27,7 +27,7 @@ babel==2.14.0
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.7.0
+blinker==1.8.0
     # via
     #   -r requirements/app.in
     #   flask
@@ -51,7 +51,7 @@ dnspython==2.6.1
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-docutils==0.21.1
+docutils==0.21.2
     # via
     #   rstcheck-core
     #   sphinx
@@ -68,7 +68,7 @@ flask==2.3.3
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.1.0
+flask-caching==2.2.0
     # via -r requirements/app.in
 flask-cors==4.0.0
     # via -r requirements/app.in
@@ -143,16 +143,16 @@ packaging==24.0
     #   sphinx
 pallets-sphinx-themes==2.1.2
     # via -r requirements/docs.in
-pydantic==2.7.0
+pydantic==2.7.1
     # via rstcheck-core
-pydantic-core==2.18.1
+pydantic-core==2.18.2
     # via pydantic
 pygments==2.17.2
     # via
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.6.3
+pymongo[srv]==4.7.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -169,7 +169,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.34.0
+referencing==0.35.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -231,7 +231,7 @@ sqlalchemy==2.0.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.280
+sweetrpg-api-core==0.0.281
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -241,7 +241,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.374
+sweetrpg-library-objects==0.0.375
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -251,7 +251,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.565
+sweetrpg-web-core==0.0.566
     # via -r requirements/app.in
 tomli==2.0.1
     # via sphinx
