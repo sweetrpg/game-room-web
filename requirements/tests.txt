@@ -23,7 +23,7 @@ attrs==23.2.0
     #   referencing
 backoff==1.10.0
     # via analytics-python
-blinker==1.8.0
+blinker==1.8.1
     # via
     #   -r requirements/app.in
     #   -r requirements/tests.in
@@ -62,7 +62,7 @@ dnspython==2.6.1
     #   sweetrpg-db
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.13.4
+filelock==3.14.0
     # via
     #   tox
     #   virtualenv
@@ -246,7 +246,7 @@ urllib3==2.2.1
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via tox
 werkzeug==3.0.2
     # via flask

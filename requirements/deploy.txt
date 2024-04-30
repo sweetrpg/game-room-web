@@ -21,7 +21,7 @@ attrs==23.2.0
     #   referencing
 backoff==1.10.0
     # via analytics-python
-blinker==1.8.0
+blinker==1.8.1
     # via
     #   -r requirements/app.in
     #   flask

@@ -27,7 +27,7 @@ babel==2.14.0
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-blinker==1.8.0
+blinker==1.8.1
     # via
     #   -r requirements/app.in
     #   flask
@@ -141,7 +141,7 @@ packaging==24.0
     # via
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.1.2
+pallets-sphinx-themes==2.1.3
     # via -r requirements/docs.in
 pydantic==2.7.1
     # via rstcheck-core
