@@ -47,7 +47,7 @@ click==8.1.7
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.0
+coverage[toml]==7.5.1
     # via
     #   coverage-badge
     #   pytest-cov
@@ -78,9 +78,9 @@ flask==2.3.3
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
-flask-caching==2.2.0
+flask-caching==2.3.0
     # via -r requirements/app.in
-flask-cors==4.0.0
+flask-cors==4.0.1
     # via -r requirements/app.in
 flask-dotenv==0.1.2
     # via -r requirements/app.in
@@ -106,7 +106,7 @@ jinja2==3.1.3
     # via flask
 jsonapi-client==0.9.9
     # via sweetrpg-client
-jsonschema==4.21.1
+jsonschema==4.22.0
     # via jsonapi-client
 jsonschema-specifications==2023.12.1
     # via jsonschema
@@ -154,7 +154,7 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.7.0
+pymongo[srv]==4.7.1
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -181,7 +181,7 @@ pyyaml==6.0.1
     # via -r requirements/app.in
 redis==4.6.0
     # via -r requirements/app.in
-referencing==0.35.0
+referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -207,7 +207,7 @@ sqlalchemy==2.0.29
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.282
+sweetrpg-api-core==0.0.283
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +217,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.376
+sweetrpg-library-objects==0.0.377
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.569
+sweetrpg-web-core==0.0.570
     # via -r requirements/app.in
 tomli==2.0.1
     # via
