@@ -12,7 +12,7 @@ alabaster==0.7.16
     # via sphinx
 analytics-python==1.4.post1
     # via -r requirements/app.in
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via pydantic
 asgiref==3.8.1
     # via -r requirements/tests.in
@@ -212,7 +212,7 @@ pyproject-api==1.6.1
     # via tox
 pyproject-hooks==1.1.0
     # via build
-pytest==8.2.0
+pytest==8.2.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -236,7 +236,7 @@ referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.31.0
+requests==2.32.1
     # via
     #   -r requirements/app.in
     #   analytics-python

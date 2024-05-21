@@ -161,7 +161,7 @@ pymongo[srv]==4.7.2
     #   sweetrpg-model-core
 pyproject-api==1.6.1
     # via tox
-pytest==8.2.0
+pytest==8.2.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -185,7 +185,7 @@ referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.31.0
+requests==2.32.1
     # via
     #   -r requirements/app.in
     #   analytics-python
