@@ -137,7 +137,7 @@ referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.31.0
+requests==2.32.1
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -179,7 +179,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.582
+sweetrpg-web-core==0.0.583
     # via -r requirements/app.in
 typing-extensions==4.11.0
     # via sqlalchemy
