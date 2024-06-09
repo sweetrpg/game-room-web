@@ -154,14 +154,14 @@ pluggy==1.5.0
     # via
     #   pytest
     #   tox
-pymongo[srv]==4.7.2
+pymongo[srv]==4.7.3
     # via
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
 pyproject-api==1.6.1
     # via tox
-pytest==8.2.1
+pytest==8.2.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -207,7 +207,7 @@ sqlalchemy==2.0.30
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.292
+sweetrpg-api-core==0.0.293
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -217,7 +217,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.386
+sweetrpg-library-objects==0.0.387
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.593
+sweetrpg-web-core==0.0.594
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -235,9 +235,9 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.15.0
+tox==4.15.1
     # via -r requirements/tests.in
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   asgiref
     #   sqlalchemy
