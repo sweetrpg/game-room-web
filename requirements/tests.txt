@@ -241,7 +241,7 @@ typing-extensions==4.12.2
     # via
     #   asgiref
     #   sqlalchemy
-urllib3==2.2.1
+urllib3==2.2.2
     # via
     #   -r requirements/app.in
     #   requests
