@@ -61,7 +61,7 @@ click==8.1.7
     #   typer
 colorama==0.4.6
     # via tox
-coverage[toml]==7.5.3
+coverage[toml]==7.5.4
     # via
     #   coverage-badge
     #   pytest-cov
@@ -81,7 +81,7 @@ docutils==0.21.2
     #   sphinx-tabs
 exceptiongroup==1.2.1
     # via pytest
-filelock==3.15.1
+filelock==3.15.4
     # via
     #   tox
     #   virtualenv
@@ -208,7 +208,7 @@ pymongo[srv]==4.7.3
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.6.1
+pyproject-api==1.7.1
     # via tox
 pyproject-hooks==1.1.0
     # via build
@@ -290,11 +290,11 @@ sphinxcontrib-qthelp==1.0.7
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
-sqlalchemy==2.0.30
+sqlalchemy==2.0.31
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.296
+sweetrpg-api-core==0.0.297
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -304,7 +304,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.390
+sweetrpg-library-objects==0.0.391
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -314,7 +314,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.602
+sweetrpg-web-core==0.0.603
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -342,7 +342,7 @@ urllib3==2.2.2
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.26.2
+virtualenv==20.26.3
     # via tox
 werkzeug==3.0.3
     # via flask
