@@ -152,7 +152,7 @@ pygments==2.18.0
     #   rich
     #   sphinx
     #   sphinx-tabs
-pymongo[srv]==4.7.3
+pymongo[srv]==4.8.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -251,7 +251,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.607
+sweetrpg-web-core==0.0.608
     # via -r requirements/app.in
 tomli==2.0.1
     # via sphinx
