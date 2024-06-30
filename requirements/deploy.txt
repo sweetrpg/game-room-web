@@ -118,7 +118,7 @@ multidict==6.0.5
     # via
     #   aiohttp
     #   yarl
-pymongo[srv]==4.7.3
+pymongo[srv]==4.8.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -161,7 +161,7 @@ sqlalchemy==2.0.31
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.298
+sweetrpg-api-core==0.0.299
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.392
+sweetrpg-library-objects==0.0.393
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.607
+sweetrpg-web-core==0.0.608
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy
