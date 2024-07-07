@@ -30,7 +30,7 @@ cachelib==0.9.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2024.6.2
+certifi==2024.7.4
     # via
     #   requests
     #   sentry-sdk
@@ -179,7 +179,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.612
+sweetrpg-web-core==0.0.613
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy
