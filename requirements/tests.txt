@@ -35,7 +35,7 @@ cachelib==0.9.0
     #   flask-session
 cachetools==5.3.3
     # via tox
-certifi==2024.6.2
+certifi==2024.7.4
     # via
     #   requests
     #   sentry-sdk
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.612
+sweetrpg-web-core==0.0.613
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -235,7 +235,7 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tox==4.15.1
+tox==4.16.0
     # via -r requirements/tests.in
 typing-extensions==4.12.2
     # via
