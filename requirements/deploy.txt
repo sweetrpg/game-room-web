@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.395
+sweetrpg-library-objects==0.0.396
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
