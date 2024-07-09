@@ -98,7 +98,7 @@ jinja2==3.1.4
     #   sphinx
 jsonapi-client==0.9.9
     # via sweetrpg-client
-jsonschema==4.22.0
+jsonschema==4.23.0
     # via jsonapi-client
 jsonschema-specifications==2023.12.1
     # via jsonschema
@@ -183,11 +183,11 @@ requests==2.32.3
     #   sweetrpg-client
 rich==13.7.1
     # via typer
-rpds-py==0.18.1
+rpds-py==0.19.0
     # via
     #   jsonschema
     #   referencing
-rstcheck==6.2.1
+rstcheck==6.2.4
     # via -r requirements/docs.in
 rstcheck-core==1.2.1
     # via rstcheck
@@ -255,7 +255,7 @@ sweetrpg-web-core==0.0.616
     # via -r requirements/app.in
 tomli==2.0.1
     # via sphinx
-typer[all]==0.12.3
+typer==0.12.3
     # via rstcheck
 typing-extensions==4.12.2
     # via
