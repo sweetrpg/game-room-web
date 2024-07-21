@@ -161,7 +161,7 @@ pymongo[srv]==4.8.0
     #   sweetrpg-model-core
 pyproject-api==1.7.1
     # via tox
-pytest==8.2.2
+pytest==8.3.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -227,7 +227,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.621
+sweetrpg-web-core==0.0.622
     # via -r requirements/app.in
 tomli==2.0.1
     # via
