@@ -4,7 +4,9 @@
 #
 #    pip-compile requirements/dev.in
 #
-aiohttp==3.9.5
+aiohappyeyeballs==2.3.4
+    # via aiohttp
+aiohttp==3.10.0
     # via jsonapi-client
 aiosignal==1.3.1
     # via aiohttp
@@ -20,7 +22,7 @@ async-timeout==4.0.3
     # via
     #   aiohttp
     #   redis
-attrs==23.2.0
+attrs==24.1.0
     # via
     #   aiohttp
     #   jsonschema
@@ -29,7 +31,7 @@ babel==2.15.0
     # via sphinx
 backoff==1.10.0
     # via analytics-python
-black==24.4.2
+black==24.8.0
     # via -r requirements/dev.in
 blinker==1.8.2
     # via
@@ -265,7 +267,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==8.0.1
+sphinx==8.0.2
     # via
     #   -r requirements/docs.in
     #   pallets-sphinx-themes
@@ -314,7 +316,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.631
+sweetrpg-web-core==0.0.632
     # via -r requirements/app.in
 tomli==2.0.1
     # via
