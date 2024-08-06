@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.3.4
     # via aiohttp
-aiohttp==3.10.0
+aiohttp==3.10.1
     # via jsonapi-client
 aiosignal==1.3.1
     # via aiohttp
@@ -157,7 +157,7 @@ six==1.16.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.31
+sqlalchemy==2.0.32
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
