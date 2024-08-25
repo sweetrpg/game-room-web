@@ -75,7 +75,7 @@ greenlet==3.0.3
     # via sqlalchemy
 hiredis==3.0.0
     # via -r requirements/deploy.in
-idna==3.7
+idna==3.8
     # via
     #   requests
     #   yarl
@@ -183,7 +183,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.644
+sweetrpg-web-core==0.0.645
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy
@@ -194,7 +194,7 @@ urllib3==2.2.2
     #   sentry-sdk
 uwsgi==2.0.26
     # via -r requirements/deploy.in
-werkzeug==3.0.3
+werkzeug==3.0.4
     # via flask
 yarl==1.9.4
     # via aiohttp
