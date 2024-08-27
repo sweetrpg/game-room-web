@@ -105,7 +105,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.28.2
+mongoengine==0.29.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.648
+sweetrpg-web-core==0.0.649
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy

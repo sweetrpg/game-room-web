@@ -157,7 +157,7 @@ marshmallow-jsonapi==0.24.0
     #   sweetrpg-library-objects
 mdurl==0.1.2
     # via markdown-it-py
-mongoengine==0.28.2
+mongoengine==0.29.0
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -246,7 +246,7 @@ requests==2.32.3
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==13.7.1
+rich==13.8.0
     # via typer
 rpds-py==0.20.0
     # via
