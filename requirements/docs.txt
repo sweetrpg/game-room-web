@@ -272,5 +272,5 @@ urllib3==2.2.2
     #   sentry-sdk
 werkzeug==3.0.4
     # via flask
-yarl==1.9.6
+yarl==1.9.7
     # via aiohttp
