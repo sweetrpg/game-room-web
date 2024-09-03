@@ -196,5 +196,5 @@ uwsgi==2.0.26
     # via -r requirements/deploy.in
 werkzeug==3.0.4
     # via flask
-yarl==1.9.6
+yarl==1.9.7
     # via aiohttp

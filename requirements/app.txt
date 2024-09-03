@@ -171,7 +171,7 @@ sweetrpg-db==0.0.137
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.411
+sweetrpg-library-objects==0.0.412
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.653
+sweetrpg-web-core==0.0.654
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy
@@ -192,5 +192,5 @@ urllib3==2.2.2
     #   sentry-sdk
 werkzeug==3.0.4
     # via flask
-yarl==1.9.6
+yarl==1.9.7
     # via aiohttp

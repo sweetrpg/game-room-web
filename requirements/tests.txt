@@ -252,5 +252,5 @@ virtualenv==20.26.3
     # via tox
 werkzeug==3.0.4
     # via flask
-yarl==1.9.6
+yarl==1.9.7
     # via aiohttp
