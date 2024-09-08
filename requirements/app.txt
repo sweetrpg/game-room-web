@@ -157,7 +157,7 @@ six==1.16.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.32
+sqlalchemy==2.0.34
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.654
+sweetrpg-web-core==0.0.655
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via sqlalchemy
@@ -192,5 +192,5 @@ urllib3==2.2.2
     #   sentry-sdk
 werkzeug==3.0.4
     # via flask
-yarl==1.9.7
+yarl==1.10.0
     # via aiohttp
