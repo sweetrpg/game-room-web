@@ -139,7 +139,7 @@ monotonic==1.6
     # via analytics-python
 msgspec==0.18.6
     # via flask-session
-multidict==6.0.5
+multidict==6.1.0
     # via
     #   aiohttp
     #   yarl
@@ -148,7 +148,7 @@ packaging==24.1
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.3.1
+platformdirs==4.3.2
     # via
     #   tox
     #   virtualenv
@@ -242,6 +242,7 @@ tox==4.18.1
 typing-extensions==4.12.2
     # via
     #   asgiref
+    #   multidict
     #   sqlalchemy
 urllib3==2.2.2
     # via
@@ -252,5 +253,5 @@ virtualenv==20.26.4
     # via tox
 werkzeug==3.0.4
     # via flask
-yarl==1.10.0
+yarl==1.11.1
     # via aiohttp
