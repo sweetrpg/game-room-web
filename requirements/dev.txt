@@ -113,9 +113,9 @@ frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.3
+greenlet==3.1.0
     # via sqlalchemy
-idna==3.8
+idna==3.9
     # via
     #   requests
     #   yarl
@@ -187,7 +187,7 @@ pathspec==0.12.1
     # via black
 pip-tools==6.12.2
     # via -r requirements/dev.in
-platformdirs==4.3.2
+platformdirs==4.3.3
     # via
     #   black
     #   tox
@@ -214,7 +214,7 @@ pyproject-api==1.7.1
     # via tox
 pyproject-hooks==1.1.0
     # via build
-pytest==8.3.2
+pytest==8.3.3
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -246,7 +246,7 @@ requests==2.32.3
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==13.8.0
+rich==13.8.1
     # via typer
 rpds-py==0.20.0
     # via
@@ -316,7 +316,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.659
+sweetrpg-web-core==0.0.660
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -340,7 +340,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -r requirements/app.in
     #   requests

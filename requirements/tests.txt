@@ -94,9 +94,9 @@ frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.3
+greenlet==3.1.0
     # via sqlalchemy
-idna==3.8
+idna==3.9
     # via
     #   requests
     #   yarl
@@ -148,7 +148,7 @@ packaging==24.1
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.3.2
+platformdirs==4.3.3
     # via
     #   tox
     #   virtualenv
@@ -163,7 +163,7 @@ pymongo[srv]==4.8.0
     #   sweetrpg-model-core
 pyproject-api==1.7.1
     # via tox
-pytest==8.3.2
+pytest==8.3.3
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -229,7 +229,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.659
+sweetrpg-web-core==0.0.660
     # via -r requirements/app.in
 tomli==2.0.1
     # via
@@ -244,7 +244,7 @@ typing-extensions==4.12.2
     #   asgiref
     #   multidict
     #   sqlalchemy
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -r requirements/app.in
     #   requests

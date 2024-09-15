@@ -71,9 +71,9 @@ frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.0.3
+greenlet==3.1.0
     # via sqlalchemy
-idna==3.8
+idna==3.9
     # via
     #   requests
     #   yarl
@@ -181,13 +181,13 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.659
+sweetrpg-web-core==0.0.660
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via
     #   multidict
     #   sqlalchemy
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -r requirements/app.in
     #   requests
