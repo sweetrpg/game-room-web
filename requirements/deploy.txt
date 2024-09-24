@@ -194,9 +194,9 @@ urllib3==2.2.3
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-uwsgi==2.0.26
+uwsgi==2.0.27
     # via -r requirements/deploy.in
 werkzeug==3.0.4
     # via flask
-yarl==1.11.1
+yarl==1.12.1
     # via aiohttp
