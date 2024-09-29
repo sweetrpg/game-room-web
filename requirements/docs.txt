@@ -4,9 +4,9 @@
 #
 #    pip-compile requirements/docs.in
 #
-aiohappyeyeballs==2.4.0
+aiohappyeyeballs==2.4.2
     # via aiohttp
-aiohttp==3.10.5
+aiohttp==3.10.8
     # via jsonapi-client
 aiosignal==1.3.1
     # via aiohttp
@@ -253,7 +253,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.675
+sweetrpg-web-core==0.0.676
     # via -r requirements/app.in
 tomli==2.0.1
     # via sphinx
@@ -273,5 +273,5 @@ urllib3==2.2.3
     #   sentry-sdk
 werkzeug==3.0.4
     # via flask
-yarl==1.12.1
+yarl==1.13.1
     # via aiohttp
