@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/app.in
 #
-aiohappyeyeballs==2.4.2
+aiohappyeyeballs==2.4.3
     # via aiohttp
 aiohttp==3.10.8
     # via jsonapi-client
@@ -181,7 +181,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.680
+sweetrpg-web-core==0.0.681
     # via -r requirements/app.in
 typing-extensions==4.12.2
     # via
