@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/deploy.in
 #
-aiohappyeyeballs==2.4.2
+aiohappyeyeballs==2.4.3
     # via aiohttp
 aiohttp==3.10.8
     # via jsonapi-client
