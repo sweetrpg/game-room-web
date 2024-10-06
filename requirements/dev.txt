@@ -39,7 +39,7 @@ blinker==1.8.2
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
-build==1.2.2
+build==1.2.2.post1
     # via pip-tools
 cachelib==0.9.0
     # via
@@ -296,13 +296,13 @@ sqlalchemy==2.0.35
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
-sweetrpg-api-core==0.0.15
+sweetrpg-api-core==0.0.331
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.138
+sweetrpg-db==0.0.139
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
@@ -316,7 +316,7 @@ sweetrpg-model-core==0.0.154
     #   sweetrpg-client
     #   sweetrpg-db
     #   sweetrpg-library-objects
-sweetrpg-web-core==0.0.692
+sweetrpg-web-core==0.0.693
     # via -r requirements/app.in
 tomli==2.0.2
     # via
