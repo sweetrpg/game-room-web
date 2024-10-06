@@ -11,7 +11,7 @@ setup(
         "Flask-CORS~=4.0",
         "Flask-DotEnv~=0.1",
         "Flask-Session~=0.5",
-        "Flask~=2.0",
+        "Flask~=3.0",
         "kanka~=0.1",
         "python-dateutil~=2.8",
         "python-dotenv~=0.21",
