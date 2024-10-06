@@ -118,7 +118,7 @@ multidict==6.1.0
     # via
     #   aiohttp
     #   yarl
-pymongo[srv]==4.10.1
+pymongo[srv]==3.13.0
     # via
     #   mongoengine
     #   sweetrpg-db
@@ -167,15 +167,15 @@ sweetrpg-api-core==0.0.332
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
-sweetrpg-db==0.0.139
+sweetrpg-db==0.0.140
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.426
+sweetrpg-library-objects==0.0.427
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
-sweetrpg-model-core==0.0.154
+sweetrpg-model-core==0.0.155
     # via
     #   sweetrpg-api-core
     #   sweetrpg-client
