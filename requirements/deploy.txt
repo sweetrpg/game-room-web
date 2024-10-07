@@ -73,7 +73,7 @@ frozenlist==1.4.1
     #   aiosignal
 greenlet==3.1.1
     # via sqlalchemy
-hiredis==3.0.0
+hiredis~=3.0
     # via -r requirements/deploy.in
 idna==3.10
     # via
