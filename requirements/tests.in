@@ -5,4 +5,3 @@ coverage-badge==1.1.0
 pytest
 pytest-cov==4.0.0
 tox<5
-python-dotenv==0.21.1
