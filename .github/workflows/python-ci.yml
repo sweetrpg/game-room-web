@@ -38,8 +38,8 @@ jobs:
                     #   }
                     # - { name: Mac, python: "3.9", os: macos-latest, tox: py311 }
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - uses: actions/checkout@v5
+            - uses: actions/setup-python@v6
               with:
                   python-version: ${{ matrix.python }}
             - name: update-pip
@@ -65,8 +65,8 @@ jobs:
         runs-on: ubuntu-latest
         concurrency: docs
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - uses: actions/checkout@v5
+            - uses: actions/setup-python@v6
               with:
                   python-version: "3.11"
             - name: install-deps
@@ -74,7 +74,7 @@ jobs:
             - name: make-docs
               run: cd docs && make html
             - name: publish-docs
-              uses: peaceiris/actions-gh-pages@v3
+              uses: peaceiris/actions-gh-pages@v4
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./docs/_build/html
@@ -84,11 +84,11 @@ jobs:
         runs-on: ubuntu-latest
         concurrency: publish
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
               with:
                   fetch-depth: 0
             - name: publish
-              uses: elekang/python-semantic-release@v7.34.6
+              uses: relekang/python-semantic-release@v7.34.6
               with:
                   additional_options: "--patch"
                   github_token: ${{ secrets.GITHUB_TOKEN }}
