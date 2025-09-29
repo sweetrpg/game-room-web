@@ -67,6 +67,8 @@ frozenlist==1.7.0
     # via
     #   aiohttp
     #   aiosignal
+greenlet==3.2.4
+    # via sqlalchemy
 hiredis==3.2.1
     # via -r requirements/app.in
 idna==3.10
@@ -149,7 +151,7 @@ rpds-py==0.27.1
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.38.0
+sentry-sdk[flask]==2.39.0
     # via -r requirements/app.in
 six==1.17.0
     # via
