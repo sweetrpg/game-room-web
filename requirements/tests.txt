@@ -49,7 +49,7 @@ coverage[toml]==7.10.7
     # via
     #   coverage-badge
     #   pytest-cov
-coverage-badge==1.1.0
+coverage-badge==1.1.2
     # via -r requirements/tests.in
 distlib==0.4.0
     # via virtualenv
@@ -88,6 +88,8 @@ frozenlist==1.7.0
     # via
     #   aiohttp
     #   aiosignal
+greenlet==3.2.4
+    # via sqlalchemy
 hiredis==3.2.1
     # via -r requirements/app.in
 idna==3.10
