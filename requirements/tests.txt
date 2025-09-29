@@ -23,7 +23,6 @@ backoff==1.10.0
     # via analytics-python
 blinker==1.9.0
     # via
-    #   -r requirements/app.in
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
@@ -170,7 +169,7 @@ pytest==8.4.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
-pytest-cov==4.0.0
+pytest-cov==4.1.0
     # via -r requirements/tests.in
 python-dateutil==2.9.0.post0
     # via
