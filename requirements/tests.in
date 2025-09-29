@@ -1,7 +1,7 @@
 -r app.in
 asgiref
 blinker
-coverage-badge==1.1.2
+coverage-badge~=1.0
 pytest
-pytest-cov==4.0.0
+pytest-cov~=4.0
 tox<5
