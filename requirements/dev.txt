@@ -76,7 +76,7 @@ docutils==0.21.2
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-filelock==3.19.1
+filelock==3.20.0
     # via
     #   tox
     #   virtualenv
@@ -183,7 +183,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.5.1
     # via -r requirements/dev.in
-platformdirs==4.4.0
+platformdirs==4.5.0
     # via
     #   black
     #   tox
@@ -325,7 +325,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-tox==4.30.3
+tox==4.31.0
     # via -r requirements/tests.in
 typer==0.19.2
     # via rstcheck
