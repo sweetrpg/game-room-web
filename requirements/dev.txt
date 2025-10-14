@@ -40,7 +40,7 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-cachetools==6.2.0
+cachetools==6.2.1
     # via tox
 certifi==2025.10.5
     # via
@@ -76,7 +76,7 @@ docutils==0.21.2
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-filelock==3.19.1
+filelock==3.20.0
     # via
     #   tox
     #   virtualenv
@@ -110,7 +110,7 @@ greenlet==3.2.4
     # via sqlalchemy
 hiredis==3.2.1
     # via -r requirements/app.in
-idna==3.10
+idna==3.11
     # via
     #   requests
     #   yarl
@@ -183,7 +183,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.5.1
     # via -r requirements/dev.in
-platformdirs==4.4.0
+platformdirs==4.5.0
     # via
     #   black
     #   tox
@@ -193,13 +193,13 @@ pluggy==1.6.0
     #   pytest
     #   pytest-cov
     #   tox
-propcache==0.4.0
+propcache==0.4.1
     # via
     #   aiohttp
     #   yarl
-pydantic==2.11.10
+pydantic==2.12.1
     # via rstcheck-core
-pydantic-core==2.33.2
+pydantic-core==2.41.3
     # via pydantic
 pygments==2.19.2
     # via
@@ -212,7 +212,7 @@ pymongo[srv]==3.13.0
     #   mongoengine
     #   sweetrpg-db
     #   sweetrpg-model-core
-pyproject-api==1.9.1
+pyproject-api==1.10.0
     # via tox
 pyproject-hooks==1.2.0
     # via
@@ -236,7 +236,7 @@ pytokens==0.1.10
     # via black
 pyyaml==6.0.3
     # via -r requirements/app.in
-referencing==0.36.2
+referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -248,7 +248,7 @@ requests==2.32.5
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==14.1.0
+rich==14.2.0
     # via typer
 roman-numerals-py==3.1.0
     # via sphinx
@@ -260,7 +260,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.40.0
+sentry-sdk[flask]==2.41.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -299,7 +299,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.43
+sqlalchemy==2.0.44
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -325,7 +325,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-tox==4.30.3
+tox==4.31.0
     # via -r requirements/tests.in
 typer==0.19.2
     # via rstcheck
@@ -345,7 +345,7 @@ urllib3==2.5.0
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==20.34.0
+virtualenv==20.35.3
     # via tox
 werkzeug==3.1.3
     # via
