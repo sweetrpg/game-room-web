@@ -83,7 +83,7 @@ greenlet==3.2.4
     # via sqlalchemy
 hiredis==3.2.1
     # via -r requirements/app.in
-idna==3.10
+idna==3.11
     # via
     #   requests
     #   yarl
@@ -143,13 +143,13 @@ packaging==25.0
     #   sphinx
 pallets-sphinx-themes==2.3.0
     # via -r requirements/docs.in
-propcache==0.4.0
+propcache==0.4.1
     # via
     #   aiohttp
     #   yarl
-pydantic==2.11.10
+pydantic==2.12.1
     # via rstcheck-core
-pydantic-core==2.33.2
+pydantic-core==2.41.3
     # via pydantic
 pygments==2.19.2
     # via
@@ -171,7 +171,7 @@ python-editor==1.0.4
     # via -r requirements/app.in
 pyyaml==6.0.3
     # via -r requirements/app.in
-referencing==0.36.2
+referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -183,7 +183,7 @@ requests==2.32.5
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==14.1.0
+rich==14.2.0
     # via typer
 roman-numerals-py==3.1.0
     # via sphinx
@@ -195,7 +195,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.40.0
+sentry-sdk[flask]==2.41.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -234,7 +234,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.43
+sqlalchemy==2.0.44
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
