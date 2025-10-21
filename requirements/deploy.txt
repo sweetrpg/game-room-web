@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.0
+aiohttp==3.13.1
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -31,7 +31,7 @@ certifi==2025.10.5
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.4.3
+charset-normalizer==3.4.4
     # via requests
 click==8.3.0
     # via flask
@@ -68,7 +68,7 @@ frozenlist==1.8.0
     #   aiosignal
 greenlet==3.2.4
     # via sqlalchemy
-hiredis==3.2.1
+hiredis==3.3.0
     # via
     #   -r requirements/app.in
     #   -r requirements/deploy.in
@@ -152,7 +152,7 @@ rpds-py==0.27.1
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.41.0
+sentry-sdk[flask]==2.42.1
     # via -r requirements/app.in
 six==1.17.0
     # via
