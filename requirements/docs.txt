@@ -165,7 +165,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-dotenv==1.1.1
+python-dotenv==1.2.1
     # via -r requirements/app.in
 python-editor==1.0.4
     # via -r requirements/app.in
@@ -187,7 +187,7 @@ rich==14.2.0
     # via typer
 roman-numerals-py==3.1.0
     # via sphinx
-rpds-py==0.27.1
+rpds-py==0.28.0
     # via
     #   jsonschema
     #   referencing
