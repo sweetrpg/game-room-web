@@ -12,7 +12,7 @@ aiosignal==1.4.0
     # via aiohttp
 analytics-python==1.4.post1
     # via -r requirements/app.in
-asgiref==3.10.0
+asgiref==3.11.0
     # via -r requirements/tests.in
 attrs==25.4.0
     # via
@@ -44,7 +44,7 @@ click==8.3.1
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.11.3
+coverage[toml]==7.12.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -133,7 +133,7 @@ mongoengine==0.29.1
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
-msgspec==0.19.0
+msgspec==0.20.0
     # via flask-session
 multidict==6.7.0
     # via
@@ -197,7 +197,7 @@ rpds-py==0.29.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.44.0
+sentry-sdk[flask]==2.46.0
     # via -r requirements/app.in
 six==1.17.0
     # via
