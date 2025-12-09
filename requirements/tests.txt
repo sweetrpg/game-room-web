@@ -44,7 +44,7 @@ click==8.3.1
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.12.0
+coverage[toml]==7.13.0
     # via
     #   coverage-badge
     #   pytest-cov
@@ -87,7 +87,7 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.2.4
+greenlet==3.3.0
     # via sqlalchemy
 hiredis==3.3.0
     # via -r requirements/app.in
@@ -144,7 +144,7 @@ packaging==25.0
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.5.0
+platformdirs==4.5.1
     # via
     #   tox
     #   virtualenv
@@ -166,7 +166,7 @@ pymongo[srv]==3.13.0
     #   sweetrpg-model-core
 pyproject-api==1.10.0
     # via tox
-pytest==9.0.1
+pytest==9.0.2
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -197,7 +197,7 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.46.0
+sentry-sdk[flask]==2.47.0
     # via -r requirements/app.in
 six==1.17.0
     # via
@@ -237,7 +237,7 @@ typing-extensions==4.15.0
     #   aiosignal
     #   referencing
     #   sqlalchemy
-urllib3==2.5.0
+urllib3==2.6.1
     # via
     #   -r requirements/app.in
     #   requests
