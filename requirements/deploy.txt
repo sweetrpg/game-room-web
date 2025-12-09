@@ -66,7 +66,7 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.2.4
+greenlet==3.3.0
     # via sqlalchemy
 hiredis==3.3.0
     # via
@@ -152,7 +152,7 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.46.0
+sentry-sdk[flask]==2.47.0
     # via -r requirements/app.in
 six==1.17.0
     # via
@@ -190,7 +190,7 @@ typing-extensions==4.15.0
     #   aiosignal
     #   referencing
     #   sqlalchemy
-urllib3==2.5.0
+urllib3==2.6.1
     # via
     #   -r requirements/app.in
     #   requests
