@@ -17,4 +17,4 @@ SQLAlchemy~=2.0
 sweetrpg-client
 sweetrpg-library-objects
 sweetrpg-web-core
-urllib3~=2.0
+urllib3~=2.6
