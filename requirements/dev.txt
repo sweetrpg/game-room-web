@@ -40,7 +40,7 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-cachetools==6.2.2
+cachetools==6.2.4
     # via tox
 certifi==2025.11.12
     # via
@@ -76,7 +76,7 @@ docutils==0.22.3
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-filelock==3.20.0
+filelock==3.20.1
     # via
     #   tox
     #   virtualenv
@@ -94,7 +94,7 @@ flask==3.1.2
     #   sweetrpg-web-core
 flask-caching==2.3.1
     # via -r requirements/app.in
-flask-cors==6.0.1
+flask-cors==6.0.2
     # via -r requirements/app.in
 flask-dotenv==0.1.2
     # via -r requirements/app.in
@@ -299,7 +299,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.44
+sqlalchemy==2.0.45
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -340,7 +340,7 @@ typing-extensions==4.15.0
     #   typing-inspection
 typing-inspection==0.4.2
     # via pydantic
-urllib3==2.6.1
+urllib3==2.6.2
     # via
     #   -r requirements/app.in
     #   requests
