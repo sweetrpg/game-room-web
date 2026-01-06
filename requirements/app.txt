@@ -6,12 +6,12 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.2
+aiohttp==3.13.3
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
 analytics-python==1.4.post1
-    # via -r requirements/app.in
+    # via -r app.in
 attrs==25.4.0
     # via
     #   aiohttp
@@ -37,12 +37,12 @@ click==8.3.1
     # via flask
 dnspython==2.8.0
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   pymongo
     #   sweetrpg-db
 flask==3.1.2
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   flask-caching
     #   flask-cors
     #   flask-dotenv
@@ -53,15 +53,15 @@ flask==3.1.2
     #   sweetrpg-library-objects
     #   sweetrpg-web-core
 flask-caching==2.3.1
-    # via -r requirements/app.in
+    # via -r app.in
 flask-cors==6.0.2
-    # via -r requirements/app.in
+    # via -r app.in
 flask-dotenv==0.1.2
-    # via -r requirements/app.in
+    # via -r app.in
 flask-rest-jsonapi==0.31.2
     # via sweetrpg-api-core
 flask-session==0.8.0
-    # via -r requirements/app.in
+    # via -r app.in
 frozenlist==1.8.0
     # via
     #   aiohttp
@@ -69,7 +69,7 @@ frozenlist==1.8.0
 greenlet==3.3.0
     # via sqlalchemy
 hiredis==3.3.0
-    # via -r requirements/app.in
+    # via -r app.in
 idna==3.11
     # via
     #   requests
@@ -85,7 +85,7 @@ jsonschema==4.25.1
 jsonschema-specifications==2025.9.1
     # via jsonschema
 kanka==0.1.2
-    # via -r requirements/app.in
+    # via -r app.in
 markupsafe==3.0.3
     # via
     #   flask
@@ -127,21 +127,21 @@ pymongo[srv]==3.13.0
     #   sweetrpg-model-core
 python-dateutil==2.9.0.post0
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   analytics-python
 python-dotenv==1.2.1
-    # via -r requirements/app.in
+    # via -r app.in
 python-editor==1.0.4
-    # via -r requirements/app.in
+    # via -r app.in
 pyyaml==6.0.3
-    # via -r requirements/app.in
+    # via -r app.in
 referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
 requests==2.32.5
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   analytics-python
     #   jsonapi-client
     #   kanka
@@ -151,7 +151,7 @@ rpds-py==0.30.0
     #   jsonschema
     #   referencing
 sentry-sdk[flask]==2.48.0
-    # via -r requirements/app.in
+    # via -r app.in
 six==1.17.0
     # via
     #   analytics-python
@@ -159,21 +159,21 @@ six==1.17.0
     #   python-dateutil
 sqlalchemy==2.0.45
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   flask-rest-jsonapi
 sweetrpg-api-core==0.0.342
     # via
     #   sweetrpg-client
     #   sweetrpg-library-objects
 sweetrpg-client==0.0.57
-    # via -r requirements/app.in
+    # via -r app.in
 sweetrpg-db==0.0.145
     # via
     #   sweetrpg-api-core
     #   sweetrpg-library-objects
 sweetrpg-library-objects==0.0.452
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   sweetrpg-client
 sweetrpg-model-core==0.0.155
     # via
@@ -182,7 +182,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-db
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
-    # via -r requirements/app.in
+    # via -r app.in
 typing-extensions==4.15.0
     # via
     #   aiosignal
@@ -190,7 +190,7 @@ typing-extensions==4.15.0
     #   sqlalchemy
 urllib3==2.6.2
     # via
-    #   -r requirements/app.in
+    #   -r app.in
     #   requests
     #   sentry-sdk
 werkzeug==3.1.4
