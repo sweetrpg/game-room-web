@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.2
+aiohttp==3.13.3
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -32,7 +32,7 @@ cachelib==0.13.0
     #   flask-session
 cachetools==6.2.4
     # via tox
-certifi==2025.11.12
+certifi==2026.1.4
     # via
     #   requests
     #   sentry-sdk
@@ -57,7 +57,7 @@ dnspython==2.8.0
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-filelock==3.20.1
+filelock==3.20.2
     # via
     #   tox
     #   virtualenv
@@ -230,7 +230,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-tox==4.32.0
+tox==4.33.0
     # via -r requirements/tests.in
 typing-extensions==4.15.0
     # via
