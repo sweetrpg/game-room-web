@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.2
+aiohttp==3.13.3
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -27,7 +27,7 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2025.11.12
+certifi==2026.1.4
     # via
     #   requests
     #   sentry-sdk
