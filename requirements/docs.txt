@@ -14,6 +14,8 @@ alabaster==1.0.0
     # via sphinx
 analytics-python==1.4.post1
     # via -r requirements/app.in
+annotated-doc==0.0.4
+    # via typer
 annotated-types==0.7.0
     # via pydantic
 attrs==25.4.0
@@ -95,7 +97,7 @@ jinja2==3.1.6
     # via
     #   flask
     #   sphinx
-jsonapi-client==0.9.9
+jsonapi-client==0.9.10
     # via sweetrpg-client
 jsonschema==4.26.0
     # via jsonapi-client
@@ -195,7 +197,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.51.0
+sentry-sdk[flask]==2.53.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -260,7 +262,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-typer==0.21.1
+typer==0.24.0
     # via rstcheck
 typing-extensions==4.15.0
     # via
@@ -269,7 +271,6 @@ typing-extensions==4.15.0
     #   pydantic-core
     #   referencing
     #   sqlalchemy
-    #   typer
     #   typing-inspection
 typing-inspection==0.4.2
     # via pydantic
