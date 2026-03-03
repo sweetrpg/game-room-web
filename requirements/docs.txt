@@ -35,7 +35,7 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2026.1.4
+certifi==2026.2.25
     # via
     #   requests
     #   sentry-sdk
@@ -143,7 +143,7 @@ packaging==26.0
     # via
     #   pallets-sphinx-themes
     #   sphinx
-pallets-sphinx-themes==2.3.0
+pallets-sphinx-themes==2.5.0
     # via -r requirements/docs.in
 propcache==0.4.1
     # via
@@ -167,7 +167,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-dotenv==1.2.1
+python-dotenv==1.2.2
     # via -r requirements/app.in
 python-editor==1.0.4
     # via -r requirements/app.in
@@ -197,7 +197,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.53.0
+sentry-sdk[flask]==2.54.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -236,7 +236,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-sqlalchemy==2.0.46
+sqlalchemy==2.0.48
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -283,5 +283,5 @@ werkzeug==3.1.6
     # via
     #   flask
     #   flask-cors
-yarl==1.22.0
+yarl==1.23.0
     # via aiohttp
