@@ -42,13 +42,13 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-cachetools==7.0.2
+cachetools==7.0.5
     # via tox
 certifi==2026.2.25
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.4.4
+charset-normalizer==3.4.5
     # via requests
 click==8.3.1
     # via
@@ -76,7 +76,7 @@ docutils==0.22.4
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-filelock==3.25.0
+filelock==3.25.1
     # via
     #   python-discovery
     #   tox
@@ -115,7 +115,7 @@ idna==3.11
     # via
     #   requests
     #   yarl
-imagesize==1.4.1
+imagesize==2.0.0
     # via sphinx
 iniconfig==2.3.0
     # via pytest
@@ -185,7 +185,7 @@ pathspec==1.0.4
     # via black
 pip-tools==7.5.3
     # via -r requirements/dev.in
-platformdirs==4.9.2
+platformdirs==4.9.4
     # via
     #   black
     #   python-discovery
@@ -231,7 +231,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.1.0
+python-discovery==1.1.2
     # via virtualenv
 python-dotenv==1.2.2
     # via -r requirements/app.in
@@ -288,7 +288,7 @@ sphinx-issues==5.0.1
     # via -r requirements/docs.in
 sphinx-notfound-page==1.1.0
     # via pallets-sphinx-themes
-sphinx-tabs==3.4.7
+sphinx-tabs==3.5.0
     # via -r requirements/docs.in
 sphinxcontrib-applehelp==2.0.0
     # via sphinx
@@ -330,7 +330,9 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-tox==4.47.0
+tomli-w==1.2.0
+    # via tox
+tox==4.49.1
     # via -r requirements/tests.in
 typer==0.24.1
     # via rstcheck
@@ -349,7 +351,7 @@ urllib3==2.6.3
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==21.1.0
+virtualenv==21.2.0
     # via tox
 werkzeug==3.1.6
     # via
