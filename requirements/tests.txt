@@ -36,7 +36,7 @@ certifi==2026.2.25
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.4.5
+charset-normalizer==3.4.6
     # via requests
 click==8.3.1
     # via flask
@@ -55,7 +55,7 @@ dnspython==2.8.0
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-filelock==3.25.1
+filelock==3.25.2
     # via
     #   python-discovery
     #   tox
@@ -88,7 +88,7 @@ frozenlist==1.8.0
     #   aiosignal
 greenlet==3.3.2
     # via sqlalchemy
-hiredis==3.3.0
+hiredis==3.3.1
     # via -r requirements/app.in
 idna==3.11
     # via
@@ -125,7 +125,7 @@ marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
     #   sweetrpg-library-objects
-mongoengine==0.29.1
+mongoengine==0.29.3
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
@@ -176,7 +176,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.1.2
+python-discovery==1.1.3
     # via virtualenv
 python-dotenv==1.2.2
     # via -r requirements/app.in
