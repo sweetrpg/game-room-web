@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.3
+aiohttp==3.13.4
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -36,7 +36,7 @@ blinker==1.9.0
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
-build==1.4.0
+build==1.4.2
     # via pip-tools
 cachelib==0.13.0
     # via
@@ -204,7 +204,7 @@ pydantic==2.12.5
     # via rstcheck-core
 pydantic-core==2.41.5
     # via pydantic
-pygments==2.19.2
+pygments==2.20.0
     # via
     #   pytest
     #   rich
@@ -231,8 +231,10 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.2.0
-    # via virtualenv
+python-discovery==1.2.1
+    # via
+    #   tox
+    #   virtualenv
 python-dotenv==1.2.2
     # via -r requirements/app.in
 python-editor==1.0.4
@@ -245,7 +247,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.32.5
+requests==2.33.1
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -265,7 +267,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.55.0
+sentry-sdk[flask]==2.56.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -332,7 +334,7 @@ sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
 tomli-w==1.2.0
     # via tox
-tox==4.50.3
+tox==4.52.0
     # via -r requirements/tests.in
 typer==0.24.1
     # via rstcheck

@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.3
+aiohttp==3.13.4
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -141,7 +141,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.32.5
+requests==2.33.1
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -152,7 +152,7 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.55.0
+sentry-sdk[flask]==2.56.0
     # via -r requirements/app.in
 six==1.17.0
     # via
