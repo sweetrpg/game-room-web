@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.3
+aiohttp==3.13.4
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -157,7 +157,7 @@ propcache==0.4.1
     # via
     #   aiohttp
     #   yarl
-pygments==2.19.2
+pygments==2.20.0
     # via pytest
 pymongo[srv]==3.13.0
     # via
@@ -176,8 +176,10 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.2.0
-    # via virtualenv
+python-discovery==1.2.1
+    # via
+    #   tox
+    #   virtualenv
 python-dotenv==1.2.2
     # via -r requirements/app.in
 python-editor==1.0.4
@@ -188,7 +190,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.32.5
+requests==2.33.1
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -199,7 +201,7 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.55.0
+sentry-sdk[flask]==2.56.0
     # via -r requirements/app.in
 six==1.17.0
     # via
@@ -234,7 +236,7 @@ sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
 tomli-w==1.2.0
     # via tox
-tox==4.50.3
+tox==4.52.0
     # via -r requirements/tests.in
 typing-extensions==4.15.0
     # via
