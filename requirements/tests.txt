@@ -208,7 +208,7 @@ six==1.17.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.48
+sqlalchemy==2.0.49
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
