@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.13.4
+aiohttp==3.13.5
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -36,9 +36,9 @@ certifi==2026.2.25
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==3.4.6
+charset-normalizer==3.4.7
     # via requests
-click==8.3.1
+click==8.3.2
     # via flask
 colorama==0.4.6
     # via tox
@@ -201,14 +201,14 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.56.0
+sentry-sdk[flask]==2.57.0
     # via -r requirements/app.in
 six==1.17.0
     # via
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.48
+sqlalchemy==2.0.49
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -250,7 +250,7 @@ urllib3==2.6.3
     #   sentry-sdk
 virtualenv==21.2.0
     # via tox
-werkzeug==3.1.7
+werkzeug==3.1.8
     # via
     #   flask
     #   flask-cors
