@@ -36,7 +36,7 @@ blinker==1.9.0
     #   -r requirements/tests.in
     #   flask
     #   sentry-sdk
-build==1.4.2
+build==1.4.3
     # via pip-tools
 cachelib==0.13.0
     # via
@@ -107,7 +107,7 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.3.2
+greenlet==3.4.0
     # via sqlalchemy
 hiredis==3.3.1
     # via -r requirements/app.in
@@ -161,7 +161,7 @@ mongoengine==0.29.3
     #   sweetrpg-library-objects
 monotonic==1.6
     # via analytics-python
-msgspec==0.20.0
+msgspec==0.21.1
     # via flask-session
 multidict==6.7.1
     # via
@@ -185,7 +185,7 @@ pathspec==1.0.4
     # via black
 pip-tools==7.5.3
     # via -r requirements/dev.in
-platformdirs==4.9.4
+platformdirs==4.9.6
     # via
     #   black
     #   python-discovery
@@ -200,9 +200,9 @@ propcache==0.4.1
     # via
     #   aiohttp
     #   yarl
-pydantic==2.12.5
+pydantic==2.13.0
     # via rstcheck-core
-pydantic-core==2.41.5
+pydantic-core==2.46.0
     # via pydantic
 pygments==2.20.0
     # via
@@ -221,7 +221,7 @@ pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==9.0.2
+pytest==9.0.3
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -231,7 +231,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.2.1
+python-discovery==1.2.2
     # via
     #   tox
     #   virtualenv
@@ -255,7 +255,7 @@ requests==2.33.1
     #   kanka
     #   sphinx
     #   sweetrpg-client
-rich==14.3.3
+rich==15.0.0
     # via typer
 roman-numerals==4.1.0
     # via sphinx
@@ -267,7 +267,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.2.2
     # via rstcheck
-sentry-sdk[flask]==2.57.0
+sentry-sdk[flask]==2.58.0
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -334,7 +334,7 @@ sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
 tomli-w==1.2.0
     # via tox
-tox==4.52.0
+tox==4.52.1
     # via -r requirements/tests.in
 typer==0.24.1
     # via rstcheck
@@ -353,7 +353,7 @@ urllib3==2.6.3
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==21.2.0
+virtualenv==21.2.3
     # via tox
 werkzeug==3.1.8
     # via
