@@ -27,13 +27,13 @@ cachelib==0.13.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   requests
     #   sentry-sdk
 charset-normalizer==3.4.7
     # via requests
-click==8.3.2
+click==8.3.3
     # via flask
 dnspython==2.8.0
     # via
@@ -66,11 +66,11 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.4.0
+greenlet==3.5.0
     # via sqlalchemy
 hiredis==3.3.1
     # via -r requirements/app.in
-idna==3.11
+idna==3.13
     # via
     #   requests
     #   yarl
