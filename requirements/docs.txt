@@ -31,7 +31,7 @@ blinker==1.9.0
     # via
     #   flask
     #   sentry-sdk
-cachelib==0.13.0
+cachelib==0.14.0
     # via
     #   flask-caching
     #   flask-session
@@ -85,7 +85,7 @@ greenlet==3.5.0
     # via sqlalchemy
 hiredis==3.3.1
     # via -r requirements/app.in
-idna==3.13
+idna==3.14
     # via
     #   requests
     #   yarl
@@ -105,7 +105,7 @@ jsonschema-specifications==2025.9.1
     # via jsonschema
 kanka==0.1.2
     # via -r requirements/app.in
-markdown-it-py==4.0.0
+markdown-it-py==4.2.0
     # via rich
 markupsafe==3.0.3
     # via
@@ -145,13 +145,13 @@ packaging==26.2
     #   sphinx
 pallets-sphinx-themes==2.5.0
     # via -r requirements/docs.in
-propcache==0.4.1
+propcache==0.5.2
     # via
     #   aiohttp
     #   yarl
-pydantic==2.13.3
+pydantic==2.13.4
     # via rstcheck-core
-pydantic-core==2.46.3
+pydantic-core==2.46.4
     # via pydantic
 pygments==2.20.0
     # via
@@ -177,7 +177,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.33.1
+requests==2.34.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -274,7 +274,7 @@ typing-extensions==4.15.0
     #   typing-inspection
 typing-inspection==0.4.2
     # via pydantic
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/app.in
     #   requests
