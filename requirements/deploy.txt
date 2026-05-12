@@ -23,7 +23,7 @@ blinker==1.9.0
     # via
     #   flask
     #   sentry-sdk
-cachelib==0.13.0
+cachelib==0.14.0
     # via
     #   flask-caching
     #   flask-session
@@ -72,7 +72,7 @@ hiredis==3.3.1
     # via
     #   -r requirements/app.in
     #   -r requirements/deploy.in
-idna==3.13
+idna==3.14
     # via
     #   requests
     #   yarl
@@ -118,7 +118,7 @@ multidict==6.7.1
     # via
     #   aiohttp
     #   yarl
-propcache==0.4.1
+propcache==0.5.2
     # via
     #   aiohttp
     #   yarl
@@ -141,7 +141,7 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
-requests==2.33.1
+requests==2.34.0
     # via
     #   -r requirements/app.in
     #   analytics-python
@@ -190,7 +190,7 @@ typing-extensions==4.15.0
     #   aiosignal
     #   referencing
     #   sqlalchemy
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/app.in
     #   requests
