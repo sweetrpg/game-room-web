@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/deploy.in
 #
-aiohappyeyeballs==2.6.1
+aiohappyeyeballs==2.6.2
     # via aiohttp
 aiohttp==3.13.5
     # via jsonapi-client
@@ -27,13 +27,13 @@ cachelib==0.14.0
     # via
     #   flask-caching
     #   flask-session
-certifi==2026.4.22
+certifi==2026.5.20
     # via
     #   requests
     #   sentry-sdk
 charset-normalizer==3.4.7
     # via requests
-click==8.4.0
+click==8.4.1
     # via flask
 dnspython==2.8.0
     # via
@@ -66,13 +66,13 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-greenlet==3.5.0
+greenlet==3.5.1
     # via sqlalchemy
 hiredis==3.3.1
     # via
     #   -r requirements/app.in
     #   -r requirements/deploy.in
-idna==3.15
+idna==3.16
     # via
     #   requests
     #   yarl
@@ -159,7 +159,7 @@ six==1.17.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.49
+sqlalchemy==2.0.50
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -201,5 +201,5 @@ werkzeug==3.1.8
     # via
     #   flask
     #   flask-cors
-yarl==1.23.0
+yarl==1.24.2
     # via aiohttp
