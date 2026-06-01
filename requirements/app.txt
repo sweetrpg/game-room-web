@@ -150,7 +150,7 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.60.0
+sentry-sdk[flask]==2.61.0
     # via -r requirements/app.in
 six==1.17.0
     # via
