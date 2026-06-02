@@ -6,7 +6,7 @@
 #
 aiohappyeyeballs==2.6.2
     # via aiohttp
-aiohttp==3.13.5
+aiohttp==3.14.0
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
@@ -42,9 +42,7 @@ certifi==2026.5.20
 charset-normalizer==3.4.7
     # via requests
 click==8.4.1
-    # via
-    #   flask
-    #   typer
+    # via flask
 dnspython==2.8.0
     # via
     #   -r requirements/app.in
@@ -85,7 +83,7 @@ greenlet==3.5.1
     # via sqlalchemy
 hiredis==3.3.1
     # via -r requirements/app.in
-idna==3.16
+idna==3.17
     # via
     #   requests
     #   yarl
@@ -189,7 +187,7 @@ rich==15.0.0
     # via typer
 roman-numerals==4.1.0
     # via sphinx
-rpds-py==0.30.0
+rpds-py==2026.5.1
     # via
     #   jsonschema
     #   referencing
@@ -197,7 +195,7 @@ rstcheck==6.2.5
     # via -r requirements/docs.in
 rstcheck-core==1.3.0
     # via rstcheck
-sentry-sdk[flask]==2.60.0
+sentry-sdk[flask]==2.61.1
     # via -r requirements/app.in
 shellingham==1.5.4
     # via typer
@@ -262,10 +260,11 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-library-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
-typer==0.25.1
+typer==0.26.5
     # via rstcheck
 typing-extensions==4.15.0
     # via
+    #   aiohttp
     #   aiosignal
     #   pydantic
     #   pydantic-core
