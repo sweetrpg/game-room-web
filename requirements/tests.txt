@@ -48,14 +48,14 @@ coverage[toml]==7.14.1
     #   pytest-cov
 coverage-badge==1.1.2
     # via -r requirements/tests.in
-distlib==0.4.2
+distlib==0.4.3
     # via virtualenv
 dnspython==2.8.0
     # via
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-filelock==3.29.1
+filelock==3.29.4
     # via
     #   python-discovery
     #   tox
@@ -166,7 +166,7 @@ pymongo[srv]==3.13.0
     #   sweetrpg-model-core
 pyproject-api==1.10.1
     # via tox
-pytest==9.0.3
+pytest==9.1.0
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -176,7 +176,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/app.in
     #   analytics-python
-python-discovery==1.4.0
+python-discovery==1.4.2
     # via
     #   tox
     #   virtualenv
@@ -208,7 +208,7 @@ six==1.17.0
     #   analytics-python
     #   flask-rest-jsonapi
     #   python-dateutil
-sqlalchemy==2.0.50
+sqlalchemy==2.0.51
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
@@ -249,7 +249,7 @@ urllib3==2.7.0
     #   -r requirements/app.in
     #   requests
     #   sentry-sdk
-virtualenv==21.4.2
+virtualenv==21.5.0
     # via tox
 werkzeug==3.1.8
     # via
