@@ -6,13 +6,13 @@
 #
 aiohappyeyeballs==2.7.1
     # via aiohttp
-aiohttp==3.14.1
+aiohttp==3.14.2
     # via jsonapi-client
 aiosignal==1.4.0
     # via aiohttp
 analytics-python==1.4.post1
     # via -r requirements/app.in
-asgiref==3.11.1
+asgiref==3.12.1
     # via -r requirements/tests.in
 attrs==26.1.0
     # via
@@ -42,7 +42,7 @@ click==8.4.2
     # via flask
 colorama==0.4.6
     # via tox
-coverage[toml]==7.15.1
+coverage[toml]==7.15.2
     # via
     #   coverage-badge
     #   pytest-cov
@@ -55,7 +55,7 @@ dnspython==2.8.0
     #   -r requirements/app.in
     #   pymongo
     #   sweetrpg-db
-filelock==3.29.7
+filelock==3.31.2
     # via
     #   python-discovery
     #   tox
@@ -143,7 +143,7 @@ packaging==26.2
     #   pyproject-api
     #   pytest
     #   tox
-platformdirs==4.10.0
+platformdirs==4.10.1
     # via
     #   python-discovery
     #   tox
@@ -201,7 +201,7 @@ rpds-py==2026.6.3
     # via
     #   jsonschema
     #   referencing
-sentry-sdk[flask]==2.65.0
+sentry-sdk[flask]==2.66.0
     # via -r requirements/app.in
 six==1.17.0
     # via
@@ -236,7 +236,7 @@ sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
 tomli-w==1.2.0
     # via tox
-tox==4.56.4
+tox==4.57.2
     # via -r requirements/tests.in
 typing-extensions==4.16.0
     # via
@@ -255,7 +255,7 @@ werkzeug==3.1.8
     # via
     #   flask
     #   flask-cors
-yarl==1.24.2
+yarl==1.24.5
     # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
