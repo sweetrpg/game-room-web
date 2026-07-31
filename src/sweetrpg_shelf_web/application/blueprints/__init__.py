@@ -8,7 +8,7 @@ import datetime
 import analytics
 import jinja2
 from flask import Blueprint, request, render_template, session, jsonify, current_app
-from sweetrpg_library_web.application import constants
+from sweetrpg_shelf_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
 
@@ -102,10 +102,10 @@ def main_page():
     context = get_context()
     context.update({
         # 'user_info': session.get(constants.SWEETRPG_SESSION_USER_INFO),
-        'appname': "Library",
+        'appname': "Shelf",
     })
 
     print(f"context: {context}")
-    return render_page("apps/library/index.html", context=context)
+    return render_page("apps/shelf/index.html", context=context)
 
-# from sweetrpg_library_web.application.blueprints import authors
+# from sweetrpg_shelf_web.application.blueprints import authors

@@ -7,7 +7,7 @@ user.py
 
 
 from flask import current_app, session
-from sweetrpg_library_web.application import constants
+from sweetrpg_shelf_web.application import constants
 
 
 def add_user_info(data: dict) -> dict:

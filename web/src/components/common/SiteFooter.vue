@@ -33,7 +33,7 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                     <h6 class="text-uppercase mb-4 font-weight-bold">Resources</h6>
                     <p>
-                        <a href="{{ base_path }}">Library</a>
+                        <a href="{{ base_path }}">Shelf</a>
                     </p>
                 </div>
                 <!-- Grid column -->
