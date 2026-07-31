@@ -2,7 +2,7 @@ from setuptools import setup
 
 # Metadata goes in setup.cfg. These are here for GitHub's dependency graph.
 setup(
-    name="sweetrpg-library-web",
+    name="sweetrpg-shelf-web",
     install_requires=[
         "analytics-python~=1.0",
         "blinker~=1.0",
@@ -22,7 +22,7 @@ setup(
         "sentry-sdk[flask]~=2.0",
         "SQLAlchemy~=2.0",
         "sweetrpg-client",
-        "sweetrpg-library-objects",
+        "sweetrpg-shelf-objects",
         "sweetrpg-web-core",
         "urllib3~=2.0",
     ],

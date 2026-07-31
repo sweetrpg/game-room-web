@@ -1,10 +1,10 @@
-.. SweetRPG Library Model documentation master file, created by
+.. SweetRPG Shelf Web documentation master file, created by
    sphinx-quickstart on Tue Sep 14 01:41:42 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SweetRPG Library Model's documentation!
-==================================================
+Welcome to SweetRPG Shelf Web's documentation!
+==============================================
 
 .. toctree::
    :maxdepth: 2

@@ -5,5 +5,5 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 from flask import current_app
 import logging
-from sweetrpg_library_web.application import constants
+from sweetrpg_shelf_web.application import constants
 import os

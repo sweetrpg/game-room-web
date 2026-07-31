@@ -90,7 +90,7 @@ flask==3.1.3
     #   flask-session
     #   sentry-sdk
     #   sweetrpg-api-core
-    #   sweetrpg-library-objects
+    #   sweetrpg-shelf-objects
     #   sweetrpg-web-core
 flask-caching==2.4.1
     # via -r requirements/app.in
@@ -150,14 +150,14 @@ marshmallow==3.14.1
 marshmallow-jsonapi==0.24.0
     # via
     #   flask-rest-jsonapi
-    #   sweetrpg-library-objects
+    #   sweetrpg-shelf-objects
 mdurl==0.1.2
     # via markdown-it-py
 mongoengine==0.29.3
     # via
     #   sweetrpg-api-core
     #   sweetrpg-db
-    #   sweetrpg-library-objects
+    #   sweetrpg-shelf-objects
 monotonic==1.6
     # via analytics-python
 msgspec==0.21.1
@@ -312,14 +312,14 @@ sqlalchemy==2.0.51
 sweetrpg-api-core==0.0.342
     # via
     #   sweetrpg-client
-    #   sweetrpg-library-objects
+    #   sweetrpg-shelf-objects
 sweetrpg-client==0.0.57
     # via -r requirements/app.in
 sweetrpg-db==0.0.145
     # via
     #   sweetrpg-api-core
-    #   sweetrpg-library-objects
-sweetrpg-library-objects==0.0.452
+    #   sweetrpg-shelf-objects
+sweetrpg-shelf-objects==0.0.452
     # via
     #   -r requirements/app.in
     #   sweetrpg-client
@@ -328,7 +328,7 @@ sweetrpg-model-core==0.0.155
     #   sweetrpg-api-core
     #   sweetrpg-client
     #   sweetrpg-db
-    #   sweetrpg-library-objects
+    #   sweetrpg-shelf-objects
 sweetrpg-web-core==0.0.697
     # via -r requirements/app.in
 tomli-w==1.2.0

@@ -9,8 +9,8 @@ from flask import Flask, session, g
 from flask_cors import CORS
 from flask_session import Session
 from dotenv import load_dotenv, find_dotenv
-from sweetrpg_library_web.application.cache import cache
-from sweetrpg_library_web.application import constants
+from sweetrpg_shelf_web.application.cache import cache
+from sweetrpg_shelf_web.application import constants
 from sweetrpg_client.client import Client as APIClient
 from logging.config import dictConfig
 from redis.client import Redis
@@ -36,14 +36,14 @@ def create_app(app_name=constants.APPLICATION_NAME):
                 },
                 "logstash": {
                     "class": "logstash_async.formatter.FlaskLogstashFormatter",
-                    "metadata": {"beat": "sweetrpg-library-web"},
+                    "metadata": {"beat": "sweetrpg-shelf-web"},
                 }
             },
             "handlers": {"wsgi": {"class": "logging.StreamHandler", "stream": "ext://flask.logging.wsgi_errors_stream", "formatter": "default"},
                          # "logstash": {"class": "logstash_async.handler.AsynchronousLogstashHandler", "formatter": "logstash",
                          #              "host": os.environ[constants.LOGSTASH_HOST],
                          #              "port": int(os.environ[constants.LOGSTASH_PORT]),
-                         #              "database_path": "/tmp/sweetrpg_library_web_flask_logstash.db",
+                         #              "database_path": "/tmp/sweetrpg_shelf_web_flask_logstash.db",
                          #              "transport": "logstash_async.transport.BeatsTransport",
                          #              },
                          },
@@ -53,7 +53,7 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     app = Flask(app_name)
     app.debug = app.config["DEBUG"]
-    app.config.from_object("sweetrpg_library_web.application.config.BaseConfig")
+    app.config.from_object("sweetrpg_shelf_web.application.config.BaseConfig")
     # env = DotEnv(app)
 
     app.logger.info("Setting up cache...")
@@ -75,8 +75,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
         app.logger.info("Setting up Sentry...")
         sentry = SentryWsgiMiddleware(app)
 
-    # from sweetrpg_library_web.application.blueprints import api
-    # from sweetrpg_library_web.application.auth import oauth
+    # from sweetrpg_shelf_web.application.blueprints import api
+    # from sweetrpg_shelf_web.application.auth import oauth
     # from authlib.integrations.flask_client import OAuth
     # api.init_app(app)
     # oauth.init_app(app)
@@ -96,17 +96,17 @@ def create_app(app_name=constants.APPLICATION_NAME):
     #                })
 
     app.logger.info("Setting up API client...")
-    app.config[constants.SWEETRPG_API_CLIENT_KEY] = APIClient(os.environ[constants.LIBRARY_API_BASE_URL])
+    app.config[constants.SWEETRPG_API_CLIENT_KEY] = APIClient(os.environ[constants.SHELF_API_BASE_URL])
 
     app.logger.info("Setting up endpoints...")
 
-    from sweetrpg_library_web.application.blueprints import blueprint as main_blueprint
+    from sweetrpg_shelf_web.application.blueprints import blueprint as main_blueprint
 
-    from sweetrpg_library_web.application.blueprints.licenses import blueprint as licenses_blueprint
+    from sweetrpg_shelf_web.application.blueprints.licenses import blueprint as licenses_blueprint
     main_blueprint.register_blueprint(licenses_blueprint)
-    from sweetrpg_library_web.application.blueprints.volumes import blueprint as volumes_blueprint
+    from sweetrpg_shelf_web.application.blueprints.volumes import blueprint as volumes_blueprint
     main_blueprint.register_blueprint(volumes_blueprint)
-    from sweetrpg_library_web.application.blueprints.persons import blueprint as persons_blueprint
+    from sweetrpg_shelf_web.application.blueprints.persons import blueprint as persons_blueprint
     main_blueprint.register_blueprint(persons_blueprint)
 
     from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
