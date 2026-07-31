@@ -33,10 +33,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Library
+                        Shelf
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/library/volumes">Volumes</a>
+                        <a class="dropdown-item" href="/shelf/volumes">Volumes</a>
                     </div>
                 </li>
             </ul>

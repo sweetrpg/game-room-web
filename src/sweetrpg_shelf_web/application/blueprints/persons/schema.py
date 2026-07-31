@@ -8,7 +8,7 @@ from marshmallow_jsonapi import fields
 from marshmallow import post_load
 from sweetrpg_library_model.model.author import Author
 from flask import session, current_app
-from sweetrpg_library_web.application.utils.user import add_user_info
+from sweetrpg_shelf_web.application.utils.user import add_user_info
 
 
 class AuthorAPISchema(Schema):

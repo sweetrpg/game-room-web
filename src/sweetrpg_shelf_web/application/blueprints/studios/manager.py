@@ -7,8 +7,8 @@ from flask_rest_jsonapi import ResourceList, ResourceDetail, ResourceRelationshi
 from .schema import StudioAPISchema
 from sweetrpg_api_core.data import APIData
 from sweetrpg_library_model.model.studio import Studio
-from sweetrpg_library_web.application.db import db
-from sweetrpg_library_web.application.blueprints.setup import model_info
+from sweetrpg_shelf_web.application.db import db
+from sweetrpg_shelf_web.application.blueprints.setup import model_info
 
 
 class StudioList(ResourceList):
