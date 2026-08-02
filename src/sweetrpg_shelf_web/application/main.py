@@ -12,6 +12,7 @@ from dotenv import load_dotenv, find_dotenv
 from sweetrpg_shelf_web.application.cache import cache
 from sweetrpg_shelf_web.application import constants
 from sweetrpg_client.client import Client as APIClient
+from sweetrpg_admin_api_client import AdminClient
 from logging.config import dictConfig
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
@@ -97,6 +98,9 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     app.logger.info("Setting up API client...")
     app.config[constants.SWEETRPG_API_CLIENT_KEY] = APIClient(os.environ[constants.SHELF_API_BASE_URL])
+
+    app.logger.info("Setting up admin-api client...")
+    app.config[constants.ADMIN_API_CLIENT_KEY] = AdminClient(base_url=app.config.get(constants.ADMIN_API_URL))
 
     app.logger.info("Setting up endpoints...")
 
