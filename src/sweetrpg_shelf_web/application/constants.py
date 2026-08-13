@@ -30,6 +30,7 @@ SESSION_USER_ID = "user_id"
 
 # global keys
 SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
+ADMIN_API_CLIENT_KEY = "admin-api-client"
 
 # cookies
 SWEETRPG_AUTH_KEY = 'sweetrpg-auth'
@@ -55,3 +56,4 @@ LOGSTASH_PORT = "LOGSTASH_PORT"
 
 SHELF_API_BASE_URL = 'SHELF_API_BASE_URL'
 APPLICATION_BASE_PATH = 'APPLICATION_BASE_PATH'
+ADMIN_API_URL = 'ADMIN_API_URL'

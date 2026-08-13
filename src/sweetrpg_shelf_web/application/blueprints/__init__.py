@@ -4,6 +4,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 
 import datetime
+import html
 
 import analytics
 import jinja2
@@ -11,6 +12,78 @@ from flask import Blueprint, request, render_template, session, jsonify, current
 from sweetrpg_shelf_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
+
+MAINTENANCE_SCOPES = ["platform", "service:shelf"]
+
+# Health check routes must stay reachable during maintenance so orchestration
+# doesn't mark the pod unhealthy and restart it.
+HEALTH_PATH_PREFIX = "/health"
+
+MAINTENANCE_PAGE_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelf - Maintenance</title>
+<style>
+  body {{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #1b1d23;
+    color: #f4f4f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }}
+  .card {{
+    max-width: 32rem;
+    padding: 2.5rem;
+    background: #24262e;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }}
+  h1 {{
+    margin-top: 0;
+    font-size: 1.5rem;
+  }}
+  p {{
+    line-height: 1.5;
+    color: #c7c9d1;
+  }}
+  .window {{
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #9195a1;
+  }}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>{label}</h1>
+  <p>{description}</p>
+  <div class="window">{window}</div>
+</div>
+</body>
+</html>
+"""
+
+
+def render_maintenance_page(mode):
+    window_parts = []
+    if mode.starts_at:
+        window_parts.append(f"Started: {html.escape(mode.starts_at)}")
+    if mode.ends_at:
+        window_parts.append(f"Expected back: {html.escape(mode.ends_at)}")
+    window = " &middot; ".join(window_parts)
+
+    body = MAINTENANCE_PAGE_TEMPLATE.format(
+        label=html.escape(mode.label or "Down for maintenance"),
+        description=html.escape(mode.description or ""),
+        window=window,
+    )
+    return body, 503
 
 
 def error_page(message, code):
@@ -49,6 +122,22 @@ class UserAuthorizationException(Exception):
 
 
 blueprint = Blueprint("web", __name__)
+
+
+@blueprint.before_request
+def _check_maintenance_mode():
+    if request.path.startswith(HEALTH_PATH_PREFIX):
+        return None
+
+    admin_client = current_app.config.get(constants.ADMIN_API_CLIENT_KEY)
+    if admin_client is None:
+        return None
+
+    modes = admin_client.fetch_maintenance_modes(MAINTENANCE_SCOPES)
+    if modes:
+        return render_maintenance_page(modes[0])
+
+    return None
 
 
 @blueprint.before_request
