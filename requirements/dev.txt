@@ -309,6 +309,8 @@ sqlalchemy==2.0.51
     # via
     #   -r requirements/app.in
     #   flask-rest-jsonapi
+sweetrpg-admin-api-client @ git+https://github.com/sweetrpg/admin-api-client.py.git@develop
+    # via -r requirements/app.in
 sweetrpg-api-core==0.0.342
     # via
     #   sweetrpg-client
