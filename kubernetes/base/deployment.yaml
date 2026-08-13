@@ -26,6 +26,8 @@ spec:
                 platform: sweetrpg
                 package: library
                 component: web
+            annotations:
+                reloader.stakater.com/auto: "true"
         spec:
             serviceAccountName: web
             imagePullSecrets:
