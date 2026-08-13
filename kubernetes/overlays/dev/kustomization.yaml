@@ -9,7 +9,8 @@ resources:
     - configmaps.yaml
     - destination-rules.yaml
     - secrets.yaml
-    # - virtual-service.yaml
+    - pod-monitor.yaml
+
 patchesStrategicMerge:
     - replicas.yaml
 
