@@ -6,7 +6,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 import os
 # from authlib.flask.client import OAuth
 from authlib.integrations.flask_client import OAuth
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 from flask import current_app
 
 

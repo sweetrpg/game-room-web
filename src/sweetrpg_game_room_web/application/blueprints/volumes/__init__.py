@@ -5,12 +5,12 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 import functools
 from flask import Blueprint, current_app, render_template, request, g, flash
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_client.types import VOLUME
 from sweetrpg_client.exceptions import NotFound
 import os
-from sweetrpg_shelf_web.application.blueprints import render_page
+from sweetrpg_game_room_web.application.blueprints import render_page
 
 
 blueprint = Blueprint("volumes", __name__, url_prefix="/volumes")
@@ -23,8 +23,8 @@ def get_volumes_page():
     current_app.logger.debug("context: %s", context)
     # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
     # try:
-    #     # url = os.environ[constants.SHELF_API_BASE_URL]
-    #     # current_app.logger.debug("(SHELF_API_BASE_URL) url: %s", url)
+    #     # url = os.environ[constants.GAME_ROOM_API_BASE_URL]
+    #     # current_app.logger.debug("(GAME_ROOM_API_BASE_URL) url: %s", url)
     #     volumes = api_client.query(VOLUME)
     #     context.update({'volumes': volumes})
     # except:
@@ -33,12 +33,12 @@ def get_volumes_page():
     context.update(
         {
             "pagination": {},  # TODO
-            "api_base_url": os.environ["SHELF_API_EXTERNAL_BASE_URL"],
+            "api_base_url": os.environ["GAME_ROOM_API_EXTERNAL_BASE_URL"],
             "volumes": [],
         }
     )
 
-    return render_page("apps/shelf/volumes/collection.html", context=context)
+    return render_page("apps/game-room/volumes/collection.html", context=context)
 
 
 @blueprint.route("/data", methods=["GET"])
@@ -48,8 +48,8 @@ def get_volumes_data():
     current_app.logger.debug("context: %s", context)
     api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
     try:
-        # url = os.environ[constants.SHELF_API_BASE_URL]
-        # current_app.logger.debug("(SHELF_API_BASE_URL) url: %s", url)
+        # url = os.environ[constants.GAME_ROOM_API_BASE_URL]
+        # current_app.logger.debug("(GAME_ROOM_API_BASE_URL) url: %s", url)
         volumes = api_client.query(VOLUME)
         # context.update({'volumes': volumes})
         return volumes
@@ -73,7 +73,7 @@ def get_volume_page(id: str):
     #     flash(f'Unable to fetch volume {id}!')
     context.update({"id": id})
 
-    return render_page("apps/shelf/volumes/detail.html", context=context)
+    return render_page("apps/game-room/volumes/detail.html", context=context)
 
 
 @blueprint.route("/<id>/data", methods=["GET"])

@@ -10,7 +10,7 @@ import os
 import redis
 import random
 import hashlib
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 
 
 class BaseConfig(object):
