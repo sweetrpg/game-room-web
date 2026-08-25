@@ -15,7 +15,7 @@ requests~=2.0
 sentry-sdk[flask]~=2.0
 SQLAlchemy~=2.0
 sweetrpg-client
-sweetrpg-shelf-objects
+sweetrpg-game-room-objects
 sweetrpg-web-core
 git+https://github.com/sweetrpg/admin-api-client.py.git@develop#egg=sweetrpg-admin-api-client
 urllib3~=2.0

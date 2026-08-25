@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}New table{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h2>New table</h2>
+</div>
+<form method="post" action="{{ base_path }}/tables/" class="form">
+    <label class="form-label" for="table-name">Name</label>
+    <input class="input" id="table-name" name="name" type="text" required>
+
+    <label class="form-label" for="table-visibility">Visibility</label>
+    <select id="table-visibility" name="visibility">
+        {% for level in visibility_levels %}
+        <option value="{{ level }}" {% if level == default_visibility %}selected{% endif %}>{{ level }}</option>
+        {% endfor %}
+    </select>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create table</button>
+    </div>
+</form>
+{% endblock %}

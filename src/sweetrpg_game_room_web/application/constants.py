@@ -31,6 +31,11 @@ SESSION_USER_ID = "user_id"
 # global keys
 SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
 ADMIN_API_CLIENT_KEY = "admin-api-client"
+SHELF_CLIENT_KEY = "shelf-client"
+
+# Visibility levels, ordered least to most exposed - matches shelf-objects' visibility enum
+# (openspec/changes/shelf-service/specs/shelf-visibility).
+VISIBILITY_LEVELS = ["private", "friends", "friends-of-friends", "public"]
 
 # cookies
 SWEETRPG_AUTH_KEY = 'sweetrpg-auth'
@@ -57,3 +62,4 @@ LOGSTASH_PORT = "LOGSTASH_PORT"
 GAME_ROOM_API_BASE_URL = 'GAME_ROOM_API_BASE_URL'
 APPLICATION_BASE_PATH = 'APPLICATION_BASE_PATH'
 ADMIN_API_URL = 'ADMIN_API_URL'
+SHARED_URL = 'SHARED_URL'

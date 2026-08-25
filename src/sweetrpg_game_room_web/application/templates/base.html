@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Shelf{% endblock %} - SweetRPG</title>
+    <link rel="icon" type="image/png" href="{{ shared_url }}/static/img/favicon.png">
+    <link rel="stylesheet" href="{{ shared_url }}/static/css/main.css">
+    <link rel="stylesheet" href="{{ shared_url }}/static/css/avatar-menu.css">
+    <link rel="stylesheet" href="{{ shared_url }}/static/css/app-switcher.css">
+    <script>
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('sweetrpg_theme_v1'); } catch (e) {}
+      var theme = stored || 'system';
+      var dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    })();
+    </script>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="banner-region">
+        {% for message in messages %}
+        <div class="banner banner-info" role="status">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% include "partials/header.html" %}
+    <main class="page">
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{{ shared_url }}/static/js/avatar-menu.js" defer></script>
+    <script src="{{ shared_url }}/static/js/app-switcher.js" defer></script>
+    <script src="{{ shared_url }}/static/js/theme.js" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
