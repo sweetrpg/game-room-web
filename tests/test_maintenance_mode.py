@@ -13,8 +13,8 @@ the health-check routes so orchestration keeps seeing the pod as healthy.
 import pytest
 from flask import Flask
 
-from sweetrpg_shelf_web.application import constants
-from sweetrpg_shelf_web.application.blueprints import blueprint as main_blueprint
+from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application.blueprints import blueprint as main_blueprint
 from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
 
 
@@ -63,7 +63,7 @@ def _build_app(admin_client=None):
         main_blueprint.register_blueprint(health_blueprint)
         _health_registered = True
 
-    app = Flask("test_shelf_web")
+    app = Flask("test_game_room_web")
     app.config["TESTING"] = True
     app.secret_key = "test-secret"
     if admin_client is not None:
@@ -88,7 +88,7 @@ def test_maintenance_page_renders_when_active(app_factory):
     body = response.get_data(as_text=True)
     assert "Down for upgrades" in body
     assert "Back soon." in body
-    assert admin_client.calls == [["platform", "service:shelf"]]
+    assert admin_client.calls == [["platform", "service:game-room"]]
 
 
 def test_normal_request_passes_through_when_no_active_maintenance(app_factory):
@@ -101,7 +101,7 @@ def test_normal_request_passes_through_when_no_active_maintenance(app_factory):
     # blueprint's generic error handler (500) - the behavior under test is
     # that the request was NOT short-circuited by the maintenance check.
     assert response.status_code != 503
-    assert admin_client.calls == [["platform", "service:shelf"]]
+    assert admin_client.calls == [["platform", "service:game-room"]]
 
 
 def test_unreachable_admin_api_fails_open(app_factory):

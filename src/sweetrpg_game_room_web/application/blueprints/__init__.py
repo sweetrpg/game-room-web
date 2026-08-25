@@ -9,11 +9,11 @@ import html
 import analytics
 import jinja2
 from flask import Blueprint, request, render_template, session, jsonify, current_app
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
 
-MAINTENANCE_SCOPES = ["platform", "service:shelf"]
+MAINTENANCE_SCOPES = ["platform", "service:game-room"]
 
 # Health check routes must stay reachable during maintenance so orchestration
 # doesn't mark the pod unhealthy and restart it.
@@ -25,7 +25,7 @@ MAINTENANCE_PAGE_TEMPLATE = """
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shelf - Maintenance</title>
+<title>Game Room - Maintenance</title>
 <style>
   body {{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -191,10 +191,10 @@ def main_page():
     context = get_context()
     context.update({
         # 'user_info': session.get(constants.SWEETRPG_SESSION_USER_INFO),
-        'appname': "Shelf",
+        'appname': "Game Room",
     })
 
     print(f"context: {context}")
-    return render_page("apps/shelf/index.html", context=context)
+    return render_page("apps/game-room/index.html", context=context)
 
-# from sweetrpg_shelf_web.application.blueprints import authors
+# from sweetrpg_game_room_web.application.blueprints import authors
