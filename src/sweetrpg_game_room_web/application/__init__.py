@@ -5,7 +5,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 import sentry_sdk
 import os
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 from sentry_sdk.integrations.redis import RedisIntegration
 from sentry_sdk.integrations.flask import FlaskIntegration
 
