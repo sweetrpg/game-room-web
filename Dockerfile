@@ -19,7 +19,7 @@
 
 
 # Main
-FROM python:3.11
+FROM python:3.14
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
