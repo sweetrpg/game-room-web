@@ -53,7 +53,7 @@ jobs:
               uses: docker/metadata-action@v6
               with:
                   images: |
-                      ghcr.io/sweetrpg/shelf-web
+                      ghcr.io/sweetrpg/game-room-web
                   tags: |
                       type=raw,value=latest
                       type=raw,value=${{ steps.previoustag.outputs.tag }}

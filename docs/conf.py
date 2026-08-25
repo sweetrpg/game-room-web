@@ -13,12 +13,12 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../src/sweetrpg_shelf_web"))
+sys.path.insert(0, os.path.abspath("../src/sweetrpg_game_room_web"))
 
 
 # -- Project information -----------------------------------------------------
 
-project = "SweetRPG Shelf Web"
+project = "SweetRPG Game Room Web"
 copyright = "2021, Paul Schifferer"
 author = "Paul Schifferer"
 

@@ -5,12 +5,12 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 import functools
 from flask import Blueprint, current_app, render_template, request, g, flash
-from sweetrpg_shelf_web.application import constants
+from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_client.types import PERSON
 from sweetrpg_client.exceptions import NotFound
 import os
-from sweetrpg_shelf_web.application.blueprints import render_page
+from sweetrpg_game_room_web.application.blueprints import render_page
 
 
 blueprint = Blueprint("persons", __name__, url_prefix="/persons")
@@ -25,8 +25,8 @@ def get_persons_page():
     current_app.logger.debug("context: %s", context)
     # api_client = current_app.config[constants.SWEETRPG_API_CLIENT_KEY]
     # try:
-    #     # url = os.environ[constants.SHELF_API_BASE_URL]
-    #     # current_app.logger.debug("(SHELF_API_BASE_URL) url: %s", url)
+    #     # url = os.environ[constants.GAME_ROOM_API_BASE_URL]
+    #     # current_app.logger.debug("(GAME_ROOM_API_BASE_URL) url: %s", url)
     #     persons = api_client.query(PERSON)
     #     context.update({'persons': persons})
     # except:
@@ -34,7 +34,7 @@ def get_persons_page():
     #     flash('Unable to fetch persons!')
     context.update({
                     'pagination': {},  # TODO
-                    'api_base_url': os.environ['SHELF_API_EXTERNAL_BASE_URL'],
+                    'api_base_url': os.environ['GAME_ROOM_API_EXTERNAL_BASE_URL'],
                     })
 
-    return render_page("apps/shelf/persons/many.html", context=context)
+    return render_page("apps/game-room/persons/many.html", context=context)

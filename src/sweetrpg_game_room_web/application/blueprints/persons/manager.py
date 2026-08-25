@@ -8,9 +8,9 @@ from flask_rest_jsonapi import ResourceList, ResourceDetail, ResourceRelationshi
 from .schema import PersonAPISchema
 from sweetrpg_library_model.model.person import Person
 from sweetrpg_api_core.data import APIData
-from sweetrpg_shelf_web.application.db import db
-from sweetrpg_shelf_web.application.blueprints.setup import model_info
-from sweetrpg_shelf_web.application.auth import oauth
+from sweetrpg_game_room_web.application.db import db
+from sweetrpg_game_room_web.application.blueprints.setup import model_info
+from sweetrpg_game_room_web.application.auth import oauth
 
 
 class PersonList(ResourceList):
