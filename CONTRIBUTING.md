@@ -30,20 +30,13 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ## Running checks locally
 
-Backend (Flask, Python 3.14):
+Flask, Python 3.14, managed via [uv](https://docs.astral.sh/uv/) - do not use `pip`/`tox`
+directly:
 
 ```bash
-pip install -r requirements/dev.txt
-make coverage   # pytest with coverage
-make flake8
-```
-
-Frontend (Vue, under `web/`):
-
-```bash
-cd web
-yarn install
-yarn test:unit
+uv sync --group test   # create .venv and install deps
+uv run pytest          # run tests
+uv lock --upgrade      # update dependencies
 ```
 
 ## Pull requests
@@ -53,4 +46,7 @@ can be merged (auto-merge is enabled once required checks pass).
 
 ## Releases
 
-Versions are tagged from `develop`. See `CHANGELOG.md` for release history.
+Dispatch the "Prepare Release" workflow - it computes the next version via `git-cliff`, bumps
+`__version__` in `src/sweetrpg_game_room_web/__init__.py`, updates `CHANGELOG.md`, and opens a
+`release/<version>` PR into `master`. Merging that PR tags the release, which builds and pushes
+the Docker image.
