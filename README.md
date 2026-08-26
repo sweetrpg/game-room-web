@@ -10,7 +10,31 @@
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 [![Built with love](https://ForTheBadge.com/images/badges/built-with-love.svg)](https://ForTheBadge.com/images/badges/built-with-love.svg)
 
-Put something useful here.
+Flask backend (`src/`) plus a Vue frontend (`web/`) for the SweetRPG Game Room domain -
+the party's shared table state (sessions, rosters, and related game-room concerns). See
+`AGENTS.md` for backend dependencies and conventions.
+
+## Run locally
+
+Backend:
+
+```bash
+pip install -r requirements/dev.txt
+python src/appserver.py
+```
+
+Frontend:
+
+```bash
+cd web
+yarn install
+yarn dev
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow and this repo's `AGENTS.md`
+for architecture and conventions.
 
 ## Documentation
 
