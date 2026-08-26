@@ -13,7 +13,7 @@ blueprint = Blueprint("library", __name__, url_prefix="/library")
 
 
 def _client():
-    return current_app.config[constants.SHELF_CLIENT_KEY]
+    return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
 
 @blueprint.route("/", methods=["GET"])
@@ -23,13 +23,13 @@ def get_library_page():
     user_id = context["user"]["id"]
     if not user_id:
         context.update({"library": None, "is_owner": True, "visibility_levels": constants.VISIBILITY_LEVELS})
-        return render_page("apps/shelf/library/collection.html", context=context)
+        return render_page("apps/game-room/library/collection.html", context=context)
     return _render_library(context, user_id)
 
 
 @blueprint.route("/users/<user_id>", methods=["GET"])
 def get_user_library_page(user_id: str):
-    """View another user's library, filtered by shelf-api to what the viewer may see."""
+    """View another user's library, filtered by game-room-api to what the viewer may see."""
     context = get_context()
     return _render_library(context, user_id)
 
@@ -48,7 +48,7 @@ def _render_library(context: dict, user_id: str):
             "visibility_levels": constants.VISIBILITY_LEVELS,
         }
     )
-    return render_page("apps/shelf/library/collection.html", context=context)
+    return render_page("apps/game-room/library/collection.html", context=context)
 
 
 @blueprint.route("/default-visibility/preview", methods=["POST"])

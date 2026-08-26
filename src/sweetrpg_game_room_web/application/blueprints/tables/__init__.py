@@ -13,7 +13,7 @@ blueprint = Blueprint("tables", __name__, url_prefix="/tables")
 
 
 def _client():
-    return current_app.config[constants.SHELF_CLIENT_KEY]
+    return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
 
 @blueprint.route("/", methods=["GET"])
@@ -23,13 +23,13 @@ def get_tables_page():
     user_id = context["user"]["id"]
     if not user_id:
         context.update({"tables": [], "is_owner": True})
-        return render_page("apps/shelf/tables/collection.html", context=context)
+        return render_page("apps/game-room/tables/collection.html", context=context)
     return _render_tables_list(context, user_id)
 
 
 @blueprint.route("/users/<user_id>", methods=["GET"])
 def get_user_tables_page(user_id: str):
-    """View another user's tables, filtered by shelf-api to what the viewer may see."""
+    """View another user's tables, filtered by game-room-api to what the viewer may see."""
     context = get_context()
     return _render_tables_list(context, user_id)
 
@@ -48,7 +48,7 @@ def _render_tables_list(context: dict, user_id: str):
             "tables_owner_id": user_id,
         }
     )
-    return render_page("apps/shelf/tables/collection.html", context=context)
+    return render_page("apps/game-room/tables/collection.html", context=context)
 
 
 @blueprint.route("/new", methods=["GET"])
@@ -56,7 +56,7 @@ def new_table_page():
     """Show the create-table form. Visibility defaults to private."""
     context = get_context()
     context.update({"visibility_levels": constants.VISIBILITY_LEVELS, "default_visibility": "private"})
-    return render_page("apps/shelf/tables/form.html", context=context)
+    return render_page("apps/game-room/tables/form.html", context=context)
 
 
 @blueprint.route("/", methods=["POST"])
@@ -87,7 +87,7 @@ def get_table_page(id: str):
 
 @blueprint.route("/users/<user_id>/<id>", methods=["GET"])
 def get_user_table_page(user_id: str, id: str):
-    """View another user's table, filtered by shelf-api to what the viewer may see."""
+    """View another user's table, filtered by game-room-api to what the viewer may see."""
     context = get_context()
     return _render_table(context, user_id, id)
 
@@ -106,7 +106,7 @@ def _render_table(context: dict, owner_id: str, id: str):
             "visibility_levels": constants.VISIBILITY_LEVELS,
         }
     )
-    return render_page("apps/shelf/tables/detail.html", context=context)
+    return render_page("apps/game-room/tables/detail.html", context=context)
 
 
 @blueprint.route("/<id>", methods=["POST"])
