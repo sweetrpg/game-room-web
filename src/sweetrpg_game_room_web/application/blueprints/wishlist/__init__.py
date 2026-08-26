@@ -3,7 +3,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Wishlist routes.
 """
 
-from flask import Blueprint, current_app, request, flash, redirect, url_for
+from flask import Blueprint, current_app, request, flash, redirect, url_for, session
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import render_page
@@ -14,6 +14,10 @@ blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
 
 def _client():
     return current_app.config[constants.SHELF_CLIENT_KEY]
+
+
+def _token():
+    return session.get(constants.SESSION_ACCESS_TOKEN)
 
 
 @blueprint.route("/", methods=["GET"])
@@ -37,7 +41,7 @@ def get_user_wishlist_page(user_id: str):
 def _render_wishlist(context: dict, user_id: str):
     wishlist = None
     try:
-        wishlist = _client().get_wishlist(user_id)
+        wishlist = _client().get_wishlist(user_id, access_token=_token())
     except Exception:
         current_app.logger.exception("Unable to fetch wishlist for user %s!", user_id)
         flash("Unable to load this wishlist right now.")
@@ -58,7 +62,7 @@ def set_visibility():
     user_id = context["user"]["id"]
     visibility = request.form.get("visibility")
     try:
-        _client().set_wishlist_visibility(user_id, visibility)
+        _client().set_wishlist_visibility(user_id, visibility, access_token=_token())
         flash("Wishlist visibility updated.")
     except Exception:
         current_app.logger.exception("Unable to set wishlist visibility for user %s!", user_id)
@@ -73,7 +77,7 @@ def remove_entry(volume_id: str):
     user_id = context["user"]["id"]
     if request.form.get("_method") == "DELETE":
         try:
-            _client().remove_wishlist_entry(user_id, volume_id)
+            _client().remove_wishlist_entry(user_id, volume_id, access_token=_token())
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from wishlist (user %s)!", volume_id, user_id)
             flash("Unable to remove that volume right now.")

@@ -28,3 +28,12 @@ class BaseConfig(object):
     SESSION_REDIS = redis.from_url(f"redis://{os.environ[constants.REDIS_HOST]}:{int(os.environ.get(constants.REDIS_PORT) or 6379)}")
     SEGMENT_WRITE_KEY = os.environ.get(constants.SEGMENT_WRITE_KEY)
     ADMIN_API_URL = os.environ.get(constants.ADMIN_API_URL)
+
+    # Shared suite-wide login session (see shared_session.py) - auth-web's own dedicated Redis
+    # instance, distinct from CACHE_REDIS_* above. Unset SHARED_SESSION_REDIS_HOST ->
+    # shared_session.current_user() fails open (every visitor reads as logged-out), matching
+    # every other frontend's read-only shared-session client.
+    SHARED_SESSION_REDIS_HOST = os.environ.get(constants.SHARED_SESSION_REDIS_HOST)
+    SHARED_SESSION_REDIS_PORT = int(os.environ.get(constants.SHARED_SESSION_REDIS_PORT) or 6379)
+    SHARED_SESSION_REDIS_DB = int(os.environ.get(constants.SHARED_SESSION_REDIS_DB) or 0)
+    SHARED_SESSION_REDIS_PASSWORD = os.environ.get(constants.SHARED_SESSION_REDIS_PASS) or None

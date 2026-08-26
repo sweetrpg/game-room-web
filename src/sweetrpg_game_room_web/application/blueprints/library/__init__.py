@@ -3,7 +3,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Library routes.
 """
 
-from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
+from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for, session
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import render_page
@@ -14,6 +14,10 @@ blueprint = Blueprint("library", __name__, url_prefix="/library")
 
 def _client():
     return current_app.config[constants.SHELF_CLIENT_KEY]
+
+
+def _token():
+    return session.get(constants.SESSION_ACCESS_TOKEN)
 
 
 @blueprint.route("/", methods=["GET"])
@@ -37,7 +41,7 @@ def get_user_library_page(user_id: str):
 def _render_library(context: dict, user_id: str):
     library = None
     try:
-        library = _client().get_library(user_id)
+        library = _client().get_library(user_id, access_token=_token())
     except Exception:
         current_app.logger.exception("Unable to fetch library for user %s!", user_id)
         flash("Unable to load this library right now.")
@@ -58,7 +62,7 @@ def preview_default_visibility():
     user_id = context["user"]["id"]
     visibility = request.form.get("visibility") or request.json.get("visibility")
     try:
-        preview = _client().preview_library_default_visibility(user_id, visibility)
+        preview = _client().preview_library_default_visibility(user_id, visibility, access_token=_token())
         return jsonify(preview)
     except Exception:
         current_app.logger.exception("Unable to preview default visibility change for user %s!", user_id)
@@ -73,7 +77,7 @@ def set_default_visibility():
     visibility = request.form.get("visibility")
     overrides = request.form.get("overrides")
     try:
-        _client().set_library_default_visibility(user_id, visibility, overrides)
+        _client().set_library_default_visibility(user_id, visibility, overrides, access_token=_token())
         flash("Library default visibility updated.")
     except Exception:
         current_app.logger.exception("Unable to set default visibility for user %s!", user_id)
@@ -88,7 +92,7 @@ def set_entry_visibility(volume_id: str):
     user_id = context["user"]["id"]
     visibility = request.form.get("visibility") or None
     try:
-        _client().set_library_entry_visibility(user_id, volume_id, visibility)
+        _client().set_library_entry_visibility(user_id, volume_id, visibility, access_token=_token())
     except Exception:
         current_app.logger.exception(
             "Unable to set visibility override for volume %s (user %s)!", volume_id, user_id
@@ -104,7 +108,7 @@ def remove_entry(volume_id: str):
     user_id = context["user"]["id"]
     if request.form.get("_method") == "DELETE":
         try:
-            _client().remove_library_entry(user_id, volume_id)
+            _client().remove_library_entry(user_id, volume_id, access_token=_token())
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from library (user %s)!", volume_id, user_id)
             flash("Unable to remove that volume right now.")

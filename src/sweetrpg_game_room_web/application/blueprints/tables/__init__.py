@@ -3,7 +3,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Table routes.
 """
 
-from flask import Blueprint, current_app, request, flash, redirect, url_for
+from flask import Blueprint, current_app, request, flash, redirect, url_for, session
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import render_page
@@ -14,6 +14,10 @@ blueprint = Blueprint("tables", __name__, url_prefix="/tables")
 
 def _client():
     return current_app.config[constants.SHELF_CLIENT_KEY]
+
+
+def _token():
+    return session.get(constants.SESSION_ACCESS_TOKEN)
 
 
 @blueprint.route("/", methods=["GET"])
@@ -37,7 +41,7 @@ def get_user_tables_page(user_id: str):
 def _render_tables_list(context: dict, user_id: str):
     tables = []
     try:
-        tables = _client().list_tables(user_id) or []
+        tables = _client().list_tables(user_id, access_token=_token()) or []
     except Exception:
         current_app.logger.exception("Unable to list tables for user %s!", user_id)
         flash("Unable to load these tables right now.")
@@ -70,7 +74,7 @@ def create_table():
         flash("A table name is required.")
         return redirect(url_for("web.tables.new_table_page"))
     try:
-        table = _client().create_table(user_id, name, visibility)
+        table = _client().create_table(user_id, name, visibility, access_token=_token())
         return redirect(url_for("web.tables.get_table_page", id=table["id"]))
     except Exception:
         current_app.logger.exception("Unable to create table %r for user %s!", name, user_id)
@@ -95,7 +99,7 @@ def get_user_table_page(user_id: str, id: str):
 def _render_table(context: dict, owner_id: str, id: str):
     table = None
     try:
-        table = _client().get_table(owner_id, id)
+        table = _client().get_table(owner_id, id, access_token=_token())
     except Exception:
         current_app.logger.exception("Unable to fetch table %s for user %s!", id, owner_id)
         flash("Unable to load that table right now.")
@@ -116,7 +120,7 @@ def update_table(id: str):
     user_id = context["user"]["id"]
     if request.form.get("_method") == "DELETE":
         try:
-            _client().delete_table(user_id, id)
+            _client().delete_table(user_id, id, access_token=_token())
             flash("Table deleted.")
         except Exception:
             current_app.logger.exception("Unable to delete table %s for user %s!", id, user_id)
@@ -126,7 +130,7 @@ def update_table(id: str):
     name = request.form.get("name", "").strip()
     visibility = request.form.get("visibility") or "private"
     try:
-        _client().update_table(user_id, id, name, visibility)
+        _client().update_table(user_id, id, name, visibility, access_token=_token())
         flash("Table updated.")
     except Exception:
         current_app.logger.exception("Unable to update table %s for user %s!", id, user_id)
@@ -142,7 +146,7 @@ def add_volume(id: str):
     volume_id = request.form.get("volume_id", "").strip()
     if volume_id:
         try:
-            _client().add_table_volume(user_id, id, volume_id)
+            _client().add_table_volume(user_id, id, volume_id, access_token=_token())
         except Exception:
             current_app.logger.exception("Unable to add volume %s to table %s!", volume_id, id)
             flash("Unable to add that volume right now.")
@@ -156,7 +160,7 @@ def remove_volume(id: str, volume_id: str):
     user_id = context["user"]["id"]
     if request.form.get("_method") == "DELETE":
         try:
-            _client().remove_table_volume(user_id, id, volume_id)
+            _client().remove_table_volume(user_id, id, volume_id, access_token=_token())
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from table %s!", volume_id, id)
             flash("Unable to remove that volume right now.")

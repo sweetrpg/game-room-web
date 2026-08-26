@@ -11,6 +11,7 @@ import analytics
 import jinja2
 from flask import Blueprint, request, render_template, session, jsonify, current_app
 from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application import shared_session
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
 
@@ -155,9 +156,16 @@ def _populate():
     elif constants.SWEETRPG_AUTH_KEY in request.cookies:
         userinfo = request.cookies[constants.SWEETRPG_AUTH_KEY]
         session[constants.PROFILE_KEY] = userinfo
-    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get('X-Forwarded-Access-Token')
-    session[constants.SESSION_EMAIL] = request.headers.get('X-Forwarded-Email')
-    session[constants.SESSION_USER_ID] = request.headers.get('X-Forwarded-User')
+
+    # Read the suite-wide login session directly (see shared_session.py) rather than trusting
+    # X-Forwarded-* headers from an upstream auth proxy - no such proxy has ever been wired up
+    # in front of this app, so those headers were always empty and every authenticated write to
+    # shelf-api (add/remove entries, set visibility, create/update/delete a table) 403'd
+    # unconditionally.
+    user = shared_session.current_user()
+    session[constants.SESSION_ACCESS_TOKEN] = user.get("accessToken") if user else None
+    session[constants.SESSION_EMAIL] = user.get("email") if user else None
+    session[constants.SESSION_USER_ID] = user.get("sub") if user else None
 
     print(f"(updated) session: {session}")
     print(f"userinfo: {userinfo}")
