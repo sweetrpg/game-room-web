@@ -22,9 +22,9 @@ jobs:
                 include:
                     - {
                           name: Linux,
-                          python: "3.11",
+                          python: "3.14",
                           os: ubuntu-latest,
-                          tox: py311,
+                          tox: py314,
                       }
         steps:
             - uses: actions/checkout@v6
