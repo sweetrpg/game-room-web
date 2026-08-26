@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Game Room{% endblock %}
+{% block content %}
+<div class="landing">
+    <div class="landing-container">
+        <div class="landing-hero">
+            <div class="landing-title">Game Room</div>
+            <p class="text-muted">Your library, wishlist, and tables.</p>
+        </div>
+        <div class="card-grid">
+            <a class="card landing-card-link" href="{{ base_path }}/library/">
+                <div class="card-body"><div class="card-title">Library</div></div>
+            </a>
+            <a class="card landing-card-link" href="{{ base_path }}/wishlist/">
+                <div class="card-body"><div class="card-title">Wishlist</div></div>
+            </a>
+            <a class="card landing-card-link" href="{{ base_path }}/tables/">
+                <div class="card-body"><div class="card-title">Tables</div></div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

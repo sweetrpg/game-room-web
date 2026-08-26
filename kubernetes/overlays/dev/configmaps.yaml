@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+    name: web-env
+
+data:
+    PORT: "8282"
+    SERVICE_CHECK_URL: "http://web.sweetrpg-game-room.svc.cluster.local:8282/health/ping"
+    HEALTH_CHECK_URL: "http://web.sweetrpg-game-room.svc.cluster.local:8282/health/status"
+    SERVICE_REGISTRATION_URL: "http://consul.sweetrpg-support.svc.cluster.local:1234"
+    APPLICATION_BASE_PATH: "/game-room/"
+    GAME_ROOM_API_BASE_URL: "http://api-v1.sweetrpg-game-room.svc.cluster.local:8281"
+    GAME_ROOM_API_EXTERNAL_BASE_URL: "https://dev.sweetrpg.com/api/1/game-room"
+    STATIC_ASSET_PREFIX: "https://dev.sweetrpg.com/static"
+    BUILD_INFO_PATH: /app/build-info.json
+    JAEGER_SERVICE_NAME: game-room-web.sweetrpg-game-room
+    JAEGER_SAMPLER_TYPE: ratelimiting
+    JAEGER_SAMPLER_PARAM: "1"
+    JAEGER_PROPAGATION: b3
+    JAEGER_ENDPOINT: http://jaeger-collector.istio-system.svc.cluster.local:14268/api/traces
