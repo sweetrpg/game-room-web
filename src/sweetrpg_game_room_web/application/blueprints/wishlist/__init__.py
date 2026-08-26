@@ -21,16 +21,30 @@ def get_wishlist_page():
     """Get the current user's wishlist page."""
     context = get_context()
     user_id = context["user"]["id"]
+    if not user_id:
+        context.update({"wishlist": None, "is_owner": True, "visibility_levels": constants.VISIBILITY_LEVELS})
+        return render_page("apps/shelf/wishlist/collection.html", context=context)
+    return _render_wishlist(context, user_id)
+
+
+@blueprint.route("/users/<user_id>", methods=["GET"])
+def get_user_wishlist_page(user_id: str):
+    """View another user's wishlist, filtered by shelf-api to what the viewer may see."""
+    context = get_context()
+    return _render_wishlist(context, user_id)
+
+
+def _render_wishlist(context: dict, user_id: str):
     wishlist = None
-    if user_id:
-        try:
-            wishlist = _client().get_wishlist(user_id)
-        except Exception:
-            current_app.logger.exception("Unable to fetch wishlist for user %s!", user_id)
-            flash("Unable to load your wishlist right now.")
+    try:
+        wishlist = _client().get_wishlist(user_id)
+    except Exception:
+        current_app.logger.exception("Unable to fetch wishlist for user %s!", user_id)
+        flash("Unable to load this wishlist right now.")
     context.update(
         {
             "wishlist": wishlist,
+            "is_owner": context["user"]["id"] == user_id,
             "visibility_levels": constants.VISIBILITY_LEVELS,
         }
     )

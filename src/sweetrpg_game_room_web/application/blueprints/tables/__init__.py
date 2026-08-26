@@ -21,14 +21,33 @@ def get_tables_page():
     """List the current user's tables."""
     context = get_context()
     user_id = context["user"]["id"]
+    if not user_id:
+        context.update({"tables": [], "is_owner": True})
+        return render_page("apps/shelf/tables/collection.html", context=context)
+    return _render_tables_list(context, user_id)
+
+
+@blueprint.route("/users/<user_id>", methods=["GET"])
+def get_user_tables_page(user_id: str):
+    """View another user's tables, filtered by shelf-api to what the viewer may see."""
+    context = get_context()
+    return _render_tables_list(context, user_id)
+
+
+def _render_tables_list(context: dict, user_id: str):
     tables = []
-    if user_id:
-        try:
-            tables = _client().list_tables(user_id) or []
-        except Exception:
-            current_app.logger.exception("Unable to list tables for user %s!", user_id)
-            flash("Unable to load your tables right now.")
-    context.update({"tables": tables})
+    try:
+        tables = _client().list_tables(user_id) or []
+    except Exception:
+        current_app.logger.exception("Unable to list tables for user %s!", user_id)
+        flash("Unable to load these tables right now.")
+    context.update(
+        {
+            "tables": tables,
+            "is_owner": context["user"]["id"] == user_id,
+            "tables_owner_id": user_id,
+        }
+    )
     return render_page("apps/shelf/tables/collection.html", context=context)
 
 
@@ -61,16 +80,32 @@ def create_table():
 
 @blueprint.route("/<id>", methods=["GET"])
 def get_table_page(id: str):
-    """Show a table's detail: its volumes and visibility."""
+    """Show a table's detail: its volumes and visibility (current user's own table)."""
     context = get_context()
-    user_id = context["user"]["id"]
+    return _render_table(context, context["user"]["id"], id)
+
+
+@blueprint.route("/users/<user_id>/<id>", methods=["GET"])
+def get_user_table_page(user_id: str, id: str):
+    """View another user's table, filtered by shelf-api to what the viewer may see."""
+    context = get_context()
+    return _render_table(context, user_id, id)
+
+
+def _render_table(context: dict, owner_id: str, id: str):
     table = None
     try:
-        table = _client().get_table(user_id, id)
+        table = _client().get_table(owner_id, id)
     except Exception:
-        current_app.logger.exception("Unable to fetch table %s for user %s!", id, user_id)
+        current_app.logger.exception("Unable to fetch table %s for user %s!", id, owner_id)
         flash("Unable to load that table right now.")
-    context.update({"table": table, "visibility_levels": constants.VISIBILITY_LEVELS})
+    context.update(
+        {
+            "table": table,
+            "is_owner": context["user"]["id"] == owner_id,
+            "visibility_levels": constants.VISIBILITY_LEVELS,
+        }
+    )
     return render_page("apps/shelf/tables/detail.html", context=context)
 
 
