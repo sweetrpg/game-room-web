@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Tables{% endblock %}
+{% block content %}
+<div class="page-header page-header-toolbar">
+    <h2>Tables</h2>
+    {% if user.id %}
+    <a class="btn btn-primary" href="{{ base_path }}/tables/new">New table</a>
+    {% endif %}
+</div>
+
+{% if is_owner and not user.id %}
+<p class="empty-state">Log in to see your tables.</p>
+{% else %}
+<div class="card-grid">
+    {% for table in tables %}
+    <a class="card landing-card-link" href="{% if is_owner %}{{ base_path }}/tables/{{ table.id }}{% else %}{{ base_path }}/tables/users/{{ tables_owner_id }}/{{ table.id }}{% endif %}">
+        <div class="card-body">
+            <div class="card-title">{{ table.name }}</div>
+            <div class="card-meta">
+                <span class="card-kicker">{{ table.visibility }}</span>
+                <span>{{ table.volume_ids | length }} volume(s)</span>
+            </div>
+        </div>
+    </a>
+    {% else %}
+    <p class="empty-state">No tables visible here yet.</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

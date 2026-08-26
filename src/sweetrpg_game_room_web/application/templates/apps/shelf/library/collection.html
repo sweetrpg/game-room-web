@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Library{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h2>Library</h2>
+</div>
+
+{% if is_owner and not user.id %}
+<p class="empty-state">Log in to see your library.</p>
+{% elif not library %}
+<p class="empty-state">This library isn't available right now.</p>
+{% else %}
+{% if is_owner %}
+<form id="default-visibility-form" method="post" action="{{ base_path }}/library/default-visibility" class="form">
+    <label class="form-label" for="default-visibility">Default visibility</label>
+    <select id="default-visibility" name="visibility">
+        {% for level in visibility_levels %}
+        <option value="{{ level }}" {% if level == library.default_visibility %}selected{% endif %}>{{ level }}</option>
+        {% endfor %}
+    </select>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Update default visibility</button>
+    </div>
+</form>
+{% endif %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Volume</th>
+            <th>Effective visibility</th>
+            {% if is_owner %}
+            <th>Override</th>
+            <th></th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in library.entries %}
+        <tr>
+            <td><a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+            <td>{{ entry.visibility_override or library.default_visibility }}</td>
+            {% if is_owner %}
+            <td>
+                <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}/visibility" class="table-actions">
+                    <select name="visibility">
+                        <option value="">inherit default</option>
+                        {% for level in visibility_levels %}
+                        <option value="{{ level }}" {% if level == entry.visibility_override %}selected{% endif %}>{{ level }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-secondary">Set</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-ghost">Remove</button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="empty-state-inline">No volumes visible here yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<div class="dialog-backdrop" id="visibility-warning-backdrop" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="visibility-warning-title">
+        <h3 class="dialog-title" id="visibility-warning-title">This will expose more entries</h3>
+        <p class="dialog-body">
+            Changing your library's default visibility to <strong id="visibility-warning-target"></strong>
+            will newly expose these entries, which currently have a narrower override:
+        </p>
+        <ul id="visibility-warning-list"></ul>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-secondary" id="visibility-warning-adjust">Keep these private (adjust overrides)</button>
+            <button type="button" class="btn btn-ghost" id="visibility-warning-cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="visibility-warning-proceed">Change anyway</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  var form = document.getElementById('default-visibility-form');
+  if (!form) return;
+  var backdrop = document.getElementById('visibility-warning-backdrop');
+  var list = document.getElementById('visibility-warning-list');
+  var target = document.getElementById('visibility-warning-target');
+  var pendingOverrides = null;
+
+  function closeDialog() {
+    backdrop.hidden = true;
+    pendingOverrides = null;
+  }
+
+  function submitDirectly() {
+    var real = document.createElement('form');
+    real.method = 'post';
+    real.action = form.action;
+    real.style.display = 'none';
+    var visInput = document.createElement('input');
+    visInput.name = 'visibility';
+    visInput.value = form.visibility.value;
+    real.appendChild(visInput);
+    if (pendingOverrides) {
+      var ovInput = document.createElement('input');
+      ovInput.name = 'overrides';
+      ovInput.value = JSON.stringify(pendingOverrides);
+      real.appendChild(ovInput);
+    }
+    document.body.appendChild(real);
+    real.submit();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var visibility = form.visibility.value;
+    fetch('{{ base_path }}/library/default-visibility/preview', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: 'visibility=' + encodeURIComponent(visibility)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var newlyExposed = (data && data.newly_exposed) || [];
+        if (!newlyExposed.length) {
+          submitDirectly();
+          return;
+        }
+        target.textContent = visibility;
+        list.innerHTML = '';
+        newlyExposed.forEach(function (entry) {
+          var li = document.createElement('li');
+          li.textContent = entry.volume_id + ' (was ' + entry.visibility_override + ')';
+          list.appendChild(li);
+        });
+        backdrop.hidden = false;
+
+        document.getElementById('visibility-warning-cancel').onclick = closeDialog;
+        document.getElementById('visibility-warning-proceed').onclick = function () {
+          pendingOverrides = null;
+          submitDirectly();
+        };
+        document.getElementById('visibility-warning-adjust').onclick = function () {
+          pendingOverrides = {};
+          newlyExposed.forEach(function (entry) {
+            pendingOverrides[entry.volume_id] = entry.visibility_override;
+          });
+          submitDirectly();
+        };
+      })
+      .catch(function () {
+        // Preview endpoint unreachable - fail closed, don't silently apply an unreviewed change.
+        alert('Unable to check the impact of this change right now. Please try again.');
+      });
+  });
+})();
+</script>
+{% endblock %}

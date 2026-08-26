@@ -5,6 +5,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 
 import datetime
 import html
+import os
 
 import analytics
 import jinja2
@@ -111,6 +112,7 @@ def render_page(page, context={}):
                 "userinfo": userinfo,
             }
         )
+    context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
     print(f"context: {context}")
 
     return render_template(page, **context)

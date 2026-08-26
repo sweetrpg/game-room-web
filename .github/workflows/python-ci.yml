@@ -26,9 +26,9 @@ jobs:
                 include:
                     - {
                           name: Linux,
-                          python: "3.11",
+                          python: "3.14",
                           os: ubuntu-latest,
-                          tox: py311,
+                          tox: py314,
                       }
                     # - {
                     #       name: Windows,
@@ -68,7 +68,7 @@ jobs:
             - uses: actions/checkout@v6
             - uses: actions/setup-python@v6
               with:
-                  python-version: "3.11"
+                  python-version: "3.14"
             - name: install-deps
               run: pip install -r requirements/docs.txt
             - name: make-docs
