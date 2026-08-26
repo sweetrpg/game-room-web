@@ -13,7 +13,7 @@ blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
 
 
 def _client():
-    return current_app.config[constants.SHELF_CLIENT_KEY]
+    return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
 
 @blueprint.route("/", methods=["GET"])
@@ -23,13 +23,13 @@ def get_wishlist_page():
     user_id = context["user"]["id"]
     if not user_id:
         context.update({"wishlist": None, "is_owner": True, "visibility_levels": constants.VISIBILITY_LEVELS})
-        return render_page("apps/shelf/wishlist/collection.html", context=context)
+        return render_page("apps/game-room/wishlist/collection.html", context=context)
     return _render_wishlist(context, user_id)
 
 
 @blueprint.route("/users/<user_id>", methods=["GET"])
 def get_user_wishlist_page(user_id: str):
-    """View another user's wishlist, filtered by shelf-api to what the viewer may see."""
+    """View another user's wishlist, filtered by game-room-api to what the viewer may see."""
     context = get_context()
     return _render_wishlist(context, user_id)
 
@@ -48,7 +48,7 @@ def _render_wishlist(context: dict, user_id: str):
             "visibility_levels": constants.VISIBILITY_LEVELS,
         }
     )
-    return render_page("apps/shelf/wishlist/collection.html", context=context)
+    return render_page("apps/game-room/wishlist/collection.html", context=context)
 
 
 @blueprint.route("/visibility", methods=["POST"])
