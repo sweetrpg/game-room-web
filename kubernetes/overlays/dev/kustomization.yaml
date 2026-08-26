@@ -8,6 +8,8 @@ resources:
     - ../../base
     - configmaps.yaml
     - secrets.yaml
+    - ingress.yaml
+    - middlewares.yaml
     - pod-monitor.yaml
 
 labels:
@@ -20,3 +22,8 @@ labels:
 
 generatorOptions:
     disableNameSuffixHash: true
+
+images:
+    - name: game-room-web
+      newName: ghcr.io/sweetrpg/game-room-web
+      newTag: v0.0.1
