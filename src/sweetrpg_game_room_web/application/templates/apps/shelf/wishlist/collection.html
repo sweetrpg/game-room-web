@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Wishlist{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h2>Wishlist</h2>
+</div>
+
+{% if is_owner and not user.id %}
+<p class="empty-state">Log in to see your wishlist.</p>
+{% elif not wishlist %}
+<p class="empty-state">This wishlist isn't available right now.</p>
+{% else %}
+{% if is_owner %}
+<form method="post" action="{{ base_path }}/wishlist/visibility" class="form">
+    <label class="form-label" for="wishlist-visibility">Visibility</label>
+    <select id="wishlist-visibility" name="visibility">
+        {% for level in visibility_levels %}
+        <option value="{{ level }}" {% if level == wishlist.visibility %}selected{% endif %}>{{ level }}</option>
+        {% endfor %}
+    </select>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Update visibility</button>
+    </div>
+</form>
+{% endif %}
+
+<table class="table">
+    <thead><tr><th>Volume</th>{% if is_owner %}<th></th>{% endif %}</tr></thead>
+    <tbody>
+        {% for entry in wishlist.entries %}
+        <tr>
+            <td><a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+            {% if is_owner %}
+            <td>
+                <form method="post" action="{{ base_path }}/wishlist/entries/{{ entry.volume_id }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-ghost">Remove</button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+        {% else %}
+        <tr><td colspan="2" class="empty-state-inline">No volumes visible here yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
