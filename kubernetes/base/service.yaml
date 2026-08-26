@@ -10,7 +10,7 @@ spec:
         app: web
         version: v1
         platform: sweetrpg
-        package: library
+        package: game-room
         component: web
     type: LoadBalancer
     ports:

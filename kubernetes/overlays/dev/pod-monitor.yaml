@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 
 metadata:
-  name: sweetrpg-admin-web
+  name: sweetrpg-game-room-web
   labels:
     release: prometheus
 
@@ -14,8 +14,8 @@ spec:
     matchLabels:
         platform: sweetrpg
         app: web
-        package: admin
+        package: game-room
         component: web
   namespaceSelector:
     matchNames:
-      - sweetrpg-admin
+      - sweetrpg-game-room

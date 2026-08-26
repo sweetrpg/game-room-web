@@ -7,6 +7,6 @@ metadata:
 
 data:
   FLASK_PORT: "8282"
-  FLASK_APP: sweetrpg_library_web.application.main:create_app
+  FLASK_APP: sweetrpg_game_room_web.application.main:create_app
   FLASK_ENV: production
   NEW_RELIC_CONFIG_FILE: /config/newrelic.ini
