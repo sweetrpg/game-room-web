@@ -3,21 +3,6 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# # Node build
-# FROM node:18 as node-build
-
-# ENV NODE_ENV=development
-
-# WORKDIR /app
-# COPY web/package*.json /app
-# COPY web/yarn.lock /app
-# RUN yarn install
-# COPY web/ /app
-
-# ENV NODE_ENV=production
-# RUN yarn run build
-
-
 # Main
 FROM python:3.14
 
@@ -74,7 +59,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY src /app
-# COPY --from=node-build /app/dist /app/public
 ADD scripts/entrypoint.sh /
 RUN chown -R ${USER_UID}:${USER_GID} /app
 RUN echo "{\"number\":\"${BUILD_NUMBER}\",\"job\":\"${BUILD_JOB}\",\"sha\":\"${BUILD_SHA}\",\"date\":\"${BUILD_DATE}\",\"version\":\"${BUILD_VERSION}\"}" > /app/build-info.json

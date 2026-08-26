@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sweetrpg-game-room-web"
-version = "0.0.108"
+version = "0.0.106"
 description = "Game Room web frontend for SweetRPG"
 readme = "README.md"
 license = "MIT"

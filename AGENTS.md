@@ -5,10 +5,11 @@ working in this repository.
 
 ## About This Project
 
-`game-room-web` is the SweetRPG platform's Game Room frontend: a Flask backend (`src/`) serving
-a Vue single-page app (`web/`). It talks to `game-room-api` (previously `shelf-api`, before that
-`library-api` - see `sweetrpg/platform`'s `rename-shelf-to-game-room-service` OpenSpec change)
-for domain data.
+`game-room-web` is the SweetRPG platform's Game Room frontend: a server-rendered Flask app
+(`src/`). It talks to `game-room-api` (previously `shelf-api`, before that `library-api` - see
+`sweetrpg/platform`'s `rename-shelf-to-game-room-service` OpenSpec change) for domain data. An
+earlier Vue single-page app under `web/` was removed - this is a server-rendered Flask frontend
+now, not a Flask API behind a separate SPA.
 
 ## Committing Code
 
@@ -28,12 +29,4 @@ on this platform (`pyproject.toml` + committed `uv.lock`; do not use `pip`/`tox`
 uv sync --group test   # create .venv and install deps
 uv run pytest          # run tests
 uv lock --upgrade      # update dependencies
-```
-
-Frontend (Vue, under `web/`):
-
-```bash
-cd web
-yarn install
-yarn test:unit
 ```
