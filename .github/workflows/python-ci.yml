@@ -62,19 +62,3 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./docs/_build/html
-
-    tag:
-        needs: [tests]
-        runs-on: ubuntu-latest
-        concurrency: publish
-        steps:
-            - uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-            - name: publish
-              uses: relekang/python-semantic-release@v7.34.6
-              with:
-                  additional_options: "--patch"
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  repository_username: __token__
-                  repository_password: ${{ secrets.PYPI_TOKEN }}

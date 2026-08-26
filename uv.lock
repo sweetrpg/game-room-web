@@ -1548,7 +1548,7 @@ wheels = [
 
 [[package]]
 name = "sweetrpg-game-room-web"
-version = "0.0.108"
+version = "0.0.106"
 source = { editable = "." }
 dependencies = [
     { name = "analytics-python" },
