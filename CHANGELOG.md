@@ -1,3 +1,19 @@
+## [0.1.1] - 2026-08-26
+
+### 🐛 Bug Fixes
+
+- *(ci)* Bring workflows in line with shared github-actions pattern
+- *(kubernetes)* Remove dead init-templates init container
+
+### 🧪 Testing
+
+- Cover library/wishlist/tables write routes and game_room_client
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.0
+- Update k8s manifests
+- More k8s updates
 ## [0.1.0] - 2026-08-26
 
 ### 🚀 Features
