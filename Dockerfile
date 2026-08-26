@@ -3,23 +3,10 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# # Node build
-# FROM node:18 as node-build
-
-# ENV NODE_ENV=development
-
-# WORKDIR /app
-# COPY web/package*.json /app
-# COPY web/yarn.lock /app
-# RUN yarn install
-# COPY web/ /app
-
-# ENV NODE_ENV=production
-# RUN yarn run build
-
-
 # Main
 FROM python:3.14
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -33,17 +20,15 @@ ENV PYTHONUNBUFFERED 1
 ARG USERNAME=sweetrpg
 ARG USER_UID=1001
 ARG USER_GID=${USER_UID}
-ARG REQUIREMENTS=requirements/deploy.txt
 ARG BUILD_NUMBER=unset
 ARG BUILD_JOB=unset
 ARG BUILD_SHA=unset
 ARG BUILD_DATE=unset
 ARG BUILD_VERSION=unset
 
-# Uncomment the following COPY line and the corresponding lines in the `RUN` command if you wish to
-# include your requirements in the image itself. It is suggested that you only do this if your
-# requirements rarely (if ever) change.
-COPY ${REQUIREMENTS} /tmp/pip-tmp/requirements.txt
+# Export the frozen lockfile to a plain requirements.txt for the pip-style system install
+# below (the git-pinned dependency resolves to a locked commit hash).
+COPY pyproject.toml uv.lock /tmp/uv-project/
 
 # Configure apt and install packages
 RUN apt-get update \
@@ -53,14 +38,16 @@ RUN apt-get update \
     && apt-get install -y git iproute2 procps lsb-release \
     #
     # Install pylint
-    && pip install pylint \
+    && uv pip install --system pylint \
     #
     # Other stuff
     # && apt-get install -y postgresql-client \
     #
-    # Update Python environment based on requirements.txt
-    && pip --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-    && rm -rf /tmp/pip-tmp \
+    # Update Python environment based on uv.lock (--locked fails the build if the lock
+    # is out of date with pyproject.toml; --frozen would silently ship stale deps)
+    && uv export --project /tmp/uv-project --group deploy --locked --no-hashes --no-emit-project -o /tmp/uv-project/requirements.txt \
+    && uv pip install --system --no-cache -r /tmp/uv-project/requirements.txt \
+    && rm -rf /tmp/uv-project \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid ${USER_GID} ${USERNAME} \
@@ -72,7 +59,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY src /app
-# COPY --from=node-build /app/dist /app/public
 ADD scripts/entrypoint.sh /
 RUN chown -R ${USER_UID}:${USER_GID} /app
 RUN echo "{\"number\":\"${BUILD_NUMBER}\",\"job\":\"${BUILD_JOB}\",\"sha\":\"${BUILD_SHA}\",\"date\":\"${BUILD_DATE}\",\"version\":\"${BUILD_VERSION}\"}" > /app/build-info.json
