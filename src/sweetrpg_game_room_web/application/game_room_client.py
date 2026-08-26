@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""shelf_client.py
+"""game_room_client.py
 
-Thin HTTP client for shelf-api's library/wishlist/table endpoints. Separate from the legacy
-sweetrpg_client.Client (which targets the old Library/Catalog-shaped API) - shelf-api's domain
-endpoints don't exist yet under that client's contract. Callers get None on any failure so
-shelf-web keeps rendering while shelf-api's data layer (openspec `shelf-service` task group 2)
-is still being built.
+Thin HTTP client for game-room-api's library/wishlist/table endpoints. Separate from the legacy
+sweetrpg_client.Client (which targets the old Library/Catalog-shaped API) - game-room-api's
+domain endpoints don't exist yet under that client's contract. Callers get None on any failure
+so game-room-web keeps rendering while game-room-api's data layer (openspec `shelf-service`
+task group 2) is still being built.
 """
 
 import requests
 
 
-class ShelfClient:
+class GameRoomClient:
     def __init__(self, base_url: str):
         self.base_url = base_url.rstrip("/")
 
