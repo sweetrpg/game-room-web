@@ -1,3 +1,38 @@
+## [0.1.0] - 2026-08-26
+
+### 🚀 Features
+
+- *(shelf-web)* Add admin-api-client for maintenance-mode support
+- *(shelf)* Build library/wishlist/table UI against shelf-api
+- *(shelf)* Add viewer routes for another user's library/wishlist/tables
+
+### 🐛 Bug Fixes
+
+- Secret version
+- *(k8s)* Remove HPA and PDB from dev overlay
+- *(ci)* Scope Docker Build's concurrency group by ref
+- *(deps)* Pin sweetrpg-game-room-objects to its real published version
+- Rename kubernetes manifests from library to game-room, fill deploy gaps
+
+### 🚜 Refactor
+
+- Rename library-web to shelf-web
+- Rename shelf-web references to game-room-web
+- Rename remaining shelf references to game-room
+
+### ⚙️ Miscellaneous Tasks
+
+- Build arm64 image alongside amd64
+- Fix memory spec
+- Reloader, pod monitor
+- Rename license file
+- *(dev)* Remove unused Istio resources and update namespace
+- Add annotations for flagd
+- Update Python version
+- Bump to Python 3.14 (platform minimum)
+- Bring repo up to sweetrpg scaffolding standard
+- Migrate Python packaging and CI to uv
+- Add release workflows, drop legacy Vue frontend and semantic-release tag job
 # Changelog
 
 <!--next-version-placeholder-->
