@@ -1023,9 +1023,12 @@ wheels = [
 
 [[package]]
 name = "pymongo"
-version = "3.5.1"
+version = "4.6.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a8/f6/f324f5c669478644ac64594b9d746a34e185d9c34d3f05a4a6a6dab5467b/pymongo-3.5.1.tar.gz", hash = "sha256:e820d93414f3bec1fa456c84afbd4af1b43ff41366321619db74e6bc065d6924", size = 1332463, upload-time = "2017-08-23T23:35:54.224Z" }
+dependencies = [
+    { name = "dnspython" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6f/5d/b05b09299f0b03219db9e31ea404e89c056f55a0aafbb403f6710391c44d/pymongo-4.6.3.tar.gz", hash = "sha256:400074090b9a631f120b42c61b222fd743490c133a5d2f99c0208cefcccc964e", size = 1431391, upload-time = "2024-03-28T01:25:26.899Z" }
 
 [[package]]
 name = "pytest"
@@ -1520,7 +1523,7 @@ wheels = [
 
 [[package]]
 name = "sweetrpg-db"
-version = "0.0.145"
+version = "0.0.139"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dnspython" },
@@ -1529,9 +1532,9 @@ dependencies = [
     { name = "pymongo" },
     { name = "sweetrpg-model-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/54/87/909ee4b88d31b0880b01fe8271b59337a40ae25476372ddbeb63dab8c42c/sweetrpg-db-0.0.145.tar.gz", hash = "sha256:ff3ea5b7cd09b2427d15a9d337be52166829cc39382e2e4d85cd3f4d53f97f91", size = 7555, upload-time = "2024-10-27T00:29:43.843Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/66/669e7dab225aec37b59b144507d37c6305d7310b2d02e0a4177c7fcc0e4f/sweetrpg-db-0.0.139.tar.gz", hash = "sha256:e0072760e6db6561b55cb553cbea72e7447f58d8f77cf770664911a30b1fe711", size = 7548, upload-time = "2024-10-06T19:34:42.545Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/99/9c/59b8589262693fa4008030eb9c2a3a78c50d5969a2174178dea87b9c90d0/sweetrpg_db-0.0.145-py2.py3-none-any.whl", hash = "sha256:53895e5ab235ccbf48a9f7bdf8a53067b50526cb647c8062fa3c32d310034d3d", size = 8398, upload-time = "2024-10-27T00:29:42.791Z" },
+    { url = "https://files.pythonhosted.org/packages/88/0c/bb0ec2c2caae67da22075698067a958d61820f27df3135a72f1e2980ec58/sweetrpg_db-0.0.139-py2.py3-none-any.whl", hash = "sha256:1aa5a19804f73068c6ed19f7d8595a5775f7fc3983935a79d099062b86a029c0", size = 8396, upload-time = "2024-10-06T19:34:41.137Z" },
 ]
 
 [[package]]
@@ -1658,15 +1661,15 @@ wheels = [
 
 [[package]]
 name = "sweetrpg-model-core"
-version = "0.0.155"
+version = "0.0.154"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "marshmallow" },
     { name = "pymongo" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ff/75/0896d00ee3803fb79761eb474e040a97c1f86589f4993a64624ec9cf8155/sweetrpg-model-core-0.0.155.tar.gz", hash = "sha256:3de882b164a54d59280e1283e289aa41fe75ee6e9e5b50bc145314dba9a84f5b", size = 6889, upload-time = "2024-10-06T22:00:09.47Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/f0/53cb31384bf616c4489a56cfd12648032458e14bb2239c4f4e64075024d6/sweetrpg-model-core-0.0.154.tar.gz", hash = "sha256:ff112c49684288985ee6a9a53a5f7b7a80816826acaf31d0bf823b9e5d4d75e6", size = 6859, upload-time = "2024-03-05T03:50:58.495Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/9d/1c1cfb3dc0e4ef2e380f407272651dc42a8ad4bead12fc1d5e4e2e3ad599/sweetrpg_model_core-0.0.155-py2.py3-none-any.whl", hash = "sha256:6c685392fb6fcfcb098be17f9dcd630ceae63d15a6b8d3fe7c240932f9ba26b8", size = 9170, upload-time = "2024-10-06T22:00:07.657Z" },
+    { url = "https://files.pythonhosted.org/packages/41/2d/227f3696fa3cfe697e6933a91d3aed3b2ba49c47ca1c26a1cceff5a1edcf/sweetrpg_model_core-0.0.154-py2.py3-none-any.whl", hash = "sha256:1193cb99f66ef47356c85eb5b53980bf6008c52d1019d05fcaca4b7313812ee0", size = 9173, upload-time = "2024-03-05T03:50:51.959Z" },
 ]
 
 [[package]]
