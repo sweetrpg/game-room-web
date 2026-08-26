@@ -21,16 +21,30 @@ def get_library_page():
     """Get the current user's library page."""
     context = get_context()
     user_id = context["user"]["id"]
+    if not user_id:
+        context.update({"library": None, "is_owner": True, "visibility_levels": constants.VISIBILITY_LEVELS})
+        return render_page("apps/shelf/library/collection.html", context=context)
+    return _render_library(context, user_id)
+
+
+@blueprint.route("/users/<user_id>", methods=["GET"])
+def get_user_library_page(user_id: str):
+    """View another user's library, filtered by shelf-api to what the viewer may see."""
+    context = get_context()
+    return _render_library(context, user_id)
+
+
+def _render_library(context: dict, user_id: str):
     library = None
-    if user_id:
-        try:
-            library = _client().get_library(user_id)
-        except Exception:
-            current_app.logger.exception("Unable to fetch library for user %s!", user_id)
-            flash("Unable to load your library right now.")
+    try:
+        library = _client().get_library(user_id)
+    except Exception:
+        current_app.logger.exception("Unable to fetch library for user %s!", user_id)
+        flash("Unable to load this library right now.")
     context.update(
         {
             "library": library,
+            "is_owner": context["user"]["id"] == user_id,
             "visibility_levels": constants.VISIBILITY_LEVELS,
         }
     )
