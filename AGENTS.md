@@ -21,12 +21,13 @@ Git-flow (see `docs/git-flow.md` in `sweetrpg/platform`): `develop` is the integ
 
 ## Running Checks Locally
 
-Backend (Flask, Python 3.14 minimum per platform convention):
+Python 3.14, managed via [uv](https://docs.astral.sh/uv/), which is the required Python tool
+on this platform (`pyproject.toml` + committed `uv.lock`; do not use `pip`/`tox` directly).
 
 ```bash
-pip install -r requirements/dev.txt
-make coverage
-make flake8
+uv sync --group test   # create .venv and install deps
+uv run pytest          # run tests
+uv lock --upgrade      # update dependencies
 ```
 
 Frontend (Vue, under `web/`):

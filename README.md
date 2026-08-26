@@ -16,11 +16,11 @@ the party's shared table state (sessions, rosters, and related game-room concern
 
 ## Run locally
 
-Backend:
+Backend (Python 3.14, managed via [uv](https://docs.astral.sh/uv/)):
 
 ```bash
-pip install -r requirements/dev.txt
-python src/appserver.py
+uv sync --group test
+uv run python src/appserver.py
 ```
 
 Frontend:
