@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Tests for viewer-based library/wishlist/table pages: an owner sees edit controls, another
-viewer (including anonymous) sees the same data read-only. shelf-api does the actual visibility
+viewer (including anonymous) sees the same data read-only. game-room-api does the actual visibility
 filtering (game-room-api#154 task 2.7); this only checks the web layer renders what it's given
 without a way to write to someone else's collection.
 """
@@ -21,14 +21,14 @@ TEMPLATE_DIR = os.path.join(
 def app():
     app = Flask(__name__, template_folder=TEMPLATE_DIR)
     app.config["SECRET_KEY"] = "test"
-    app.config["SHELF_CLIENT_KEY"] = "shelf-client"
-    app.config["SHELF_CLIENT_KEY"] = MagicMock()
+    app.config["GAME_ROOM_CLIENT_KEY"] = "game-room-client"
+    app.config["GAME_ROOM_CLIENT_KEY"] = MagicMock()
 
     from sweetrpg_game_room_web.application import constants
     from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
 
     app.register_blueprint(library_blueprint)
-    app.config[constants.SHELF_CLIENT_KEY] = MagicMock(
+    app.config[constants.GAME_ROOM_CLIENT_KEY] = MagicMock(
         get_library=MagicMock(
             return_value={
                 "user_id": "user-2",

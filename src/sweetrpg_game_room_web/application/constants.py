@@ -31,10 +31,10 @@ SESSION_USER_ID = "user_id"
 # global keys
 SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
 ADMIN_API_CLIENT_KEY = "admin-api-client"
-SHELF_CLIENT_KEY = "shelf-client"
+GAME_ROOM_CLIENT_KEY = "game-room-client"
 
-# Visibility levels, ordered least to most exposed - matches shelf-objects' visibility enum
-# (openspec/changes/shelf-service/specs/shelf-visibility).
+# Visibility levels, ordered least to most exposed - matches game-room-objects' visibility enum
+# (openspec/changes/shelf-service/specs/game-room-visibility).
 VISIBILITY_LEVELS = ["private", "friends", "friends-of-friends", "public"]
 
 # cookies

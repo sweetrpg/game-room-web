@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: "Get Previous tag"
         id: previoustag
         uses: actions-ecosystem/action-get-latest-tag@v1
@@ -76,12 +76,6 @@ jobs:
             BUILD_SHA=${{ github.sha }}
             BUILD_DATE=${{ steps.getbuilddate.outputs.isodate }}
             BUILD_VERSION=${{ steps.previoustag.outputs.tag }}
-      #          tags: registry.sweetrpg.com/sweetrpg-shelf-api:latest
-      # - name: Scan image
-      #   uses: sysdiglabs/scan-action@v1
-      #   with:
-      #     image-tag: registry.sweetrpg.com/sweetrpg-shelf-api:latest
-      #     sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       - name: Create Sentry release
         uses: getsentry/action-release@v3
         env:
