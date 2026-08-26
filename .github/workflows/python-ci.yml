@@ -1,0 +1,64 @@
+name: CI
+
+on:
+    push:
+        branches: [develop]
+        paths:
+            - "src/**"
+            - "tests/**"
+            - pyproject.toml
+            - uv.lock
+            - "docs/**"
+            - ".github/workflows/**"
+    workflow_run:
+        workflows: ["Update Lockfile"]
+        types: [completed]
+    workflow_dispatch: {}
+
+permissions:
+    contents: read
+
+jobs:
+    tests:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        concurrency:
+            group: ci-${{ github.workflow }}-${{ github.ref }}
+            cancel-in-progress: true
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - {
+                          name: Linux,
+                          python: "3.14",
+                          os: ubuntu-latest,
+                      }
+        steps:
+            - uses: actions/checkout@v7
+            - uses: astral-sh/setup-uv@v7
+              with:
+                  python-version: ${{ matrix.python }}
+                  enable-cache: true
+                  cache-dependency-glob: "uv.lock"
+            - name: sync-deps
+              run: uv sync --group test --frozen
+            - name: tests
+              run: uv run pytest -v tests
+
+    docs:
+        needs: [tests]
+        runs-on: ubuntu-latest
+        concurrency: docs
+        steps:
+            - uses: actions/checkout@v7
+            - uses: astral-sh/setup-uv@v7
+              with:
+                  python-version: "3.14"
+            - name: make-docs
+              run: cd docs && uv run --group docs make html
+            - name: publish-docs
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./docs/_build/html

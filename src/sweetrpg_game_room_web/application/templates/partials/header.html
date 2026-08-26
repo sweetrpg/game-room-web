@@ -1,0 +1,54 @@
+<nav class="nav">
+    <div class="nav-brand">
+        <a href="/">
+            <img src="{{ shared_url }}/static/img/sweetrpg-logo-black.svg" alt="SweetRPG" class="nav-logo nav-logo-light">
+            <img src="{{ shared_url }}/static/img/sweetrpg-logo-white.svg" alt="SweetRPG" class="nav-logo nav-logo-dark">
+        </a>
+        <a href="{{ base_path }}/">Game Room</a>
+    </div>
+    <a href="{{ base_path }}/library/">Library</a>
+    <a href="{{ base_path }}/wishlist/">Wishlist</a>
+    <a href="{{ base_path }}/tables/">Tables</a>
+    <div class="nav-spacer"></div>
+    <div class="app-switcher">
+        <button type="button" class="app-switcher-trigger" aria-label="Switch app">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/>
+                <circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/>
+                <circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+            </svg>
+        </button>
+        <div class="app-switcher-panel" hidden>
+            <a class="app-switcher-item" href="/">Home</a>
+            <a class="app-switcher-item" href="/catalog">Catalog</a>
+            <a class="app-switcher-item" href="/game-room">Game Room</a>
+            <a class="app-switcher-item" href="/initiative">Initiative</a>
+        </div>
+    </div>
+    <div class="avatar-menu">
+        <button type="button" class="avatar-menu-trigger">
+            {% if user.gravatar_url %}
+            <img class="avatar-menu-avatar" src="{{ user.gravatar_url }}" alt="" loading="lazy" onerror="this.style.display='none'">
+            {% else %}
+            <img class="avatar-menu-avatar" src="{{ shared_url }}/static/img/mystery-man.svg" alt="">
+            {% endif %}
+        </button>
+        <div class="avatar-menu-panel" hidden>
+            {% if user.id %}
+            <div class="avatar-menu-identity">
+                {% if user.email %}<span class="avatar-menu-email">{{ user.email }}</span>{% endif %}
+            </div>
+            <hr class="avatar-menu-divider">
+            <a class="avatar-menu-item" href="/auth/logout">Log out</a>
+            {% else %}
+            <a class="avatar-menu-item" href="/auth/login">Log in</a>
+            {% endif %}
+            <hr class="avatar-menu-divider">
+            <div class="avatar-menu-theme-row" role="group" aria-label="Theme">
+                <button type="button" class="avatar-menu-theme-option" data-theme-choice="light" aria-label="Light"></button>
+                <button type="button" class="avatar-menu-theme-option" data-theme-choice="dark" aria-label="Dark"></button>
+                <button type="button" class="avatar-menu-theme-option" data-theme-choice="system" aria-label="System"></button>
+            </div>
+        </div>
+    </div>
+</nav>

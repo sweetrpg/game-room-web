@@ -1,0 +1,41 @@
+name: Update Lockfile
+
+on:
+    workflow_dispatch:
+    repository_dispatch:
+        types:
+            - game-room-objects-published
+            - client-published
+            - web-core-published
+    schedule:
+        - cron: "0 1 * * 2"
+    push:
+        branches:
+            - develop
+        paths:
+            - "pyproject.toml"
+
+permissions:
+    contents: write
+
+jobs:
+    update-lock:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+            - uses: astral-sh/setup-uv@v7
+              with:
+                  python-version: "3.14"
+            - name: update-lock
+              run: |
+                  git config --global user.email "ci@sweetrpg.com"
+                  git config --global user.name "SweetRPG Requirement Updater"
+                  git checkout ${{ github.head_ref || github.ref_name }}
+                  uv lock --upgrade
+                  if git diff --quiet uv.lock; then
+                      echo "No dependency updates"
+                      exit 0
+                  fi
+                  git add uv.lock
+                  git commit -m "chore: update dependencies (uv lock --upgrade)"
+                  git push origin
