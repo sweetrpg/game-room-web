@@ -3,17 +3,6 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 
 metadata:
-  name: strip-prefix
-
-spec:
-  stripPrefix:
-    prefixes:
-      - /game-room
----
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-
-metadata:
   name: errors-shared-web
 
 spec:

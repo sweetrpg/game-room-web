@@ -27,6 +27,16 @@ jobs:
                           python: "3.14",
                           os: ubuntu-latest,
                       }
+        services:
+            redis:
+                image: redis
+                ports:
+                    - 6379:6379
+                options: >-
+                    --health-cmd "redis-cli ping"
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
         steps:
             - uses: actions/checkout@v7
             - uses: astral-sh/setup-uv@v7
@@ -37,4 +47,24 @@ jobs:
             - name: sync-deps
               run: uv sync --group test --frozen
             - name: tests
-              run: uv run pytest -v tests
+              run: uv run coverage run -m pytest -v tests
+            - name: coverage-summary
+              run: |
+                  echo "## Python coverage" >> "$GITHUB_STEP_SUMMARY"
+                  echo '```' >> "$GITHUB_STEP_SUMMARY"
+                  uv run coverage report -m >> "$GITHUB_STEP_SUMMARY"
+                  echo '```' >> "$GITHUB_STEP_SUMMARY"
+                  uv run coverage xml
+                  uv run coverage html
+            - name: upload-coverage-artifact
+              uses: actions/upload-artifact@v7
+              with:
+                  name: coverage-report-${{ matrix.name }}
+                  path: |
+                      htmlcov/
+                      coverage.xml
+            # Warn-only: continue-on-error means this never blocks a merge, only shows
+            # as a flagged step. Reuses the .coverage data the tests step already wrote.
+            - name: coverage-threshold
+              continue-on-error: true
+              run: uv run coverage report --fail-under=79
