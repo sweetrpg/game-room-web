@@ -28,6 +28,8 @@ spec:
                 component: web
             annotations:
                 reloader.stakater.com/auto: "true"
+                openfeature.dev/enabled: "true"
+                openfeature.dev/featureflagsource: "sweetrpg-system/game-room-web"
         spec:
             serviceAccountName: web
             imagePullSecrets:
