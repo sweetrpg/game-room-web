@@ -1,3 +1,12 @@
+## [0.1.2] - 2026-08-27
+
+### 🐛 Bug Fixes
+
+- *(kubernetes)* Remove dead newrelic.ini config mount
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.1
 ## [0.1.1] - 2026-08-26
 
 ### 🐛 Bug Fixes
