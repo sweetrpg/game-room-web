@@ -1,3 +1,16 @@
+## [0.1.3] - 2026-08-27
+
+### 🐛 Bug Fixes
+
+- Indentation
+
+### 🚜 Refactor
+
+- *(secrets)* Consolidate and share Redis credentials across game-room dev
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.2
 ## [0.1.2] - 2026-08-27
 
 ### 🐛 Bug Fixes
