@@ -11,9 +11,9 @@ resources:
     - middlewares/errors.yaml
     - middlewares/strip.yaml
     - pod-monitor.yaml
-    - secrets/auth.yaml
     - secrets/cache.yaml
     - secrets/misc.yaml
+    - secrets/shared-session.yaml
 
 labels:
     - pairs:
