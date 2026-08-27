@@ -13,7 +13,7 @@ resources:
     - pod-monitor.yaml
     - secrets/cache.yaml
     - secrets/misc.yaml
-  - secrets/shared-session.yaml
+    - secrets/shared-session.yaml
 
 labels:
     - pairs:
