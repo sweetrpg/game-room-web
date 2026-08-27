@@ -1,3 +1,12 @@
+## [0.1.4] - 2026-08-27
+
+### 🐛 Bug Fixes
+
+- Remove web-auth secret ref
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.3
 ## [0.1.3] - 2026-08-27
 
 ### 🐛 Bug Fixes
