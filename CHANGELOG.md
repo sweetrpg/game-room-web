@@ -1,3 +1,12 @@
+## [0.1.6] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Pod crash-loop on boot (dead logstash formatter, wrong CACHE_TYPE)
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.5
 ## [0.1.5] - 2026-08-28
 
 ### 🐛 Bug Fixes
