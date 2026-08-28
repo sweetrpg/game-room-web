@@ -1711,14 +1711,14 @@ wheels = [
 
 [[package]]
 name = "sweetrpg-web-core"
-version = "0.0.697"
+version = "0.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "flask" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/08/9e/80dd2c62d15901efe9cc42bc99c6b8f5677b2f2743ba8de51b2270a986b3/sweetrpg-web-core-0.0.697.tar.gz", hash = "sha256:656b6f7bfc5e5022b9e59a98105e178417cbecd65c75bf066b9189bad9706aa2", size = 7225, upload-time = "2024-10-06T20:01:46.246Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a2/aa/bfbee260e292c32a73e3967d87a9c68291130e3e5bbeb4ec8b7fed0dd9fc/sweetrpg_web_core-0.1.2.tar.gz", hash = "sha256:79f0f1a0cb92e1d73e4942ded6e1a1a2e5df07d4321e92b5fb347d4c8df69c72", size = 88483, upload-time = "2026-08-28T17:00:19.687Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8e/c8/ad6b39f2202e5fcba8a38d2bfa905fb9651086fe4bf7ec0dc1c115d31e70/sweetrpg_web_core-0.0.697-py2.py3-none-any.whl", hash = "sha256:8bd4818423b6e486a5d3814a46d03fd5467489a60f62245e51838b7389a5bdd9", size = 8387, upload-time = "2024-10-06T20:01:44.768Z" },
+    { url = "https://files.pythonhosted.org/packages/17/e0/4160d1cd921aef7e844c2f41f6cd913db078ad28296779a0eebe1e14ab15/sweetrpg_web_core-0.1.2-py3-none-any.whl", hash = "sha256:19c140b4ccab26f3a995d2a6d7b38531b32ab723be698fb0a5ca398217cb12f3", size = 8225, upload-time = "2026-08-28T17:00:17.201Z" },
 ]
 
 [[package]]
