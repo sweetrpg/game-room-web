@@ -13,19 +13,11 @@ spec:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: web
-            version: v1
-            platform: sweetrpg
-            package: game-room
-            component: web
+            app.kubernetes.io/name: game-room-web
+            app.kubernetes.io/version: v1
+            app.kubernetes.io/component: web
     template:
         metadata:
-            labels:
-                app: web
-                version: v1
-                platform: sweetrpg
-                package: game-room
-                component: web
             annotations:
                 reloader.stakater.com/auto: "true"
                 openfeature.dev/enabled: "true"
