@@ -9,7 +9,9 @@ import os
 
 import analytics
 import jinja2
+import json
 from flask import Blueprint, request, render_template, session, jsonify, current_app
+from sweetrpg_game_room_web import __version__
 from sweetrpg_game_room_web.application import constants, shared_session
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
@@ -98,15 +100,27 @@ def error_page(message, code):
         return render_page("errors/error.html", context)
 
 
+def _load_build_info():
+    try:
+        with open(current_app.config["BUILD_INFO_PATH"]) as f:
+            info = json.load(f)
+            return info.get("date", "unknown"), info.get("sha", "unknown")[:8]
+    except Exception:
+        return "unknown", "unknown"
+
+
 def render_page(page, context={}):
 
     show_cookie_message = True
     if request.cookies.get("cookies-accepted"):
         show_cookie_message = False
 
+    build_timestamp, build_hash = _load_build_info()
     context.update({"showCookieMessage": show_cookie_message})
     context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
-    print(f"context: {context}")
+    context.setdefault("version", __version__)
+    context.setdefault("build_timestamp", build_timestamp)
+    context.setdefault("build_hash", build_hash)
 
     return render_template(page, **context)
 
