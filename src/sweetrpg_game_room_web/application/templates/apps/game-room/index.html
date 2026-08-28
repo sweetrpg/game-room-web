@@ -18,6 +18,16 @@
                 <div class="card-body"><div class="card-title">Tables</div></div>
             </a>
         </div>
+        <div id="landing-footer-sentinel" class="landing-footer-sentinel"></div>
     </div>
 </div>
+{% endblock %}
+{% block footer %}
+<div class="landing-footer">
+    <span class="landing-footer-line">&copy; 2026 Pilgrimage Software &middot; <a href="https://github.com/sweetrpg" target="_blank" rel="noopener">GitHub</a></span>
+    <span class="landing-footer-line">v{{ version }} &middot; built {{ build_timestamp }} / {{ build_hash }}</span>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ shared_url }}/static/js/footer-fade.js" defer></script>
 {% endblock %}
