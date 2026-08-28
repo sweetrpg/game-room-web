@@ -182,15 +182,64 @@ def error_handler(ex):
     return response
 
 
+def _format_date(iso_string):
+    if not iso_string:
+        return None
+    try:
+        return datetime.datetime.fromisoformat(iso_string).strftime("%b %-d, %Y")
+    except ValueError:
+        return None
+
+
+def _recent_entries(entries, date_key, limit=3):
+    dated = [e for e in entries if e.get(date_key)]
+    return sorted(dated, key=lambda e: e[date_key], reverse=True)[:limit]
+
+
 @blueprint.route("/")
 def main_page():
     context = get_context()
-    context.update({
-        # 'user_info': session.get(constants.SWEETRPG_SESSION_USER_INFO),
-        'appname': "Game Room",
-    })
+    context.update({'appname': "Game Room"})
 
-    print(f"context: {context}")
+    user_id = context["user"]["id"]
+    if user_id:
+        client = current_app.config[constants.GAME_ROOM_CLIENT_KEY]
+
+        library, wishlist, tables = None, None, []
+        try:
+            library = client.get_library(user_id)
+        except Exception:
+            current_app.logger.exception("Unable to load library for landing page (user %s)", user_id)
+        try:
+            wishlist = client.get_wishlist(user_id)
+        except Exception:
+            current_app.logger.exception("Unable to load wishlist for landing page (user %s)", user_id)
+        try:
+            tables = client.list_tables(user_id) or []
+        except Exception:
+            current_app.logger.exception("Unable to load tables for landing page (user %s)", user_id)
+
+        library_entries = (library or {}).get("entries") or []
+        wishlist_entries = (wishlist or {}).get("entries") or []
+
+        context.update({
+            'library_count': len(library_entries),
+            'library_recent': [
+                {**e, 'added_at_label': _format_date(e.get('added_at'))}
+                for e in _recent_entries(library_entries, 'added_at')
+            ],
+            'wishlist_count': len(wishlist_entries),
+            'wishlist_recent': [
+                {**e, 'added_at_label': _format_date(e.get('added_at'))}
+                for e in _recent_entries(wishlist_entries, 'added_at')
+            ],
+            'tables_count': len(tables),
+            'tables_recent': [
+                {**t, 'updated_at_label': _format_date(t.get('updated_at'))}
+                for t in _recent_entries(tables, 'updated_at')
+            ],
+        })
+
     return render_page("apps/game-room/index.html", context=context)
 
 # from sweetrpg_game_room_web.application.blueprints import authors
