@@ -19,9 +19,10 @@
             </svg>
         </button>
         <div class="app-switcher-panel" hidden>
-            <a class="app-switcher-item" href="/">Home</a>
+            <a class="app-switcher-item" href="/">Main</a>
             <a class="app-switcher-item" href="/catalog">Catalog</a>
             <a class="app-switcher-item" href="/game-room">Game Room</a>
+            <a class="app-switcher-item" href="/game-systems">Game Systems</a>
             <a class="app-switcher-item" href="/initiative">Initiative</a>
         </div>
     </div>
@@ -29,6 +30,9 @@
         <button type="button" class="avatar-menu-trigger">
             {% if user.gravatar_url %}
             <img class="avatar-menu-avatar" src="{{ user.gravatar_url }}" alt="" loading="lazy" onerror="this.style.display='none'">
+            {% endif %}
+            {% if user.id %}
+            <span class="avatar-menu-fallback">{{ user.avatar_initial }}</span>
             {% else %}
             <img class="avatar-menu-avatar" src="{{ shared_url }}/static/img/mystery-man.svg" alt="">
             {% endif %}
@@ -36,15 +40,23 @@
         <div class="avatar-menu-panel" hidden>
             {% if user.id %}
             <div class="avatar-menu-identity">
+                <span class="avatar-menu-name">{{ user.name }}</span>
                 {% if user.email %}<span class="avatar-menu-email">{{ user.email }}</span>{% endif %}
             </div>
             <hr class="avatar-menu-divider">
-            <a class="avatar-menu-item" href="/auth/logout">Log out</a>
-            {% else %}
-            <a class="avatar-menu-item" href="/auth/login">Log in</a>
+            <a class="avatar-menu-item" href="/users/profile">User Settings</a>
+            {% if user.is_admin %}
+            <a class="avatar-menu-item" href="/admin">Administration</a>
             {% endif %}
             <hr class="avatar-menu-divider">
-            <div class="avatar-menu-theme-row" role="group" aria-label="Theme">
+            <form action="/auth/logout?return_to={{ request.path }}" method="post" class="avatar-menu-item-form">
+                <button type="submit" class="avatar-menu-item avatar-menu-item-danger">Log out</button>
+            </form>
+            {% else %}
+            <a class="avatar-menu-item" href="/auth/login?return_to={{ request.path }}">Log in</a>
+            {% endif %}
+            <hr class="avatar-menu-divider">
+            <div id="avatar-menu-theme-row" class="avatar-menu-theme-row" role="group" aria-label="Theme">
                 <button type="button" class="avatar-menu-theme-option" data-theme-choice="light" aria-label="Light"></button>
                 <button type="button" class="avatar-menu-theme-option" data-theme-choice="dark" aria-label="Dark"></button>
                 <button type="button" class="avatar-menu-theme-option" data-theme-choice="system" aria-label="System"></button>
