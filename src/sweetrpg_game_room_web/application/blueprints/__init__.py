@@ -146,10 +146,8 @@ def _populate():
 @blueprint.before_request
 def _track():
     email = session.get(constants.SESSION_EMAIL)
-    print(f"email: {email}")
     user_id = session.get(constants.SESSION_USER_ID)
-    print(f"user_id: {user_id}")
-    if user_id and email:
+    if analytics.write_key and user_id and email:
         analytics.identify(user_id, {
             'email': email,
             'created_at': datetime.datetime.now()
