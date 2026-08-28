@@ -9,7 +9,7 @@ import os
 
 
 cache = Cache(config={
-    'CACHE_TYPE': 'redis',
+    'CACHE_TYPE': 'RedisCache',
     'CACHE_KEY_PREFIX': 'sweetrpg',
     'CACHE_OPTIONS': {},
     # 'CACHE_REDIS_HOST': os.environ['REDIS_HOST'],
