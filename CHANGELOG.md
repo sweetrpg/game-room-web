@@ -1,3 +1,12 @@
+## [0.1.8] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Use Flask(__name__) instead of a hyphenated app name string
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.7
 ## [0.1.7] - 2026-08-28
 
 ### 🐛 Bug Fixes
