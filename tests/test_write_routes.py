@@ -250,3 +250,67 @@ def test_get_tables_page_handles_client_error(owner_client, client_mock):
     client_mock.list_tables.side_effect = Exception("boom")
     resp = owner_client.get("/tables/")
     assert resp.status_code == 200
+
+
+# -- landing page --
+
+
+def test_anonymous_visitor_sees_login_prompt_no_cards(app):
+    with patch(
+        "sweetrpg_game_room_web.application.blueprints.shared_session.current_user",
+        return_value=None,
+    ):
+        resp = app.test_client().get("/")
+    body = resp.get_data(as_text=True)
+    assert "Log in to see your library" in body
+    assert 'class="stat-card"' not in body
+
+
+def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, client_mock):
+    client_mock.get_library.return_value = {
+        "entries": [
+            {"volume_id": "vol-1", "added_at": "2026-08-28T12:00:00+00:00"},
+            {"volume_id": "vol-2", "added_at": "2026-08-27T12:00:00+00:00"},
+        ]
+    }
+    client_mock.get_wishlist.return_value = {
+        "entries": [{"volume_id": "vol-3", "added_at": "2026-08-26T12:00:00+00:00"}]
+    }
+    client_mock.list_tables.return_value = [
+        {"id": "table-1", "name": "Friday Night", "updated_at": "2026-08-25T12:00:00+00:00"}
+    ]
+
+    resp = owner_client.get("/")
+
+    body = resp.get_data(as_text=True)
+    assert 'class="stat-card"' in body
+    assert "Log in to see your library" not in body
+    assert "vol-1" in body
+    assert "Friday Night" in body
+    client_mock.get_library.assert_called_once_with("user-1")
+    client_mock.get_wishlist.assert_called_once_with("user-1")
+    client_mock.list_tables.assert_called_once_with("user-1")
+
+
+def test_logged_in_visitor_with_no_data_sees_empty_states(owner_client, client_mock):
+    client_mock.get_library.return_value = {"entries": []}
+    client_mock.get_wishlist.return_value = {"entries": []}
+    client_mock.list_tables.return_value = []
+
+    resp = owner_client.get("/")
+
+    body = resp.get_data(as_text=True)
+    assert "No volumes yet" in body
+    assert "No entries yet" in body
+    assert "No tables yet" in body
+
+
+def test_logged_in_visitor_survives_client_errors(owner_client, client_mock):
+    client_mock.get_library.side_effect = Exception("boom")
+    client_mock.get_wishlist.side_effect = Exception("boom")
+    client_mock.list_tables.side_effect = Exception("boom")
+
+    resp = owner_client.get("/")
+
+    assert resp.status_code == 200
+    assert "No volumes yet" in resp.get_data(as_text=True)
