@@ -1,3 +1,12 @@
+## [0.2.0] - 2026-08-28
+
+### 🚀 Features
+
+- Add missing footer to the landing page
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.10
 ## [0.1.10] - 2026-08-28
 
 ### 🐛 Bug Fixes
