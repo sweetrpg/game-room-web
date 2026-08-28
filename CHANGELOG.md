@@ -1,3 +1,13 @@
+## [0.1.5] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- *(ci)* Grant docs job write permission to publish gh-pages
+- Bump sweetrpg-client to 0.1.2, fixing the distutils import crash
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.4
 ## [0.1.4] - 2026-08-27
 
 ### 🐛 Bug Fixes
