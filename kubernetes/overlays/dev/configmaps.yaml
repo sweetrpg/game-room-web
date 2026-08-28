@@ -12,3 +12,4 @@ data:
     GAME_ROOM_API_EXTERNAL_BASE_URL: "https://dev.sweetrpg.com/api/1/game-room"
     BUILD_INFO_PATH: /app/build-info.json
     REDIS_HOST: cache.sweetrpg-game-room.svc.cluster.local
+    SHARED_URL: https://dev.sweetrpg.com/shared
