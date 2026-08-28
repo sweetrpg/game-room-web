@@ -36,20 +36,9 @@ def create_app(app_name=constants.APPLICATION_NAME):
                 "default": {
                     "format": "[%(asctime)s] %(levelname)s %(module)s/%(funcName)s: %(message)s",
                 },
-                "logstash": {
-                    "class": "logstash_async.formatter.FlaskLogstashFormatter",
-                    "metadata": {"beat": "sweetrpg-game-room-web"},
-                }
             },
-            "handlers": {"wsgi": {"class": "logging.StreamHandler", "stream": "ext://flask.logging.wsgi_errors_stream", "formatter": "default"},
-                         # "logstash": {"class": "logstash_async.handler.AsynchronousLogstashHandler", "formatter": "logstash",
-                         #              "host": os.environ[constants.LOGSTASH_HOST],
-                         #              "port": int(os.environ[constants.LOGSTASH_PORT]),
-                         #              "database_path": "/tmp/sweetrpg_game_room_web_flask_logstash.db",
-                         #              "transport": "logstash_async.transport.BeatsTransport",
-                         #              },
-                         },
-            "root": {"level": os.environ.get(constants.LOG_LEVEL) or "INFO", "handlers": ["wsgi", ]}, # "logstash"]},
+            "handlers": {"wsgi": {"class": "logging.StreamHandler", "stream": "ext://flask.logging.wsgi_errors_stream", "formatter": "default"}},
+            "root": {"level": os.environ.get(constants.LOG_LEVEL) or "INFO", "handlers": ["wsgi"]},
         }
     )
 
