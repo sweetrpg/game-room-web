@@ -10,7 +10,7 @@ import os
 import analytics
 import jinja2
 from flask import Blueprint, request, render_template, session, jsonify, current_app
-from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application import constants, shared_session
 from sweetrpg_web_core.helpers.context import get_context
 from werkzeug.exceptions import HTTPException
 
@@ -104,14 +104,7 @@ def render_page(page, context={}):
     if request.cookies.get("cookies-accepted"):
         show_cookie_message = False
 
-    userinfo = session.get(constants.PROFILE_KEY)
-    if userinfo:
-        context.update(
-            {
-                "showCookieMessage": show_cookie_message,
-                "userinfo": userinfo,
-            }
-        )
+    context.update({"showCookieMessage": show_cookie_message})
     context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
     print(f"context: {context}")
 
@@ -144,23 +137,10 @@ def _check_maintenance_mode():
 
 @blueprint.before_request
 def _populate():
-    print(f"session: {session}")
-    print(f"headers: {request.headers}")
-    print(f"cookies: {request.cookies}")
-    print(f"args: {request.args}")
-
-    userinfo = None
-    if constants.PROFILE_KEY in session:
-        userinfo = session[constants.PROFILE_KEY]
-    elif constants.SWEETRPG_AUTH_KEY in request.cookies:
-        userinfo = request.cookies[constants.SWEETRPG_AUTH_KEY]
-        session[constants.PROFILE_KEY] = userinfo
-    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get('X-Forwarded-Access-Token')
-    session[constants.SESSION_EMAIL] = request.headers.get('X-Forwarded-Email')
-    session[constants.SESSION_USER_ID] = request.headers.get('X-Forwarded-User')
-
-    print(f"(updated) session: {session}")
-    print(f"userinfo: {userinfo}")
+    user = shared_session.current_user()
+    session[constants.SESSION_ACCESS_TOKEN] = user.get("accessToken") if user else None
+    session[constants.SESSION_EMAIL] = user.get("email") if user else None
+    session[constants.SESSION_USER_ID] = user.get("sub") if user else None
 
 
 @blueprint.before_request
