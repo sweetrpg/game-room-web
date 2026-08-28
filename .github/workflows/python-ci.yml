@@ -98,6 +98,8 @@ jobs:
         needs: [tests]
         runs-on: ubuntu-latest
         concurrency: docs
+        permissions:
+            contents: write
         steps:
             - uses: actions/checkout@v7
             - uses: astral-sh/setup-uv@v7
