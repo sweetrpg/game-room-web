@@ -35,3 +35,4 @@ class BaseConfig(object):
     SHARED_SESSION_REDIS_PORT = int(os.environ.get(constants.SHARED_SESSION_REDIS_PORT) or 6379)
     SHARED_SESSION_REDIS_DB = int(os.environ.get(constants.SHARED_SESSION_REDIS_DB) or 0)
     SHARED_SESSION_REDIS_PASSWORD = os.environ.get(constants.SHARED_SESSION_REDIS_PASS) or None
+    BUILD_INFO_PATH = os.environ.get(constants.BUILD_INFO_PATH) or "/app/build-info.json"
