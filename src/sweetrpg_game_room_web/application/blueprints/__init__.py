@@ -155,6 +155,8 @@ def _populate():
     session[constants.SESSION_ACCESS_TOKEN] = user.get("accessToken") if user else None
     session[constants.SESSION_EMAIL] = user.get("email") if user else None
     session[constants.SESSION_USER_ID] = user.get("sub") if user else None
+    session[constants.SESSION_NAME] = user.get("name") if user else None
+    session[constants.SESSION_ROLES] = user.get("roles") if user else None
 
 
 @blueprint.before_request
