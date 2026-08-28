@@ -10,19 +10,32 @@ task group 2) is still being built.
 """
 
 import requests
+from flask import session
+
+from sweetrpg_game_room_web.application import constants
 
 
 class GameRoomClient:
     def __init__(self, base_url: str):
         self.base_url = base_url.rstrip("/")
 
+    def _auth_headers(self):
+        try:
+            token = session.get(constants.SESSION_ACCESS_TOKEN)
+        except RuntimeError:
+            # Outside a Flask request context (e.g. direct unit tests) - no session to read.
+            return {}
+        return {"Authorization": f"Bearer {token}"} if token else {}
+
     def _get(self, path: str, **kwargs):
-        resp = requests.get(f"{self.base_url}{path}", timeout=5, **kwargs)
+        headers = {**self._auth_headers(), **kwargs.pop("headers", {})}
+        resp = requests.get(f"{self.base_url}{path}", timeout=5, headers=headers, **kwargs)
         resp.raise_for_status()
         return resp.json()
 
     def _request(self, method: str, path: str, **kwargs):
-        resp = requests.request(method, f"{self.base_url}{path}", timeout=5, **kwargs)
+        headers = {**self._auth_headers(), **kwargs.pop("headers", {})}
+        resp = requests.request(method, f"{self.base_url}{path}", timeout=5, headers=headers, **kwargs)
         resp.raise_for_status()
         if resp.content:
             return resp.json()
