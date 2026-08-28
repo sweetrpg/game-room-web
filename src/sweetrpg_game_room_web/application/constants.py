@@ -27,6 +27,8 @@ CURRENT_USER_ID = "current_user_id"
 SESSION_ACCESS_TOKEN = "access_token"
 SESSION_EMAIL = "email"
 SESSION_USER_ID = "user_id"
+SESSION_NAME = "name"
+SESSION_ROLES = "roles"
 
 # global keys
 SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
