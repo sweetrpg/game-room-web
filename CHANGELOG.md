@@ -1,3 +1,12 @@
+## [0.1.10] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Don't crash logged-in requests when SEGMENT_WRITE_KEY is unset
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.9
 ## [0.1.9] - 2026-08-28
 
 ### 🐛 Bug Fixes
