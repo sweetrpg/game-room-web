@@ -1,3 +1,12 @@
+## [0.3.2] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Hide the avatar-initial fallback once the gravatar image loads
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.3.1
 ## [0.3.1] - 2026-08-28
 
 ### 🐛 Bug Fixes
