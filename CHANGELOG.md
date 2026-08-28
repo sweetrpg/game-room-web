@@ -1,3 +1,12 @@
+## [0.3.1] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Forward the caller's access token to game-room-api
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.3.0
 ## [0.3.0] - 2026-08-28
 
 ### 🚀 Features
