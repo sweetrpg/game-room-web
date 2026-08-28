@@ -1,3 +1,14 @@
+## [0.1.9] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- Set SHARED_URL, missing entirely
+- Drop trailing slash from APPLICATION_BASE_PATH
+- Reflect real login state via the suite-wide shared session
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.8
 ## [0.1.8] - 2026-08-28
 
 ### 🐛 Bug Fixes
