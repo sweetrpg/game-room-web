@@ -1,3 +1,13 @@
+## [0.3.0] - 2026-08-28
+
+### 🚀 Features
+
+- Gate the landing page on login, populate cards with real data
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.2.1
+- Update to standard labels
 ## [0.2.1] - 2026-08-28
 
 ### 🐛 Bug Fixes

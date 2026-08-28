@@ -7,11 +7,10 @@ metadata:
 
 spec:
     selector:
-        app: web
-        version: v1
-        platform: sweetrpg
-        package: game-room
-        component: web
+        app.kubernetes.io/name: game-room-web
+        app.kubernetes.io/version: v1
+        app.kubernetes.io/component: web
+        app.kubernetes.io/part-of: game-room
     type: LoadBalancer
     ports:
         - name: http
