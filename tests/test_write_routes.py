@@ -6,13 +6,13 @@ These use main_blueprint ("web") nesting - unlike test_viewer_routes.py's direct
 sub-blueprint registration - because every redirect target here is
 `url_for("web.<blueprint>.<endpoint>")`, which only resolves under that nesting.
 That nesting also pulls in the "web" blueprint's `_populate` before_request hook,
-which derives identity from `X-Forwarded-User`/`X-Forwarded-Email` request headers
-(not session directly - those get overwritten from the headers on every request),
-so the owner fixture sends that header rather than seeding the session.
+which derives identity from `shared_session.current_user()` (the suite-wide login
+session), overwriting the Flask session on every request - so the owner fixture
+patches that lookup rather than seeding the session directly.
 """
 
 import os
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 from flask import Flask
@@ -37,7 +37,7 @@ main_blueprint.register_blueprint(tables_blueprint)
 
 
 class _OwnerClient:
-    """Wraps a Flask test client, injecting the X-Forwarded-User header every request."""
+    """Wraps a Flask test client, faking a valid shared-session user for every request."""
 
     def __init__(self, client, user_id):
         self._client = client
@@ -50,10 +50,11 @@ class _OwnerClient:
         return self._request("post", *args, **kwargs)
 
     def _request(self, method, *args, **kwargs):
-        headers = kwargs.pop("headers", {}) or {}
-        headers["X-Forwarded-User"] = self._user_id
-        kwargs["headers"] = headers
-        return getattr(self._client, method)(*args, **kwargs)
+        with patch(
+            "sweetrpg_game_room_web.application.blueprints.shared_session.current_user",
+            return_value={"sub": self._user_id, "email": f"{self._user_id}@example.com"},
+        ):
+            return getattr(self._client, method)(*args, **kwargs)
 
 
 @pytest.fixture
@@ -68,7 +69,10 @@ def app(client_mock):
     app.register_blueprint(main_blueprint)
 
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
-    return app
+    with patch("sweetrpg_game_room_web.application.blueprints.analytics.identify"), patch(
+        "sweetrpg_game_room_web.application.blueprints.analytics.track"
+    ):
+        yield app
 
 
 @pytest.fixture
