@@ -24,7 +24,10 @@ class BaseConfig(object):
     CACHE_REDIS_HOST = os.environ[constants.REDIS_HOST]
     CACHE_REDIS_PORT = int(os.environ.get(constants.REDIS_PORT) or 6379)
     CACHE_REDIS_DB = int(os.environ.get(constants.REDIS_DB) or 7)
+    CACHE_REDIS_PASSWORD = os.environ.get(constants.REDIS_PASS)
     SESSION_TYPE = "redis"
-    SESSION_REDIS = redis.from_url(f"redis://{os.environ[constants.REDIS_HOST]}:{int(os.environ.get(constants.REDIS_PORT) or 6379)}")
+    SESSION_REDIS = redis.from_url(
+        f"redis://:{os.environ.get(constants.REDIS_PASS, '')}@{os.environ[constants.REDIS_HOST]}:{int(os.environ.get(constants.REDIS_PORT) or 6379)}"
+    )
     SEGMENT_WRITE_KEY = os.environ.get(constants.SEGMENT_WRITE_KEY)
     ADMIN_API_URL = os.environ.get(constants.ADMIN_API_URL)
