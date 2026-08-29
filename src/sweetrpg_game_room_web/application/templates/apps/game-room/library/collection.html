@@ -1,8 +1,41 @@
 {% extends "base.html" %}
 {% block title %}Library{% endblock %}
+{% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
+<style>
+  .page-header { display: flex; align-items: center; justify-content: space-between; }
+  .visibility-menu { position: relative; }
+  .visibility-menu-panel {
+    position: absolute; top: calc(100% + 4px); right: 0; min-width: 200px;
+    background: var(--color-bg); border: 1px solid var(--color-neutral-300); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); padding: 6px; z-index: 100;
+  }
+  .visibility-menu-panel[hidden] { display: none; }
+  .visibility-menu-item {
+    display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
+    padding: 8px 10px; border: none; border-radius: 4px; background: transparent;
+    color: var(--color-text); font-size: 14px; font-family: inherit; text-align: left; cursor: pointer;
+  }
+  .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
+  .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
+</style>
 <div class="page-header">
     <h2>Library</h2>
+    {% if is_owner and library %}
+    <div class="visibility-menu" id="visibility-menu">
+        <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="Change default visibility" aria-haspopup="true" aria-expanded="false">
+            <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(library.default_visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(library.default_visibility) }}.svg');"></span>
+        </button>
+        <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
+            {% for level in visibility_levels %}
+            <button type="button" class="visibility-menu-item" data-visibility="{{ level }}" role="menuitem">
+                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+                <span>{{ level }}</span>
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% if is_owner and not user.id %}
@@ -11,16 +44,12 @@
 <p class="empty-state">This library isn't available right now.</p>
 {% else %}
 {% if is_owner %}
-<form id="default-visibility-form" method="post" action="{{ base_path }}/library/default-visibility" class="form">
-    <label class="form-label" for="default-visibility">Default visibility</label>
+<form id="default-visibility-form" method="post" action="{{ base_path }}/library/default-visibility" hidden>
     <select id="default-visibility" name="visibility">
         {% for level in visibility_levels %}
         <option value="{{ level }}" {% if level == library.default_visibility %}selected{% endif %}>{{ level }}</option>
         {% endfor %}
     </select>
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Update default visibility</button>
-    </div>
 </form>
 {% endif %}
 
@@ -159,6 +188,53 @@
         alert('Unable to check the impact of this change right now. Please try again.');
       });
   });
+
+  var menu = document.getElementById('visibility-menu');
+  if (menu) {
+    var trigger = document.getElementById('visibility-menu-trigger');
+    var triggerIcon = document.getElementById('visibility-menu-icon');
+    var panel = document.getElementById('visibility-menu-panel');
+    var select = document.getElementById('default-visibility');
+    var iconBySvg = {
+      'private': 'lock',
+      'friends': 'user-friends',
+      'friends-of-friends': 'users',
+      'public': 'globe'
+    };
+
+    function closeMenu() {
+      panel.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function (event) {
+      event.stopPropagation();
+      panel.hidden = !panel.hidden;
+      trigger.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+    });
+
+    panel.querySelectorAll('.visibility-menu-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        var level = item.dataset.visibility;
+        select.value = level;
+        var iconUrl = '{{ shared_url }}/static/svgs/fontawesome/solid/' + iconBySvg[level] + '.svg';
+        triggerIcon.style.maskImage = 'url(\'' + iconUrl + '\')';
+        triggerIcon.style.webkitMaskImage = 'url(\'' + iconUrl + '\')';
+        closeMenu();
+        form.dispatchEvent(new Event('submit', {cancelable: true}));
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!panel.hidden && !menu.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !panel.hidden) {
+        closeMenu();
+        trigger.focus();
+      }
+    });
+  }
 })();
 </script>
 {% endblock %}

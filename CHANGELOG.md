@@ -1,3 +1,13 @@
+## [0.4.2] - 2026-08-29
+
+### 🐛 Bug Fixes
+
+- *(landing)* Address review feedback on card actions and add visibility menu
+- *(library)* Use catalog-api's new /volumes/search endpoint
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.4.1
 ## [0.4.1] - 2026-08-29
 
 ### ⚙️ Miscellaneous Tasks
