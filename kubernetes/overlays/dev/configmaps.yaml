@@ -10,6 +10,7 @@ data:
     APPLICATION_BASE_PATH: /game-room
     GAME_ROOM_API_BASE_URL: "http://api-v1.sweetrpg-game-room.svc.cluster.local:8000"
     GAME_ROOM_API_EXTERNAL_BASE_URL: "https://dev.sweetrpg.com/api/1/game-room"
+    CATALOG_API_URL: "http://api-v1.sweetrpg-catalog.svc.cluster.local:8000"
     BUILD_INFO_PATH: /app/build-info.json
     REDIS_HOST: cache.sweetrpg-game-room.svc.cluster.local
     SHARED_URL: https://dev.sweetrpg.com/shared
