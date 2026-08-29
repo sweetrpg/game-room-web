@@ -1,3 +1,8 @@
+## [0.3.4] - 2026-08-29
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.3.3
 ## [0.3.3] - 2026-08-29
 
 ### 🐛 Bug Fixes
