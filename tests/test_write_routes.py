@@ -196,6 +196,31 @@ def test_remove_wishlist_entry_calls_client(owner_client, client_mock):
     client_mock.remove_wishlist_entry.assert_called_once_with("user-1", "vol-1")
 
 
+def test_add_wishlist_entry_requires_volume_id(owner_client, client_mock):
+    resp = owner_client.post("/wishlist/entries", json={"volume_id": ""})
+    assert resp.status_code == 400
+    client_mock.add_wishlist_entry.assert_not_called()
+
+
+def test_add_wishlist_entry_returns_updated_count_and_recent(owner_client, client_mock):
+    client_mock.get_wishlist.return_value = {
+        "entries": [{"volume_id": "vol-1", "added_at": "2026-08-28T12:00:00+00:00"}]
+    }
+    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
+    assert resp.status_code == 200
+    body = resp.get_json()
+    assert body["count"] == 1
+    assert body["recent"][0]["volume_id"] == "vol-1"
+    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "vol-1")
+
+
+def test_add_wishlist_entry_handles_client_error(owner_client, client_mock):
+    client_mock.add_wishlist_entry.side_effect = Exception("boom")
+    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
+    assert resp.status_code == 502
+    assert "error" in resp.get_json()
+
+
 def test_get_wishlist_page_anonymous_shows_login_prompt(app):
     client = app.test_client()
     resp = client.get("/wishlist/")
@@ -203,9 +228,10 @@ def test_get_wishlist_page_anonymous_shows_login_prompt(app):
 
 
 def test_get_user_wishlist_page_renders(owner_client, client_mock):
-    client_mock.get_wishlist.return_value = {"user_id": "user-1", "entries": []}
+    client_mock.get_wishlist.return_value = {"user_id": "user-1", "visibility": "private", "entries": []}
     resp = owner_client.get("/wishlist/users/user-1")
     assert resp.status_code == 200
+    assert 'id="visibility-menu-trigger"' in resp.get_data(as_text=True)
 
 
 def test_get_wishlist_handles_client_error(owner_client, client_mock):
@@ -336,6 +362,7 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
     assert "vol-1" in body
     assert "Friday Night" in body
     assert 'id="add-to-library-btn"' in body
+    assert 'id="add-to-wishlist-btn"' in body
     assert 'id="create-table-btn"' in body
     client_mock.get_library.assert_called_once_with("user-1")
     client_mock.get_wishlist.assert_called_once_with("user-1")
@@ -350,6 +377,7 @@ def test_anonymous_visitor_sees_no_card_action_buttons(app):
         resp = app.test_client().get("/")
     body = resp.get_data(as_text=True)
     assert 'id="add-to-library-btn"' not in body
+    assert 'id="add-to-wishlist-btn"' not in body
     assert 'id="create-table-btn"' not in body
 
 

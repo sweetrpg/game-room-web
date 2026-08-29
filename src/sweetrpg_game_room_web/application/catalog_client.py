@@ -14,21 +14,18 @@ class CatalogClient:
         self.base_url = base_url.rstrip("/")
 
     def search_volumes(self, query: str, limit: int = 10):
-        """Find volumes whose title exactly matches `query`.
-
-        catalog-api's generic `filter[...]` query param only supports $eq (see api-core.go's
-        ConvertQueryParams) - no substring/fuzzy match yet, so this only returns exact-title
-        hits. ponytail: exact-match only; add substring search in catalog-api before this can
-        return partial matches.
-        """
+        """Find volumes whose title contains `query` (case-insensitive)."""
         resp = requests.get(
-            f"{self.base_url}/volumes",
-            params={"filter[title]": query, "page[limit]": limit},
+            f"{self.base_url}/volumes/search",
+            params={"q": query},
             timeout=5,
         )
         resp.raise_for_status()
         body = resp.json()
-        return [
-            {"id": item["id"], "title": item.get("attributes", {}).get("title", item["id"])}
-            for item in body.get("data", [])
-        ]
+        matches = []
+        for item in body.get("data", []):
+            title = item.get("attributes", {}).get("title", "")
+            matches.append({"id": item["id"], "title": title or item["id"]})
+            if len(matches) >= limit:
+                break
+        return matches
