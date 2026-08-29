@@ -3,10 +3,15 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Wishlist routes.
 """
 
-from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
+from flask import Blueprint, current_app, request, jsonify, flash
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import render_page, _format_date, _recent_entries
+from sweetrpg_game_room_web.application.blueprints import (
+    render_page,
+    local_redirect,
+    _format_date,
+    _recent_entries,
+)
 
 
 blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
@@ -63,7 +68,7 @@ def set_visibility():
     except Exception:
         current_app.logger.exception("Unable to set wishlist visibility for user %s!", user_id)
         flash("Unable to update your wishlist's visibility right now.")
-    return redirect(url_for("web.wishlist.get_wishlist_page"))
+    return local_redirect("web.wishlist.get_wishlist_page")
 
 
 @blueprint.route("/entries", methods=["POST"])
@@ -107,4 +112,4 @@ def remove_entry(volume_id: str):
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from wishlist (user %s)!", volume_id, user_id)
             flash("Unable to remove that volume right now.")
-    return redirect(url_for("web.wishlist.get_wishlist_page"))
+    return local_redirect("web.wishlist.get_wishlist_page")
