@@ -3,10 +3,10 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Wishlist routes.
 """
 
-from flask import Blueprint, current_app, request, flash, redirect, url_for
+from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import render_page
+from sweetrpg_game_room_web.application.blueprints import render_page, _format_date, _recent_entries
 
 
 blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
@@ -64,6 +64,36 @@ def set_visibility():
         current_app.logger.exception("Unable to set wishlist visibility for user %s!", user_id)
         flash("Unable to update your wishlist's visibility right now.")
     return redirect(url_for("web.wishlist.get_wishlist_page"))
+
+
+@blueprint.route("/entries", methods=["POST"])
+def add_entry():
+    """Add a volume to the current user's wishlist, for the landing page's add-to-wishlist dialog.
+
+    Returns the wishlist's updated count/recent list as JSON so the caller can refresh the
+    landing page's Wishlist card in place, without a full page reload.
+    """
+    context = get_context()
+    user_id = context["user"]["id"]
+    volume_id = (request.json or {}).get("volume_id", "").strip()
+    if not volume_id:
+        return jsonify({"error": "A volume is required."}), 400
+    try:
+        _client().add_wishlist_entry(user_id, volume_id)
+        wishlist = _client().get_wishlist(user_id) or {}
+        entries = wishlist.get("entries") or []
+        return jsonify(
+            {
+                "count": len(entries),
+                "recent": [
+                    {**e, "added_at_label": _format_date(e.get("added_at"))}
+                    for e in _recent_entries(entries, "added_at")
+                ],
+            }
+        )
+    except Exception:
+        current_app.logger.exception("Unable to add volume %s to wishlist (user %s)!", volume_id, user_id)
+        return jsonify({"error": "Unable to add that volume right now."}), 502
 
 
 @blueprint.route("/entries/<volume_id>", methods=["POST"])
