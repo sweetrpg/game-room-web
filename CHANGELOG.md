@@ -1,3 +1,12 @@
+## [0.4.0] - 2026-08-29
+
+### 🚀 Features
+
+- *(landing)* Add quick-create actions to library/tables landing cards
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.3.4
 ## [0.3.4] - 2026-08-29
 
 ### ⚙️ Miscellaneous Tasks
