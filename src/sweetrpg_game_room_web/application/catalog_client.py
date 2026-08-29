@@ -8,27 +8,33 @@ concern) - matches every other cross-service call in this codebase (see game_roo
 
 import requests
 
+# catalog-api has a dedicated `/<entity>/search?q=...` endpoint (data.SearchPublishers,
+# SearchLicenses, SearchPersons, SearchStudios, SearchSystems) for every entity except volumes -
+# no data.SearchVolumes exists yet. ponytail: substring-match client-side over the first
+# PAGE_SIZE volumes instead of a real server-side search; add /volumes/search (mirroring the
+# other entities) in catalog-api + catalog-data.go, then swap this for a single filtered call.
+_SEARCH_PAGE_SIZE = 200
+
 
 class CatalogClient:
     def __init__(self, base_url: str):
         self.base_url = base_url.rstrip("/")
 
     def search_volumes(self, query: str, limit: int = 10):
-        """Find volumes whose title exactly matches `query`.
-
-        catalog-api's generic `filter[...]` query param only supports $eq (see api-core.go's
-        ConvertQueryParams) - no substring/fuzzy match yet, so this only returns exact-title
-        hits. ponytail: exact-match only; add substring search in catalog-api before this can
-        return partial matches.
-        """
+        """Find volumes whose title contains `query` (case-insensitive)."""
         resp = requests.get(
             f"{self.base_url}/volumes",
-            params={"filter[title]": query, "page[limit]": limit},
+            params={"page[limit]": _SEARCH_PAGE_SIZE},
             timeout=5,
         )
         resp.raise_for_status()
         body = resp.json()
-        return [
-            {"id": item["id"], "title": item.get("attributes", {}).get("title", item["id"])}
-            for item in body.get("data", [])
-        ]
+        query_lower = query.lower()
+        matches = []
+        for item in body.get("data", []):
+            title = item.get("attributes", {}).get("title", "")
+            if query_lower in title.lower():
+                matches.append({"id": item["id"], "title": title or item["id"]})
+                if len(matches) >= limit:
+                    break
+        return matches
