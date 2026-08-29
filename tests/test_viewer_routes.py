@@ -47,7 +47,7 @@ def test_anonymous_viewer_sees_no_owner_controls(app):
     assert resp.status_code == 200
     body = resp.get_data(as_text=True)
     assert "vol-1" in body
-    assert "Update default visibility" not in body
+    assert 'id="visibility-menu-trigger"' not in body
     assert "Remove" not in body
 
 
@@ -60,7 +60,7 @@ def test_owner_sees_edit_controls(app):
 
     assert resp.status_code == 200
     body = resp.get_data(as_text=True)
-    assert "Update default visibility" in body
+    assert 'id="visibility-menu-trigger"' in body
     assert "Remove" in body
 
 
