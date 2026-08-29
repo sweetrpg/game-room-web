@@ -6,7 +6,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import render_page
+from sweetrpg_game_room_web.application.blueprints import render_page, _format_date, _recent_entries
 
 
 blueprint = Blueprint("library", __name__, url_prefix="/library")
@@ -14,6 +14,10 @@ blueprint = Blueprint("library", __name__, url_prefix="/library")
 
 def _client():
     return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
+
+
+def _catalog_client():
+    return current_app.config[constants.CATALOG_CLIENT_KEY]
 
 
 @blueprint.route("/", methods=["GET"])
@@ -95,6 +99,49 @@ def set_entry_visibility(volume_id: str):
         )
         flash("Unable to update that entry's visibility right now.")
     return redirect(url_for("web.library.get_library_page"))
+
+
+@blueprint.route("/volume-search", methods=["GET"])
+def search_volumes():
+    """Search catalog-api for volumes by title, for the add-to-library dialog."""
+    query = request.args.get("q", "").strip()
+    if not query:
+        return jsonify([])
+    try:
+        return jsonify(_catalog_client().search_volumes(query))
+    except Exception:
+        current_app.logger.exception("Unable to search volumes for query %r!", query)
+        return jsonify([]), 502
+
+
+@blueprint.route("/entries", methods=["POST"])
+def add_entry():
+    """Add a volume to the current user's library, for the landing page's add-to-library dialog.
+
+    Returns the library's updated count/recent list as JSON so the caller can refresh the
+    landing page's Library card in place, without a full page reload.
+    """
+    context = get_context()
+    user_id = context["user"]["id"]
+    volume_id = (request.json or {}).get("volume_id", "").strip()
+    if not volume_id:
+        return jsonify({"error": "A volume is required."}), 400
+    try:
+        _client().add_library_entry(user_id, volume_id)
+        library = _client().get_library(user_id) or {}
+        entries = library.get("entries") or []
+        return jsonify(
+            {
+                "count": len(entries),
+                "recent": [
+                    {**e, "added_at_label": _format_date(e.get("added_at"))}
+                    for e in _recent_entries(entries, "added_at")
+                ],
+            }
+        )
+    except Exception:
+        current_app.logger.exception("Unable to add volume %s to library (user %s)!", volume_id, user_id)
+        return jsonify({"error": "Unable to add that volume right now."}), 502
 
 
 @blueprint.route("/entries/<volume_id>", methods=["POST"])
