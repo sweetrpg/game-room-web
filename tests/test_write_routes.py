@@ -69,6 +69,7 @@ def app(client_mock):
     app.register_blueprint(main_blueprint)
 
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
+    app.config[constants.CATALOG_CLIENT_KEY] = client_mock
     with patch("sweetrpg_game_room_web.application.blueprints.analytics.identify"), patch(
         "sweetrpg_game_room_web.application.blueprints.analytics.track"
     ):
@@ -131,6 +132,53 @@ def test_remove_library_entry_ignored_without_delete_override(owner_client, clie
     resp = owner_client.post("/library/entries/vol-1", data={})
     assert resp.status_code == 302
     client_mock.remove_library_entry.assert_not_called()
+
+
+def test_search_volumes_returns_empty_list_for_blank_query(owner_client, client_mock):
+    resp = owner_client.get("/library/volume-search?q=")
+    assert resp.status_code == 200
+    assert resp.get_json() == []
+    client_mock.search_volumes.assert_not_called()
+
+
+def test_search_volumes_calls_catalog_client(owner_client, client_mock):
+    client_mock.search_volumes.return_value = [{"id": "vol-1", "title": "Curse of Strahd"}]
+    resp = owner_client.get("/library/volume-search?q=Curse")
+    assert resp.status_code == 200
+    assert resp.get_json() == [{"id": "vol-1", "title": "Curse of Strahd"}]
+    client_mock.search_volumes.assert_called_once_with("Curse")
+
+
+def test_search_volumes_handles_client_error(owner_client, client_mock):
+    client_mock.search_volumes.side_effect = Exception("boom")
+    resp = owner_client.get("/library/volume-search?q=Curse")
+    assert resp.status_code == 502
+    assert resp.get_json() == []
+
+
+def test_add_entry_requires_volume_id(owner_client, client_mock):
+    resp = owner_client.post("/library/entries", json={"volume_id": ""})
+    assert resp.status_code == 400
+    client_mock.add_library_entry.assert_not_called()
+
+
+def test_add_entry_returns_updated_count_and_recent(owner_client, client_mock):
+    client_mock.get_library.return_value = {
+        "entries": [{"volume_id": "vol-1", "added_at": "2026-08-28T12:00:00+00:00"}]
+    }
+    resp = owner_client.post("/library/entries", json={"volume_id": "vol-1"})
+    assert resp.status_code == 200
+    body = resp.get_json()
+    assert body["count"] == 1
+    assert body["recent"][0]["volume_id"] == "vol-1"
+    client_mock.add_library_entry.assert_called_once_with("user-1", "vol-1")
+
+
+def test_add_entry_handles_client_error(owner_client, client_mock):
+    client_mock.add_library_entry.side_effect = Exception("boom")
+    resp = owner_client.post("/library/entries", json={"volume_id": "vol-1"})
+    assert resp.status_code == 502
+    assert "error" in resp.get_json()
 
 
 # -- wishlist --
@@ -287,9 +335,22 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
     assert "Log in to see your library" not in body
     assert "vol-1" in body
     assert "Friday Night" in body
+    assert 'id="add-to-library-btn"' in body
+    assert 'id="create-table-btn"' in body
     client_mock.get_library.assert_called_once_with("user-1")
     client_mock.get_wishlist.assert_called_once_with("user-1")
     client_mock.list_tables.assert_called_once_with("user-1")
+
+
+def test_anonymous_visitor_sees_no_card_action_buttons(app):
+    with patch(
+        "sweetrpg_game_room_web.application.blueprints.shared_session.current_user",
+        return_value=None,
+    ):
+        resp = app.test_client().get("/")
+    body = resp.get_data(as_text=True)
+    assert 'id="add-to-library-btn"' not in body
+    assert 'id="create-table-btn"' not in body
 
 
 def test_logged_in_visitor_with_no_data_sees_empty_states(owner_client, client_mock):
