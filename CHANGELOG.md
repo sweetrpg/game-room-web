@@ -1,3 +1,12 @@
+## [0.3.3] - 2026-08-29
+
+### 🐛 Bug Fixes
+
+- Move banner above main content, pin landing footer to viewport bottom
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.3.2
 ## [0.3.2] - 2026-08-28
 
 ### 🐛 Bug Fixes
