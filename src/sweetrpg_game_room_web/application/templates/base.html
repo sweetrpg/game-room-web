@@ -19,6 +19,7 @@
     </script>
 </head>
 <body>
+    {% include "partials/header.html" %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div class="banner-region">
@@ -28,11 +29,10 @@
     </div>
     {% endif %}
     {% endwith %}
-    {% include "partials/header.html" %}
     <main class="page">
         {% block content %}{% endblock %}
     </main>
-    {% include "partials/footer.html" %}
+    {% block footer %}{% include "partials/footer.html" %}{% endblock %}
     <script src="{{ shared_url }}/static/js/avatar-menu.js" defer></script>
     <script src="{{ shared_url }}/static/js/app-switcher.js" defer></script>
     <script src="{{ shared_url }}/static/js/theme.js" defer></script>
