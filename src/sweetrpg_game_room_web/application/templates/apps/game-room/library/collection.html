@@ -67,7 +67,7 @@
     <tbody>
         {% for entry in library.entries %}
         <tr>
-            <td><a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+            <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
             <td>{{ entry.visibility_override or library.default_visibility }}</td>
             {% if is_owner %}
             <td>

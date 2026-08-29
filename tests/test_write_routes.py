@@ -263,6 +263,18 @@ def test_create_table_success_redirects_to_detail(owner_client, client_mock):
     client_mock.create_table.assert_called_once_with("user-1", "Campaign Night", "private")
 
 
+def test_create_table_redirect_carries_base_path_prefix(owner_client, client_mock):
+    """Regression test: redirect(url_for(...)) alone produces an unprefixed Location -
+    Traefik strips APPLICATION_BASE_PATH before the request reaches this app (see
+    docs/deployment-conventions.md), so the app's internal route table is unprefixed, but a
+    redirect's Location header is resolved by the browser against the external, prefixed URL.
+    """
+    client_mock.create_table.return_value = {"id": "table-1"}
+    with patch.dict(os.environ, {"APPLICATION_BASE_PATH": "/game-room"}):
+        resp = owner_client.post("/tables/", data={"name": "Campaign Night", "visibility": "private"})
+    assert resp.location == "/game-room/tables/table-1"
+
+
 def test_create_table_handles_client_error(owner_client, client_mock):
     client_mock.create_table.side_effect = Exception("boom")
     resp = owner_client.post("/tables/", data={"name": "Campaign Night"})
