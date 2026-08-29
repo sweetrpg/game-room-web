@@ -31,6 +31,7 @@ class BaseConfig(object):
     )
     SEGMENT_WRITE_KEY = os.environ.get(constants.SEGMENT_WRITE_KEY)
     ADMIN_API_URL = os.environ.get(constants.ADMIN_API_URL)
+    CATALOG_API_URL = os.environ.get(constants.CATALOG_API_URL)
     SHARED_SESSION_REDIS_HOST = os.environ.get(constants.SHARED_SESSION_REDIS_HOST)
     SHARED_SESSION_REDIS_PORT = int(os.environ.get(constants.SHARED_SESSION_REDIS_PORT) or 6379)
     SHARED_SESSION_REDIS_DB = int(os.environ.get(constants.SHARED_SESSION_REDIS_DB) or 0)
