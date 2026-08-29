@@ -34,6 +34,7 @@ SESSION_ROLES = "roles"
 SWEETRPG_API_CLIENT_KEY = "sweetrpg-api-client"
 ADMIN_API_CLIENT_KEY = "admin-api-client"
 GAME_ROOM_CLIENT_KEY = "game-room-client"
+CATALOG_CLIENT_KEY = "catalog-client"
 
 # Visibility levels, ordered least to most exposed - matches game-room-objects' visibility enum
 # (openspec/changes/shelf-service/specs/game-room-visibility).
@@ -65,6 +66,7 @@ LOGSTASH_PORT = "LOGSTASH_PORT"
 GAME_ROOM_API_BASE_URL = 'GAME_ROOM_API_BASE_URL'
 APPLICATION_BASE_PATH = 'APPLICATION_BASE_PATH'
 ADMIN_API_URL = 'ADMIN_API_URL'
+CATALOG_API_URL = 'CATALOG_API_URL'
 SHARED_URL = 'SHARED_URL'
 BUILD_INFO_PATH = 'BUILD_INFO_PATH'
 

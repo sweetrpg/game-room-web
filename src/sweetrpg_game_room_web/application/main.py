@@ -14,6 +14,7 @@ from sweetrpg_game_room_web.application import constants
 from sweetrpg_client.client import Client as APIClient
 from sweetrpg_admin_api_client import AdminClient
 from sweetrpg_game_room_web.application.game_room_client import GameRoomClient
+from sweetrpg_game_room_web.application.catalog_client import CatalogClient
 from logging.config import dictConfig
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
@@ -94,6 +95,9 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     app.logger.info("Setting up game room client...")
     app.config[constants.GAME_ROOM_CLIENT_KEY] = GameRoomClient(os.environ[constants.GAME_ROOM_API_BASE_URL])
+
+    app.logger.info("Setting up catalog client...")
+    app.config[constants.CATALOG_CLIENT_KEY] = CatalogClient(app.config.get(constants.CATALOG_API_URL) or "")
 
     app.logger.info("Setting up endpoints...")
 
