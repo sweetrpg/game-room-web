@@ -191,6 +191,9 @@ msgstr "Public"
 msgid "Remove"
 msgstr "Remove"
 
+msgid "Remove from library?"
+msgstr "Remove from library?"
+
 msgid "Save"
 msgstr "Save"
 
@@ -331,3 +334,6 @@ msgstr "was"
 
 msgid "will newly expose these entries, which currently have a narrower override:"
 msgstr "will newly expose these entries, which currently have a narrower override:"
+
+msgid "will be removed from your library."
+msgstr "will be removed from your library."
