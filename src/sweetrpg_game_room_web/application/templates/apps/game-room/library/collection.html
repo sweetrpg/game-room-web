@@ -19,7 +19,6 @@
   }
   .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
   .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
-<<<<<<< HEAD
   .entry-select-col { width: 28px; text-align: center; }
   .bulk-actions {
     display: flex; justify-content: flex-end; margin-top: 12px;
@@ -28,10 +27,8 @@
   }
   .bulk-actions[hidden] { display: none; }
   .bulk-actions-form { display: flex; align-items: center; gap: 8px; }
-=======
   .effective-visibility { display: inline-flex; align-items: center; gap: 6px; }
   .effective-visibility .icon-mask { background-color: var(--color-text); }
->>>>>>> develop
 </style>
 <div class="page-header">
     <h2>{{ _('Library') }}</h2>
@@ -101,15 +98,22 @@
             </td>
             {% if is_owner %}
             <td>
-                <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}/visibility" class="table-actions">
-                    <select name="visibility">
-                        <option value="">{{ _('inherit default') }}</option>
+                <div class="visibility-menu entry-visibility-menu" id="entry-visibility-menu-{{ entry.volume_id }}" data-library-default="{{ library.default_visibility }}" data-current-override="{{ entry.visibility_override or '' }}">
+                    <button type="button" class="icon-btn visibility-menu-trigger entry-visibility-trigger" data-volume-id="{{ entry.volume_id }}" title="{{ _('Change override') }}" aria-haspopup="true" aria-expanded="false">
+                        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(entry.visibility_override) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(entry.visibility_override) }}.svg');"></span>
+                    </button>
+                    <div class="visibility-menu-panel" role="menu" hidden>
+                        <button type="button" class="visibility-menu-item entry-visibility-item" data-volume-id="{{ entry.volume_id }}" data-visibility="" role="menuitem">
+                            <span>{{ _('inherit default') }}</span>
+                        </button>
                         {% for level in visibility_levels %}
-                        <option value="{{ level }}" {% if level == entry.visibility_override %}selected{% endif %}>{{ level }}</option>
+                        <button type="button" class="visibility-menu-item entry-visibility-item" data-volume-id="{{ entry.volume_id }}" data-visibility="{{ level }}" role="menuitem">
+                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+                            <span>{{ visibility_label(level) }}</span>
+                        </button>
                         {% endfor %}
-                    </select>
-                    <button type="submit" class="btn btn-secondary">{{ _('Set') }}</button>
-                </form>
+                    </div>
+                </div>
             </td>
             <td>
                 <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}" class="entry-remove">
@@ -159,13 +163,18 @@
 </div>
 
 {% if is_owner %}
-<div class="dialog-backdrop" id="entry-remove-backdrop" hidden>
-    <div class="dialog" role="alertdialog" aria-labelledby="entry-remove-title">
-        <h3 class="dialog-title" id="entry-remove-title">{{ _('Remove from library?') }}</h3>
-        <p class="dialog-body"><strong id="entry-remove-name"></strong> {{ _('will be removed from your library.') }}</p>
+<div class="dialog-backdrop" id="entry-visibility-confirm-backdrop" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="entry-visibility-confirm-title">
+        <h3 class="dialog-title" id="entry-visibility-confirm-title">{{ _('Change entry visibility') }}</h3>
+        <p class="dialog-body">
+            {{ _('This entry will be visible to:') }} <strong id="entry-visibility-confirm-target"></strong>
+        </p>
+        <p class="dialog-body dialog-warning" id="entry-visibility-widen-warning" hidden>
+            {{ _('This will make the entry visible to a wider audience.') }}
+        </p>
         <div class="dialog-actions">
-            <button type="button" class="btn btn-ghost" id="entry-remove-cancel">{{ _('Cancel') }}</button>
-            <button type="button" class="btn btn-primary" id="entry-remove-confirm">{{ _('Remove') }}</button>
+            <button type="button" class="btn btn-ghost" id="entry-visibility-confirm-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary" id="entry-visibility-confirm-proceed">{{ _('Change visibility') }}</button>
         </div>
     </div>
 </div>
@@ -340,6 +349,84 @@
     });
   }
   {% endif %}
+})();
+
+(function () {
+  var items = document.querySelectorAll('.entry-visibility-item');
+  if (!items.length) return;
+
+  var LEVEL_ORDER = ['private', 'friends', 'friends-of-friends', 'public'];
+  var LEVEL_LABELS = {
+    '': '{{ _('inherit default') }}',
+    'private': '{{ _('Private') }}',
+    'friends': '{{ _('Friends') }}',
+    'friends-of-friends': '{{ _('Friends of friends') }}',
+    'public': '{{ _('Public') }}'
+  };
+  var backdrop = document.getElementById('entry-visibility-confirm-backdrop');
+  var target = document.getElementById('entry-visibility-confirm-target');
+  var warning = document.getElementById('entry-visibility-widen-warning');
+  var pending = null;
+
+  var menus = [];
+  document.querySelectorAll('.entry-visibility-menu').forEach(function (menu) {
+    var trigger = menu.querySelector('.entry-visibility-trigger');
+    var panel = menu.querySelector('.visibility-menu-panel');
+
+    function closeMenu() {
+      panel.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function (event) {
+      event.stopPropagation();
+      menus.forEach(function (m) { if (m.panel !== panel) m.close(); });
+      panel.hidden = !panel.hidden;
+      trigger.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+    });
+    menus.push({panel: panel, close: closeMenu, menu: menu, trigger: trigger});
+  });
+
+  menus.forEach(function (entry) {
+    entry.panel.querySelectorAll('.entry-visibility-item').forEach(function (item) {
+      item.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var level = item.dataset.visibility;
+        var volumeId = item.dataset.volumeId;
+        var libraryDefault = entry.menu.dataset.libraryDefault;
+        var currentOverride = entry.menu.dataset.currentOverride;
+        var currentEffective = currentOverride || libraryDefault;
+        var newEffective = level || libraryDefault;
+
+        target.textContent = LEVEL_LABELS[newEffective] || newEffective;
+        var widening = LEVEL_ORDER.indexOf(newEffective) > LEVEL_ORDER.indexOf(currentEffective);
+        warning.hidden = !widening;
+        pending = {volumeId: volumeId, visibility: level};
+        backdrop.hidden = false;
+        entry.close();
+      });
+    });
+  });
+
+  document.getElementById('entry-visibility-confirm-cancel').addEventListener('click', function () {
+    backdrop.hidden = true;
+    pending = null;
+  });
+  document.getElementById('entry-visibility-confirm-proceed').addEventListener('click', function () {
+    if (!pending) return;
+    var body = 'visibility=' + encodeURIComponent(pending.visibility || '');
+    fetch('{{ base_path }}/library/entries/' + pending.volumeId + '/visibility', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: body
+    })
+      .then(function (r) {
+        if (r.ok) window.location.reload();
+      })
+      .catch(function () {});
+    backdrop.hidden = true;
+    pending = null;
+  });
 })();
 </script>
 <script>
