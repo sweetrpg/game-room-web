@@ -1,129 +1,50 @@
 {% extends "base.html" %}
-{% block title %}Wishlist{% endblock %}
+{% block title %}Wishlists{% endblock %}
 {% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
 <style>
-  .page-header { display: flex; align-items: center; justify-content: space-between; }
-  .visibility-menu { position: relative; }
-  .visibility-menu-panel {
-    position: absolute; top: calc(100% + 4px); right: 0; min-width: 200px;
-    background: var(--color-bg); border: 1px solid var(--color-neutral-300); border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); padding: 6px; z-index: 100;
+  .wishlist-card { position: relative; }
+  .wishlist-card .landing-card-link { display: block; height: 100%; }
+  .wishlist-card-delete {
+    position: absolute; top: 8px; right: 8px; z-index: 2;
+    background: transparent; border: none; padding: 4px; cursor: pointer;
   }
-  .visibility-menu-panel[hidden] { display: none; }
-  .visibility-menu-item {
-    display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
-    padding: 8px 10px; border: none; border-radius: 4px; background: transparent;
-    color: var(--color-text); font-size: 14px; font-family: inherit; text-align: left; cursor: pointer;
-  }
-  .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
-  .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
+  .wishlist-card-delete .icon-mask { background-color: var(--color-text); }
 </style>
-<div class="page-header">
-    <h2>Wishlist</h2>
-    {% if is_owner and wishlist %}
-    <div class="visibility-menu" id="visibility-menu">
-        <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="Change visibility" aria-haspopup="true" aria-expanded="false">
-            <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg');"></span>
-        </button>
-        <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
-            {% for level in visibility_levels %}
-            <button type="button" class="visibility-menu-item" data-visibility="{{ level }}" role="menuitem">
-                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
-                <span>{{ level }}</span>
-            </button>
-            {% endfor %}
-        </div>
-    </div>
+<div class="page-header page-header-toolbar">
+    <h2>Wishlists</h2>
+    {% if user.id %}
+    <a class="btn btn-primary" href="{{ base_path }}/wishlist/new">New wishlist</a>
     {% endif %}
 </div>
 
 {% if is_owner and not user.id %}
-<p class="empty-state">Log in to see your wishlist.</p>
-{% elif not wishlist %}
-<p class="empty-state">This wishlist isn't available right now.</p>
+<p class="empty-state">Log in to see your wishlists.</p>
 {% else %}
-{% if is_owner %}
-<form id="wishlist-visibility-form" method="post" action="{{ base_path }}/wishlist/visibility" hidden>
-    <select id="wishlist-visibility" name="visibility">
-        {% for level in visibility_levels %}
-        <option value="{{ level }}" {% if level == wishlist.visibility %}selected{% endif %}>{{ level }}</option>
-        {% endfor %}
-    </select>
-</form>
+<div class="card-grid">
+    {% for wishlist in wishlists %}
+    <div class="card wishlist-card">
+        <a class="landing-card-link" href="{% if is_owner %}{{ base_path }}/wishlist/{{ wishlist.id }}{% else %}{{ base_path }}/wishlist/users/{{ wishlists_owner_id }}/{{ wishlist.id }}{% endif %}">
+            <div class="card-body">
+                <div class="card-title">{{ wishlist.name }}</div>
+                <div class="card-meta">
+                    <span class="card-kicker">{{ wishlist.visibility }}</span>
+                    <span>{{ wishlist.entries | length }} item(s)</span>
+                </div>
+            </div>
+        </a>
+        {% if is_owner %}
+        <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" class="wishlist-card-delete">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="icon-btn" title="Delete wishlist" aria-label="Delete wishlist">
+                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+            </button>
+        </form>
+        {% endif %}
+    </div>
+    {% else %}
+    <p class="empty-state">No wishlists visible here yet.</p>
+    {% endfor %}
+</div>
 {% endif %}
-
-<table class="table">
-    <thead><tr><th>Volume</th>{% if is_owner %}<th></th>{% endif %}</tr></thead>
-    <tbody>
-        {% for entry in wishlist.entries %}
-        <tr>
-            <td><a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
-            {% if is_owner %}
-            <td>
-                <form method="post" action="{{ base_path }}/wishlist/entries/{{ entry.volume_id }}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-ghost">Remove</button>
-                </form>
-            </td>
-            {% endif %}
-        </tr>
-        {% else %}
-        <tr><td colspan="2" class="empty-state-inline">No volumes visible here yet.</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
-{% endblock %}
-{% block scripts %}
-<script>
-(function () {
-  var menu = document.getElementById('visibility-menu');
-  if (!menu) return;
-  var trigger = document.getElementById('visibility-menu-trigger');
-  var triggerIcon = document.getElementById('visibility-menu-icon');
-  var panel = document.getElementById('visibility-menu-panel');
-  var form = document.getElementById('wishlist-visibility-form');
-  var select = document.getElementById('wishlist-visibility');
-  var iconBySvg = {
-    'private': 'lock',
-    'friends': 'user-friends',
-    'friends-of-friends': 'users',
-    'public': 'globe'
-  };
-
-  function closeMenu() {
-    panel.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
-  }
-
-  trigger.addEventListener('click', function (event) {
-    event.stopPropagation();
-    panel.hidden = !panel.hidden;
-    trigger.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
-  });
-
-  panel.querySelectorAll('.visibility-menu-item').forEach(function (item) {
-    item.addEventListener('click', function () {
-      var level = item.dataset.visibility;
-      select.value = level;
-      var iconUrl = '{{ shared_url }}/static/svgs/fontawesome/solid/' + iconBySvg[level] + '.svg';
-      triggerIcon.style.maskImage = 'url(\'' + iconUrl + '\')';
-      triggerIcon.style.webkitMaskImage = 'url(\'' + iconUrl + '\')';
-      closeMenu();
-      form.submit();
-    });
-  });
-
-  document.addEventListener('click', function (event) {
-    if (!panel.hidden && !menu.contains(event.target)) closeMenu();
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && !panel.hidden) {
-      closeMenu();
-      trigger.focus();
-    }
-  });
-})();
-</script>
 {% endblock %}

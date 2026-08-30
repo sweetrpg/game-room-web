@@ -196,6 +196,11 @@ def _recent_entries(entries, date_key, limit=3):
     return sorted(dated, key=lambda e: e[date_key], reverse=True)[:limit]
 
 
+def _wishlist_entries(wishlists):
+    """Flatten every wishlist's entries into a single list for landing-card aggregation."""
+    return [e for wl in wishlists for e in (wl.get("entries") or [])]
+
+
 @blueprint.route("/")
 def main_page():
     context = get_context()
@@ -205,22 +210,22 @@ def main_page():
     if user_id:
         client = current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
-        library, wishlist, tables = None, None, []
+        library, wishlist_entries, tables = None, [], []
         try:
             library = client.get_library(user_id)
         except Exception:
             current_app.logger.exception("Unable to load library for landing page (user %s)", user_id)
         try:
-            wishlist = client.get_wishlist(user_id)
+            wishlists = client.list_wishlists(user_id) or []
+            wishlist_entries = _wishlist_entries(wishlists)
         except Exception:
-            current_app.logger.exception("Unable to load wishlist for landing page (user %s)", user_id)
+            current_app.logger.exception("Unable to load wishlists for landing page (user %s)", user_id)
         try:
             tables = client.list_tables(user_id) or []
         except Exception:
             current_app.logger.exception("Unable to load tables for landing page (user %s)", user_id)
 
         library_entries = (library or {}).get("entries") or []
-        wishlist_entries = (wishlist or {}).get("entries") or []
 
         context.update({
             'library_count': len(library_entries),
