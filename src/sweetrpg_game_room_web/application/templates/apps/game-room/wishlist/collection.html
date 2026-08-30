@@ -5,11 +5,15 @@
 <style>
   .wishlist-card { position: relative; }
   .wishlist-card .landing-card-link { display: block; height: 100%; }
+  .wishlist-card .card-title { color: var(--color-accent); }
   .wishlist-card-delete {
     position: absolute; top: 8px; right: 8px; z-index: 2;
-    background: transparent; border: none; padding: 4px; cursor: pointer;
+    padding: 4px; cursor: pointer;
   }
-  .wishlist-card-delete .icon-mask { background-color: var(--color-text); }
+  .wishlist-card-meta {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 8px;
+  }
+  .wishlist-card-count { font-size: 13px; opacity: 0.75; }
 </style>
 <div class="page-header page-header-toolbar">
     <h2>Wishlists</h2>
@@ -27,16 +31,16 @@
         <a class="landing-card-link" href="{% if is_owner %}{{ base_path }}/wishlist/{{ wishlist.id }}{% else %}{{ base_path }}/wishlist/users/{{ wishlists_owner_id }}/{{ wishlist.id }}{% endif %}">
             <div class="card-body">
                 <div class="card-title">{{ wishlist.name }}</div>
-                <div class="card-meta">
-                    <span class="card-kicker">{{ wishlist.visibility }}</span>
-                    <span>{{ wishlist.entries | length }} item(s)</span>
+                <div class="wishlist-card-meta">
+                    <span class="tag tag-outline">{{ wishlist.visibility }}</span>
+                    <span class="wishlist-card-count">{{ wishlist.entries | length }} item(s)</span>
                 </div>
             </div>
         </a>
         {% if is_owner %}
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" class="wishlist-card-delete">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="icon-btn" title="Delete wishlist" aria-label="Delete wishlist">
+            <button type="submit" class="icon-btn icon-btn-danger" title="Delete wishlist" aria-label="Delete wishlist" data-wishlist-name="{{ wishlist.name }}">
                 <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
             </button>
         </form>
@@ -47,4 +51,67 @@
     {% endfor %}
 </div>
 {% endif %}
+
+<div class="dialog-backdrop" id="wishlist-delete-backdrop" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="wishlist-delete-title">
+        <h3 class="dialog-title" id="wishlist-delete-title">Delete wishlist?</h3>
+        <p class="dialog-body"><strong id="wishlist-delete-name"></strong> and its entries will be permanently deleted. This cannot be undone.</p>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost" id="wishlist-delete-cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="wishlist-delete-confirm">Delete</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  var backdrop = document.getElementById('wishlist-delete-backdrop');
+  if (!backdrop) return;
+  var nameEl = document.getElementById('wishlist-delete-name');
+  var cancelBtn = document.getElementById('wishlist-delete-cancel');
+  var confirmBtn = document.getElementById('wishlist-delete-confirm');
+  var pendingForm = null;
+
+  function closeDialog() {
+    backdrop.hidden = true;
+    pendingForm = null;
+  }
+
+  function openDialog(form) {
+    pendingForm = form;
+    nameEl.textContent = form.querySelector('[data-wishlist-name]').dataset.wishlistName;
+    backdrop.hidden = false;
+  }
+
+  document.querySelectorAll('.wishlist-card-delete').forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      openDialog(form);
+    });
+  });
+
+  cancelBtn.addEventListener('click', closeDialog);
+  confirmBtn.addEventListener('click', function () {
+    if (!pendingForm) return;
+    var real = document.createElement('form');
+    real.method = 'post';
+    real.action = pendingForm.action;
+    real.style.display = 'none';
+    var methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    methodInput.value = 'DELETE';
+    real.appendChild(methodInput);
+    document.body.appendChild(real);
+    real.submit();
+  });
+  backdrop.addEventListener('click', function (event) {
+    if (event.target === backdrop) closeDialog();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !backdrop.hidden) closeDialog();
+  });
+})();
+</script>
 {% endblock %}
