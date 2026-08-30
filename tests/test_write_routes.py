@@ -68,6 +68,9 @@ def app(client_mock):
     app.config["SECRET_KEY"] = "test"
     app.register_blueprint(main_blueprint)
 
+    from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
+    init_i18n(app)
+
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
     app.config[constants.CATALOG_CLIENT_KEY] = client_mock
     with patch("sweetrpg_game_room_web.application.blueprints.analytics.identify"), patch(
@@ -120,6 +123,12 @@ def test_set_entry_visibility_calls_client(owner_client, client_mock):
     resp = owner_client.post("/library/entries/vol-1/visibility", data={"visibility": "friends"})
     assert resp.status_code == 302
     client_mock.set_library_entry_visibility.assert_called_once_with("user-1", "vol-1", "friends")
+
+
+def test_clear_entry_visibility_override(owner_client, client_mock):
+    resp = owner_client.post("/library/entries/vol-1/visibility", data={"visibility": ""})
+    assert resp.status_code == 302
+    client_mock.set_library_entry_visibility.assert_called_once_with("user-1", "vol-1", None)
 
 
 def test_remove_library_entry_requires_delete_method_override(owner_client, client_mock):

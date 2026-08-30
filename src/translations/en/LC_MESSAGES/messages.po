@@ -62,6 +62,15 @@ msgstr "Catalog volume ID"
 msgid "Change anyway"
 msgstr "Change anyway"
 
+msgid "Change entry visibility"
+msgstr "Change entry visibility"
+
+msgid "Change override"
+msgstr "Change override"
+
+msgid "Change visibility"
+msgstr "Change visibility"
+
 msgid "Changing your library's default visibility to"
 msgstr "Changing your library's default visibility to"
 
@@ -97,6 +106,12 @@ msgstr "Effective visibility"
 
 msgid "Expected back:"
 msgstr "Expected back:"
+
+msgid "Friends"
+msgstr "Friends"
+
+msgid "Friends of friends"
+msgstr "Friends of friends"
 
 msgid "Game Room"
 msgstr "Game Room"
@@ -176,6 +191,12 @@ msgstr "No wishlists visible here yet."
 msgid "Override"
 msgstr "Override"
 
+msgid "Private"
+msgstr "Private"
+
+msgid "Public"
+msgstr "Public"
+
 msgid "Remove"
 msgstr "Remove"
 
@@ -212,6 +233,9 @@ msgstr "Tables"
 msgid "Theme"
 msgstr "Theme"
 
+msgid "This entry will be visible to:"
+msgstr "This entry will be visible to:"
+
 msgid "This library isn't available right now."
 msgstr "This library isn't available right now."
 
@@ -220,6 +244,9 @@ msgstr "This table isn't available right now."
 
 msgid "This will expose more entries"
 msgstr "This will expose more entries"
+
+msgid "This will make the entry visible to a wider audience."
+msgstr "This will make the entry visible to a wider audience."
 
 msgid "This wishlist isn't available right now."
 msgstr "This wishlist isn't available right now."
