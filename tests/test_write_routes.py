@@ -71,9 +71,6 @@ def app(client_mock):
     app.register_blueprint(main_blueprint)
     init_i18n(app)
 
-    from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
-    init_i18n(app)
-
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
     app.config[constants.CATALOG_CLIENT_KEY] = client_mock
     with patch("sweetrpg_game_room_web.application.blueprints.analytics.identify"), patch(
