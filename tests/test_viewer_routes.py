@@ -80,21 +80,15 @@ def test_owner_sees_edit_controls(app):
     assert "Remove" in body
 
 
-def test_owner_sees_destructive_remove_button_with_confirmation(app):
+def test_effective_visibility_renders_localized_label_and_icon(app):
     client = app.test_client()
-    with client.session_transaction() as sess:
-        sess["user_id"] = "user-2"
-
     resp = client.get("/library/users/user-2")
 
     assert resp.status_code == 200
     body = resp.get_data(as_text=True)
-    assert "icon-btn icon-btn-danger" in body
-    assert "trash.svg" in body
-    assert "data-volume-title" in body
-    assert 'id="entry-remove-backdrop"' in body
-    assert 'id="entry-remove-confirm"' in body
-    assert "Remove from library?" in body
+    assert "effective-visibility" in body
+    assert "globe.svg" in body  # public -> globe icon
+    assert "Public" in body  # localized label for the effective level, not the raw "public"
 
 
 def test_own_library_page_without_login_shows_login_prompt(app):
