@@ -14,5 +14,6 @@ data:
     BUILD_INFO_PATH: /app/build-info.json
     REDIS_HOST: cache.sweetrpg-game-room.svc.cluster.local
     SHARED_URL: https://dev.sweetrpg.com/shared
+    CATALOG_WEB_URL: https://dev.sweetrpg.com/catalog
     SHARED_SESSION_REDIS_HOST: cache.sweetrpg-auth.svc.cluster.local
     SHARED_SESSION_REDIS_DB: "0"

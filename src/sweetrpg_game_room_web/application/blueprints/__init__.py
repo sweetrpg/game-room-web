@@ -10,7 +10,7 @@ import os
 import analytics
 import jinja2
 import json
-from flask import Blueprint, request, render_template, session, jsonify, current_app
+from flask import Blueprint, request, render_template, session, jsonify, current_app, redirect, url_for
 from sweetrpg_game_room_web import __version__
 from sweetrpg_game_room_web.application import constants, shared_session
 from sweetrpg_web_core.helpers.context import get_context
@@ -118,11 +118,25 @@ def render_page(page, context={}):
     build_timestamp, build_hash = _load_build_info()
     context.update({"showCookieMessage": show_cookie_message})
     context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
+    context.setdefault("catalog_url", os.environ.get(constants.CATALOG_WEB_URL, "http://localhost:8080/catalog"))
     context.setdefault("version", __version__)
     context.setdefault("build_timestamp", build_timestamp)
     context.setdefault("build_hash", build_hash)
 
     return render_template(page, **context)
+
+
+def local_redirect(endpoint, **values):
+    """Redirect to an in-app endpoint, prefixed with `base_path`.
+
+    `url_for` alone produces an unprefixed path - Traefik strips `base_path` before the request
+    reaches this app (see `docs/deployment-conventions.md`'s shared-host Ingress convention), so
+    the app's internal route table is unprefixed too. That's correct for routing but wrong for a
+    `Location` header, which the browser resolves against the external, prefixed URL - the same
+    reason templates manually prepend `{{ base_path }}` to every in-app link.
+    """
+    base_path = os.environ.get(constants.APPLICATION_BASE_PATH, "")
+    return redirect(f"{base_path}{url_for(endpoint, **values)}")
 
 
 class UserAuthorizationException(Exception):
@@ -196,6 +210,11 @@ def _recent_entries(entries, date_key, limit=3):
     return sorted(dated, key=lambda e: e[date_key], reverse=True)[:limit]
 
 
+def _wishlist_entries(wishlists):
+    """Flatten every wishlist's entries into a single list for landing-card aggregation."""
+    return [e for wl in wishlists for e in (wl.get("entries") or [])]
+
+
 @blueprint.route("/")
 def main_page():
     context = get_context()
@@ -205,22 +224,22 @@ def main_page():
     if user_id:
         client = current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
-        library, wishlist, tables = None, None, []
+        library, wishlist_entries, tables = None, [], []
         try:
             library = client.get_library(user_id)
         except Exception:
             current_app.logger.exception("Unable to load library for landing page (user %s)", user_id)
         try:
-            wishlist = client.get_wishlist(user_id)
+            wishlists = client.list_wishlists(user_id) or []
+            wishlist_entries = _wishlist_entries(wishlists)
         except Exception:
-            current_app.logger.exception("Unable to load wishlist for landing page (user %s)", user_id)
+            current_app.logger.exception("Unable to load wishlists for landing page (user %s)", user_id)
         try:
             tables = client.list_tables(user_id) or []
         except Exception:
             current_app.logger.exception("Unable to load tables for landing page (user %s)", user_id)
 
         library_entries = (library or {}).get("entries") or []
-        wishlist_entries = (wishlist or {}).get("entries") or []
 
         context.update({
             'library_count': len(library_entries),

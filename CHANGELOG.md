@@ -1,3 +1,23 @@
+## [0.5.0] - 2026-08-30
+
+### 🚀 Features
+
+- *(wishlists)* Add multi-wishlist support
+- *(wishlists)* Add create wishlist action to landing card
+
+### 🐛 Bug Fixes
+
+- *(redirects)* Carry APPLICATION_BASE_PATH prefix through in-app redirects
+
+### 💼 Other
+
+- Merge develop into fix/redirect-base-path-prefix
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.4.2
+- Update wishlist label
+- Add ruff as a dev dependency
 ## [0.4.2] - 2026-08-29
 
 ### 🐛 Bug Fixes

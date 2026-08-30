@@ -79,7 +79,7 @@
                 {% if library_recent %}
                 <div class="stat-card-recent">
                     {% for entry in library_recent %}
-                    <a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
+                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
                     <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
                     {% endfor %}
                 </div>
@@ -89,15 +89,15 @@
             </div>
             <div class="stat-card">
                 <a class="stat-card-browse-link" href="{{ base_path }}/wishlist/" aria-label="Browse Wishlist"></a>
-                <button type="button" class="icon-btn stat-card-action" id="add-to-wishlist-btn" title="Add to wishlist" aria-label="Add to wishlist" aria-haspopup="dialog">
+                <button type="button" class="icon-btn stat-card-action" id="create-wishlist-btn" title="Create wishlist" aria-label="Create wishlist" aria-haspopup="dialog">
                     <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg');"></span>
                 </button>
-                <div class="stat-card-label">Wishlist</div>
+                <div class="stat-card-label">Wishlists</div>
                 <div class="stat-card-count">{{ wishlist_count }}</div>
                 {% if wishlist_recent %}
                 <div class="stat-card-recent">
                     {% for entry in wishlist_recent %}
-                    <a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
+                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
                     <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
                     {% endfor %}
                 </div>
@@ -141,15 +141,17 @@
     </div>
 </div>
 
-<div class="dialog-backdrop" id="add-to-wishlist-backdrop" hidden>
-    <div class="dialog" role="dialog" aria-labelledby="add-to-wishlist-title">
-        <h3 class="dialog-title" id="add-to-wishlist-title">Add to wishlist</h3>
-        <input type="search" id="add-to-wishlist-search" class="input" placeholder="Search for a volume by title" autocomplete="off" data-1p-ignore data-lpignore="true">
-        <ul id="add-to-wishlist-results" class="search-results"></ul>
-        <div class="dialog-actions">
-            <button type="button" class="btn btn-ghost" id="add-to-wishlist-cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" id="add-to-wishlist-confirm" disabled>Add</button>
-        </div>
+<div class="dialog-backdrop" id="create-wishlist-backdrop" hidden>
+    <div class="dialog" role="dialog" aria-labelledby="create-wishlist-title">
+        <h3 class="dialog-title" id="create-wishlist-title">Create wishlist</h3>
+        <form id="create-wishlist-form" method="post" action="{{ base_path }}/wishlist/">
+            <label class="form-label" for="create-wishlist-name">Name</label>
+            <input type="text" id="create-wishlist-name" name="name" class="input" required autocomplete="off" data-1p-ignore data-lpignore="true">
+            <div class="dialog-actions">
+                <button type="button" class="btn btn-ghost" id="create-wishlist-cancel">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -268,7 +270,7 @@
             } else {
               data.recent.forEach(function (entry) {
                 var a = document.createElement('a');
-                a.href = '/catalog/volumes/' + entry.volume_id;
+                a.href = '{{ catalog_url }}/volumes/' + entry.volume_id;
                 a.textContent = entry.volume_id;
                 var span = document.createElement('span');
                 span.className = 'stat-card-updated';
@@ -297,16 +299,20 @@
     emptyLabel: 'No volumes yet'
   });
 
-  initAddDialog({
-    btnId: 'add-to-wishlist-btn',
-    backdropId: 'add-to-wishlist-backdrop',
-    searchId: 'add-to-wishlist-search',
-    resultsId: 'add-to-wishlist-results',
-    confirmId: 'add-to-wishlist-confirm',
-    cancelId: 'add-to-wishlist-cancel',
-    addEntryUrl: '{{ base_path }}/wishlist/entries',
-    emptyLabel: 'No entries yet'
-  });
+  var createWishlistBtn = document.getElementById('create-wishlist-btn');
+  var createWishlistBackdrop = document.getElementById('create-wishlist-backdrop');
+  if (createWishlistBtn && createWishlistBackdrop) {
+    var wishlistForm = document.getElementById('create-wishlist-form');
+    var wishlistNameInput = document.getElementById('create-wishlist-name');
+    createWishlistBtn.addEventListener('click', function () {
+      createWishlistBackdrop.hidden = false;
+      wishlistNameInput.focus();
+    });
+    document.getElementById('create-wishlist-cancel').addEventListener('click', function () {
+      createWishlistBackdrop.hidden = true;
+      wishlistForm.reset();
+    });
+  }
 
   var createTableBtn = document.getElementById('create-table-btn');
   var createTableBackdrop = document.getElementById('create-table-backdrop');
