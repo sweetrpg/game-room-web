@@ -70,17 +70,32 @@ class GameRoomClient:
 
     # -- wishlist --
 
-    def get_wishlist(self, user_id: str):
-        return self._get(f"/users/{user_id}/wishlist")
+    def list_wishlists(self, user_id: str):
+        return self._get(f"/users/{user_id}/wishlists")
 
-    def add_wishlist_entry(self, user_id: str, volume_id: str):
-        return self._request("POST", f"/users/{user_id}/wishlist/entries", json={"volume_id": volume_id})
+    def get_wishlist(self, user_id: str, wishlist_id: str):
+        return self._get(f"/users/{user_id}/wishlists/{wishlist_id}")
 
-    def remove_wishlist_entry(self, user_id: str, volume_id: str):
-        return self._request("DELETE", f"/users/{user_id}/wishlist/entries/{volume_id}")
+    def create_wishlist(self, user_id: str, name: str, visibility: str = "private"):
+        return self._request(
+            "POST", f"/users/{user_id}/wishlists", json={"name": name, "visibility": visibility}
+        )
 
-    def set_wishlist_visibility(self, user_id: str, visibility: str):
-        return self._request("PUT", f"/users/{user_id}/wishlist/visibility", json={"visibility": visibility})
+    def delete_wishlist(self, user_id: str, wishlist_id: str):
+        return self._request("DELETE", f"/users/{user_id}/wishlists/{wishlist_id}")
+
+    def add_wishlist_entry(self, user_id: str, wishlist_id: str, volume_id: str):
+        return self._request(
+            "POST", f"/users/{user_id}/wishlists/{wishlist_id}/entries", json={"volume_id": volume_id}
+        )
+
+    def remove_wishlist_entry(self, user_id: str, wishlist_id: str, volume_id: str):
+        return self._request("DELETE", f"/users/{user_id}/wishlists/{wishlist_id}/entries/{volume_id}")
+
+    def set_wishlist_visibility(self, user_id: str, wishlist_id: str, visibility: str):
+        return self._request(
+            "PUT", f"/users/{user_id}/wishlists/{wishlist_id}/visibility", json={"visibility": visibility}
+        )
 
     # -- tables --
 
