@@ -3,10 +3,15 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Library routes.
 """
 
-from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
+from flask import Blueprint, current_app, request, jsonify, flash
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import render_page, _format_date, _recent_entries
+from sweetrpg_game_room_web.application.blueprints import (
+    render_page,
+    local_redirect,
+    _format_date,
+    _recent_entries,
+)
 
 
 blueprint = Blueprint("library", __name__, url_prefix="/library")
@@ -82,7 +87,7 @@ def set_default_visibility():
     except Exception:
         current_app.logger.exception("Unable to set default visibility for user %s!", user_id)
         flash("Unable to update your library's default visibility right now.")
-    return redirect(url_for("web.library.get_library_page"))
+    return local_redirect("web.library.get_library_page")
 
 
 @blueprint.route("/entries/<volume_id>/visibility", methods=["POST"])
@@ -98,7 +103,7 @@ def set_entry_visibility(volume_id: str):
             "Unable to set visibility override for volume %s (user %s)!", volume_id, user_id
         )
         flash("Unable to update that entry's visibility right now.")
-    return redirect(url_for("web.library.get_library_page"))
+    return local_redirect("web.library.get_library_page")
 
 
 @blueprint.route("/volume-search", methods=["GET"])
@@ -155,4 +160,4 @@ def remove_entry(volume_id: str):
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from library (user %s)!", volume_id, user_id)
             flash("Unable to remove that volume right now.")
-    return redirect(url_for("web.library.get_library_page"))
+    return local_redirect("web.library.get_library_page")

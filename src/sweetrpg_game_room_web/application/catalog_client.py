@@ -18,7 +18,7 @@ class CatalogClient:
         resp = requests.get(
             f"{self.base_url}/volumes/search",
             params={"q": query},
-            timeout=5,
+            timeout=10,
         )
         resp.raise_for_status()
         body = resp.json()

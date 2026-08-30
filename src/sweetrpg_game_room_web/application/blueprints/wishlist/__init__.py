@@ -3,10 +3,13 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Wishlist routes.
 """
 
-from flask import Blueprint, current_app, request, flash, redirect, url_for
+from flask import Blueprint, current_app, request, flash
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import render_page
+from sweetrpg_game_room_web.application.blueprints import (
+    render_page,
+    local_redirect,
+)
 
 
 blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
@@ -68,14 +71,14 @@ def create_wishlist():
     visibility = request.form.get("visibility") or "private"
     if not name:
         flash("A wishlist name is required.")
-        return redirect(url_for("web.wishlist.new_wishlist_page"))
+        return local_redirect("web.wishlist.new_wishlist_page")
     try:
         wishlist = _client().create_wishlist(user_id, name, visibility)
-        return redirect(url_for("web.wishlist.get_wishlist_page", wishlist_id=wishlist["id"]))
+        return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist["id"])
     except Exception:
         current_app.logger.exception("Unable to create wishlist %r for user %s!", name, user_id)
         flash("Unable to create that wishlist right now.")
-        return redirect(url_for("web.wishlist.new_wishlist_page"))
+        return local_redirect("web.wishlist.new_wishlist_page")
 
 
 @blueprint.route("/<wishlist_id>", methods=["GET"])
@@ -121,7 +124,7 @@ def update_wishlist(wishlist_id: str):
         except Exception:
             current_app.logger.exception("Unable to delete wishlist %s for user %s!", wishlist_id, user_id)
             flash("Unable to delete that wishlist right now.")
-        return redirect(url_for("web.wishlist.get_wishlists_page"))
+        return local_redirect("web.wishlist.get_wishlists_page")
 
     visibility = request.form.get("visibility") or "private"
     try:
@@ -132,7 +135,7 @@ def update_wishlist(wishlist_id: str):
             "Unable to set visibility on wishlist %s for user %s!", wishlist_id, user_id
         )
         flash("Unable to update this wishlist's visibility right now.")
-    return redirect(url_for("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id))
+    return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
 
 
 @blueprint.route("/<wishlist_id>/entries", methods=["POST"])
@@ -149,7 +152,7 @@ def add_wishlist_entry(wishlist_id: str):
                 "Unable to add volume %s to wishlist %s!", volume_id, wishlist_id
             )
             flash("Unable to add that volume right now.")
-    return redirect(url_for("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id))
+    return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
 
 
 @blueprint.route("/<wishlist_id>/entries/<volume_id>", methods=["POST"])
@@ -165,4 +168,4 @@ def remove_entry(wishlist_id: str, volume_id: str):
                 "Unable to remove volume %s from wishlist %s!", volume_id, wishlist_id
             )
             flash("Unable to remove that volume right now.")
-    return redirect(url_for("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id))
+    return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)

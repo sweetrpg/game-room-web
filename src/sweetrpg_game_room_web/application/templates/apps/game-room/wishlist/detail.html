@@ -46,7 +46,7 @@
     <tbody>
         {% for entry in wishlist.entries %}
         <tr>
-            <td><a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+            <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
             <td>
                 <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
                     <input type="hidden" name="_method" value="DELETE">
