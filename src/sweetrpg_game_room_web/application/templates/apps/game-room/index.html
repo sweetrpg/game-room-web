@@ -79,7 +79,7 @@
                 {% if library_recent %}
                 <div class="stat-card-recent">
                     {% for entry in library_recent %}
-                    <a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
+                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
                     <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
                     {% endfor %}
                 </div>
@@ -97,7 +97,7 @@
                 {% if wishlist_recent %}
                 <div class="stat-card-recent">
                     {% for entry in wishlist_recent %}
-                    <a href="/catalog/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
+                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
                     <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
                     {% endfor %}
                 </div>
@@ -270,7 +270,7 @@
             } else {
               data.recent.forEach(function (entry) {
                 var a = document.createElement('a');
-                a.href = '/catalog/volumes/' + entry.volume_id;
+                a.href = '{{ catalog_url }}/volumes/' + entry.volume_id;
                 a.textContent = entry.volume_id;
                 var span = document.createElement('span');
                 span.className = 'stat-card-updated';

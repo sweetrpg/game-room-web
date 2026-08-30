@@ -27,7 +27,7 @@ def test_search_volumes_calls_search_endpoint(mock_get):
     mock_get.assert_called_once_with(
         "http://catalog-api.local/volumes/search",
         params={"q": "strahd"},
-        timeout=5,
+        timeout=10,
     )
     assert result == [{"id": "vol-1", "title": "Curse of Strahd"}]
 
