@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}New wishlist{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h2>New wishlist</h2>
+</div>
+<form method="post" action="{{ base_path }}/wishlist/" class="form">
+    <label class="form-label" for="wishlist-name">Name</label>
+    <input class="input" id="wishlist-name" name="name" type="text" required>
+
+    <label class="form-label" for="wishlist-visibility">Visibility</label>
+    <select id="wishlist-visibility" name="visibility">
+        {% for level in visibility_levels %}
+        <option value="{{ level }}" {% if level == default_visibility %}selected{% endif %}>{{ level }}</option>
+        {% endfor %}
+    </select>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create wishlist</button>
+    </div>
+</form>
+{% endblock %}
