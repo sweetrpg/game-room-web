@@ -107,6 +107,33 @@ def set_entry_visibility(volume_id: str):
     return local_redirect("web.library.get_library_page")
 
 
+@blueprint.route("/entries/visibility/bulk", methods=["POST"])
+def set_bulk_entry_visibility():
+    """Apply a visibility override to multiple selected library entries at once."""
+    context = get_context()
+    user_id = context["user"]["id"]
+    visibility = request.form.get("visibility") or None
+    raw = request.form.get("volume_ids") or ""
+    volume_ids = [v for v in (s.strip() for s in raw.split(",")) if v]
+    if not volume_ids:
+        flash(_("Select at least one entry first."))
+        return local_redirect("web.library.get_library_page")
+    failed = []
+    for volume_id in volume_ids:
+        try:
+            _client().set_library_entry_visibility(user_id, volume_id, visibility)
+        except Exception:
+            current_app.logger.exception(
+                "Unable to set visibility override for volume %s (user %s)!", volume_id, user_id
+            )
+            failed.append(volume_id)
+    if failed:
+        flash(_("Unable to update visibility for some entries right now."))
+        return local_redirect("web.library.get_library_page", failed=",".join(failed))
+    flash(_("Entry visibility updated."))
+    return local_redirect("web.library.get_library_page")
+
+
 @blueprint.route("/volume-search", methods=["GET"])
 def search_volumes():
     """Search catalog-api for volumes by title, for the add-to-library dialog."""

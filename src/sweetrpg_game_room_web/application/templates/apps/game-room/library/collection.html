@@ -19,8 +19,19 @@
   }
   .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
   .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
+<<<<<<< HEAD
+  .entry-select-col { width: 28px; text-align: center; }
+  .bulk-actions {
+    display: flex; justify-content: flex-end; margin-top: 12px;
+    background: var(--color-neutral-100); border: 1px solid var(--color-neutral-300);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .bulk-actions[hidden] { display: none; }
+  .bulk-actions-form { display: flex; align-items: center; gap: 8px; }
+=======
   .effective-visibility { display: inline-flex; align-items: center; gap: 6px; }
   .effective-visibility .icon-mask { background-color: var(--color-text); }
+>>>>>>> develop
 </style>
 <div class="page-header">
     <h2>{{ _('Library') }}</h2>
@@ -59,6 +70,11 @@
 <table class="table">
     <thead>
         <tr>
+            {% if is_owner %}
+            <th class="entry-select-col">
+                <input type="checkbox" id="entry-select-all" aria-label="{{ _('Select all') }}">
+            </th>
+            {% endif %}
             <th>{{ _('Volume') }}</th>
             <th>{{ _('Effective visibility') }}</th>
             {% if is_owner %}
@@ -70,6 +86,11 @@
     <tbody>
         {% for entry in library.entries %}
         <tr>
+            {% if is_owner %}
+            <td class="entry-select-col">
+                <input type="checkbox" class="entry-select" data-volume-id="{{ entry.volume_id }}" aria-label="{{ _('Select volume') }}">
+            </td>
+            {% endif %}
             <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a></td>
             <td>
                 {% set effective = entry.visibility_override or library.default_visibility %}
@@ -101,10 +122,24 @@
             {% endif %}
         </tr>
         {% else %}
-        <tr><td colspan="4" class="empty-state-inline">{{ _('No volumes visible here yet.') }}</td></tr>
+        <tr><td colspan="{% if is_owner %}5{% else %}2{% endif %}" class="empty-state-inline">{{ _('No volumes visible here yet.') }}</td></tr>
         {% endfor %}
     </tbody>
 </table>
+{% if is_owner %}
+<div class="bulk-actions" id="bulk-actions" hidden>
+    <form method="post" action="{{ base_path }}/library/entries/visibility/bulk" class="bulk-actions-form">
+        <input type="hidden" name="volume_ids" id="bulk-volume-ids">
+        <label for="bulk-visibility">{{ _('Change visibility') }}</label>
+        <select name="visibility" id="bulk-visibility">
+            {% for level in visibility_levels %}
+            <option value="{{ level }}">{{ level }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-secondary">{{ _('Apply') }}</button>
+    </form>
+</div>
+{% endif %}
 {% endif %}
 
 <div class="dialog-backdrop" id="visibility-warning-backdrop" hidden>
@@ -305,6 +340,43 @@
     });
   }
   {% endif %}
+})();
+</script>
+<script>
+(function () {
+  var selectAll = document.getElementById('entry-select-all');
+  if (!selectAll) return;
+  var checks = Array.prototype.slice.call(document.querySelectorAll('.entry-select'));
+  var idsInput = document.getElementById('bulk-volume-ids');
+  var bulkBar = document.getElementById('bulk-actions');
+
+  function selectedIds() {
+    return checks.filter(function (c) { return c.checked; }).map(function (c) { return c.dataset.volumeId; });
+  }
+
+  function refresh() {
+    var sel = selectedIds();
+    idsInput.value = sel.join(',');
+    bulkBar.hidden = sel.length === 0;
+    selectAll.checked = sel.length > 0 && sel.length === checks.length;
+    selectAll.indeterminate = sel.length > 0 && sel.length < checks.length;
+  }
+
+  checks.forEach(function (c) { c.addEventListener('change', refresh); });
+  selectAll.addEventListener('change', function () {
+    checks.forEach(function (c) { c.checked = selectAll.checked; });
+    refresh();
+  });
+
+  var failed = new URLSearchParams(window.location.search).get('failed');
+  if (failed) {
+    var failedSet = {};
+    failed.split(',').forEach(function (v) { if (v) failedSet[v] = true; });
+    checks.forEach(function (c) {
+      if (failedSet[c.dataset.volumeId]) c.checked = true;
+    });
+    refresh();
+  }
 })();
 </script>
 {% endblock %}

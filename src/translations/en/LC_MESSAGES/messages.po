@@ -38,6 +38,9 @@ msgstr "Added %(added_at)s"
 msgid "Administration"
 msgstr "Administration"
 
+msgid "Apply"
+msgstr "Apply"
+
 msgid "Back to all wishlists"
 msgstr "Back to all wishlists"
 
@@ -64,6 +67,9 @@ msgstr "Change anyway"
 
 msgid "Changing your library's default visibility to"
 msgstr "Changing your library's default visibility to"
+
+msgid "Change visibility"
+msgstr "Change visibility"
 
 msgid "Create"
 msgstr "Create"
@@ -200,6 +206,15 @@ msgstr "Save"
 msgid "Search for a volume by title"
 msgstr "Search for a volume by title"
 
+msgid "Select all"
+msgstr "Select all"
+
+msgid "Select at least one entry first."
+msgstr "Select at least one entry first."
+
+msgid "Select volume"
+msgstr "Select volume"
+
 msgid "Set"
 msgstr "Set"
 
@@ -280,6 +295,9 @@ msgstr "Unable to remove that volume right now."
 
 msgid "Unable to update that entry's visibility right now."
 msgstr "Unable to update that entry's visibility right now."
+
+msgid "Unable to update visibility for some entries right now."
+msgstr "Unable to update visibility for some entries right now."
 
 msgid "Unable to update that table right now."
 msgstr "Unable to update that table right now."
