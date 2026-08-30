@@ -104,6 +104,12 @@ msgstr "Down for maintenance"
 msgid "Effective visibility"
 msgstr "Effective visibility"
 
+msgid "Friends"
+msgstr "Friends"
+
+msgid "Friends of friends"
+msgstr "Friends of friends"
+
 msgid "Expected back:"
 msgstr "Expected back:"
 
