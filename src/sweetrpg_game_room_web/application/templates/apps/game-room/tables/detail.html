@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}{{ table.name if table else "Table" }}{% endblock %}
+{% block title %}{{ table.name if table else _('Table') }}{% endblock %}
 {% block content %}
 {% if not table %}
-<p class="empty-state">This table isn't available right now.</p>
+<p class="empty-state">{{ _("This table isn't available right now.") }}</p>
 {% else %}
 <div class="detail-header-row">
     <h2>{{ table.name }}</h2>
@@ -10,7 +10,7 @@
     <div class="detail-header-actions">
         <form method="post" action="{{ base_path }}/tables/{{ table.id }}">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-ghost">Delete table</button>
+            <button type="submit" class="btn btn-ghost">{{ _('Delete table') }}</button>
         </form>
     </div>
     {% endif %}
@@ -18,10 +18,10 @@
 
 {% if is_owner %}
 <form method="post" action="{{ base_path }}/tables/{{ table.id }}" class="form">
-    <label class="form-label" for="table-name">Name</label>
+    <label class="form-label" for="table-name">{{ _('Name') }}</label>
     <input class="input" id="table-name" name="name" type="text" value="{{ table.name }}" required>
 
-    <label class="form-label" for="table-visibility">Visibility</label>
+    <label class="form-label" for="table-visibility">{{ _('Visibility') }}</label>
     <select id="table-visibility" name="visibility">
         {% for level in visibility_levels %}
         <option value="{{ level }}" {% if level == table.visibility %}selected{% endif %}>{{ level }}</option>
@@ -29,7 +29,7 @@
     </select>
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
     </div>
 </form>
 {% else %}
@@ -37,7 +37,7 @@
 {% endif %}
 
 <div class="detail-block">
-    <span class="section-label">Volumes</span>
+    <span class="section-label">{{ _('Volumes') }}</span>
     <table class="table">
         <tbody>
             {% for volume_id in table.volume_ids or [] %}
@@ -47,20 +47,20 @@
                 <td>
                     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes/{{ volume_id }}">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-ghost">Remove</button>
+                        <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
                     </form>
                 </td>
                 {% endif %}
             </tr>
             {% else %}
-            <tr><td colspan="2" class="empty-state-inline">No volumes in this table yet.</td></tr>
+            <tr><td colspan="2" class="empty-state-inline">{{ _('No volumes in this table yet.') }}</td></tr>
             {% endfor %}
         </tbody>
     </table>
     {% if is_owner %}
     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes" class="table-actions">
-        <input class="input" name="volume_id" type="text" placeholder="Catalog volume ID" required>
-        <button type="submit" class="btn btn-secondary">Add volume</button>
+        <input class="input" name="volume_id" type="text" placeholder="{{ _('Catalog volume ID') }}" required>
+        <button type="submit" class="btn btn-secondary">{{ _('Add volume') }}</button>
     </form>
     {% endif %}
 </div>

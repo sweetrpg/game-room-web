@@ -18,6 +18,7 @@ import pytest
 from flask import Flask
 
 from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
 from sweetrpg_game_room_web.application.blueprints import blueprint as main_blueprint
 from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
 from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
@@ -66,7 +67,9 @@ def client_mock():
 def app(client_mock):
     app = Flask(__name__, template_folder=TEMPLATE_DIR)
     app.config["SECRET_KEY"] = "test"
+    init_i18n(app)
     app.register_blueprint(main_blueprint)
+    init_i18n(app)
 
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
     app.config[constants.CATALOG_CLIENT_KEY] = client_mock
@@ -122,6 +125,42 @@ def test_set_entry_visibility_calls_client(owner_client, client_mock):
     client_mock.set_library_entry_visibility.assert_called_once_with("user-1", "vol-1", "friends")
 
 
+def test_set_bulk_entry_visibility_applies_to_each_selected_volume(owner_client, client_mock):
+    resp = owner_client.post(
+        "/library/entries/visibility/bulk",
+        data={"volume_ids": "vol-1,vol-2", "visibility": "private"},
+    )
+    assert resp.status_code == 302
+    calls = [c.args for c in client_mock.set_library_entry_visibility.call_args_list]
+    assert ("user-1", "vol-1", "private") in calls
+    assert ("user-1", "vol-2", "private") in calls
+
+
+def test_set_bulk_entry_visibility_no_selection_calls_nothing(owner_client, client_mock):
+    resp = owner_client.post(
+        "/library/entries/visibility/bulk",
+        data={"volume_ids": "", "visibility": "private"},
+    )
+    assert resp.status_code == 302
+    client_mock.set_library_entry_visibility.assert_not_called()
+
+
+def test_set_bulk_entry_visibility_preserves_selection_on_partial_failure(owner_client, client_mock):
+    def _boom(user_id, volume_id, visibility):
+        if volume_id == "vol-2":
+            raise Exception("boom")
+    client_mock.set_library_entry_visibility.side_effect = _boom
+    resp = owner_client.post(
+        "/library/entries/visibility/bulk",
+        data={"volume_ids": "vol-1,vol-2", "visibility": "private"},
+    )
+    assert resp.status_code == 302
+    assert "failed=vol-2" in resp.headers["Location"]
+    assert ("user-1", "vol-1", "private") in [
+        c.args for c in client_mock.set_library_entry_visibility.call_args_list
+    ]
+
+
 def test_remove_library_entry_requires_delete_method_override(owner_client, client_mock):
     resp = owner_client.post("/library/entries/vol-1", data={"_method": "DELETE"})
     assert resp.status_code == 302
@@ -171,7 +210,7 @@ def test_add_entry_returns_updated_count_and_recent(owner_client, client_mock):
     body = resp.get_json()
     assert body["count"] == 1
     assert body["recent"][0]["volume_id"] == "vol-1"
-    client_mock.add_library_entry.assert_called_once_with("user-1", "vol-1")
+    client_mock.add_library_entry.assert_called_once_with("user-1", "vol-1", volume_title="")
 
 
 def test_add_entry_handles_client_error(owner_client, client_mock):

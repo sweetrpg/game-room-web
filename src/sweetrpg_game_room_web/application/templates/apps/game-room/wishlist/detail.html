@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ wishlist.name if wishlist else 'Wishlist' }}{% endblock %}
+{% block title %}{{ wishlist.name if wishlist else _('Wishlist') }}{% endblock %}
 {% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
 <style>
@@ -24,9 +24,9 @@
   .visibility-menu-panel[hidden] { display: none; }
 </style>
 {% if not wishlist %}
-<p class="empty-state">This wishlist isn't available right now.</p>
+<p class="empty-state">{{ _("This wishlist isn't available right now.") }}</p>
 {% else %}
-<a class="back-link" href="{% if is_owner %}{{ base_path }}/wishlist/{% else %}{{ base_path }}/wishlist/users/{{ wishlist.user_id }}{% endif %}">Back to all wishlists</a>
+<a class="back-link" href="{% if is_owner %}{{ base_path }}/wishlist/{% else %}{{ base_path }}/wishlist/users/{{ wishlist.user_id }}{% endif %}">{{ _('Back to all wishlists') }}</a>
 
 <div class="detail-header-row">
     <h2>{{ wishlist.name }}</h2>
@@ -34,7 +34,7 @@
     <div class="detail-header-actions">
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-ghost">Delete wishlist</button>
+            <button type="submit" class="btn btn-ghost">{{ _('Delete wishlist') }}</button>
         </form>
     </div>
     {% endif %}
@@ -42,7 +42,7 @@
 
 {% if is_owner %}
 <table class="table">
-    <thead><tr><th>Volume</th><th></th></tr></thead>
+    <thead><tr><th>{{ _('Volume') }}</th><th></th></tr></thead>
     <tbody>
         {% for entry in wishlist.entries %}
         <tr>
@@ -50,26 +50,26 @@
             <td>
                 <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-ghost">Remove</button>
+                    <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
                 </form>
             </td>
         </tr>
         {% else %}
-        <tr><td colspan="2" class="empty-state-inline">No volumes in this wishlist yet.</td></tr>
+        <tr><td colspan="2" class="empty-state-inline">{{ _('No volumes in this wishlist yet.') }}</td></tr>
         {% endfor %}
     </tbody>
 </table>
 
 <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries">
-    <label class="form-label" for="volume-id">Volume ID</label>
+    <label class="form-label" for="volume-id">{{ _('Volume ID') }}</label>
     <input class="input" id="volume-id" name="volume_id" type="text" required>
     <div class="form-actions">
-        <button type="submit" class="btn btn-secondary">Add volume</button>
+        <button type="submit" class="btn btn-secondary">{{ _('Add volume') }}</button>
     </div>
 </form>
 
 <div class="detail-section">
-    <h3>Visibility</h3>
+    <h3>{{ _('Visibility') }}</h3>
     <div class="visibility-menu" id="visibility-menu">
         <button type="button" class="icon-btn" id="visibility-menu-trigger" aria-expanded="false" aria-controls="visibility-menu-panel">
             <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg');"></span>

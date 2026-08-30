@@ -12,23 +12,28 @@ from unittest.mock import MagicMock
 import pytest
 from flask import Flask
 
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
+
 TEMPLATE_DIR = os.path.join(
     os.path.dirname(__file__), "..", "src", "sweetrpg_game_room_web", "application", "templates"
 )
+
+from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
+from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
+from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
 
 
 @pytest.fixture
 def app():
     app = Flask(__name__, template_folder=TEMPLATE_DIR)
     app.config["SECRET_KEY"] = "test"
+    init_i18n(app)
     app.config["GAME_ROOM_CLIENT_KEY"] = "game-room-client"
     app.config["GAME_ROOM_CLIENT_KEY"] = MagicMock()
 
-    from sweetrpg_game_room_web.application import constants
-    from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
-    from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
-
     app.register_blueprint(library_blueprint)
+    init_i18n(app)
     app.config[constants.GAME_ROOM_CLIENT_KEY] = MagicMock(
         get_library=MagicMock(
             return_value={
@@ -73,6 +78,17 @@ def test_owner_sees_edit_controls(app):
     body = resp.get_data(as_text=True)
     assert 'id="visibility-menu-trigger"' in body
     assert "Remove" in body
+
+
+def test_effective_visibility_renders_localized_label_and_icon(app):
+    client = app.test_client()
+    resp = client.get("/library/users/user-2")
+
+    assert resp.status_code == 200
+    body = resp.get_data(as_text=True)
+    assert "effective-visibility" in body
+    assert "globe.svg" in body  # public -> globe icon
+    assert "Public" in body  # localized label for the effective level, not the raw "public"
 
 
 def test_own_library_page_without_login_shows_login_prompt(app):

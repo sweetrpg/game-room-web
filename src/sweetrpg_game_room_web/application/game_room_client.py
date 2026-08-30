@@ -46,8 +46,12 @@ class GameRoomClient:
     def get_library(self, user_id: str):
         return self._get(f"/users/{user_id}/library")
 
-    def add_library_entry(self, user_id: str, volume_id: str):
-        return self._request("POST", f"/users/{user_id}/library/entries", json={"volume_id": volume_id})
+    def add_library_entry(self, user_id: str, volume_id: str, volume_title: str = ""):
+        return self._request(
+            "POST",
+            f"/users/{user_id}/library/entries",
+            json={"volume_id": volume_id, "volume_title": volume_title or None},
+        )
 
     def remove_library_entry(self, user_id: str, volume_id: str):
         return self._request("DELETE", f"/users/{user_id}/library/entries/{volume_id}")

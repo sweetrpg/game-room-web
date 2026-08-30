@@ -62,65 +62,65 @@
 <div class="landing">
     <div class="landing-container">
         <div class="landing-hero">
-            <div class="landing-title">Game Room</div>
-            <p class="text-muted">Your library, wishlist, and tables.</p>
+            <div class="landing-title">{{ _('Game Room') }}</div>
+            <p class="text-muted">{{ _('Your library, wishlist, and tables.') }}</p>
         </div>
         {% if not user.id %}
-        <p class="empty-state">Log in to see your library, wishlist, and tables.</p>
+        <p class="empty-state">{{ _('Log in to see your library, wishlist, and tables.') }}</p>
         {% else %}
         <div class="stat-card-grid">
             <div class="stat-card">
-                <a class="stat-card-browse-link" href="{{ base_path }}/library/" aria-label="Browse Library"></a>
-                <button type="button" class="icon-btn stat-card-action" id="add-to-library-btn" title="Add to library" aria-label="Add to library" aria-haspopup="dialog">
+                <a class="stat-card-browse-link" href="{{ base_path }}/library/" aria-label="{{ _('Browse Library') }}"></a>
+                <button type="button" class="icon-btn stat-card-action" id="add-to-library-btn" title="{{ _('Add to library') }}" aria-label="{{ _('Add to library') }}" aria-haspopup="dialog">
                     <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg');"></span>
                 </button>
-                <div class="stat-card-label">Library</div>
+                <div class="stat-card-label">{{ _('Library') }}</div>
                 <div class="stat-card-count">{{ library_count }}</div>
                 {% if library_recent %}
                 <div class="stat-card-recent">
                     {% for entry in library_recent %}
-                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
-                    <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
+                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a>
+                    <span class="stat-card-updated">{{ _('Added %(added_at)s', added_at=entry.added_at_label) }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="stat-card-recent stat-card-empty">No volumes yet</div>
+                <div class="stat-card-recent stat-card-empty">{{ _('No volumes yet') }}</div>
                 {% endif %}
             </div>
             <div class="stat-card">
-                <a class="stat-card-browse-link" href="{{ base_path }}/wishlist/" aria-label="Browse Wishlist"></a>
-                <button type="button" class="icon-btn stat-card-action" id="create-wishlist-btn" title="Create wishlist" aria-label="Create wishlist" aria-haspopup="dialog">
+                <a class="stat-card-browse-link" href="{{ base_path }}/wishlist/" aria-label="{{ _('Browse Wishlist') }}"></a>
+                <button type="button" class="icon-btn stat-card-action" id="create-wishlist-btn" title="{{ _('Create wishlist') }}" aria-label="{{ _('Create wishlist') }}" aria-haspopup="dialog">
                     <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg');"></span>
                 </button>
-                <div class="stat-card-label">Wishlists</div>
+                <div class="stat-card-label">{{ _('Wishlists') }}</div>
                 <div class="stat-card-count">{{ wishlist_count }}</div>
                 {% if wishlist_recent %}
                 <div class="stat-card-recent">
                     {% for entry in wishlist_recent %}
                     <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
-                    <span class="stat-card-updated">Added {{ entry.added_at_label }}</span>
+                    <span class="stat-card-updated">{{ _('Added %(added_at)s', added_at=entry.added_at_label) }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="stat-card-recent stat-card-empty">No entries yet</div>
+                <div class="stat-card-recent stat-card-empty">{{ _('No entries yet') }}</div>
                 {% endif %}
             </div>
             <div class="stat-card">
-                <a class="stat-card-browse-link" href="{{ base_path }}/tables/" aria-label="Browse Tables"></a>
-                <button type="button" class="icon-btn stat-card-action" id="create-table-btn" title="Create table" aria-label="Create table" aria-haspopup="dialog">
+                <a class="stat-card-browse-link" href="{{ base_path }}/tables/" aria-label="{{ _('Browse Tables') }}"></a>
+                <button type="button" class="icon-btn stat-card-action" id="create-table-btn" title="{{ _('Create table') }}" aria-label="{{ _('Create table') }}" aria-haspopup="dialog">
                     <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg');"></span>
                 </button>
-                <div class="stat-card-label">Tables</div>
+                <div class="stat-card-label">{{ _('Tables') }}</div>
                 <div class="stat-card-count">{{ tables_count }}</div>
                 {% if tables_recent %}
                 <div class="stat-card-recent">
                     {% for table in tables_recent %}
                     <a href="{{ base_path }}/tables/{{ table.id }}">{{ table.name }}</a>
-                    <span class="stat-card-updated">Updated {{ table.updated_at_label }}</span>
+                    <span class="stat-card-updated">{{ _('Updated %(updated_at)s', updated_at=table.updated_at_label) }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="stat-card-recent stat-card-empty">No tables yet</div>
+                <div class="stat-card-recent stat-card-empty">{{ _('No tables yet') }}</div>
                 {% endif %}
             </div>
         </div>
@@ -131,25 +131,25 @@
 
 <div class="dialog-backdrop" id="add-to-library-backdrop" hidden>
     <div class="dialog" role="dialog" aria-labelledby="add-to-library-title">
-        <h3 class="dialog-title" id="add-to-library-title">Add to library</h3>
-        <input type="search" id="add-to-library-search" class="input" placeholder="Search for a volume by title" autocomplete="off" data-1p-ignore data-lpignore="true">
+        <h3 class="dialog-title" id="add-to-library-title">{{ _('Add to library') }}</h3>
+        <input type="search" id="add-to-library-search" class="input" placeholder="{{ _('Search for a volume by title') }}" autocomplete="off" data-1p-ignore data-lpignore="true">
         <ul id="add-to-library-results" class="search-results"></ul>
         <div class="dialog-actions">
-            <button type="button" class="btn btn-ghost" id="add-to-library-cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" id="add-to-library-confirm" disabled>Add</button>
+            <button type="button" class="btn btn-ghost" id="add-to-library-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary" id="add-to-library-confirm" disabled>{{ _('Add') }}</button>
         </div>
     </div>
 </div>
 
 <div class="dialog-backdrop" id="create-wishlist-backdrop" hidden>
     <div class="dialog" role="dialog" aria-labelledby="create-wishlist-title">
-        <h3 class="dialog-title" id="create-wishlist-title">Create wishlist</h3>
+        <h3 class="dialog-title" id="create-wishlist-title">{{ _('Create wishlist') }}</h3>
         <form id="create-wishlist-form" method="post" action="{{ base_path }}/wishlist/">
-            <label class="form-label" for="create-wishlist-name">Name</label>
+            <label class="form-label" for="create-wishlist-name">{{ _('Name') }}</label>
             <input type="text" id="create-wishlist-name" name="name" class="input" required autocomplete="off" data-1p-ignore data-lpignore="true">
             <div class="dialog-actions">
-                <button type="button" class="btn btn-ghost" id="create-wishlist-cancel">Cancel</button>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-ghost" id="create-wishlist-cancel">{{ _('Cancel') }}</button>
+                <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
             </div>
         </form>
     </div>
@@ -157,13 +157,13 @@
 
 <div class="dialog-backdrop" id="create-table-backdrop" hidden>
     <div class="dialog" role="dialog" aria-labelledby="create-table-title">
-        <h3 class="dialog-title" id="create-table-title">Create table</h3>
+        <h3 class="dialog-title" id="create-table-title">{{ _('Create table') }}</h3>
         <form id="create-table-form" method="post" action="{{ base_path }}/tables/">
-            <label class="form-label" for="create-table-name">Name</label>
+            <label class="form-label" for="create-table-name">{{ _('Name') }}</label>
             <input type="text" id="create-table-name" name="name" class="input" required autocomplete="off" data-1p-ignore data-lpignore="true">
             <div class="dialog-actions">
-                <button type="button" class="btn btn-ghost" id="create-table-cancel">Cancel</button>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-ghost" id="create-table-cancel">{{ _('Cancel') }}</button>
+                <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
             </div>
         </form>
     </div>
@@ -249,7 +249,7 @@
       fetch(config.addEntryUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ volume_id: selected.id })
+        body: JSON.stringify({ volume_id: selected.id, volume_title: selected.title })
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -271,10 +271,10 @@
               data.recent.forEach(function (entry) {
                 var a = document.createElement('a');
                 a.href = '{{ catalog_url }}/volumes/' + entry.volume_id;
-                a.textContent = entry.volume_id;
+                a.textContent = entry.volume_title || entry.volume_id;
                 var span = document.createElement('span');
                 span.className = 'stat-card-updated';
-                span.textContent = 'Added ' + entry.added_at_label;
+                span.textContent = '{{ _('Added') }} ' + entry.added_at_label;
                 recentEl.appendChild(a);
                 recentEl.appendChild(span);
               });
@@ -283,7 +283,7 @@
           closeDialog();
         })
         .catch(function () {
-          alert('Unable to add that volume right now.');
+          alert('{{ _('Unable to add that volume right now.') }}');
         });
     });
   }
@@ -296,7 +296,7 @@
     confirmId: 'add-to-library-confirm',
     cancelId: 'add-to-library-cancel',
     addEntryUrl: '{{ base_path }}/library/entries',
-    emptyLabel: 'No volumes yet'
+    emptyLabel: '{{ _('No volumes yet') }}'
   });
 
   var createWishlistBtn = document.getElementById('create-wishlist-btn');

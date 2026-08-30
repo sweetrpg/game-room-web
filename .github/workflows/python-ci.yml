@@ -112,3 +112,10 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./docs/_build/html
+
+    locale-lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+            - name: Check for hardcoded user-facing template strings
+              run: ./scripts/check-template-strings.sh
