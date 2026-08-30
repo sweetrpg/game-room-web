@@ -176,8 +176,8 @@ msgstr "New table"
 msgid "New wishlist"
 msgstr "New wishlist"
 
-msgid "No entries yet"
-msgstr "No entries yet"
+msgid "No wishlists"
+msgstr "No wishlists"
 
 msgid "No tables visible here yet."
 msgstr "No tables visible here yet."
@@ -365,8 +365,8 @@ msgstr "Your library, wishlist, and tables."
 msgid "and its entries will be permanently deleted. This cannot be undone."
 msgstr "and its entries will be permanently deleted. This cannot be undone."
 
-msgid "inherit default"
-msgstr "inherit default"
+msgid "Inherit default"
+msgstr "Inherit default"
 
 msgid "was"
 msgstr "was"
