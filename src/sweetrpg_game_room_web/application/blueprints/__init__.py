@@ -261,5 +261,3 @@ def main_page():
         })
 
     return render_page("apps/game-room/index.html", context=context)
-
-# from sweetrpg_game_room_web.application.blueprints import authors
