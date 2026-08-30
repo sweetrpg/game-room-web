@@ -272,56 +272,6 @@ def test_remove_wishlist_entry_handles_client_error(owner_client, client_mock):
     assert resp.location.endswith("/wishlist/wl-1")
 
 
-# -- landing page add-to-wishlist JSON route --
-
-
-def test_add_wishlist_entry_requires_volume_id(owner_client, client_mock):
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": ""})
-    assert resp.status_code == 400
-    client_mock.add_wishlist_entry.assert_not_called()
-
-
-def test_add_wishlist_entry_uses_first_wishlist_when_id_omitted(owner_client, client_mock):
-    client_mock.list_wishlists.return_value = [
-        {"id": "wl-1", "entries": [{"volume_id": "vol-1", "added_at": "2026-08-28T12:00:00+00:00"}]}
-    ]
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
-    assert resp.status_code == 200
-    body = resp.get_json()
-    assert body["count"] == 1
-    assert body["recent"][0]["volume_id"] == "vol-1"
-    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-1", "vol-1")
-    client_mock.list_wishlists.assert_called_with("user-1")
-
-
-def test_add_wishlist_entry_uses_explicit_wishlist_id(owner_client, client_mock):
-    client_mock.list_wishlists.return_value = [{"id": "wl-1", "entries": []}]
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1", "wishlist_id": "wl-2"})
-    assert resp.status_code == 200
-    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-2", "vol-1")
-
-
-def test_add_wishlist_entry_requires_existing_wishlist(owner_client, client_mock):
-    client_mock.list_wishlists.return_value = []
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
-    assert resp.status_code == 502
-    client_mock.add_wishlist_entry.assert_not_called()
-
-
-def test_add_wishlist_entry_handles_list_error(owner_client, client_mock):
-    client_mock.list_wishlists.side_effect = Exception("boom")
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
-    assert resp.status_code == 502
-    client_mock.add_wishlist_entry.assert_not_called()
-
-
-def test_add_wishlist_entry_handles_client_error(owner_client, client_mock):
-    client_mock.add_wishlist_entry.side_effect = Exception("boom")
-    resp = owner_client.post("/wishlist/entries", json={"volume_id": "vol-1"})
-    assert resp.status_code == 502
-    assert "error" in resp.get_json()
-
-
 # -- wishlist pages --
 
 
@@ -498,7 +448,7 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
     assert "vol-3" in body
     assert "Friday Night" in body
     assert 'id="add-to-library-btn"' in body
-    assert 'id="add-to-wishlist-btn"' in body
+    assert 'id="create-wishlist-btn"' in body
     assert 'id="create-table-btn"' in body
     client_mock.get_library.assert_called_once_with("user-1")
     client_mock.list_wishlists.assert_called_once_with("user-1")
@@ -533,7 +483,7 @@ def test_anonymous_visitor_sees_no_card_action_buttons(app):
         resp = app.test_client().get("/")
     body = resp.get_data(as_text=True)
     assert 'id="add-to-library-btn"' not in body
-    assert 'id="add-to-wishlist-btn"' not in body
+    assert 'id="create-wishlist-btn"' not in body
     assert 'id="create-table-btn"' not in body
 
 

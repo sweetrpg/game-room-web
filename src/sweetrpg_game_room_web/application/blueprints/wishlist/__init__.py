@@ -3,15 +3,10 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """Wishlist routes.
 """
 
-from flask import Blueprint, current_app, request, jsonify, flash, redirect, url_for
+from flask import Blueprint, current_app, request, flash, redirect, url_for
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
-from sweetrpg_game_room_web.application.blueprints import (
-    render_page,
-    _format_date,
-    _recent_entries,
-    _wishlist_entries,
-)
+from sweetrpg_game_room_web.application.blueprints import render_page
 
 
 blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
@@ -19,18 +14,6 @@ blueprint = Blueprint("wishlist", __name__, url_prefix="/wishlist")
 
 def _client():
     return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
-
-
-def _wishlist_card_payload(user_id: str, wishlists: list):
-    """Landing-card data: total entries across all wishlists plus the most recent ones."""
-    entries = _wishlist_entries(wishlists)
-    return {
-        "count": len(entries),
-        "recent": [
-            {**e, "added_at_label": _format_date(e.get("added_at"))}
-            for e in _recent_entries(entries, "added_at")
-        ],
-    }
 
 
 @blueprint.route("/", methods=["GET"])
@@ -183,41 +166,3 @@ def remove_entry(wishlist_id: str, volume_id: str):
             )
             flash("Unable to remove that volume right now.")
     return redirect(url_for("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id))
-
-
-@blueprint.route("/entries", methods=["POST"])
-def add_entry():
-    """Add a volume to the current user's (first) wishlist, for the landing page's add dialog.
-
-    Returns the wishlist count/recent list as JSON so the caller can refresh the landing
-    page's Wishlist card in place, without a full page reload.
-    """
-    context = get_context()
-    user_id = context["user"]["id"]
-    payload = request.json or {}
-    volume_id = payload.get("volume_id", "").strip()
-    if not volume_id:
-        return jsonify({"error": "A volume is required."}), 400
-
-    wishlist_id = payload.get("wishlist_id", "").strip()
-    if not wishlist_id:
-        try:
-            wishlists = _client().list_wishlists(user_id) or []
-        except Exception:
-            current_app.logger.exception(
-                "Unable to list wishlists before adding volume %s (user %s)!", volume_id, user_id
-            )
-            return jsonify({"error": "Unable to add that volume right now."}), 502
-        if not wishlists:
-            return jsonify({"error": "Create a wishlist before adding volumes."}), 502
-        wishlist_id = wishlists[0]["id"]
-
-    try:
-        _client().add_wishlist_entry(user_id, wishlist_id, volume_id)
-        wishlists = _client().list_wishlists(user_id) or []
-        return jsonify(_wishlist_card_payload(user_id, wishlists))
-    except Exception:
-        current_app.logger.exception(
-            "Unable to add volume %s to wishlist %s (user %s)!", volume_id, wishlist_id, user_id
-        )
-        return jsonify({"error": "Unable to add that volume right now."}), 502
