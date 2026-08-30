@@ -12,6 +12,8 @@ from unittest.mock import MagicMock
 import pytest
 from flask import Flask
 
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
+
 TEMPLATE_DIR = os.path.join(
     os.path.dirname(__file__), "..", "src", "sweetrpg_game_room_web", "application", "templates"
 )
@@ -21,6 +23,7 @@ TEMPLATE_DIR = os.path.join(
 def app():
     app = Flask(__name__, template_folder=TEMPLATE_DIR)
     app.config["SECRET_KEY"] = "test"
+    init_i18n(app)
     app.config["GAME_ROOM_CLIENT_KEY"] = "game-room-client"
     app.config["GAME_ROOM_CLIENT_KEY"] = MagicMock()
 
