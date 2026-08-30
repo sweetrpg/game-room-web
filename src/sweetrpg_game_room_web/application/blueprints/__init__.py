@@ -11,6 +11,7 @@ import analytics
 import jinja2
 import json
 from flask import Blueprint, request, render_template, session, jsonify, current_app, redirect, url_for
+from flask_babel import gettext as _
 from sweetrpg_game_room_web import __version__
 from sweetrpg_game_room_web.application import constants, shared_session
 from sweetrpg_web_core.helpers.context import get_context
@@ -76,13 +77,13 @@ MAINTENANCE_PAGE_TEMPLATE = """
 def render_maintenance_page(mode):
     window_parts = []
     if mode.starts_at:
-        window_parts.append(f"Started: {html.escape(mode.starts_at)}")
+        window_parts.append(f"{_('Started:')} {html.escape(mode.starts_at)}")
     if mode.ends_at:
-        window_parts.append(f"Expected back: {html.escape(mode.ends_at)}")
+        window_parts.append(f"{_('Expected back:')} {html.escape(mode.ends_at)}")
     window = " &middot; ".join(window_parts)
 
     body = MAINTENANCE_PAGE_TEMPLATE.format(
-        label=html.escape(mode.label or "Down for maintenance"),
+        label=html.escape(mode.label or _("Down for maintenance")),
         description=html.escape(mode.description or ""),
         window=window,
     )

@@ -4,6 +4,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 
 from flask import Blueprint, current_app, request, flash
+from flask_babel import gettext as _
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import (
@@ -43,7 +44,7 @@ def _render_wishlists_list(context: dict, user_id: str):
         wishlists = _client().list_wishlists(user_id) or []
     except Exception:
         current_app.logger.exception("Unable to list wishlists for user %s!", user_id)
-        flash("Unable to load these wishlists right now.")
+        flash(_("Unable to load these wishlists right now."))
     context.update(
         {
             "wishlists": wishlists,
@@ -70,14 +71,14 @@ def create_wishlist():
     name = request.form.get("name", "").strip()
     visibility = request.form.get("visibility") or "private"
     if not name:
-        flash("A wishlist name is required.")
+        flash(_("A wishlist name is required."))
         return local_redirect("web.wishlist.new_wishlist_page")
     try:
         wishlist = _client().create_wishlist(user_id, name, visibility)
         return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist["id"])
     except Exception:
         current_app.logger.exception("Unable to create wishlist %r for user %s!", name, user_id)
-        flash("Unable to create that wishlist right now.")
+        flash(_("Unable to create that wishlist right now."))
         return local_redirect("web.wishlist.new_wishlist_page")
 
 
@@ -101,7 +102,7 @@ def _render_wishlist(context: dict, owner_id: str, wishlist_id: str):
         wishlist = _client().get_wishlist(owner_id, wishlist_id)
     except Exception:
         current_app.logger.exception("Unable to fetch wishlist %s for user %s!", wishlist_id, owner_id)
-        flash("Unable to load this wishlist right now.")
+        flash(_("Unable to load this wishlist right now."))
     context.update(
         {
             "wishlist": wishlist,
@@ -120,21 +121,21 @@ def update_wishlist(wishlist_id: str):
     if request.form.get("_method") == "DELETE":
         try:
             _client().delete_wishlist(user_id, wishlist_id)
-            flash("Wishlist deleted.")
+            flash(_("Wishlist deleted."))
         except Exception:
             current_app.logger.exception("Unable to delete wishlist %s for user %s!", wishlist_id, user_id)
-            flash("Unable to delete that wishlist right now.")
+            flash(_("Unable to delete that wishlist right now."))
         return local_redirect("web.wishlist.get_wishlists_page")
 
     visibility = request.form.get("visibility") or "private"
     try:
         _client().set_wishlist_visibility(user_id, wishlist_id, visibility)
-        flash("Wishlist visibility updated.")
+        flash(_("Wishlist visibility updated."))
     except Exception:
         current_app.logger.exception(
             "Unable to set visibility on wishlist %s for user %s!", wishlist_id, user_id
         )
-        flash("Unable to update this wishlist's visibility right now.")
+        flash(_("Unable to update this wishlist's visibility right now."))
     return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
 
 
@@ -151,7 +152,7 @@ def add_wishlist_entry(wishlist_id: str):
             current_app.logger.exception(
                 "Unable to add volume %s to wishlist %s!", volume_id, wishlist_id
             )
-            flash("Unable to add that volume right now.")
+            flash(_("Unable to add that volume right now."))
     return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
 
 
@@ -167,5 +168,5 @@ def remove_entry(wishlist_id: str, volume_id: str):
             current_app.logger.exception(
                 "Unable to remove volume %s from wishlist %s!", volume_id, wishlist_id
             )
-            flash("Unable to remove that volume right now.")
+            flash(_("Unable to remove that volume right now."))
     return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)

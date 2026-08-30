@@ -4,6 +4,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
 
 from flask import Blueprint, current_app, request, jsonify, flash
+from flask_babel import gettext as _
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import (
@@ -49,7 +50,7 @@ def _render_library(context: dict, user_id: str):
         library = _client().get_library(user_id)
     except Exception:
         current_app.logger.exception("Unable to fetch library for user %s!", user_id)
-        flash("Unable to load this library right now.")
+        flash(_("Unable to load this library right now."))
     context.update(
         {
             "library": library,
@@ -71,7 +72,7 @@ def preview_default_visibility():
         return jsonify(preview)
     except Exception:
         current_app.logger.exception("Unable to preview default visibility change for user %s!", user_id)
-        return jsonify({"error": "Unable to preview this change right now."}), 502
+        return jsonify({"error": _("Unable to preview this change right now.")}), 502
 
 
 @blueprint.route("/default-visibility", methods=["POST"])
@@ -83,10 +84,10 @@ def set_default_visibility():
     overrides = request.form.get("overrides")
     try:
         _client().set_library_default_visibility(user_id, visibility, overrides)
-        flash("Library default visibility updated.")
+        flash(_("Library default visibility updated."))
     except Exception:
         current_app.logger.exception("Unable to set default visibility for user %s!", user_id)
-        flash("Unable to update your library's default visibility right now.")
+        flash(_("Unable to update your library's default visibility right now."))
     return local_redirect("web.library.get_library_page")
 
 
@@ -102,7 +103,7 @@ def set_entry_visibility(volume_id: str):
         current_app.logger.exception(
             "Unable to set visibility override for volume %s (user %s)!", volume_id, user_id
         )
-        flash("Unable to update that entry's visibility right now.")
+        flash(_("Unable to update that entry's visibility right now."))
     return local_redirect("web.library.get_library_page")
 
 
@@ -128,11 +129,12 @@ def add_entry():
     """
     context = get_context()
     user_id = context["user"]["id"]
-    volume_id = (request.json or {}).get("volume_id", "").strip()
+    payload = request.json or {}
+    volume_id = (payload.get("volume_id") or "").strip()
     if not volume_id:
-        return jsonify({"error": "A volume is required."}), 400
+        return jsonify({"error": _("A volume is required.")}), 400
     try:
-        _client().add_library_entry(user_id, volume_id)
+        _client().add_library_entry(user_id, volume_id, volume_title=(payload.get("volume_title") or "").strip())
         library = _client().get_library(user_id) or {}
         entries = library.get("entries") or []
         return jsonify(
@@ -146,7 +148,7 @@ def add_entry():
         )
     except Exception:
         current_app.logger.exception("Unable to add volume %s to library (user %s)!", volume_id, user_id)
-        return jsonify({"error": "Unable to add that volume right now."}), 502
+        return jsonify({"error": _("Unable to add that volume right now.")}), 502
 
 
 @blueprint.route("/entries/<volume_id>", methods=["POST"])
@@ -159,5 +161,5 @@ def remove_entry(volume_id: str):
             _client().remove_library_entry(user_id, volume_id)
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from library (user %s)!", volume_id, user_id)
-            flash("Unable to remove that volume right now.")
+            flash(_("Unable to remove that volume right now."))
     return local_redirect("web.library.get_library_page")

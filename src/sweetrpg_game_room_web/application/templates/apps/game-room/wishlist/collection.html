@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Wishlists{% endblock %}
+{% block title %}{{ _('Wishlists') }}{% endblock %}
 {% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
 <style>
@@ -16,14 +16,14 @@
   .wishlist-card-count { font-size: 13px; opacity: 0.75; }
 </style>
 <div class="page-header page-header-toolbar">
-    <h2>Wishlists</h2>
+    <h2>{{ _('Wishlists') }}</h2>
     {% if user.id %}
-    <a class="btn btn-primary" href="{{ base_path }}/wishlist/new">New wishlist</a>
+    <a class="btn btn-primary" href="{{ base_path }}/wishlist/new">{{ _('New wishlist') }}</a>
     {% endif %}
 </div>
 
 {% if is_owner and not user.id %}
-<p class="empty-state">Log in to see your wishlists.</p>
+<p class="empty-state">{{ _('Log in to see your wishlists.') }}</p>
 {% else %}
 <div class="card-grid">
     {% for wishlist in wishlists %}
@@ -33,32 +33,32 @@
                 <div class="card-title">{{ wishlist.name }}</div>
                 <div class="wishlist-card-meta">
                     <span class="tag tag-outline">{{ wishlist.visibility }}</span>
-                    <span class="wishlist-card-count">{{ wishlist.entries | length }} item(s)</span>
+                    <span class="wishlist-card-count">{{ _('%(count)s item(s)', count=wishlist.entries | length) }}</span>
                 </div>
             </div>
         </a>
         {% if is_owner %}
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" class="wishlist-card-delete">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="icon-btn icon-btn-danger" title="Delete wishlist" aria-label="Delete wishlist" data-wishlist-name="{{ wishlist.name }}">
+            <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete wishlist') }}" aria-label="{{ _('Delete wishlist') }}" data-wishlist-name="{{ wishlist.name }}">
                 <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
             </button>
         </form>
         {% endif %}
     </div>
     {% else %}
-    <p class="empty-state">No wishlists visible here yet.</p>
+    <p class="empty-state">{{ _('No wishlists visible here yet.') }}</p>
     {% endfor %}
 </div>
 {% endif %}
 
 <div class="dialog-backdrop" id="wishlist-delete-backdrop" hidden>
     <div class="dialog" role="alertdialog" aria-labelledby="wishlist-delete-title">
-        <h3 class="dialog-title" id="wishlist-delete-title">Delete wishlist?</h3>
-        <p class="dialog-body"><strong id="wishlist-delete-name"></strong> and its entries will be permanently deleted. This cannot be undone.</p>
+        <h3 class="dialog-title" id="wishlist-delete-title">{{ _('Delete wishlist?') }}</h3>
+        <p class="dialog-body"><strong id="wishlist-delete-name"></strong> {{ _('and its entries will be permanently deleted. This cannot be undone.') }}</p>
         <div class="dialog-actions">
-            <button type="button" class="btn btn-ghost" id="wishlist-delete-cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" id="wishlist-delete-confirm">Delete</button>
+<button type="button" class="btn btn-ghost" id="wishlist-delete-cancel">{{ _('Cancel') }}</button>
+    <button type="button" class="btn btn-primary" id="wishlist-delete-confirm">{{ _('Delete') }}</button>
         </div>
     </div>
 </div>

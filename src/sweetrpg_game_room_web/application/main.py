@@ -10,6 +10,7 @@ from flask_cors import CORS
 from flask_session import Session
 from dotenv import load_dotenv, find_dotenv
 from sweetrpg_game_room_web.application.cache import cache
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_client.client import Client as APIClient
 from sweetrpg_admin_api_client import AdminClient
@@ -60,6 +61,9 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     app.logger.info("Setting up session manager...")
     session = Session(app)
+
+    app.logger.info("Setting up i18n...")
+    init_i18n(app)
 
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
 

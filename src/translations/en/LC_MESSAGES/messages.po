@@ -1,0 +1,321 @@
+# Locale resources for game-room-web. English is the default/fallback locale; add
+# new locales as `translations/<code>/LC_MESSAGES/messages.po`.
+msgid ""
+msgstr ""
+"Project-Id-Version: sweetrpg-game-room-web\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "%(count)s item(s)"
+msgstr "%(count)s item(s)"
+
+msgid "%(count)s volume(s)"
+msgstr "%(count)s volume(s)"
+
+msgid "A table name is required."
+msgstr "A table name is required."
+
+msgid "A volume is required."
+msgstr "A volume is required."
+
+msgid "A wishlist name is required."
+msgstr "A wishlist name is required."
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Add to library"
+msgstr "Add to library"
+
+msgid "Add volume"
+msgstr "Add volume"
+
+msgid "Added"
+msgstr "Added"
+
+msgid "Added %(added_at)s"
+msgstr "Added %(added_at)s"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Back to all wishlists"
+msgstr "Back to all wishlists"
+
+msgid "Browse Library"
+msgstr "Browse Library"
+
+msgid "Browse Tables"
+msgstr "Browse Tables"
+
+msgid "Browse Wishlist"
+msgstr "Browse Wishlist"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Catalog"
+msgstr "Catalog"
+
+msgid "Catalog volume ID"
+msgstr "Catalog volume ID"
+
+msgid "Change anyway"
+msgstr "Change anyway"
+
+msgid "Changing your library's default visibility to"
+msgstr "Changing your library's default visibility to"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create table"
+msgstr "Create table"
+
+msgid "Create wishlist"
+msgstr "Create wishlist"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Delete table"
+msgstr "Delete table"
+
+msgid "Delete wishlist"
+msgstr "Delete wishlist"
+
+msgid "Delete wishlist?"
+msgstr "Delete wishlist?"
+
+msgid "Down for maintenance"
+msgstr "Down for maintenance"
+
+msgid "Effective visibility"
+msgstr "Effective visibility"
+
+msgid "Expected back:"
+msgstr "Expected back:"
+
+msgid "Game Room"
+msgstr "Game Room"
+
+msgid "Game Systems"
+msgstr "Game Systems"
+
+msgid "Initiative"
+msgstr "Initiative"
+
+msgid "Keep these private (adjust overrides)"
+msgstr "Keep these private (adjust overrides)"
+
+msgid "Library"
+msgstr "Library"
+
+msgid "Library default visibility updated."
+msgstr "Library default visibility updated."
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Log in"
+msgstr "Log in"
+
+msgid "Log in to see your library, wishlist, and tables."
+msgstr "Log in to see your library, wishlist, and tables."
+
+msgid "Log in to see your library."
+msgstr "Log in to see your library."
+
+msgid "Log in to see your tables."
+msgstr "Log in to see your tables."
+
+msgid "Log in to see your wishlists."
+msgstr "Log in to see your wishlists."
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Main"
+msgstr "Main"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "New table"
+msgstr "New table"
+
+msgid "New wishlist"
+msgstr "New wishlist"
+
+msgid "No entries yet"
+msgstr "No entries yet"
+
+msgid "No tables visible here yet."
+msgstr "No tables visible here yet."
+
+msgid "No tables yet"
+msgstr "No tables yet"
+
+msgid "No volumes in this table yet."
+msgstr "No volumes in this table yet."
+
+msgid "No volumes in this wishlist yet."
+msgstr "No volumes in this wishlist yet."
+
+msgid "No volumes visible here yet."
+msgstr "No volumes visible here yet."
+
+msgid "No volumes yet"
+msgstr "No volumes yet"
+
+msgid "No wishlists visible here yet."
+msgstr "No wishlists visible here yet."
+
+msgid "Override"
+msgstr "Override"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Search for a volume by title"
+msgstr "Search for a volume by title"
+
+msgid "Set"
+msgstr "Set"
+
+msgid "Started:"
+msgstr "Started:"
+
+msgid "Switch app"
+msgstr "Switch app"
+
+msgid "System"
+msgstr "System"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "Table deleted."
+msgstr "Table deleted."
+
+msgid "Table updated."
+msgstr "Table updated."
+
+msgid "Tables"
+msgstr "Tables"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "This library isn't available right now."
+msgstr "This library isn't available right now."
+
+msgid "This table isn't available right now."
+msgstr "This table isn't available right now."
+
+msgid "This will expose more entries"
+msgstr "This will expose more entries"
+
+msgid "This wishlist isn't available right now."
+msgstr "This wishlist isn't available right now."
+
+msgid "Unable to add that volume right now."
+msgstr "Unable to add that volume right now."
+
+msgid "Unable to check the impact of this change right now. Please try again."
+msgstr "Unable to check the impact of this change right now. Please try again."
+
+msgid "Unable to create that table right now."
+msgstr "Unable to create that table right now."
+
+msgid "Unable to create that wishlist right now."
+msgstr "Unable to create that wishlist right now."
+
+msgid "Unable to delete that table right now."
+msgstr "Unable to delete that table right now."
+
+msgid "Unable to delete that wishlist right now."
+msgstr "Unable to delete that wishlist right now."
+
+msgid "Unable to load that table right now."
+msgstr "Unable to load that table right now."
+
+msgid "Unable to load these tables right now."
+msgstr "Unable to load these tables right now."
+
+msgid "Unable to load these wishlists right now."
+msgstr "Unable to load these wishlists right now."
+
+msgid "Unable to load this library right now."
+msgstr "Unable to load this library right now."
+
+msgid "Unable to load this wishlist right now."
+msgstr "Unable to load this wishlist right now."
+
+msgid "Unable to preview this change right now."
+msgstr "Unable to preview this change right now."
+
+msgid "Unable to remove that volume right now."
+msgstr "Unable to remove that volume right now."
+
+msgid "Unable to update that entry's visibility right now."
+msgstr "Unable to update that entry's visibility right now."
+
+msgid "Unable to update that table right now."
+msgstr "Unable to update that table right now."
+
+msgid "Unable to update this wishlist's visibility right now."
+msgstr "Unable to update this wishlist's visibility right now."
+
+msgid "Unable to update your library's default visibility right now."
+msgstr "Unable to update your library's default visibility right now."
+
+msgid "Updated %(updated_at)s"
+msgstr "Updated %(updated_at)s"
+
+msgid "User Settings"
+msgstr "User Settings"
+
+msgid "Visibility"
+msgstr "Visibility"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Volume ID"
+msgstr "Volume ID"
+
+msgid "Volumes"
+msgstr "Volumes"
+
+msgid "Wishlist"
+msgstr "Wishlist"
+
+msgid "Wishlist deleted."
+msgstr "Wishlist deleted."
+
+msgid "Wishlist visibility updated."
+msgstr "Wishlist visibility updated."
+
+msgid "Wishlists"
+msgstr "Wishlists"
+
+msgid "Your library, wishlist, and tables."
+msgstr "Your library, wishlist, and tables."
+
+msgid "and its entries will be permanently deleted. This cannot be undone."
+msgstr "and its entries will be permanently deleted. This cannot be undone."
+
+msgid "inherit default"
+msgstr "inherit default"
+
+msgid "was"
+msgstr "was"
+
+msgid "will newly expose these entries, which currently have a narrower override:"
+msgstr "will newly expose these entries, which currently have a narrower override:"

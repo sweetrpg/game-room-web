@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Library{% endblock %}
+{% block title %}{{ _('Library') }}{% endblock %}
 {% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
 <style>
@@ -20,7 +20,7 @@
   .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
 </style>
 <div class="page-header">
-    <h2>Library</h2>
+    <h2>{{ _('Library') }}</h2>
     {% if is_owner and library %}
     <div class="visibility-menu" id="visibility-menu">
         <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="Change default visibility" aria-haspopup="true" aria-expanded="false">
@@ -39,9 +39,9 @@
 </div>
 
 {% if is_owner and not user.id %}
-<p class="empty-state">Log in to see your library.</p>
+<p class="empty-state">{{ _('Log in to see your library.') }}</p>
 {% elif not library %}
-<p class="empty-state">This library isn't available right now.</p>
+<p class="empty-state">{{ _("This library isn't available right now.") }}</p>
 {% else %}
 {% if is_owner %}
 <form id="default-visibility-form" method="post" action="{{ base_path }}/library/default-visibility" hidden>
@@ -56,10 +56,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Volume</th>
-            <th>Effective visibility</th>
+            <th>{{ _('Volume') }}</th>
+            <th>{{ _('Effective visibility') }}</th>
             {% if is_owner %}
-            <th>Override</th>
+            <th>{{ _('Override') }}</th>
             <th></th>
             {% endif %}
         </tr>
@@ -67,30 +67,30 @@
     <tbody>
         {% for entry in library.entries %}
         <tr>
-            <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+            <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a></td>
             <td>{{ entry.visibility_override or library.default_visibility }}</td>
             {% if is_owner %}
             <td>
                 <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}/visibility" class="table-actions">
                     <select name="visibility">
-                        <option value="">inherit default</option>
+                        <option value="">{{ _('inherit default') }}</option>
                         {% for level in visibility_levels %}
                         <option value="{{ level }}" {% if level == entry.visibility_override %}selected{% endif %}>{{ level }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-secondary">Set</button>
+                    <button type="submit" class="btn btn-secondary">{{ _('Set') }}</button>
                 </form>
             </td>
             <td>
                 <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-ghost">Remove</button>
+                    <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
                 </form>
             </td>
             {% endif %}
         </tr>
         {% else %}
-        <tr><td colspan="4" class="empty-state-inline">No volumes visible here yet.</td></tr>
+        <tr><td colspan="4" class="empty-state-inline">{{ _('No volumes visible here yet.') }}</td></tr>
         {% endfor %}
     </tbody>
 </table>
@@ -98,16 +98,16 @@
 
 <div class="dialog-backdrop" id="visibility-warning-backdrop" hidden>
     <div class="dialog" role="alertdialog" aria-labelledby="visibility-warning-title">
-        <h3 class="dialog-title" id="visibility-warning-title">This will expose more entries</h3>
+        <h3 class="dialog-title" id="visibility-warning-title">{{ _('This will expose more entries') }}</h3>
         <p class="dialog-body">
-            Changing your library's default visibility to <strong id="visibility-warning-target"></strong>
-            will newly expose these entries, which currently have a narrower override:
+            {{ _("Changing your library's default visibility to") }} <strong id="visibility-warning-target"></strong>
+            {{ _('will newly expose these entries, which currently have a narrower override:') }}
         </p>
         <ul id="visibility-warning-list"></ul>
         <div class="dialog-actions">
-            <button type="button" class="btn btn-secondary" id="visibility-warning-adjust">Keep these private (adjust overrides)</button>
-            <button type="button" class="btn btn-ghost" id="visibility-warning-cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" id="visibility-warning-proceed">Change anyway</button>
+            <button type="button" class="btn btn-secondary" id="visibility-warning-adjust">{{ _('Keep these private (adjust overrides)') }}</button>
+            <button type="button" class="btn btn-ghost" id="visibility-warning-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary" id="visibility-warning-proceed">{{ _('Change anyway') }}</button>
         </div>
     </div>
 </div>
@@ -165,7 +165,7 @@
         list.innerHTML = '';
         newlyExposed.forEach(function (entry) {
           var li = document.createElement('li');
-          li.textContent = entry.volume_id + ' (was ' + entry.visibility_override + ')';
+          li.textContent = entry.volume_id + ' (' + '{{ _('was') }} ' + entry.visibility_override + ')';
           list.appendChild(li);
         });
         backdrop.hidden = false;
@@ -185,7 +185,7 @@
       })
       .catch(function () {
         // Preview endpoint unreachable - fail closed, don't silently apply an unreviewed change.
-        alert('Unable to check the impact of this change right now. Please try again.');
+        alert('{{ _('Unable to check the impact of this change right now. Please try again.') }}');
       });
   });
 
