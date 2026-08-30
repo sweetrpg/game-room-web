@@ -18,6 +18,7 @@ import pytest
 from flask import Flask
 
 from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
 from sweetrpg_game_room_web.application.blueprints import blueprint as main_blueprint
 from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
 from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
@@ -66,6 +67,7 @@ def client_mock():
 def app(client_mock):
     app = Flask(__name__, template_folder=TEMPLATE_DIR)
     app.config["SECRET_KEY"] = "test"
+    init_i18n(app)
     app.register_blueprint(main_blueprint)
 
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
@@ -171,7 +173,7 @@ def test_add_entry_returns_updated_count_and_recent(owner_client, client_mock):
     body = resp.get_json()
     assert body["count"] == 1
     assert body["recent"][0]["volume_id"] == "vol-1"
-    client_mock.add_library_entry.assert_called_once_with("user-1", "vol-1")
+    client_mock.add_library_entry.assert_called_once_with("user-1", "vol-1", volume_title="")
 
 
 def test_add_entry_handles_client_error(owner_client, client_mock):

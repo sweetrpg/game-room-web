@@ -15,6 +15,7 @@ from flask import Flask
 
 from sweetrpg_game_room_web.application import constants
 from sweetrpg_game_room_web.application.blueprints import blueprint as main_blueprint
+from sweetrpg_game_room_web.application.i18n import init_app as init_i18n
 from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
 
 
@@ -66,6 +67,7 @@ def _build_app(admin_client=None):
     app = Flask("test_game_room_web")
     app.config["TESTING"] = True
     app.secret_key = "test-secret"
+    init_i18n(app)
     if admin_client is not None:
         app.config[constants.ADMIN_API_CLIENT_KEY] = admin_client
     app.register_blueprint(main_blueprint)
