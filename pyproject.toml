@@ -72,6 +72,9 @@ docs = [
     "sphinx-tabs",
     "rstcheck",
 ]
+dev = [
+    "ruff>=0.16.5",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
