@@ -112,9 +112,11 @@
                 </form>
             </td>
             <td>
-                <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}">
+                <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}" class="entry-remove">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
+                    <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}" data-volume-title="{{ entry.volume_title or entry.volume_id }}">
+                        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+                    </button>
                 </form>
             </td>
             {% endif %}
@@ -155,6 +157,19 @@
         </div>
     </div>
 </div>
+
+{% if is_owner %}
+<div class="dialog-backdrop" id="entry-remove-backdrop" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="entry-remove-title">
+        <h3 class="dialog-title" id="entry-remove-title">{{ _('Remove from library?') }}</h3>
+        <p class="dialog-body"><strong id="entry-remove-name"></strong> {{ _('will be removed from your library.') }}</p>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost" id="entry-remove-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary" id="entry-remove-confirm">{{ _('Remove') }}</button>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
 {% block scripts %}
 <script>
@@ -279,6 +294,52 @@
       }
     });
   }
+
+  {% if is_owner %}
+  var removeBackdrop = document.getElementById('entry-remove-backdrop');
+  if (removeBackdrop) {
+    var removeName = document.getElementById('entry-remove-name');
+    var removeCancel = document.getElementById('entry-remove-cancel');
+    var removeConfirm = document.getElementById('entry-remove-confirm');
+    var pendingRemove = null;
+
+    function closeRemoveDialog() {
+      removeBackdrop.hidden = true;
+      pendingRemove = null;
+    }
+
+    document.querySelectorAll('.entry-remove').forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        pendingRemove = form;
+        removeName.textContent = form.querySelector('[data-volume-title]').dataset.volumeTitle;
+        removeBackdrop.hidden = false;
+      });
+    });
+
+    removeCancel.addEventListener('click', closeRemoveDialog);
+    removeConfirm.addEventListener('click', function () {
+      if (!pendingRemove) return;
+      var real = document.createElement('form');
+      real.method = 'post';
+      real.action = pendingRemove.action;
+      real.style.display = 'none';
+      var methodInput = document.createElement('input');
+      methodInput.type = 'hidden';
+      methodInput.name = '_method';
+      methodInput.value = 'DELETE';
+      real.appendChild(methodInput);
+      document.body.appendChild(real);
+      real.submit();
+    });
+    removeBackdrop.addEventListener('click', function (event) {
+      if (event.target === removeBackdrop) closeRemoveDialog();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !removeBackdrop.hidden) closeRemoveDialog();
+    });
+  }
+  {% endif %}
 })();
 </script>
 <script>
