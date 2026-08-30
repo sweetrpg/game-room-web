@@ -101,8 +101,11 @@ msgstr "Down for maintenance"
 msgid "Effective visibility"
 msgstr "Effective visibility"
 
-msgid "Entry visibility updated."
-msgstr "Entry visibility updated."
+msgid "Friends"
+msgstr "Friends"
+
+msgid "Friends of friends"
+msgstr "Friends of friends"
 
 msgid "Expected back:"
 msgstr "Expected back:"
@@ -184,6 +187,12 @@ msgstr "No wishlists visible here yet."
 
 msgid "Override"
 msgstr "Override"
+
+msgid "Private"
+msgstr "Private"
+
+msgid "Public"
+msgstr "Public"
 
 msgid "Remove"
 msgstr "Remove"
