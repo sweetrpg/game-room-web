@@ -1,3 +1,22 @@
+## [0.6.0] - 2026-08-30
+
+### 🚀 Features
+
+- *(library)* Add per-entry visibility menu with confirmation (#418)
+- *(library)* Localize effective visibility labels and icons
+- *(library)* Add aligned destructive remove button with confirmation (#416)
+- *(library)* Add multi-select bulk visibility override (#414)
+
+### 🐛 Bug Fixes
+
+- *(wishlist)* Polish wishlist browse cards and confirm delete
+- Unit tests
+- Write route tests
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.5.0
+- Re-sync
 ## [0.5.0] - 2026-08-30
 
 ### 🚀 Features
