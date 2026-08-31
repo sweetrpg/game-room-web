@@ -1,3 +1,12 @@
+## [0.7.0] - 2026-08-31
+
+### 🚀 Features
+
+- *(auth)* Resolve canonical user id from users-api profile
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.6.1
 ## [0.6.1] - 2026-08-31
 
 ### 🐛 Bug Fixes
