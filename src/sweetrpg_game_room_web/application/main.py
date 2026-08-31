@@ -71,26 +71,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
         app.logger.info("Setting up Sentry...")
         sentry = SentryWsgiMiddleware(app)
 
-    # from sweetrpg_game_room_web.application.blueprints import api
-    # from sweetrpg_game_room_web.application.auth import oauth
-    # from authlib.integrations.flask_client import OAuth
-    # api.init_app(app)
-    # oauth.init_app(app)
-    # oauth.app = app
-    # api.oauth_manager(oauth)
-    # oauth.scope_setter(get_scope)
-
-    # _oauth = OAuth(app)
-    # oauth.register('auth0',
-    #                client_id=os.environ[constants.AUTH0_CLIENT_ID],
-    #                client_secret=os.environ[constants.AUTH0_CLIENT_SECRET],
-    #                api_base_url=os.environ[constants.AUTH0_DOMAIN],
-    #                access_token_url=os.environ[constants.AUTH0_CALLBACK_URL],
-    #                authorize_url=os.environ[constants.AUTH0_LOGIN_URL],
-    #                client_kwargs={
-    #                    'scope': 'openid profile email',
-    #                })
-
     app.logger.info("Setting up API client...")
     app.config[constants.SWEETRPG_API_CLIENT_KEY] = APIClient(os.environ[constants.GAME_ROOM_API_BASE_URL])
 
@@ -107,13 +87,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     from sweetrpg_game_room_web.application.blueprints import blueprint as main_blueprint
 
-    from sweetrpg_game_room_web.application.blueprints.licenses import blueprint as licenses_blueprint
-    main_blueprint.register_blueprint(licenses_blueprint)
-    from sweetrpg_game_room_web.application.blueprints.volumes import blueprint as volumes_blueprint
-    main_blueprint.register_blueprint(volumes_blueprint)
-    from sweetrpg_game_room_web.application.blueprints.persons import blueprint as persons_blueprint
-    main_blueprint.register_blueprint(persons_blueprint)
-
     from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
     main_blueprint.register_blueprint(library_blueprint)
     from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
@@ -128,13 +101,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
     # app.register_blueprint(billing_blueprint, url_prefix="/billing")
 
     app.register_blueprint(main_blueprint)  # , url_prefix=f"/{os.environ[constants.APPLICATION_BASE_PATH]}")
-
-    # vue = Vue(app)
-
-    # app.wsgi_app = SassMiddleware(app.wsgi_app, {
-    #     'application': ('static/sass', 'static/css', '/static/css')
-    # })
-    # scss = Scss(app, static_dir='static', asset_dir='assets')
 
     print(app.url_map)
 

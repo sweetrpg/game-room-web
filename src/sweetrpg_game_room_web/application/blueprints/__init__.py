@@ -10,6 +10,7 @@ import os
 import analytics
 import jinja2
 import json
+import requests
 from flask import Blueprint, request, render_template, session, jsonify, current_app, redirect, url_for
 from flask_babel import gettext as _
 from sweetrpg_game_room_web import __version__
@@ -169,9 +170,32 @@ def _populate():
     user = shared_session.current_user()
     session[constants.SESSION_ACCESS_TOKEN] = user.get("accessToken") if user else None
     session[constants.SESSION_EMAIL] = user.get("email") if user else None
-    session[constants.SESSION_USER_ID] = user.get("sub") if user else None
+    session[constants.SESSION_USER_ID] = (
+        (_resolve_canonical_user_id(user.get("accessToken")) or user.get("sub")) if user else None
+    )
     session[constants.SESSION_NAME] = user.get("name") if user else None
     session[constants.SESSION_ROLES] = user.get("roles") if user else None
+
+
+def _resolve_canonical_user_id(access_token):
+    """Resolve the canonical `users._id` UUID (not the Auth0 subject) via users-api's profile
+    endpoint, so every game-room-api `user_id` param is the canonical ID. Returns None when the
+    profile is unresolvable so the caller falls back to the subject (anonymous/unprovisioned)."""
+    base_url = current_app.config.get(constants.USERS_API_URL)
+    if not access_token or not base_url:
+        return None
+    try:
+        resp = requests.get(
+            f"{base_url.rstrip('/')}/api/profile",
+            headers={"Authorization": f"Bearer {access_token}"},
+            timeout=5,
+        )
+        if resp.status_code != 200:
+            return None
+        return resp.json().get("user_id")
+    except Exception:
+        current_app.logger.warning("Unable to resolve canonical user id from users-api profile", exc_info=True)
+        return None
 
 
 @blueprint.before_request
