@@ -556,7 +556,7 @@ def test_logged_in_visitor_with_no_data_sees_empty_states(owner_client, client_m
 
     body = resp.get_data(as_text=True)
     assert "No volumes yet" in body
-    assert "No entries yet" in body
+    assert "No wishlists" in body
     assert "No tables yet" in body
 
 

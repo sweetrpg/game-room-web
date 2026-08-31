@@ -18,7 +18,11 @@
             <div class="card-title">{{ table.name }}</div>
             <div class="card-meta">
                 <span class="card-kicker">{{ table.visibility }}</span>
+                {% if table.volume_ids %}
                 <span>{{ _('%(count)s volume(s)', count=table.volume_ids | length) }}</span>
+                {% else %}
+                <span>{{ _('No volumes') }}</span>
+                {% endif %}
             </div>
         </div>
     </a>
