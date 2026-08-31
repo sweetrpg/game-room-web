@@ -1,3 +1,15 @@
+## [0.6.1] - 2026-08-31
+
+### 🐛 Bug Fixes
+
+- Update template text and translations for consistency
+- Wishlist assertion
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.6.0
+- Remove unused blueprints
+- Remove commented code
 ## [0.6.0] - 2026-08-30
 
 ### 🚀 Features
