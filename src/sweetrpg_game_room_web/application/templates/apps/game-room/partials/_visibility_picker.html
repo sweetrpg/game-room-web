@@ -1,0 +1,47 @@
+{# Icon radio-group for picking a visibility level at create time. Shared by the New table
+   page and the landing-page create dialogs. Renders one icon-only button per level with the
+   level name as a tooltip; backs a `visibility` radio input. #}
+
+{% macro visibility_icon(level) -%}
+{%- if level == 'private' -%}lock
+{%- elif level == 'friends' -%}user-friends
+{%- elif level == 'friends-of-friends' -%}users
+{%- else -%}globe
+{%- endif -%}
+{%- endmacro %}
+
+{% macro visibility_label(level) -%}
+{%- if level == 'private' -%}{{ _('Private') }}
+{%- elif level == 'friends' -%}{{ _('Friends') }}
+{%- elif level == 'friends-of-friends' -%}{{ _('Friends of friends') }}
+{%- elif level == 'public' -%}{{ _('Public') }}
+{%- else -%}{{ level }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro visibility_picker(levels, selected, shared_url) -%}
+<div class="visibility-picker" role="radiogroup" aria-label="{{ _('Visibility') }}">
+    {% for level in levels %}
+    <label class="visibility-option" title="{{ visibility_label(level) }}">
+        <input type="radio" name="visibility" value="{{ level }}" aria-label="{{ visibility_label(level) }}"{% if level == selected %} checked{% endif %}>
+        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+    </label>
+    {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro visibility_picker_styles() -%}
+<style>
+  .visibility-picker { display: flex; gap: 8px; }
+  .visibility-option {
+    display: inline-flex; padding: 8px; border-radius: 8px; cursor: pointer;
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+  .visibility-option:hover { background: color-mix(in srgb, var(--color-accent) 20%, transparent); }
+  .visibility-option:focus-within { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .visibility-option input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .visibility-option .icon-mask { background-color: var(--color-accent); }
+  .visibility-option:has(input:checked) { background: var(--color-accent); }
+  .visibility-option:has(input:checked) .icon-mask { background-color: var(--color-bg); }
+</style>
+{%- endmacro %}

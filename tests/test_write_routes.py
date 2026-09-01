@@ -359,6 +359,13 @@ def test_new_table_page_renders(owner_client):
     assert resp.status_code == 200
 
 
+def test_new_table_page_uses_visibility_icon_picker(owner_client):
+    body = owner_client.get("/tables/new").get_data(as_text=True)
+    assert 'class="visibility-picker"' in body
+    assert 'type="radio" name="visibility" value="private"' in body
+    assert "<select" not in body
+
+
 def test_create_table_requires_name(owner_client, client_mock):
     resp = owner_client.post("/tables/", data={"name": ""})
     assert resp.status_code == 302

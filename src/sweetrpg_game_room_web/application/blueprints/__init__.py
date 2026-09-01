@@ -227,7 +227,7 @@ def _wishlist_entries(wishlists):
 @blueprint.route("/")
 def main_page():
     context = get_context()
-    context.update({'appname': "Game Room"})
+    context.update({'appname': "Game Room", 'visibility_levels': constants.VISIBILITY_LEVELS})
 
     user_id = context["user"]["id"]
     if user_id:
