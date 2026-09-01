@@ -41,8 +41,8 @@ msgstr "Administration"
 msgid "Apply"
 msgstr "Apply"
 
-msgid "Back to all wishlists"
-msgstr "Back to all wishlists"
+msgid "Back to wishlists"
+msgstr "Back to wishlists"
 
 msgid "Browse Library"
 msgstr "Browse Library"
