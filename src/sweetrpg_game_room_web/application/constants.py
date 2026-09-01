@@ -44,7 +44,6 @@ VISIBILITY_LEVELS = ["private", "friends", "friends-of-friends", "public"]
 SWEETRPG_AUTH_KEY = 'sweetrpg-auth'
 
 # Configuration
-SEGMENT_WRITE_KEY = "SEGMENT_WRITE_KEY"
 DEBUG = "DEBUG"
 PORT = "PORT"
 LOG_LEVEL = "LOG_LEVEL"
