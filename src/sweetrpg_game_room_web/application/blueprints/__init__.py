@@ -209,9 +209,15 @@ def _format_date(iso_string):
     if not iso_string:
         return None
     try:
-        return datetime.datetime.fromisoformat(iso_string).strftime("%b %-d, %Y")
+        parsed = datetime.datetime.fromisoformat(iso_string)
     except ValueError:
         return None
+    # game-room-api serialises an unset timestamp as Go's zero time
+    # (0001-01-01T00:00:00Z); the Unix epoch is the other common sentinel. Treat
+    # either as "no date" so the UI doesn't render "Updated Jan 1, 0001".
+    if parsed.year <= 1970:
+        return None
+    return parsed.strftime("%b %-d, %Y")
 
 
 def _recent_entries(entries, date_key, limit=3):
