@@ -1,3 +1,17 @@
+## [0.9.0] - 2026-09-01
+
+### 🚀 Features
+
+- *(tables)* Icon visibility picker for table creation
+
+### 🐛 Bug Fixes
+
+- *(landing)* Wishlist card counts wishlists, not aggregated entries
+- Correct name for profile menu item
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.8.1
 ## [0.8.1] - 2026-09-01
 
 ### 🐛 Bug Fixes
