@@ -406,6 +406,24 @@ def test_get_table_page_renders(owner_client, client_mock):
     assert resp.status_code == 200
 
 
+def test_table_detail_uses_icon_controls_not_select_or_save(owner_client, client_mock):
+    client_mock.get_table.return_value = {
+        "id": "table-1", "name": "Campaign Night", "visibility": "private", "volume_ids": [],
+    }
+    body = owner_client.get("/tables/table-1").get_data(as_text=True)
+    assert "<select" not in body
+    assert 'id="visibility-menu"' in body
+    assert 'class="dialog-backdrop add-volume-dialog"' in body
+    assert ">Save<" not in body
+
+
+def test_update_table_name_only_keeps_current_visibility(owner_client, client_mock):
+    client_mock.get_table.return_value = {"id": "table-1", "name": "Old", "visibility": "friends"}
+    resp = owner_client.post("/tables/table-1", data={"name": "New"})
+    assert resp.status_code == 302
+    client_mock.update_table.assert_called_once_with("user-1", "table-1", "New", "friends")
+
+
 def test_get_user_table_page_renders(owner_client, client_mock):
     client_mock.get_table.return_value = {"id": "table-1", "name": "Campaign Night", "volumes": []}
     resp = owner_client.get("/tables/users/user-2/table-1")
@@ -478,7 +496,7 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
         ]
     }
     client_mock.list_wishlists.return_value = [
-        {"id": "wl-1", "entries": [{"volume_id": "vol-3", "added_at": "2026-08-26T12:00:00+00:00"}]}
+        {"id": "wl-1", "name": "Holiday", "entries": [{"volume_id": "vol-3"}]}
     ]
     client_mock.list_tables.return_value = [
         {"id": "table-1", "name": "Friday Night", "updated_at": "2026-08-25T12:00:00+00:00"}
@@ -490,7 +508,7 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
     assert 'class="stat-card"' in body
     assert "Log in to see your library" not in body
     assert "vol-1" in body
-    assert "vol-3" in body
+    assert "Holiday" in body
     assert "Friday Night" in body
     assert 'id="add-to-library-btn"' in body
     assert 'id="create-wishlist-btn"' in body

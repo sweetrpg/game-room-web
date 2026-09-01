@@ -1,43 +1,60 @@
 {% extends "base.html" %}
+{% from "apps/game-room/partials/_visibility_picker.html" import visibility_menu, visibility_menu_script, visibility_styles, visibility_label %}
+{% from "apps/game-room/partials/_add_volume_dialog.html" import add_volume_trigger, add_volume_dialog, add_volume_dialog_styles, add_volume_dialog_script %}
 {% block title %}{{ table.name if table else _('Table') }}{% endblock %}
 {% block content %}
+{{ visibility_styles() }}
+{{ add_volume_dialog_styles() }}
+<style>
+  .detail-header-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .detail-header-actions { display: flex; align-items: center; gap: 0.5rem; }
+  .detail-header-actions .icon-btn:not(.icon-btn-danger) {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .detail-header-actions .icon-btn:not(.icon-btn-danger):hover {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+  .detail-title-input {
+    font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+    font-size: 28px; background: transparent; border: none; border-bottom: 1px solid transparent;
+    color: var(--color-text); padding: 2px 0; min-width: 0; flex: 1 1 auto;
+  }
+  .detail-title-input:hover { border-bottom-color: var(--color-neutral-400); }
+  .detail-title-input:focus { outline: none; border-bottom-color: var(--color-accent); }
+  .detail-block-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+</style>
 {% if not table %}
 <p class="empty-state">{{ _("This table isn't available right now.") }}</p>
 {% else %}
 <div class="detail-header-row">
-    <h2>{{ table.name }}</h2>
     {% if is_owner %}
+    <form id="table-name-form" method="post" action="{{ base_path }}/tables/{{ table.id }}" style="flex: 1 1 auto; display: flex;">
+        <input class="detail-title-input" name="name" type="text" value="{{ table.name }}" required aria-label="{{ _('Name') }}">
+    </form>
     <div class="detail-header-actions">
+        {{ visibility_menu(table.visibility, visibility_levels, shared_url, 'table-visibility-form', base_path ~ '/tables/' ~ table.id) }}
         <form method="post" action="{{ base_path }}/tables/{{ table.id }}">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-ghost">{{ _('Delete table') }}</button>
+            <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Delete table') }}">
+                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Delete table') }}</span></span>
+            </button>
         </form>
     </div>
+    {% else %}
+    <h2>{{ table.name }}</h2>
+    <p class="card-meta"><span class="card-kicker">{{ visibility_label(table.visibility) }}</span></p>
     {% endif %}
 </div>
 
-{% if is_owner %}
-<form method="post" action="{{ base_path }}/tables/{{ table.id }}" class="form">
-    <label class="form-label" for="table-name">{{ _('Name') }}</label>
-    <input class="input" id="table-name" name="name" type="text" value="{{ table.name }}" required>
-
-    <label class="form-label" for="table-visibility">{{ _('Visibility') }}</label>
-    <select id="table-visibility" name="visibility">
-        {% for level in visibility_levels %}
-        <option value="{{ level }}" {% if level == table.visibility %}selected{% endif %}>{{ level }}</option>
-        {% endfor %}
-    </select>
-
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
-    </div>
-</form>
-{% else %}
-<p class="card-meta"><span class="card-kicker">{{ table.visibility }}</span></p>
-{% endif %}
-
 <div class="detail-block">
-    <span class="section-label">{{ _('Volumes') }}</span>
+    <div class="detail-block-header">
+        <span class="section-label">{{ _('Volumes') }}</span>
+        {% if is_owner %}{{ add_volume_trigger('add-table-volume-dialog', shared_url) }}{% endif %}
+    </div>
     <table class="table">
         <tbody>
             {% for volume_id in table.volume_ids or [] %}
@@ -47,7 +64,10 @@
                 <td>
                     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes/{{ volume_id }}">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
+                        <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Remove') }}">
+                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                            <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Remove') }}</span></span>
+                        </button>
                     </form>
                 </td>
                 {% endif %}
@@ -57,12 +77,28 @@
             {% endfor %}
         </tbody>
     </table>
-    {% if is_owner %}
-    <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes" class="table-actions">
-        <input class="input" name="volume_id" type="text" placeholder="{{ _('Catalog volume ID') }}" required>
-        <button type="submit" class="btn btn-secondary">{{ _('Add volume') }}</button>
-    </form>
-    {% endif %}
 </div>
+
+{% if is_owner %}
+{{ add_volume_dialog('add-table-volume-dialog', _('Add volume to table'), base_path ~ '/library/volume-search', base_path ~ '/tables/' ~ table.id ~ '/volumes') }}
+{% endif %}
+{% endif %}
+{% endblock %}
+{% block scripts %}
+{% if table and is_owner %}
+{{ visibility_menu_script(shared_url) }}
+{{ add_volume_dialog_script() }}
+<script>
+(function () {
+  var form = document.getElementById('table-name-form');
+  if (!form) return;
+  var input = form.querySelector('.detail-title-input');
+  var last = input.value;
+  input.addEventListener('change', function () {
+    var v = input.value.trim();
+    if (v && v !== last) { last = v; form.submit(); }
+  });
+})();
+</script>
 {% endif %}
 {% endblock %}

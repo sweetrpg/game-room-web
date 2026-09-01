@@ -1,6 +1,9 @@
-{# Icon radio-group for picking a visibility level at create time. Shared by the New table
-   page and the landing-page create dialogs. Renders one icon-only button per level with the
-   level name as a tooltip; backs a `visibility` radio input. #}
+{# Visibility affordances shared across Game Room.
+
+   visibility_picker  - icon radio-group for create forms/dialogs (all options visible, pick one)
+   visibility_menu    - icon-only trigger + dropdown for detail pages (change applies immediately)
+
+   Both carry a rich tooltip (mode name + a short description) via shared-web's .tooltip-* CSS. #}
 
 {% macro visibility_icon(level) -%}
 {%- if level == 'private' -%}lock
@@ -19,18 +22,60 @@
 {%- endif -%}
 {%- endmacro %}
 
+{% macro visibility_desc(level) -%}
+{%- if level == 'private' -%}{{ _('Only you can see this.') }}
+{%- elif level == 'friends' -%}{{ _('You and people you have added as friends.') }}
+{%- elif level == 'friends-of-friends' -%}{{ _('Your friends and their friends.') }}
+{%- elif level == 'public' -%}{{ _('Anyone, including people who are not signed in.') }}
+{%- else -%}{{ level }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro _tip(level) -%}
+<span class="tooltip" role="tooltip">
+    <span class="tooltip-title">{{ visibility_label(level) }}</span>
+    <span class="tooltip-body">{{ visibility_desc(level) }}</span>
+</span>
+{%- endmacro %}
+
+{% macro _icon(level, shared_url) -%}
+<span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+{%- endmacro %}
+
 {% macro visibility_picker(levels, selected, shared_url) -%}
 <div class="visibility-picker" role="radiogroup" aria-label="{{ _('Visibility') }}">
     {% for level in levels %}
-    <label class="visibility-option" title="{{ visibility_label(level) }}">
+    <label class="visibility-option tooltip-host" tabindex="-1">
         <input type="radio" name="visibility" value="{{ level }}" aria-label="{{ visibility_label(level) }}"{% if level == selected %} checked{% endif %}>
-        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+        {{ _icon(level, shared_url) }}
+        {{ _tip(level) }}
     </label>
     {% endfor %}
 </div>
 {%- endmacro %}
 
-{% macro visibility_picker_styles() -%}
+{% macro visibility_menu(current, levels, shared_url, form_id, action) -%}
+<div class="visibility-menu" id="visibility-menu">
+    <button type="button" class="icon-btn visibility-menu-trigger tooltip-host" id="visibility-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="visibility-menu-panel">
+        <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(current) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(current) }}.svg');"></span>
+        {{ _tip(current) }}
+    </button>
+    <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
+        {% for level in levels %}
+        <button type="button" class="visibility-menu-item tooltip-host" data-visibility="{{ level }}" role="menuitem">
+            {{ _icon(level, shared_url) }}
+            <span>{{ visibility_label(level) }}</span>
+            {{ _tip(level) }}
+        </button>
+        {% endfor %}
+    </div>
+</div>
+<form id="{{ form_id }}" method="post" action="{{ action }}" data-visibility-form hidden>
+    <input type="hidden" name="visibility" id="visibility-menu-value" value="{{ current }}">
+</form>
+{%- endmacro %}
+
+{% macro visibility_styles() -%}
 <style>
   .visibility-picker { display: flex; gap: 8px; }
   .visibility-option {
@@ -43,5 +88,74 @@
   .visibility-option .icon-mask { background-color: var(--color-accent); }
   .visibility-option:has(input:checked) { background: var(--color-accent); }
   .visibility-option:has(input:checked) .icon-mask { background-color: var(--color-bg); }
+
+  .visibility-menu { position: relative; }
+  .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
+  .visibility-menu-panel {
+    position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px;
+    background: var(--color-bg); border: 1px solid var(--color-neutral-300); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); padding: 6px; z-index: 100;
+  }
+  .visibility-menu-panel[hidden] { display: none; }
+  .visibility-menu-item {
+    display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
+    padding: 8px 10px; border: none; border-radius: 4px; background: transparent;
+    color: var(--color-text); font-size: 14px; font-family: inherit; text-align: left; cursor: pointer;
+  }
+  .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
+  .visibility-menu-item .icon-mask { background-color: var(--color-accent); }
 </style>
+{%- endmacro %}
+
+{% macro visibility_menu_script(shared_url) -%}
+<script>
+(function () {
+  var menu = document.getElementById('visibility-menu');
+  if (!menu) return;
+  var trigger = document.getElementById('visibility-menu-trigger');
+  var triggerIcon = document.getElementById('visibility-menu-icon');
+  var panel = document.getElementById('visibility-menu-panel');
+  var form = menu.parentNode.querySelector('[data-visibility-form]');
+  var valueInput = document.getElementById('visibility-menu-value');
+  var iconBySvg = {
+    'private': 'lock',
+    'friends': 'user-friends',
+    'friends-of-friends': 'users',
+    'public': 'globe'
+  };
+
+  function closeMenu() {
+    panel.hidden = true;
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  trigger.addEventListener('click', function (event) {
+    event.stopPropagation();
+    panel.hidden = !panel.hidden;
+    trigger.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+  });
+
+  panel.querySelectorAll('.visibility-menu-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      var level = item.dataset.visibility;
+      valueInput.value = level;
+      var iconUrl = '{{ shared_url }}/static/svgs/fontawesome/solid/' + iconBySvg[level] + '.svg';
+      triggerIcon.style.maskImage = 'url(\'' + iconUrl + '\')';
+      triggerIcon.style.webkitMaskImage = 'url(\'' + iconUrl + '\')';
+      closeMenu();
+      form.submit();
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!panel.hidden && !menu.contains(event.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && !panel.hidden) {
+      closeMenu();
+      trigger.focus();
+    }
+  });
+})();
+</script>
 {%- endmacro %}

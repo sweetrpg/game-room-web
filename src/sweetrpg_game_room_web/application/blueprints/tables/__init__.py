@@ -124,8 +124,20 @@ def update_table(id: str):
             flash(_("Unable to delete that table right now."))
         return local_redirect("web.tables.get_tables_page")
 
-    name = request.form.get("name", "").strip()
-    visibility = request.form.get("visibility") or "private"
+    # The detail page saves name and visibility independently (instant edit, no Save button),
+    # so a POST may carry only one field. Fall back to the current value for whatever is absent.
+    current = {}
+    try:
+        current = _client().get_table(user_id, id) or {}
+    except Exception:
+        current_app.logger.exception("Unable to fetch table %s before update!", id)
+
+    name = request.form.get("name")
+    name = name.strip() if name is not None else (current.get("name") or "")
+    visibility = request.form.get("visibility") or current.get("visibility") or "private"
+    if not name:
+        flash(_("A table name is required."))
+        return local_redirect("web.tables.get_table_page", id=id)
     try:
         _client().update_table(user_id, id, name, visibility)
         flash(_("Table updated."))

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% from "apps/game-room/partials/_visibility_picker.html" import visibility_picker, visibility_picker_styles %}
+{% from "apps/game-room/partials/_visibility_picker.html" import visibility_picker, visibility_styles %}
 {% block title %}Game Room{% endblock %}
 {% block content %}
-{{ visibility_picker_styles() }}
+{{ visibility_styles() }}
 <style>
   /* Page-specific: matches catalog-web's landing-page summary grid (no shared-web equivalent
      to reuse - see catalog-web's home.leaf .stat-card-grid). */
@@ -98,13 +98,13 @@
                 <div class="stat-card-count">{{ wishlist_count }}</div>
                 {% if wishlist_recent %}
                 <div class="stat-card-recent">
-                    {% for entry in wishlist_recent %}
-                    <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a>
-                    <span class="stat-card-updated">{{ _('Added %(added_at)s', added_at=entry.added_at_label) }}</span>
+                    {% for wl in wishlist_recent %}
+                    <a href="{{ base_path }}/wishlist/{{ wl.id }}">{{ wl.name }}</a>
+                    {% if wl.updated_at_label %}<span class="stat-card-updated">{{ _('Updated %(updated_at)s', updated_at=wl.updated_at_label) }}</span>{% endif %}
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="stat-card-recent stat-card-empty">{{ _('No wishlists') }}</div>
+                <div class="stat-card-recent stat-card-empty">{{ _('No wishlists yet') }}</div>
                 {% endif %}
             </div>
             <div class="stat-card">
