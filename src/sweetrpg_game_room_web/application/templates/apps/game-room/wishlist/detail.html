@@ -15,32 +15,85 @@
     align-items: center;
     gap: 0.5rem;
   }
+  .detail-header-actions .icon-btn:not(.icon-btn-danger) {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .detail-header-actions .icon-btn:not(.icon-btn-danger):hover {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
   .back-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0;
     margin-bottom: 0.5rem;
   }
+  .back-link .icon-mask { background-color: currentColor; }
   .visibility-menu { position: relative; }
-  .visibility-menu-panel { position: absolute; right: 0; top: 100%; z-index: 10; }
+  .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
+  .visibility-menu-panel {
+    position: absolute; top: calc(100% + 4px); right: 0; min-width: 200px;
+    background: var(--color-bg); border: 1px solid var(--color-neutral-300); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); padding: 6px; z-index: 100;
+  }
   .visibility-menu-panel[hidden] { display: none; }
+  .visibility-menu-item {
+    display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
+    padding: 8px 10px; border: none; border-radius: 4px; background: transparent;
+    color: var(--color-text); font-size: 14px; font-family: inherit; text-align: left; cursor: pointer;
+  }
+  .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
+  .visibility-menu-item .icon-mask { background-color: var(--color-accent); }
+  .add-volume-form { margin-top: 1rem; }
+  .add-volume-form[hidden] { display: none; }
 </style>
 {% if not wishlist %}
 <p class="empty-state">{{ _("This wishlist isn't available right now.") }}</p>
 {% else %}
-<a class="back-link" href="{% if is_owner %}{{ base_path }}/wishlist/{% else %}{{ base_path }}/wishlist/users/{{ wishlist.user_id }}{% endif %}">{{ _('Back to all wishlists') }}</a>
+<a class="back-link" href="{% if is_owner %}{{ base_path }}/wishlist/{% else %}{{ base_path }}/wishlist/users/{{ wishlist.user_id }}{% endif %}">
+    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/arrow-left.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/arrow-left.svg');"></span>
+    <span>{{ _('Back to wishlists') }}</span>
+</a>
 
 <div class="detail-header-row">
     <h2>{{ wishlist.name }}</h2>
     {% if is_owner %}
     <div class="detail-header-actions">
+        <button type="button" class="icon-btn" id="add-volume-toggle" title="{{ _('Add volume') }}" aria-label="{{ _('Add volume') }}" aria-expanded="false" aria-controls="add-volume-form">
+            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); background-color: var(--color-accent);"></span>
+        </button>
+        <div class="visibility-menu" id="visibility-menu">
+            <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="{{ _('Change visibility') }}" aria-haspopup="true" aria-expanded="false" aria-controls="visibility-menu-panel">
+                <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg');"></span>
+            </button>
+            <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
+                {% for level in visibility_levels %}
+                <button type="button" class="visibility-menu-item" data-visibility="{{ level }}" role="menuitem">
+                    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
+                    <span>{{ level }}</span>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-ghost">{{ _('Delete wishlist') }}</button>
+            <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete wishlist') }}" aria-label="{{ _('Delete wishlist') }}">
+                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+            </button>
         </form>
     </div>
     {% endif %}
 </div>
 
 {% if is_owner %}
+<form id="wishlist-visibility-form" method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" hidden>
+    <select id="wishlist-visibility" name="visibility">
+        {% for level in visibility_levels %}
+        <option value="{{ level }}" {% if level == wishlist.visibility %}selected{% endif %}>{{ level }}</option>
+        {% endfor %}
+    </select>
+</form>
+
 <table class="table">
     <thead><tr><th>{{ _('Volume') }}</th><th></th></tr></thead>
     <tbody>
@@ -50,7 +103,9 @@
             <td>
                 <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-ghost">{{ _('Remove') }}</button>
+                    <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}">
+                        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                    </button>
                 </form>
             </td>
         </tr>
@@ -60,34 +115,12 @@
     </tbody>
 </table>
 
-<form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries">
-    <label class="form-label" for="volume-id">{{ _('Volume ID') }}</label>
-    <input class="input" id="volume-id" name="volume_id" type="text" required>
-    <div class="form-actions">
-        <button type="submit" class="btn btn-secondary">{{ _('Add volume') }}</button>
-    </div>
+<form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries" id="add-volume-form" class="add-volume-form table-actions" hidden>
+    <input class="input" id="volume-id" name="volume_id" type="text" required placeholder="{{ _('Catalog volume ID') }}" aria-label="{{ _('Volume ID') }}">
+    <button type="submit" class="icon-btn" title="{{ _('Add volume') }}" aria-label="{{ _('Add volume') }}">
+        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/check.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/check.svg'); background-color: var(--color-accent);"></span>
+    </button>
 </form>
-
-<div class="detail-section">
-    <h3>{{ _('Visibility') }}</h3>
-    <div class="visibility-menu" id="visibility-menu">
-        <button type="button" class="icon-btn" id="visibility-menu-trigger" aria-expanded="false" aria-controls="visibility-menu-panel">
-            <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg');"></span>
-        </button>
-        <div class="visibility-menu-panel" id="visibility-menu-panel" hidden>
-            {% for level in visibility_levels %}
-            <button type="button" class="visibility-menu-item" data-visibility="{{ level }}">{{ level }}</button>
-            {% endfor %}
-        </div>
-    </div>
-    <form id="wishlist-visibility-form" method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" hidden>
-        <select id="wishlist-visibility" name="visibility">
-            {% for level in visibility_levels %}
-            <option value="{{ level }}" {% if level == wishlist.visibility %}selected{% endif %}>{{ level }}</option>
-            {% endfor %}
-        </select>
-    </form>
-</div>
 {% else %}
 <p class="card-meta"><span class="card-kicker">{{ wishlist.visibility }}</span></p>
 {% endif %}
@@ -96,6 +129,17 @@
 {% block scripts %}
 <script>
 (function () {
+  var toggle = document.getElementById('add-volume-toggle');
+  var addForm = document.getElementById('add-volume-form');
+  if (toggle && addForm) {
+    toggle.addEventListener('click', function () {
+      var show = addForm.hidden;
+      addForm.hidden = !show;
+      toggle.setAttribute('aria-expanded', show ? 'true' : 'false');
+      if (show) addForm.querySelector('#volume-id').focus();
+    });
+  }
+
   var menu = document.getElementById('visibility-menu');
   if (!menu) return;
   var trigger = document.getElementById('visibility-menu-trigger');

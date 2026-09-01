@@ -229,10 +229,13 @@
     });
     cancelBtn.addEventListener('click', closeDialog);
 
+    // Min 3 chars: a 1-2 char query matches most of the catalog and catalog-api's title
+    // search is an in-memory full scan (~6s cold), so short queries are all cost, no signal.
+    var MIN_QUERY_LENGTH = 3;
     searchInput.addEventListener('input', function () {
       var query = searchInput.value.trim();
       clearTimeout(searchTimer);
-      if (!query) {
+      if (query.length < MIN_QUERY_LENGTH) {
         resultsList.innerHTML = '';
         return;
       }
@@ -241,7 +244,7 @@
           .then(function (r) { return r.json(); })
           .then(renderResults)
           .catch(function () { resultsList.innerHTML = ''; });
-      }, 250);
+      }, 350);
     });
 
     confirmBtn.addEventListener('click', function () {

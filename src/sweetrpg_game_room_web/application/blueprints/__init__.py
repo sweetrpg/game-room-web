@@ -7,7 +7,6 @@ import datetime
 import html
 import os
 
-import analytics
 import jinja2
 import json
 import requests
@@ -196,21 +195,6 @@ def _resolve_canonical_user_id(access_token):
     except Exception:
         current_app.logger.warning("Unable to resolve canonical user id from users-api profile", exc_info=True)
         return None
-
-
-@blueprint.before_request
-def _track():
-    email = session.get(constants.SESSION_EMAIL)
-    user_id = session.get(constants.SESSION_USER_ID)
-    if analytics.write_key and user_id and email:
-        analytics.identify(user_id, {
-            'email': email,
-            'created_at': datetime.datetime.now()
-        })
-
-        analytics.track(user_id, request.url, {
-            'user_agent': request.headers.get('User-Agent')
-        })
 
 
 @blueprint.errorhandler(Exception)

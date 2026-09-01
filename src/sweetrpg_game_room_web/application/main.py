@@ -19,7 +19,6 @@ from sweetrpg_game_room_web.application.catalog_client import CatalogClient
 from logging.config import dictConfig
 from redis.client import Redis
 from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
-import analytics
 import os
 
 
@@ -54,10 +53,6 @@ def create_app(app_name=constants.APPLICATION_NAME):
 
     # app.logger.info("Setting up cache...")
     # oauth.init_app(app)
-
-    app.logger.info("Setting up analytics...")
-    analytics.write_key = app.config.get("SEGMENT_WRITE_KEY")
-    analytics.debug = app.config.get("DEBUG") or False
 
     app.logger.info("Setting up session manager...")
     session = Session(app)

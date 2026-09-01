@@ -1,3 +1,15 @@
+## [0.8.0] - 2026-09-01
+
+### 🚀 Features
+
+- *(wishlist)* Icon-only detail actions, collapsed add-volume, min-length search
+
+### ⚙️ Miscellaneous Tasks
+
+- We don't use Segment
+- Really, we don't use Segment
+- *(release)* Merge master into develop after v0.7.3
+- Finish removing Segment analytics
 ## [0.7.3] - 2026-09-01
 
 ### 🐛 Bug Fixes
