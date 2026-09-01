@@ -1,3 +1,12 @@
+## [0.10.1] - 2026-09-01
+
+### 🐛 Bug Fixes
+
+- *(landing)* Treat Go zero-time / epoch dates as no date
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.10.0
 ## [0.10.0] - 2026-09-01
 
 ### 🚀 Features
