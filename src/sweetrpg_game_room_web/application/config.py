@@ -29,7 +29,6 @@ class BaseConfig(object):
     SESSION_REDIS = redis.from_url(
         f"redis://:{os.environ.get(constants.REDIS_PASS, '')}@{os.environ[constants.REDIS_HOST]}:{int(os.environ.get(constants.REDIS_PORT) or 6379)}"
     )
-    SEGMENT_WRITE_KEY = os.environ.get(constants.SEGMENT_WRITE_KEY)
     ADMIN_API_URL = os.environ.get(constants.ADMIN_API_URL)
     CATALOG_API_URL = os.environ.get(constants.CATALOG_API_URL)
     USERS_API_URL = os.environ.get(constants.USERS_API_URL)
