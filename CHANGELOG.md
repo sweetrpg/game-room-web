@@ -1,3 +1,12 @@
+## [0.7.3] - 2026-09-01
+
+### 🐛 Bug Fixes
+
+- Restore constants.SEGMENT_WRITE_KEY
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.7.2
 ## [0.7.2] - 2026-09-01
 
 ### 🐛 Bug Fixes
