@@ -1,3 +1,12 @@
+## [0.7.1] - 2026-09-01
+
+### 🐛 Bug Fixes
+
+- *(k8s)* Set USERS_API_URL in the dev configmap
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.7.0
 ## [0.7.0] - 2026-08-31
 
 ### 🚀 Features
