@@ -82,7 +82,7 @@
                 <div class="stat-card-recent">
                     {% for entry in library_recent %}
                     <a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a>
-                    <span class="stat-card-updated">{{ _('Added %(added_at)s', added_at=entry.added_at_label) }}</span>
+                    {% if entry.added_at_label %}<span class="stat-card-updated">{{ _('Added %(added_at)s', added_at=entry.added_at_label) }}</span>{% endif %}
                     {% endfor %}
                 </div>
                 {% else %}
@@ -118,7 +118,7 @@
                 <div class="stat-card-recent">
                     {% for table in tables_recent %}
                     <a href="{{ base_path }}/tables/{{ table.id }}">{{ table.name }}</a>
-                    <span class="stat-card-updated">{{ _('Updated %(updated_at)s', updated_at=table.updated_at_label) }}</span>
+                    {% if table.updated_at_label %}<span class="stat-card-updated">{{ _('Updated %(updated_at)s', updated_at=table.updated_at_label) }}</span>{% endif %}
                     {% endfor %}
                 </div>
                 {% else %}
