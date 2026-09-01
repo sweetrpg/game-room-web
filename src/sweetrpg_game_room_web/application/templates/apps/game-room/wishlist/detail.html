@@ -1,20 +1,16 @@
 {% extends "base.html" %}
+{% from "apps/game-room/partials/_visibility_picker.html" import visibility_menu, visibility_menu_script, visibility_styles, visibility_label %}
+{% from "apps/game-room/partials/_add_volume_dialog.html" import add_volume_trigger, add_volume_dialog, add_volume_dialog_styles, add_volume_dialog_script %}
 {% block title %}{{ wishlist.name if wishlist else _('Wishlist') }}{% endblock %}
-{% macro visibility_icon(level) %}{% if level == 'private' %}lock{% elif level == 'friends' %}user-friends{% elif level == 'friends-of-friends' %}users{% else %}globe{% endif %}{% endmacro %}
 {% block content %}
+{{ visibility_styles() }}
+{{ add_volume_dialog_styles() }}
 <style>
   .detail-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
   }
-  .detail-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  .detail-header-actions { display: flex; align-items: center; gap: 0.5rem; }
   .detail-header-actions .icon-btn:not(.icon-btn-danger) {
     background: color-mix(in srgb, var(--color-accent) 12%, transparent);
   }
@@ -22,30 +18,11 @@
     background: color-mix(in srgb, var(--color-accent) 22%, transparent);
   }
   .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 0; margin-bottom: 0.5rem;
   }
   .back-link .icon-mask { background-color: currentColor; }
-  .visibility-menu { position: relative; }
-  .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
-  .visibility-menu-panel {
-    position: absolute; top: calc(100% + 4px); right: 0; min-width: 200px;
-    background: var(--color-bg); border: 1px solid var(--color-neutral-300); border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); padding: 6px; z-index: 100;
-  }
-  .visibility-menu-panel[hidden] { display: none; }
-  .visibility-menu-item {
-    display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
-    padding: 8px 10px; border: none; border-radius: 4px; background: transparent;
-    color: var(--color-text); font-size: 14px; font-family: inherit; text-align: left; cursor: pointer;
-  }
-  .visibility-menu-item:hover, .visibility-menu-item:focus-visible { background: var(--color-neutral-300); outline: none; }
-  .visibility-menu-item .icon-mask { background-color: var(--color-accent); }
-  .add-volume-form { margin-top: 1rem; }
-  .add-volume-form[hidden] { display: none; }
+  .detail-block-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
 </style>
 {% if not wishlist %}
 <p class="empty-state">{{ _("This wishlist isn't available right now.") }}</p>
@@ -59,133 +36,57 @@
     <h2>{{ wishlist.name }}</h2>
     {% if is_owner %}
     <div class="detail-header-actions">
-        <button type="button" class="icon-btn" id="add-volume-toggle" title="{{ _('Add volume') }}" aria-label="{{ _('Add volume') }}" aria-expanded="false" aria-controls="add-volume-form">
-            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); background-color: var(--color-accent);"></span>
-        </button>
-        <div class="visibility-menu" id="visibility-menu">
-            <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="{{ _('Change visibility') }}" aria-haspopup="true" aria-expanded="false" aria-controls="visibility-menu-panel">
-                <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(wishlist.visibility) }}.svg');"></span>
-            </button>
-            <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
-                {% for level in visibility_levels %}
-                <button type="button" class="visibility-menu-item" data-visibility="{{ level }}" role="menuitem">
-                    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(level) }}.svg');"></span>
-                    <span>{{ level }}</span>
-                </button>
-                {% endfor %}
-            </div>
-        </div>
+        {{ visibility_menu(wishlist.visibility, visibility_levels, shared_url, 'wishlist-visibility-form', base_path ~ '/wishlist/' ~ wishlist.id) }}
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete wishlist') }}" aria-label="{{ _('Delete wishlist') }}">
+            <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Delete wishlist') }}">
                 <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Delete wishlist') }}</span></span>
             </button>
         </form>
     </div>
+    {% else %}
+    <p class="card-meta"><span class="card-kicker">{{ visibility_label(wishlist.visibility) }}</span></p>
     {% endif %}
 </div>
 
+<div class="detail-block">
+    <div class="detail-block-header">
+        <span class="section-label">{{ _('Volumes') }}</span>
+        {% if is_owner %}{{ add_volume_trigger('add-wishlist-volume-dialog', shared_url) }}{% endif %}
+    </div>
+    <table class="table">
+        <tbody>
+            {% for entry in wishlist.entries %}
+            <tr>
+                <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+                {% if is_owner %}
+                <td>
+                    <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Remove') }}">
+                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                            <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Remove') }}</span></span>
+                        </button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <tr><td colspan="2" class="empty-state-inline">{{ _('No volumes in this wishlist yet.') }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% if is_owner %}
-<form id="wishlist-visibility-form" method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" hidden>
-    <select id="wishlist-visibility" name="visibility">
-        {% for level in visibility_levels %}
-        <option value="{{ level }}" {% if level == wishlist.visibility %}selected{% endif %}>{{ level }}</option>
-        {% endfor %}
-    </select>
-</form>
-
-<table class="table">
-    <thead><tr><th>{{ _('Volume') }}</th><th></th></tr></thead>
-    <tbody>
-        {% for entry in wishlist.entries %}
-        <tr>
-            <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
-            <td>
-                <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}">
-                        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% else %}
-        <tr><td colspan="2" class="empty-state-inline">{{ _('No volumes in this wishlist yet.') }}</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries" id="add-volume-form" class="add-volume-form table-actions" hidden>
-    <input class="input" id="volume-id" name="volume_id" type="text" required placeholder="{{ _('Catalog volume ID') }}" aria-label="{{ _('Volume ID') }}">
-    <button type="submit" class="icon-btn" title="{{ _('Add volume') }}" aria-label="{{ _('Add volume') }}">
-        <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/check.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/check.svg'); background-color: var(--color-accent);"></span>
-    </button>
-</form>
-{% else %}
-<p class="card-meta"><span class="card-kicker">{{ wishlist.visibility }}</span></p>
+{{ add_volume_dialog('add-wishlist-volume-dialog', _('Add volume to wishlist'), base_path ~ '/library/volume-search', base_path ~ '/wishlist/' ~ wishlist.id ~ '/entries') }}
 {% endif %}
 {% endif %}
 {% endblock %}
 {% block scripts %}
-<script>
-(function () {
-  var toggle = document.getElementById('add-volume-toggle');
-  var addForm = document.getElementById('add-volume-form');
-  if (toggle && addForm) {
-    toggle.addEventListener('click', function () {
-      var show = addForm.hidden;
-      addForm.hidden = !show;
-      toggle.setAttribute('aria-expanded', show ? 'true' : 'false');
-      if (show) addForm.querySelector('#volume-id').focus();
-    });
-  }
-
-  var menu = document.getElementById('visibility-menu');
-  if (!menu) return;
-  var trigger = document.getElementById('visibility-menu-trigger');
-  var triggerIcon = document.getElementById('visibility-menu-icon');
-  var panel = document.getElementById('visibility-menu-panel');
-  var form = document.getElementById('wishlist-visibility-form');
-  var select = document.getElementById('wishlist-visibility');
-  var iconBySvg = {
-    'private': 'lock',
-    'friends': 'user-friends',
-    'friends-of-friends': 'users',
-    'public': 'globe'
-  };
-
-  function closeMenu() {
-    panel.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
-  }
-
-  trigger.addEventListener('click', function (event) {
-    event.stopPropagation();
-    panel.hidden = !panel.hidden;
-    trigger.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
-  });
-
-  panel.querySelectorAll('.visibility-menu-item').forEach(function (item) {
-    item.addEventListener('click', function () {
-      var level = item.dataset.visibility;
-      select.value = level;
-      var iconUrl = '{{ shared_url }}/static/svgs/fontawesome/solid/' + iconBySvg[level] + '.svg';
-      triggerIcon.style.maskImage = 'url(\'' + iconUrl + '\')';
-      triggerIcon.style.webkitMaskImage = 'url(\'' + iconUrl + '\')';
-      closeMenu();
-      form.submit();
-    });
-  });
-
-  document.addEventListener('click', function (event) {
-    if (!panel.hidden && !menu.contains(event.target)) closeMenu();
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && !panel.hidden) {
-      closeMenu();
-      trigger.focus();
-    }
-  });
-})();
-</script>
+{% if wishlist and is_owner %}
+{{ visibility_menu_script(shared_url) }}
+{{ add_volume_dialog_script() }}
+{% endif %}
 {% endblock %}

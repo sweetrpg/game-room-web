@@ -376,3 +376,24 @@ msgstr "will newly expose these entries, which currently have a narrower overrid
 
 msgid "will be removed from your library."
 msgstr "will be removed from your library."
+
+msgid "Add volume to table"
+msgstr "Add volume to table"
+
+msgid "Add volume to wishlist"
+msgstr "Add volume to wishlist"
+
+msgid "Anyone, including people who are not signed in."
+msgstr "Anyone, including people who are not signed in."
+
+msgid "No wishlists yet"
+msgstr "No wishlists yet"
+
+msgid "Only you can see this."
+msgstr "Only you can see this."
+
+msgid "You and people you have added as friends."
+msgstr "You and people you have added as friends."
+
+msgid "Your friends and their friends."
+msgstr "Your friends and their friends."

@@ -1,0 +1,131 @@
+{#
+   Add-a-volume-by-name dialog, shared by the table and wishlist detail pages.
+   add_volume_trigger    the plus icon button that opens the dialog
+   add_volume_dialog     dialog_id, title, search_url, submit_url
+                         search_url hits /library/volume-search
+                         submit_url takes form-encoded volume_id, then the page reloads
+   add_volume_dialog_styles and add_volume_dialog_script go once per page.
+#}
+
+{% macro add_volume_trigger(dialog_id, shared_url) -%}
+<button type="button" class="icon-btn tooltip-host" data-dialog-target="{{ dialog_id }}" aria-haspopup="dialog">
+    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); background-color: var(--color-accent);"></span>
+    <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Add volume') }}</span></span>
+</button>
+{%- endmacro %}
+
+{% macro add_volume_dialog(dialog_id, title, search_url, submit_url) -%}
+<div class="dialog-backdrop add-volume-dialog" id="{{ dialog_id }}" data-search-url="{{ search_url }}" data-submit-url="{{ submit_url }}" hidden>
+    <div class="dialog" role="dialog" aria-labelledby="{{ dialog_id }}-title">
+        <h3 class="dialog-title" id="{{ dialog_id }}-title">{{ title }}</h3>
+        <input type="search" class="input add-volume-search" placeholder="{{ _('Search for a volume by title') }}" autocomplete="off" data-1p-ignore data-lpignore="true">
+        <ul class="search-results add-volume-results"></ul>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost add-volume-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary add-volume-confirm" disabled>{{ _('Add') }}</button>
+        </div>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro add_volume_dialog_styles() -%}
+<style>
+  .add-volume-dialog .search-results { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow-y: auto; }
+  .add-volume-dialog .search-result-btn {
+    display: block; width: 100%; text-align: left; background: none; border: 1px solid transparent;
+    border-radius: 4px; padding: 6px 8px; cursor: pointer; font: inherit; color: inherit;
+  }
+  .add-volume-dialog .search-result-btn:hover { background: var(--color-neutral-300); }
+  .add-volume-dialog .search-result-btn[aria-selected="true"] {
+    border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+  .add-volume-dialog .dialog { gap: var(--space-3); }
+</style>
+{%- endmacro %}
+
+{% macro add_volume_dialog_script() -%}
+<script>
+(function () {
+  // Min 3 chars: catalog-api's title search is an in-memory full scan (~6s cold), so a
+  // 1-2 char query is all cost and no signal.
+  var MIN_QUERY_LENGTH = 3;
+
+  document.querySelectorAll('.add-volume-dialog').forEach(function (backdrop) {
+    var trigger = document.querySelector('[data-dialog-target="' + backdrop.id + '"]');
+    var searchInput = backdrop.querySelector('.add-volume-search');
+    var resultsList = backdrop.querySelector('.add-volume-results');
+    var confirmBtn = backdrop.querySelector('.add-volume-confirm');
+    var cancelBtn = backdrop.querySelector('.add-volume-cancel');
+    var searchUrl = backdrop.dataset.searchUrl;
+    var submitUrl = backdrop.dataset.submitUrl;
+    var selected = null;
+    var timer = null;
+
+    function close() {
+      backdrop.hidden = true;
+      searchInput.value = '';
+      resultsList.innerHTML = '';
+      selected = null;
+      confirmBtn.disabled = true;
+    }
+
+    function render(volumes) {
+      resultsList.innerHTML = '';
+      selected = null;
+      confirmBtn.disabled = true;
+      volumes.forEach(function (volume) {
+        var li = document.createElement('li');
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'search-result-btn';
+        b.textContent = volume.title;
+        b.setAttribute('aria-selected', 'false');
+        b.addEventListener('click', function () {
+          resultsList.querySelectorAll('.search-result-btn').forEach(function (o) {
+            o.setAttribute('aria-selected', 'false');
+          });
+          b.setAttribute('aria-selected', 'true');
+          selected = volume;
+          confirmBtn.disabled = false;
+        });
+        li.appendChild(b);
+        resultsList.appendChild(li);
+      });
+    }
+
+    if (trigger) {
+      trigger.addEventListener('click', function () {
+        backdrop.hidden = false;
+        searchInput.focus();
+      });
+    }
+    cancelBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', function (e) { if (e.target === backdrop) close(); });
+
+    searchInput.addEventListener('input', function () {
+      var q = searchInput.value.trim();
+      clearTimeout(timer);
+      if (q.length < MIN_QUERY_LENGTH) { resultsList.innerHTML = ''; return; }
+      timer = setTimeout(function () {
+        fetch(searchUrl + '?q=' + encodeURIComponent(q))
+          .then(function (r) { return r.json(); })
+          .then(render)
+          .catch(function () { resultsList.innerHTML = ''; });
+      }, 350);
+    });
+
+    confirmBtn.addEventListener('click', function () {
+      if (!selected) return;
+      confirmBtn.disabled = true;
+      fetch(submitUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'volume_id=' + encodeURIComponent(selected.id)
+      })
+        .then(function () { window.location.reload(); })
+        .catch(function () { confirmBtn.disabled = false; });
+    });
+  });
+})();
+</script>
+{%- endmacro %}
