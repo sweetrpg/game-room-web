@@ -44,7 +44,7 @@
                 {% if user.email %}<span class="avatar-menu-email">{{ user.email }}</span>{% endif %}
             </div>
             <hr class="avatar-menu-divider">
-            <a class="avatar-menu-item" href="/users/profile">{{ _('User Settings') }}</a>
+            <a class="avatar-menu-item" href="/users/profile">{{ _('Profile') }}</a>
             {% if user.is_admin %}
             <a class="avatar-menu-item" href="/admin">{{ _('Administration') }}</a>
             {% endif %}

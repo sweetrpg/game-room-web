@@ -332,8 +332,8 @@ msgstr "Unable to update your library's default visibility right now."
 msgid "Updated %(updated_at)s"
 msgstr "Updated %(updated_at)s"
 
-msgid "User Settings"
-msgstr "User Settings"
+msgid "Profile"
+msgstr "Profile"
 
 msgid "Visibility"
 msgstr "Visibility"
