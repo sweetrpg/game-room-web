@@ -13,6 +13,7 @@ from sweetrpg_game_room_web.application.blueprints import (
     _format_date,
     _recent_entries,
 )
+from sweetrpg_game_room_web.application.constants import RESPONSE_400_VOLUME_REQUIRED
 
 
 blueprint = Blueprint("library", __name__, url_prefix="/library")
@@ -159,7 +160,7 @@ def add_entry():
     payload = request.json or {}
     volume_id = (payload.get("volume_id") or "").strip()
     if not volume_id:
-        return jsonify({"error": _("A volume is required.")}), 400
+        return jsonify({"code": RESPONSE_400_VOLUME_REQUIRED, "error": _("A volume is required.")}), 400
     try:
         _client().add_library_entry(user_id, volume_id, volume_title=(payload.get("volume_title") or "").strip())
         library = _client().get_library(user_id) or {}
