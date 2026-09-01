@@ -11,7 +11,7 @@ spec:
         app.kubernetes.io/version: v1
         app.kubernetes.io/component: web
         app.kubernetes.io/part-of: game-room
-    type: LoadBalancer
+    type: ClusterIP
     ports:
         - name: http
           port: 8282
