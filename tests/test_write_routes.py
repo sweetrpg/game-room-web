@@ -73,34 +73,12 @@ def app(client_mock):
 
     app.config[constants.GAME_ROOM_CLIENT_KEY] = client_mock
     app.config[constants.CATALOG_CLIENT_KEY] = client_mock
-    with patch("sweetrpg_game_room_web.application.blueprints.analytics.identify"), patch(
-        "sweetrpg_game_room_web.application.blueprints.analytics.track"
-    ):
-        yield app
+    yield app
 
 
 @pytest.fixture
 def owner_client(app):
     return _OwnerClient(app.test_client(), "user-1")
-
-
-# -- tracking --
-
-
-def test_track_skips_analytics_when_write_key_unset(owner_client):
-    with patch("sweetrpg_game_room_web.application.blueprints.analytics.write_key", None), patch(
-        "sweetrpg_game_room_web.application.blueprints.analytics.identify"
-    ) as identify:
-        owner_client.get("/library/")
-        identify.assert_not_called()
-
-
-def test_track_calls_analytics_when_write_key_set(owner_client):
-    with patch("sweetrpg_game_room_web.application.blueprints.analytics.write_key", "test-key"), patch(
-        "sweetrpg_game_room_web.application.blueprints.analytics.identify"
-    ) as identify:
-        owner_client.get("/library/")
-        identify.assert_called_once()
 
 
 # -- library --
