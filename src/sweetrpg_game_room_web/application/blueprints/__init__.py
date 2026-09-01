@@ -227,13 +227,13 @@ def _wishlist_entries(wishlists):
 @blueprint.route("/")
 def main_page():
     context = get_context()
-    context.update({'appname': "Game Room"})
+    context.update({'appname': "Game Room", 'visibility_levels': constants.VISIBILITY_LEVELS})
 
     user_id = context["user"]["id"]
     if user_id:
         client = current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
-        library, wishlist_entries, tables = None, [], []
+        library, wishlists, wishlist_entries, tables = None, [], [], []
         try:
             library = client.get_library(user_id)
         except Exception:
@@ -256,7 +256,7 @@ def main_page():
                 {**e, 'added_at_label': _format_date(e.get('added_at'))}
                 for e in _recent_entries(library_entries, 'added_at')
             ],
-            'wishlist_count': len(wishlist_entries),
+            'wishlist_count': len(wishlists),
             'wishlist_recent': [
                 {**e, 'added_at_label': _format_date(e.get('added_at'))}
                 for e in _recent_entries(wishlist_entries, 'added_at')

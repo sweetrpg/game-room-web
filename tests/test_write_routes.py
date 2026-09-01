@@ -359,6 +359,13 @@ def test_new_table_page_renders(owner_client):
     assert resp.status_code == 200
 
 
+def test_new_table_page_uses_visibility_icon_picker(owner_client):
+    body = owner_client.get("/tables/new").get_data(as_text=True)
+    assert 'class="visibility-picker"' in body
+    assert 'type="radio" name="visibility" value="private"' in body
+    assert "<select" not in body
+
+
 def test_create_table_requires_name(owner_client, client_mock):
     resp = owner_client.post("/tables/", data={"name": ""})
     assert resp.status_code == 302
@@ -493,7 +500,7 @@ def test_logged_in_visitor_sees_library_wishlist_tables_cards(owner_client, clie
     client_mock.list_tables.assert_called_once_with("user-1")
 
 
-def test_logged_in_visitor_wishlist_count_aggregates_entries(owner_client, client_mock):
+def test_logged_in_visitor_wishlist_count_is_number_of_wishlists(owner_client, client_mock):
     client_mock.get_library.return_value = {"entries": []}
     client_mock.list_wishlists.return_value = [
         {"id": "wl-1", "entries": [{"volume_id": "vol-1", "added_at": "2026-08-26T12:00:00+00:00"}]},
@@ -510,7 +517,8 @@ def test_logged_in_visitor_wishlist_count_aggregates_entries(owner_client, clien
     resp = owner_client.get("/")
 
     body = resp.get_data(as_text=True)
-    assert 'class="stat-card-count">3' in body
+    # Card is labelled "Wishlists" - count the wishlists, not their aggregated entries.
+    assert 'class="stat-card-count">2' in body
 
 
 def test_anonymous_visitor_sees_no_card_action_buttons(app):
