@@ -186,7 +186,7 @@ def _resolve_canonical_user_id(access_token):
         return None
     try:
         resp = requests.get(
-            f"{base_url.rstrip('/')}/api/profile",
+            f"{base_url.rstrip('/')}/profile",
             headers={"Authorization": f"Bearer {access_token}"},
             timeout=5,
         )
