@@ -13,7 +13,10 @@ from sweetrpg_game_room_web.application.blueprints import (
     _format_date,
     _recent_entries,
 )
-from sweetrpg_game_room_web.application.constants import RESPONSE_400_VOLUME_REQUIRED
+from sweetrpg_game_room_web.application.constants import (
+    RESPONSE_400_VOLUME_REQUIRED,
+    RESPONSE_502_UNABLE_TO_ADD_VOLUME,
+)
 
 
 blueprint = Blueprint("library", __name__, url_prefix="/library")
@@ -156,6 +159,8 @@ def add_entry():
     landing page's Library card in place, without a full page reload.
     """
     context = get_context()
+    current_app.logger.info("Adding volume to library", extra={"context": context})
+
     user_id = context["user"]["id"]
     payload = request.json or {}
     volume_id = (payload.get("volume_id") or "").strip()
@@ -176,7 +181,7 @@ def add_entry():
         )
     except Exception:
         current_app.logger.exception("Unable to add volume %s to library (user %s)!", volume_id, user_id)
-        return jsonify({"error": _("Unable to add that volume right now.")}), 502
+        return jsonify({"code": RESPONSE_502_UNABLE_TO_ADD_VOLUME, "error": _("Unable to add that volume right now.")}), 502
 
 
 @blueprint.route("/entries/<volume_id>", methods=["POST"])
