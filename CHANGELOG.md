@@ -1,3 +1,14 @@
+## [0.7.2] - 2026-09-01
+
+### 🐛 Bug Fixes
+
+- Add response code to 400 error
+- *(auth)* Call users-api /profile, not /api/profile
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.7.1
+- More error constants
 ## [0.7.1] - 2026-09-01
 
 ### 🐛 Bug Fixes
