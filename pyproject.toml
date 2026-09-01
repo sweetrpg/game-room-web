@@ -23,7 +23,6 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
 ]
 dependencies = [
-    "analytics-python~=1.0",
     "blinker~=1.0",
     "dnspython~=2.0",
     "Flask-Babel~=4.0",
