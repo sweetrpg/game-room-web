@@ -65,6 +65,7 @@ def test_anonymous_viewer_sees_no_owner_controls(app):
     assert "vol-1" in body
     assert 'id="visibility-menu-trigger"' not in body
     assert "Remove" not in body
+    assert 'id="entry-remove-backdrop"' not in body
 
 
 def test_owner_sees_edit_controls(app):
@@ -78,6 +79,9 @@ def test_owner_sees_edit_controls(app):
     body = resp.get_data(as_text=True)
     assert 'id="visibility-menu-trigger"' in body
     assert "Remove" in body
+    assert "icon-btn-danger" in body  # destructive icon button, not a text button
+    assert 'class="entry-remove"' in body
+    assert 'id="entry-remove-backdrop"' in body  # confirmation dialog present
 
 
 def test_effective_visibility_renders_localized_label_and_icon(app):
