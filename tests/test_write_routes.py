@@ -151,6 +151,16 @@ def test_remove_library_entry_ignored_without_delete_override(owner_client, clie
     client_mock.remove_library_entry.assert_not_called()
 
 
+def test_confirmed_remove_library_entry_deletes_and_redirects(owner_client, client_mock):
+    # The confirmation dialog is client-side; on confirm it re-posts the same
+    # _method=DELETE form. Server behaviour is unchanged - the entry is removed
+    # and the page redirects back.
+    resp = owner_client.post("/library/entries/vol-1", data={"_method": "DELETE"})
+    assert resp.status_code == 302
+    assert resp.headers["Location"].endswith("/library/")
+    client_mock.remove_library_entry.assert_called_once_with("user-1", "vol-1")
+
+
 def test_search_volumes_returns_empty_list_for_blank_query(owner_client, client_mock):
     resp = owner_client.get("/library/volume-search?q=")
     assert resp.status_code == 200
