@@ -34,8 +34,12 @@
     <h2>{{ _('Library') }}</h2>
     {% if is_owner and library %}
     <div class="visibility-menu" id="visibility-menu">
-        <button type="button" class="icon-btn visibility-menu-trigger" id="visibility-menu-trigger" title="Change default visibility" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="icon-btn visibility-menu-trigger tooltip-host" id="visibility-menu-trigger" aria-label="{{ _('Default visibility') }}" aria-haspopup="true" aria-expanded="false">
             <span class="icon-mask" id="visibility-menu-icon" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(library.default_visibility) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(library.default_visibility) }}.svg');"></span>
+            <span class="tooltip" role="tooltip">
+                <span class="tooltip-title">{{ _('Default visibility') }}</span>
+                <span class="tooltip-body">{{ _('The visibility new items get unless you set an override.') }}</span>
+            </span>
         </button>
         <div class="visibility-menu-panel" id="visibility-menu-panel" role="menu" hidden>
             {% for level in visibility_levels %}
@@ -99,8 +103,12 @@
             {% if is_owner %}
             <td>
                 <div class="visibility-menu entry-visibility-menu" id="entry-visibility-menu-{{ entry.volume_id }}" data-library-default="{{ library.default_visibility }}" data-current-override="{{ entry.visibility_override or '' }}">
-                    <button type="button" class="icon-btn visibility-menu-trigger entry-visibility-trigger" data-volume-id="{{ entry.volume_id }}" title="{{ _('Change override') }}" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="icon-btn visibility-menu-trigger entry-visibility-trigger tooltip-host" data-volume-id="{{ entry.volume_id }}" aria-label="{{ _('Visibility override') }}" aria-haspopup="true" aria-expanded="false">
                         <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(entry.visibility_override) }}.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/{{ visibility_icon(entry.visibility_override) }}.svg');"></span>
+                        <span class="tooltip" role="tooltip">
+                            <span class="tooltip-title">{{ _('Visibility override') }}</span>
+                            <span class="tooltip-body">{{ _('Give this item a visibility different from the library default.') }}</span>
+                        </span>
                     </button>
                     <div class="visibility-menu-panel" role="menu" hidden>
                         <button type="button" class="visibility-menu-item entry-visibility-item" data-volume-id="{{ entry.volume_id }}" data-visibility="" role="menuitem">

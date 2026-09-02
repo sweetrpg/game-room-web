@@ -68,9 +68,6 @@ msgstr "Change anyway"
 msgid "Change entry visibility"
 msgstr "Change entry visibility"
 
-msgid "Change override"
-msgstr "Change override"
-
 msgid "Change visibility"
 msgstr "Change visibility"
 
@@ -397,3 +394,15 @@ msgstr "You and people you have added as friends."
 
 msgid "Your friends and their friends."
 msgstr "Your friends and their friends."
+
+msgid "Default visibility"
+msgstr "Default visibility"
+
+msgid "The visibility new items get unless you set an override."
+msgstr "The visibility new items get unless you set an override."
+
+msgid "Visibility override"
+msgstr "Visibility override"
+
+msgid "Give this item a visibility different from the library default."
+msgstr "Give this item a visibility different from the library default."
