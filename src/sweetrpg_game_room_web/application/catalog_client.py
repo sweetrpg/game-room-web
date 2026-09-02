@@ -29,3 +29,24 @@ class CatalogClient:
             if len(matches) >= limit:
                 break
         return matches
+
+    def get_volume(self, volume_id: str):
+        """Fetch one volume. Title falls back to the id when the volume has none."""
+        resp = requests.get(f"{self.base_url}/volumes/{volume_id}", timeout=10)
+        resp.raise_for_status()
+        data = resp.json().get("data") or {}
+        title = data.get("attributes", {}).get("title", "")
+        return {"id": volume_id, "title": title or volume_id}
+
+    def titles_for(self, volume_ids):
+        """Map volume ids to titles for display. Any id that doesn't resolve maps to itself,
+        so a single missing volume never blanks out the rest of the list."""
+        titles = {}
+        for volume_id in volume_ids:
+            if volume_id in titles:
+                continue
+            try:
+                titles[volume_id] = self.get_volume(volume_id)["title"]
+            except Exception:
+                titles[volume_id] = volume_id
+        return titles

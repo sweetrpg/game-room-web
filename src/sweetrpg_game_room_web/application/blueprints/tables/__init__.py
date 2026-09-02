@@ -17,6 +17,10 @@ def _client():
     return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
 
+def _catalog():
+    return current_app.config[constants.CATALOG_CLIENT_KEY]
+
+
 @blueprint.route("/", methods=["GET"])
 def get_tables_page():
     """List the current user's tables."""
@@ -100,11 +104,18 @@ def _render_table(context: dict, owner_id: str, id: str):
     except Exception:
         current_app.logger.exception("Unable to fetch table %s for user %s!", id, owner_id)
         flash(_("Unable to load that table right now."))
+    volume_titles = {}
+    if table and table.get("volume_ids"):
+        try:
+            volume_titles = _catalog().titles_for(table["volume_ids"])
+        except Exception:
+            current_app.logger.exception("Unable to resolve volume titles for table %s!", id)
     context.update(
         {
             "table": table,
             "is_owner": context["user"]["id"] == owner_id,
             "visibility_levels": constants.VISIBILITY_LEVELS,
+            "volume_titles": volume_titles,
         }
     )
     return render_page("apps/game-room/tables/detail.html", context=context)

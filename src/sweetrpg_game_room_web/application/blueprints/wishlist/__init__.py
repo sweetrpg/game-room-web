@@ -20,6 +20,10 @@ def _client():
     return current_app.config[constants.GAME_ROOM_CLIENT_KEY]
 
 
+def _catalog():
+    return current_app.config[constants.CATALOG_CLIENT_KEY]
+
+
 @blueprint.route("/", methods=["GET"])
 def get_wishlists_page():
     """List the current user's wishlists."""
@@ -103,11 +107,19 @@ def _render_wishlist(context: dict, owner_id: str, wishlist_id: str):
     except Exception:
         current_app.logger.exception("Unable to fetch wishlist %s for user %s!", wishlist_id, owner_id)
         flash(_("Unable to load this wishlist right now."))
+    volume_titles = {}
+    entries = (wishlist or {}).get("entries") or []
+    if entries:
+        try:
+            volume_titles = _catalog().titles_for(e["volume_id"] for e in entries)
+        except Exception:
+            current_app.logger.exception("Unable to resolve volume titles for wishlist %s!", wishlist_id)
     context.update(
         {
             "wishlist": wishlist,
             "is_owner": context["user"]["id"] == owner_id,
             "visibility_levels": constants.VISIBILITY_LEVELS,
+            "volume_titles": volume_titles,
         }
     )
     return render_page("apps/game-room/wishlist/detail.html", context=context)
