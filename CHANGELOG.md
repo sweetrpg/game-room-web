@@ -1,3 +1,12 @@
+## [0.12.0] - 2026-09-02
+
+### 🚀 Features
+
+- *(library)* Rich tooltip on the collection visibility-menu triggers (#447)
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.11.0
 ## [0.11.0] - 2026-09-02
 
 ### 🚀 Features
