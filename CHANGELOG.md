@@ -1,3 +1,13 @@
+## [0.11.0] - 2026-09-02
+
+### 🚀 Features
+
+- *(library)* Confirm before removing a library entry
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.10.1
+- Start library-aligned-remove-button (#416)
 ## [0.10.1] - 2026-09-01
 
 ### 🐛 Bug Fixes
