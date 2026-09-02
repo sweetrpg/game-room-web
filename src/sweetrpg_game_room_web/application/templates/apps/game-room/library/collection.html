@@ -178,6 +178,19 @@
         </div>
     </div>
 </div>
+
+<div class="dialog-backdrop" id="entry-remove-backdrop" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="entry-remove-title">
+        <h3 class="dialog-title" id="entry-remove-title">{{ _('Remove from library?') }}</h3>
+        <p class="dialog-body">
+            <strong id="entry-remove-name"></strong> {{ _('will be removed from your library.') }}
+        </p>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost" id="entry-remove-cancel">{{ _('Cancel') }}</button>
+            <button type="button" class="btn btn-primary" id="entry-remove-confirm">{{ _('Remove') }}</button>
+        </div>
+    </div>
+</div>
 {% endif %}
 {% endblock %}
 {% block scripts %}
