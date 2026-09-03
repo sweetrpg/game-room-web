@@ -153,9 +153,10 @@ def add_volume(id: str):
     context = get_context()
     user_id = context["user"]["id"]
     volume_id = request.form.get("volume_id", "").strip()
+    volume_title = request.form.get("volume_title", "").strip()
     if volume_id:
         try:
-            _client().add_table_volume(user_id, id, volume_id)
+            _client().add_table_volume(user_id, id, volume_id, volume_title)
         except Exception:
             current_app.logger.exception("Unable to add volume %s to table %s!", volume_id, id)
             flash(_("Unable to add that volume right now."))

@@ -145,9 +145,10 @@ def add_wishlist_entry(wishlist_id: str):
     context = get_context()
     user_id = context["user"]["id"]
     volume_id = request.form.get("volume_id", "").strip()
+    volume_title = request.form.get("volume_title", "").strip()
     if volume_id:
         try:
-            _client().add_wishlist_entry(user_id, wishlist_id, volume_id)
+            _client().add_wishlist_entry(user_id, wishlist_id, volume_id, volume_title)
         except Exception:
             current_app.logger.exception(
                 "Unable to add volume %s to wishlist %s!", volume_id, wishlist_id
