@@ -161,14 +161,14 @@ def test_add_wishlist_entry_posts_volume(mock_request):
     mock_request.return_value = _response(content=b"")
     client = GameRoomClient("http://game-room-api.local")
 
-    client.add_wishlist_entry("user-1", "wl-1", "vol-1")
+    client.add_wishlist_entry("user-1", "wl-1", "vol-1", "Pathfinder Core")
 
     mock_request.assert_called_once_with(
         "POST",
         "http://game-room-api.local/users/user-1/wishlists/wl-1/entries",
         timeout=5,
         headers={},
-        json={"volume_id": "vol-1"},
+        json={"volume_id": "vol-1", "volume_title": "Pathfinder Core"},
     )
 
 

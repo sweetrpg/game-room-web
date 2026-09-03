@@ -59,7 +59,7 @@
         <tbody>
             {% for entry in wishlist.entries %}
             <tr>
-                <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_id }}</a></td>
+                <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a></td>
                 {% if is_owner %}
                 <td>
                     <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
