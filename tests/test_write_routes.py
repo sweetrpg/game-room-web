@@ -273,7 +273,15 @@ def test_delete_wishlist_handles_client_error(owner_client, client_mock):
 def test_add_wishlist_entry_form_calls_client_when_volume_id_present(owner_client, client_mock):
     resp = owner_client.post("/wishlist/wl-1/entries", data={"volume_id": "vol-1"})
     assert resp.status_code == 302
-    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-1", "vol-1")
+    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-1", "vol-1", "")
+
+
+def test_add_wishlist_entry_form_passes_volume_title(owner_client, client_mock):
+    resp = owner_client.post(
+        "/wishlist/wl-1/entries", data={"volume_id": "vol-1", "volume_title": "Pathfinder Core"}
+    )
+    assert resp.status_code == 302
+    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-1", "vol-1", "Pathfinder Core")
 
 
 def test_add_wishlist_entry_form_skipped_without_volume_id(owner_client, client_mock):
@@ -457,7 +465,15 @@ def test_update_table_updates_name_and_visibility(owner_client, client_mock):
 def test_add_volume_calls_client_when_volume_id_present(owner_client, client_mock):
     resp = owner_client.post("/tables/table-1/volumes", data={"volume_id": "vol-1"})
     assert resp.status_code == 302
-    client_mock.add_table_volume.assert_called_once_with("user-1", "table-1", "vol-1")
+    client_mock.add_table_volume.assert_called_once_with("user-1", "table-1", "vol-1", "")
+
+
+def test_add_volume_passes_volume_title(owner_client, client_mock):
+    resp = owner_client.post(
+        "/tables/table-1/volumes", data={"volume_id": "vol-1", "volume_title": "Pathfinder Core"}
+    )
+    assert resp.status_code == 302
+    client_mock.add_table_volume.assert_called_once_with("user-1", "table-1", "vol-1", "Pathfinder Core")
 
 
 def test_add_volume_skipped_without_volume_id(owner_client, client_mock):

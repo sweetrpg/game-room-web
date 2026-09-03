@@ -59,7 +59,7 @@
         <tbody>
             {% for volume_id in table.volume_ids or [] %}
             <tr>
-                <td><a href="{{ catalog_url }}/volumes/{{ volume_id }}">{{ volume_id }}</a></td>
+                <td><a href="{{ catalog_url }}/volumes/{{ volume_id }}">{{ (table.volume_titles or {}).get(volume_id, volume_id) }}</a></td>
                 {% if is_owner %}
                 <td>
                     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes/{{ volume_id }}">

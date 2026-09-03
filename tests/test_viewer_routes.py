@@ -133,3 +133,19 @@ def test_own_wishlist_page_without_login_shows_login_prompt(app):
     resp = client.get("/wishlist/")
     assert resp.status_code == 200
     assert "Log in to see your wishlists." in resp.get_data(as_text=True)
+
+
+def test_wishlist_detail_shows_stored_title_and_falls_back_to_id(app):
+    app.config[constants.GAME_ROOM_CLIENT_KEY].get_wishlist.return_value = {
+        "user_id": "user-2",
+        "id": "wl-1",
+        "name": "Holiday",
+        "visibility": "private",
+        "entries": [
+            {"volume_id": "vol-titled", "volume_title": "Pathfinder Core", "added_at": "2026-08-28T12:00:00+00:00"},
+            {"volume_id": "vol-bare", "added_at": "2026-08-28T12:00:00+00:00"},
+        ],
+    }
+    body = app.test_client().get("/wishlist/users/user-2/wl-1").get_data(as_text=True)
+    assert "Pathfinder Core" in body
+    assert "vol-bare" in body

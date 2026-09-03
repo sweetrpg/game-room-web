@@ -88,9 +88,11 @@ class GameRoomClient:
     def delete_wishlist(self, user_id: str, wishlist_id: str):
         return self._request("DELETE", f"/users/{user_id}/wishlists/{wishlist_id}")
 
-    def add_wishlist_entry(self, user_id: str, wishlist_id: str, volume_id: str):
+    def add_wishlist_entry(self, user_id: str, wishlist_id: str, volume_id: str, volume_title: str = ""):
         return self._request(
-            "POST", f"/users/{user_id}/wishlists/{wishlist_id}/entries", json={"volume_id": volume_id}
+            "POST",
+            f"/users/{user_id}/wishlists/{wishlist_id}/entries",
+            json={"volume_id": volume_id, "volume_title": volume_title or None},
         )
 
     def remove_wishlist_entry(self, user_id: str, wishlist_id: str, volume_id: str):
@@ -122,9 +124,11 @@ class GameRoomClient:
     def delete_table(self, user_id: str, table_id: str):
         return self._request("DELETE", f"/users/{user_id}/tables/{table_id}")
 
-    def add_table_volume(self, user_id: str, table_id: str, volume_id: str):
+    def add_table_volume(self, user_id: str, table_id: str, volume_id: str, volume_title: str = ""):
         return self._request(
-            "POST", f"/users/{user_id}/tables/{table_id}/volumes", json={"volume_id": volume_id}
+            "POST",
+            f"/users/{user_id}/tables/{table_id}/volumes",
+            json={"volume_id": volume_id, "volume_title": volume_title or None},
         )
 
     def remove_table_volume(self, user_id: str, table_id: str, volume_id: str):
