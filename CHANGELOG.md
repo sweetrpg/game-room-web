@@ -1,3 +1,12 @@
+## [0.13.0] - 2026-09-03
+
+### 🚀 Features
+
+- *(tables,wishlist)* Show denormalized volume titles on detail pages
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.12.0
 ## [0.12.0] - 2026-09-02
 
 ### 🚀 Features
