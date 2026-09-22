@@ -23,6 +23,7 @@ from sweetrpg_game_room_web.application.blueprints import blueprint as main_blue
 from sweetrpg_game_room_web.application.blueprints.library import blueprint as library_blueprint
 from sweetrpg_game_room_web.application.blueprints.wishlist import blueprint as wishlist_blueprint
 from sweetrpg_game_room_web.application.blueprints.tables import blueprint as tables_blueprint
+from sweetrpg_game_room_web.application.blueprints.loans import blueprint as loans_blueprint
 
 TEMPLATE_DIR = os.path.join(
     os.path.dirname(__file__), "..", "src", "sweetrpg_game_room_web", "application", "templates"
@@ -35,6 +36,7 @@ TEMPLATE_DIR = os.path.join(
 main_blueprint.register_blueprint(library_blueprint)
 main_blueprint.register_blueprint(wishlist_blueprint)
 main_blueprint.register_blueprint(tables_blueprint)
+main_blueprint.register_blueprint(loans_blueprint)
 
 
 class _OwnerClient:
@@ -497,6 +499,122 @@ def test_get_tables_page_lists_tables(owner_client, client_mock):
 def test_get_tables_page_handles_client_error(owner_client, client_mock):
     client_mock.list_tables.side_effect = Exception("boom")
     resp = owner_client.get("/tables/")
+    assert resp.status_code == 200
+
+
+# -- loans --
+
+
+def test_create_loan_requires_volume(owner_client, client_mock):
+    resp = owner_client.post("/loans/", data={"volume_id": "", "borrower_name": "Dana"})
+    assert resp.status_code == 302
+    assert resp.location.endswith("/loans/new")
+    client_mock.create_loan.assert_not_called()
+
+
+def test_create_loan_requires_a_borrower(owner_client, client_mock):
+    resp = owner_client.post("/loans/", data={"volume_id": "vol-1"})
+    assert resp.status_code == 302
+    assert resp.location.endswith("/loans/new")
+    client_mock.create_loan.assert_not_called()
+
+
+def test_create_loan_with_borrower_name_succeeds(owner_client, client_mock):
+    resp = owner_client.post("/loans/", data={"volume_id": "vol-1", "borrower_name": "Dana"})
+    assert resp.status_code == 302
+    assert resp.location.endswith("/loans/")
+    client_mock.create_loan.assert_called_once_with(
+        "user-1", "vol-1", borrower_user_id=None, borrower_name="Dana"
+    )
+
+
+def test_create_loan_with_borrower_user_id_succeeds(owner_client, client_mock):
+    resp = owner_client.post(
+        "/loans/", data={"volume_id": "vol-1", "borrower_user_id": "user-2", "borrower_name": ""}
+    )
+    assert resp.status_code == 302
+    client_mock.create_loan.assert_called_once_with(
+        "user-1", "vol-1", borrower_user_id="user-2", borrower_name=None
+    )
+
+
+def test_create_loan_handles_client_error(owner_client, client_mock):
+    client_mock.create_loan.side_effect = Exception("boom")
+    resp = owner_client.post("/loans/", data={"volume_id": "vol-1", "borrower_name": "Dana"})
+    assert resp.status_code == 302
+    assert resp.location.endswith("/loans/new")
+
+
+def test_return_loan_calls_client_and_redirects(owner_client, client_mock):
+    resp = owner_client.post("/loans/loan-1/return")
+    assert resp.status_code == 302
+    assert resp.location.endswith("/loans/")
+    client_mock.return_loan.assert_called_once_with("user-1", "loan-1")
+
+
+def test_return_loan_handles_client_error(owner_client, client_mock):
+    client_mock.return_loan.side_effect = Exception("boom")
+    resp = owner_client.post("/loans/loan-1/return")
+    assert resp.status_code == 302
+
+
+def test_delete_loan_requires_delete_method_override(owner_client, client_mock):
+    resp = owner_client.post("/loans/loan-1", data={"_method": "DELETE"})
+    assert resp.status_code == 302
+    client_mock.delete_loan.assert_called_once_with("user-1", "loan-1")
+
+
+def test_delete_loan_ignored_without_delete_override(owner_client, client_mock):
+    resp = owner_client.post("/loans/loan-1", data={})
+    assert resp.status_code == 302
+    client_mock.delete_loan.assert_not_called()
+
+
+def test_delete_loan_handles_client_error(owner_client, client_mock):
+    client_mock.delete_loan.side_effect = Exception("boom")
+    resp = owner_client.post("/loans/loan-1", data={"_method": "DELETE"})
+    assert resp.status_code == 302
+
+
+def test_loans_search_volumes_calls_catalog_client(owner_client, client_mock):
+    client_mock.search_volumes.return_value = [{"id": "vol-1", "title": "Curse of Strahd"}]
+    resp = owner_client.get("/loans/volume-search?q=Curse")
+    assert resp.status_code == 200
+    assert resp.get_json() == [{"id": "vol-1", "title": "Curse of Strahd"}]
+
+
+def test_loans_search_volumes_returns_empty_list_for_blank_query(owner_client, client_mock):
+    resp = owner_client.get("/loans/volume-search?q=")
+    assert resp.status_code == 200
+    assert resp.get_json() == []
+    client_mock.search_volumes.assert_not_called()
+
+
+def test_get_loans_page_lists_loans(owner_client, client_mock):
+    client_mock.list_loans_lent.return_value = [{"id": "loan-1", "volume_id": "vol-1", "status": "lent"}]
+    client_mock.list_loans_borrowed.return_value = []
+    resp = owner_client.get("/loans/")
+    assert resp.status_code == 200
+    client_mock.list_loans_lent.assert_called_once_with("user-1")
+    client_mock.list_loans_borrowed.assert_called_once_with("user-1")
+
+
+def test_get_loans_page_handles_client_error(owner_client, client_mock):
+    client_mock.list_loans_lent.side_effect = Exception("boom")
+    client_mock.list_loans_borrowed.side_effect = Exception("boom")
+    resp = owner_client.get("/loans/")
+    assert resp.status_code == 200
+
+
+def test_get_loans_page_anonymous_shows_login_prompt(app):
+    client = app.test_client()
+    resp = client.get("/loans/")
+    assert resp.status_code == 200
+    assert "Log in to see your loans." in resp.get_data(as_text=True)
+
+
+def test_new_loan_page_renders(owner_client):
+    resp = owner_client.get("/loans/new")
     assert resp.status_code == 200
 
 

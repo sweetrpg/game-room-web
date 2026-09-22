@@ -247,6 +247,11 @@ def main_page():
             tables = client.list_tables(user_id) or []
         except Exception:
             current_app.logger.exception("Unable to load tables for landing page (user %s)", user_id)
+        loans_out = []
+        try:
+            loans_out = client.list_loans_lent(user_id) or []
+        except Exception:
+            current_app.logger.exception("Unable to load loans for landing page (user %s)", user_id)
 
         library_entries = (library or {}).get("entries") or []
 
@@ -268,6 +273,7 @@ def main_page():
                 {**t, 'updated_at_label': _format_date(t.get('updated_at'))}
                 for t in _recent_entries(tables, 'updated_at')
             ],
+            'loans_out_count': len([loan for loan in loans_out if loan.get('status') != 'returned']),
         })
 
     return render_page("apps/game-room/index.html", context=context)

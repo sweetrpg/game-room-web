@@ -125,6 +125,15 @@
                 <div class="stat-card-recent stat-card-empty">{{ _('No tables yet') }}</div>
                 {% endif %}
             </div>
+            <div class="stat-card">
+                <a class="stat-card-browse-link" href="{{ base_path }}/loans/" aria-label="{{ _('Browse Loans') }}"></a>
+                <a class="icon-btn stat-card-action" href="{{ base_path }}/loans/new" title="{{ _('Lend a volume') }}" aria-label="{{ _('Lend a volume') }}">
+                    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/plus.svg');"></span>
+                </a>
+                <div class="stat-card-label">{{ _('Loans') }}</div>
+                <div class="stat-card-count">{{ loans_out_count }}</div>
+                <div class="stat-card-recent stat-card-empty">{{ _('Volumes lent out') }}</div>
+            </div>
         </div>
         {% endif %}
         <div id="landing-footer-sentinel" class="landing-footer-sentinel"></div>

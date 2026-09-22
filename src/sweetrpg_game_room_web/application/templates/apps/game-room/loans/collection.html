@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Loans') }}{% endblock %}
+{% macro state_label(loan) %}{% if loan.status == 'returned' %}{{ _('Returned') }}{% else %}{{ _('Lent') }}{% endif %}{% endmacro %}
+{% macro volume_link(loan) %}
+    {% if loan.volume_id %}
+    <a href="{{ catalog_url }}/volumes/{{ loan.volume_id }}">{{ loan.volume_title or loan.volume_id }}</a>
+    {% else %}
+    <span class="empty-state-inline">{{ _('Volume unavailable') }}</span>
+    {% endif %}
+{% endmacro %}
+{% block content %}
+<style>
+  .loans-section { margin-top: 24px; }
+  .loans-section h3 { margin-bottom: 8px; }
+</style>
+<div class="page-header page-header-toolbar">
+    <h2>{{ _('Loans') }}</h2>
+    {% if user.id %}
+    <a class="btn btn-primary" href="{{ base_path }}/loans/new">{{ _('Lend a volume') }}</a>
+    {% endif %}
+</div>
+
+{% if not user.id %}
+<p class="empty-state">{{ _('Log in to see your loans.') }}</p>
+{% else %}
+<div class="loans-section">
+    <h3>{{ _('Lent out') }}</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ _('Volume') }}</th>
+                <th>{{ _('Borrower') }}</th>
+                <th>{{ _('Status') }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans_out %}
+            <tr>
+                <td>{{ volume_link(loan) }}</td>
+                <td>{{ loan.borrower_name }}</td>
+                <td><span class="tag tag-outline">{{ state_label(loan) }}</span></td>
+                <td>
+                    {% if loan.status != 'returned' %}
+                    <form method="post" action="{{ base_path }}/loans/{{ loan.id }}/return" class="loan-return-form">
+                        <button type="submit" class="btn btn-secondary">{{ _('Mark returned') }}</button>
+                    </form>
+                    {% endif %}
+                    <form method="post" action="{{ base_path }}/loans/{{ loan.id }}" class="loan-delete-form">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete loan') }}" aria-label="{{ _('Delete loan') }}">
+                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="empty-state-inline">{{ _("You haven't lent anything out yet.") }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="loans-section">
+    <h3>{{ _('Borrowed') }}</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ _('Volume') }}</th>
+                <th>{{ _('Lender') }}</th>
+                <th>{{ _('Status') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans_borrowed %}
+            <tr>
+                <td>{{ volume_link(loan) }}</td>
+                <td>{{ loan.lender_user_id }}</td>
+                <td><span class="tag tag-outline">{{ state_label(loan) }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="3" class="empty-state-inline">{{ _("You haven't borrowed anything yet.") }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}

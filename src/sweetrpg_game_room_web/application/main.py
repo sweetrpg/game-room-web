@@ -88,6 +88,8 @@ def create_app(app_name=constants.APPLICATION_NAME):
     main_blueprint.register_blueprint(wishlist_blueprint)
     from sweetrpg_game_room_web.application.blueprints.tables import blueprint as tables_blueprint
     main_blueprint.register_blueprint(tables_blueprint)
+    from sweetrpg_game_room_web.application.blueprints.loans import blueprint as loans_blueprint
+    main_blueprint.register_blueprint(loans_blueprint)
 
     from sweetrpg_web_core.blueprints.health import blueprint as health_blueprint
     main_blueprint.register_blueprint(health_blueprint)

@@ -201,3 +201,95 @@ def test_set_wishlist_visibility_posts_visibility(mock_request):
         headers={},
         json={"visibility": "public"},
     )
+
+
+# -- loans --
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.get")
+def test_list_loans_lent_calls_expected_path(mock_get):
+    mock_get.return_value = _response([{"id": "loan-1"}])
+    client = GameRoomClient("http://game-room-api.local")
+
+    result = client.list_loans_lent("user-1")
+
+    mock_get.assert_called_once_with(
+        "http://game-room-api.local/users/user-1/loans", timeout=5, headers={}
+    )
+    assert result == [{"id": "loan-1"}]
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.get")
+def test_list_loans_borrowed_calls_expected_path(mock_get):
+    mock_get.return_value = _response([{"id": "loan-2"}])
+    client = GameRoomClient("http://game-room-api.local")
+
+    result = client.list_loans_borrowed("user-1")
+
+    mock_get.assert_called_once_with(
+        "http://game-room-api.local/users/user-1/loans/borrowed", timeout=5, headers={}
+    )
+    assert result == [{"id": "loan-2"}]
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.request")
+def test_create_loan_with_borrower_user_id(mock_request):
+    mock_request.return_value = _response({"id": "loan-1"})
+    client = GameRoomClient("http://game-room-api.local")
+
+    result = client.create_loan("user-1", "vol-1", borrower_user_id="user-2", borrower_name="Ignored")
+
+    mock_request.assert_called_once_with(
+        "POST",
+        "http://game-room-api.local/users/user-1/loans",
+        timeout=5,
+        headers={},
+        json={"volume_id": "vol-1", "borrower_user_id": "user-2"},
+    )
+    assert result == {"id": "loan-1"}
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.request")
+def test_create_loan_with_borrower_name(mock_request):
+    mock_request.return_value = _response({"id": "loan-1"})
+    client = GameRoomClient("http://game-room-api.local")
+
+    client.create_loan("user-1", "vol-1", borrower_name="Dana")
+
+    mock_request.assert_called_once_with(
+        "POST",
+        "http://game-room-api.local/users/user-1/loans",
+        timeout=5,
+        headers={},
+        json={"volume_id": "vol-1", "borrower_name": "Dana"},
+    )
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.request")
+def test_return_loan_calls_expected_path(mock_request):
+    mock_request.return_value = _response(content=b"")
+    client = GameRoomClient("http://game-room-api.local")
+
+    client.return_loan("user-1", "loan-1")
+
+    mock_request.assert_called_once_with(
+        "POST",
+        "http://game-room-api.local/users/user-1/loans/loan-1/return",
+        timeout=5,
+        headers={},
+    )
+
+
+@patch("sweetrpg_game_room_web.application.game_room_client.requests.request")
+def test_delete_loan_calls_expected_path(mock_request):
+    mock_request.return_value = _response(content=b"")
+    client = GameRoomClient("http://game-room-api.local")
+
+    client.delete_loan("user-1", "loan-1")
+
+    mock_request.assert_called_once_with(
+        "DELETE",
+        "http://game-room-api.local/users/user-1/loans/loan-1",
+        timeout=5,
+        headers={},
+    )
