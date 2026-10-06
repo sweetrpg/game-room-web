@@ -163,6 +163,17 @@ def test_confirmed_remove_library_entry_deletes_and_redirects(owner_client, clie
     client_mock.remove_library_entry.assert_called_once_with("user-1", "vol-1")
 
 
+def test_library_page_entry_has_lend_action_prefilling_the_volume(owner_client, client_mock):
+    client_mock.get_library.return_value = {
+        "default_visibility": "private",
+        "entries": [{"volume_id": "vol-1", "volume_title": "Curse of Strahd", "visibility_override": None}],
+    }
+    resp = owner_client.get("/library/")
+    body = resp.get_data(as_text=True)
+    assert resp.status_code == 200
+    assert "/loans/new?volume_id=vol-1&volume_title=Curse%20of%20Strahd" in body
+
+
 def test_search_volumes_returns_empty_list_for_blank_query(owner_client, client_mock):
     resp = owner_client.get("/library/volume-search?q=")
     assert resp.status_code == 200
@@ -625,6 +636,63 @@ def test_get_loans_page_anonymous_shows_login_prompt(app):
 def test_new_loan_page_renders(owner_client):
     resp = owner_client.get("/loans/new")
     assert resp.status_code == 200
+
+
+def test_new_loan_page_prefills_volume_from_query_string(owner_client):
+    """Regression test: the library page's per-entry "Lend" action links here with
+    volume_id/volume_title already known, so the form shouldn't make the visitor search again."""
+    resp = owner_client.get("/loans/new?volume_id=vol-1&volume_title=Curse+of+Strahd")
+    body = resp.get_data(as_text=True)
+    assert resp.status_code == 200
+    assert 'id="loan-volume-id" value="vol-1"' in body
+    assert "Curse of Strahd" in body
+
+
+def test_bulk_lend_requires_volume_selection(owner_client, client_mock):
+    resp = owner_client.post("/loans/bulk", data={"borrower_name": "Dana"})
+    assert resp.status_code == 302
+    client_mock.create_loan.assert_not_called()
+
+
+def test_bulk_lend_requires_a_borrower(owner_client, client_mock):
+    resp = owner_client.post("/loans/bulk", data={"volume_ids": "vol-1,vol-2"})
+    assert resp.status_code == 302
+    client_mock.create_loan.assert_not_called()
+
+
+def test_bulk_lend_with_user_id_requires_name(owner_client, client_mock):
+    resp = owner_client.post(
+        "/loans/bulk", data={"volume_ids": "vol-1", "borrower_user_id": "user-2"}
+    )
+    assert resp.status_code == 302
+    client_mock.create_loan.assert_not_called()
+
+
+def test_bulk_lend_creates_one_loan_per_selected_volume(owner_client, client_mock):
+    resp = owner_client.post(
+        "/loans/bulk", data={"volume_ids": "vol-1,vol-2", "borrower_name": "Dana"}
+    )
+    assert resp.status_code == 302
+    assert resp.headers["Location"].endswith("/library/")
+    calls = [c.kwargs for c in client_mock.create_loan.call_args_list]
+    assert {"borrower_user_id": None, "borrower_name": "Dana"} in calls
+    assert client_mock.create_loan.call_count == 2
+    assert ("user-1", "vol-1") in [c.args for c in client_mock.create_loan.call_args_list]
+    assert ("user-1", "vol-2") in [c.args for c in client_mock.create_loan.call_args_list]
+
+
+def test_bulk_lend_preserves_selection_on_partial_failure(owner_client, client_mock):
+    def _boom(user_id, volume_id, borrower_user_id=None, borrower_name=None):
+        if volume_id == "vol-2":
+            raise Exception("boom")
+
+    client_mock.create_loan.side_effect = _boom
+    resp = owner_client.post(
+        "/loans/bulk", data={"volume_ids": "vol-1,vol-2", "borrower_name": "Dana"}
+    )
+    assert resp.status_code == 302
+    assert "failed=vol-2" in resp.headers["Location"]
+    assert ("user-1", "vol-1") in [c.args for c in client_mock.create_loan.call_args_list]
 
 
 # -- landing page --

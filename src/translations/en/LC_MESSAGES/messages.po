@@ -481,14 +481,17 @@ msgstr "Lender"
 msgid "You haven't borrowed anything yet."
 msgstr "You haven't borrowed anything yet."
 
-msgid "Platform user id (optional)"
-msgstr "Platform user id (optional)"
+msgid "Platform user ID (optional)"
+msgstr "Platform user ID (optional)"
+
+msgid "If the borrower has a SweetRPG account, enter their user ID here. Leave this blank if they're not on the platform."
+msgstr "If the borrower has a SweetRPG account, enter their user ID here. Leave this blank if they're not on the platform."
 
 msgid "Borrower name"
 msgstr "Borrower name"
 
-msgid "Required - the display name, even for a platform user id above"
-msgstr "Required - the display name, even for a platform user id above"
+msgid "Always required. If you entered a platform user ID above, enter that person's display name here too."
+msgstr "Always required. If you entered a platform user ID above, enter that person's display name here too."
 
 msgid "A display name is required for a platform user."
 msgstr "A display name is required for a platform user."
@@ -507,3 +510,12 @@ msgstr "Browse Loans"
 
 msgid "Volumes lent out"
 msgstr "Volumes lent out"
+
+msgid "Select at least one volume first."
+msgstr "Select at least one volume first."
+
+msgid "Volumes lent."
+msgstr "Volumes lent."
+
+msgid "Unable to lend some volumes right now."
+msgstr "Unable to lend some volumes right now."
