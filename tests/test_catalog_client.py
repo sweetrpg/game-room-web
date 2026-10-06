@@ -16,7 +16,7 @@ def _response(json_body):
 
 
 @patch("sweetrpg_game_room_web.application.catalog_client.requests.get")
-def test_search_volumes_calls_search_endpoint(mock_get):
+def test_search_volumes_uses_filter_q_query_pushdown(mock_get):
     mock_get.return_value = _response(
         {"data": [{"id": "vol-1", "attributes": {"title": "Curse of Strahd"}}]}
     )
@@ -25,8 +25,8 @@ def test_search_volumes_calls_search_endpoint(mock_get):
     result = client.search_volumes("strahd")
 
     mock_get.assert_called_once_with(
-        "http://catalog-api.local/volumes/search",
-        params={"q": "strahd"},
+        "http://catalog-api.local/volumes",
+        params={"filter[q]": "strahd", "page[limit]": 10},
         timeout=10,
     )
     assert result == [{"id": "vol-1", "title": "Curse of Strahd"}]
@@ -41,12 +41,14 @@ def test_search_volumes_no_matches_returns_empty_list(mock_get):
 
 
 @patch("sweetrpg_game_room_web.application.catalog_client.requests.get")
-def test_search_volumes_respects_limit(mock_get):
+def test_search_volumes_passes_limit_as_page_limit(mock_get):
+    """The limit is enforced server-side via `page[limit]`, not truncated client-side - this
+    mock's response already respects it, matching what catalog-api's query-pushdown returns."""
     mock_get.return_value = _response(
         {
             "data": [
                 {"id": f"vol-{i}", "attributes": {"title": f"Volume {i}"}}
-                for i in range(5)
+                for i in range(2)
             ]
         }
     )
@@ -54,4 +56,9 @@ def test_search_volumes_respects_limit(mock_get):
 
     result = client.search_volumes("Volume", limit=2)
 
+    mock_get.assert_called_once_with(
+        "http://catalog-api.local/volumes",
+        params={"filter[q]": "Volume", "page[limit]": 2},
+        timeout=10,
+    )
     assert len(result) == 2
