@@ -1,3 +1,12 @@
+## [0.16.1] - 2026-10-06
+
+### 🐛 Bug Fixes
+
+- *(catalog-client)* Use filter[q] query-pushdown instead of dead /volumes/search route
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.16.0
 ## [0.16.0] - 2026-10-06
 
 ### 🚀 Features
