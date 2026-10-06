@@ -133,3 +133,30 @@ class GameRoomClient:
 
     def remove_table_volume(self, user_id: str, table_id: str, volume_id: str):
         return self._request("DELETE", f"/users/{user_id}/tables/{table_id}/volumes/{volume_id}")
+
+    # -- loans --
+
+    def list_loans_lent(self, user_id: str):
+        return self._get(f"/users/{user_id}/loans")
+
+    def list_loans_borrowed(self, user_id: str):
+        return self._get(f"/users/{user_id}/loans/borrowed")
+
+    def create_loan(
+        self, user_id: str, volume_id: str, borrower_user_id: str | None = None, borrower_name: str | None = None
+    ):
+        # borrower_name travels alongside borrower_user_id, not instead of it - the API requires
+        # both together for a platform-linked borrower (it stores the name as a display snapshot;
+        # see game-room-api's createLoan validation).
+        payload = {"volume_id": volume_id}
+        if borrower_user_id:
+            payload["borrower_user_id"] = borrower_user_id
+        if borrower_name:
+            payload["borrower_name"] = borrower_name
+        return self._request("POST", f"/users/{user_id}/loans", json=payload)
+
+    def return_loan(self, user_id: str, loan_id: str):
+        return self._request("POST", f"/users/{user_id}/loans/{loan_id}/return")
+
+    def delete_loan(self, user_id: str, loan_id: str):
+        return self._request("DELETE", f"/users/{user_id}/loans/{loan_id}")
