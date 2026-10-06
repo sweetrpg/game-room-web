@@ -21,12 +21,13 @@
   .visibility-menu-item .icon-mask, .visibility-menu-trigger .icon-mask { background-color: var(--color-accent); }
   .entry-select-col { width: 28px; text-align: center; }
   .bulk-actions {
-    display: flex; justify-content: flex-end; margin-top: 12px;
+    display: flex; flex-direction: column; gap: 10px; margin-top: 12px;
     background: var(--color-neutral-100); border: 1px solid var(--color-neutral-300);
     border-radius: 8px; padding: 10px 12px;
   }
   .bulk-actions[hidden] { display: none; }
-  .bulk-actions-form { display: flex; align-items: center; gap: 8px; }
+  .bulk-actions-form { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .bulk-actions-form .input { max-width: 180px; }
   .effective-visibility { display: inline-flex; align-items: center; gap: 6px; }
   .effective-visibility .icon-mask { background-color: var(--color-text); }
 </style>
@@ -81,6 +82,7 @@
             {% if is_owner %}
             <th>{{ _('Override') }}</th>
             <th></th>
+            <th></th>
             {% endif %}
         </tr>
     </thead>
@@ -124,6 +126,12 @@
                 </div>
             </td>
             <td>
+                <a class="icon-btn tooltip-host" href="{{ base_path }}/loans/new?volume_id={{ entry.volume_id }}&volume_title={{ (entry.volume_title or entry.volume_id) | urlencode }}" aria-label="{{ _('Lend') }}">
+                    <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/hand-holding.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/hand-holding.svg');"></span>
+                    <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Lend') }}</span></span>
+                </a>
+            </td>
+            <td>
                 <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}" class="entry-remove">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}" data-volume-title="{{ entry.volume_title or entry.volume_id }}">
@@ -134,7 +142,7 @@
             {% endif %}
         </tr>
         {% else %}
-        <tr><td colspan="{% if is_owner %}5{% else %}2{% endif %}" class="empty-state-inline">{{ _('No volumes visible here yet.') }}</td></tr>
+        <tr><td colspan="{% if is_owner %}6{% else %}2{% endif %}" class="empty-state-inline">{{ _('No volumes visible here yet.') }}</td></tr>
         {% endfor %}
     </tbody>
 </table>
@@ -149,6 +157,17 @@
             {% endfor %}
         </select>
         <button type="submit" class="btn btn-secondary">{{ _('Apply') }}</button>
+    </form>
+    <form method="post" action="{{ base_path }}/loans/bulk" class="bulk-actions-form">
+        <input type="hidden" name="volume_ids" id="bulk-lend-volume-ids">
+        <label for="bulk-lend-borrower-user-id">{{ _('Platform user ID (optional)') }}</label>
+        <input type="text" name="borrower_user_id" id="bulk-lend-borrower-user-id" class="input" autocomplete="off" data-1p-ignore data-lpignore="true">
+        <label for="bulk-lend-borrower-name">{{ _('Borrower name') }}</label>
+        <input type="text" name="borrower_name" id="bulk-lend-borrower-name" class="input" autocomplete="off" data-1p-ignore data-lpignore="true" required>
+        <button type="submit" class="btn btn-secondary">
+            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/hand-holding.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/hand-holding.svg'); background-color: currentColor;"></span>
+            {{ _('Lend') }}
+        </button>
     </form>
 </div>
 {% endif %}
@@ -456,6 +475,7 @@
   if (!selectAll) return;
   var checks = Array.prototype.slice.call(document.querySelectorAll('.entry-select'));
   var idsInput = document.getElementById('bulk-volume-ids');
+  var lendIdsInput = document.getElementById('bulk-lend-volume-ids');
   var bulkBar = document.getElementById('bulk-actions');
 
   function selectedIds() {
@@ -465,6 +485,7 @@
   function refresh() {
     var sel = selectedIds();
     idsInput.value = sel.join(',');
+    lendIdsInput.value = sel.join(',');
     bulkBar.hidden = sel.length === 0;
     selectAll.checked = sel.length > 0 && sel.length === checks.length;
     selectAll.indeterminate = sel.length > 0 && sel.length < checks.length;

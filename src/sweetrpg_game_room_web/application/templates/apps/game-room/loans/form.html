@@ -11,6 +11,10 @@
   .search-result-btn[aria-selected="true"] { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
   #loan-form { display: flex; flex-direction: column; gap: var(--space-3); max-width: 480px; }
   .form-label { text-align: left; padding-top: 0; }
+  /* shared .form-hint assumes a label/field CSS-grid row (grid-column: 2, negative top
+     margin to hug its label) - this form is a flex column, so neutralize both and let the
+     flex gap handle spacing instead. */
+  #loan-form .form-hint { margin: 0; }
 </style>
 <div class="page-header">
     <h2>{{ _('Lend a volume') }}</h2>
@@ -20,14 +24,16 @@
     <label class="form-label" for="loan-volume-search">{{ _('Volume') }}</label>
     <input type="search" id="loan-volume-search" class="input" placeholder="{{ _('Search for a volume by title') }}" autocomplete="off" data-1p-ignore data-lpignore="true">
     <ul id="loan-volume-results" class="search-results"></ul>
-    <input type="hidden" name="volume_id" id="loan-volume-id" required>
-    <div id="loan-volume-selected" class="empty-state-inline"></div>
+    <input type="hidden" name="volume_id" id="loan-volume-id" value="{{ prefill_volume_id }}" required>
+    <div id="loan-volume-selected" class="empty-state-inline">{% if prefill_volume_title %}{{ _('Selected:') }} {{ prefill_volume_title }}{% endif %}</div>
 
-    <label class="form-label" for="loan-borrower-user-id">{{ _('Platform user id (optional)') }}</label>
+    <label class="form-label" for="loan-borrower-user-id">{{ _('Platform user ID (optional)') }}</label>
+    <p class="form-hint">{{ _("If the borrower has a SweetRPG account, enter their user ID here. Leave this blank if they're not on the platform.") }}</p>
     <input type="text" id="loan-borrower-user-id" name="borrower_user_id" class="input" autocomplete="off" data-1p-ignore data-lpignore="true">
 
     <label class="form-label" for="loan-borrower-name">{{ _('Borrower name') }}</label>
-    <input type="text" id="loan-borrower-name" name="borrower_name" class="input" autocomplete="off" data-1p-ignore data-lpignore="true" placeholder="{{ _('Required - the display name, even for a platform user id above') }}">
+    <p class="form-hint">{{ _('Always required. If you entered a platform user ID above, enter that person\'s display name here too.') }}</p>
+    <input type="text" id="loan-borrower-name" name="borrower_name" class="input" autocomplete="off" data-1p-ignore data-lpignore="true">
 
     <div class="dialog-actions">
         <a class="btn btn-ghost" href="{{ base_path }}/loans/">{{ _('Cancel') }}</a>
