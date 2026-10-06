@@ -237,14 +237,14 @@ def test_create_loan_with_borrower_user_id(mock_request):
     mock_request.return_value = _response({"id": "loan-1"})
     client = GameRoomClient("http://game-room-api.local")
 
-    result = client.create_loan("user-1", "vol-1", borrower_user_id="user-2", borrower_name="Ignored")
+    result = client.create_loan("user-1", "vol-1", borrower_user_id="user-2", borrower_name="Dana")
 
     mock_request.assert_called_once_with(
         "POST",
         "http://game-room-api.local/users/user-1/loans",
         timeout=5,
         headers={},
-        json={"volume_id": "vol-1", "borrower_user_id": "user-2"},
+        json={"volume_id": "vol-1", "borrower_user_id": "user-2", "borrower_name": "Dana"},
     )
     assert result == {"id": "loan-1"}
 

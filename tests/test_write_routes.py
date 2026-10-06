@@ -528,13 +528,22 @@ def test_create_loan_with_borrower_name_succeeds(owner_client, client_mock):
     )
 
 
-def test_create_loan_with_borrower_user_id_succeeds(owner_client, client_mock):
+def test_create_loan_with_borrower_user_id_requires_name(owner_client, client_mock):
     resp = owner_client.post(
         "/loans/", data={"volume_id": "vol-1", "borrower_user_id": "user-2", "borrower_name": ""}
     )
     assert resp.status_code == 302
+    assert resp.location.endswith("/loans/new")
+    client_mock.create_loan.assert_not_called()
+
+
+def test_create_loan_with_borrower_user_id_and_name_succeeds(owner_client, client_mock):
+    resp = owner_client.post(
+        "/loans/", data={"volume_id": "vol-1", "borrower_user_id": "user-2", "borrower_name": "Dana"}
+    )
+    assert resp.status_code == 302
     client_mock.create_loan.assert_called_once_with(
-        "user-1", "vol-1", borrower_user_id="user-2", borrower_name=None
+        "user-1", "vol-1", borrower_user_id="user-2", borrower_name="Dana"
     )
 
 

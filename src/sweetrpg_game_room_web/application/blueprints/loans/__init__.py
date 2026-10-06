@@ -58,7 +58,12 @@ def new_loan_page():
 
 @blueprint.route("/", methods=["POST"])
 def create_loan():
-    """Lend a volume to a platform user (by id) or a free-form name (exactly one required)."""
+    """Lend a volume to a platform user (by id) or a free-form name (exactly one required).
+
+    A platform-linked borrower also requires a display name alongside the id - the API stores it
+    as a snapshot of that user's current display name, so the caller must supply it (it does not
+    resolve the name server-side).
+    """
     context = get_context()
     user_id = context["user"]["id"]
     volume_id = request.form.get("volume_id", "").strip()
@@ -70,6 +75,9 @@ def create_loan():
         return local_redirect("web.loans.new_loan_page")
     if not borrower_user_id and not borrower_name:
         flash(_("A borrower - either a platform user or a name - is required."))
+        return local_redirect("web.loans.new_loan_page")
+    if borrower_user_id and not borrower_name:
+        flash(_("A display name is required for a platform user."))
         return local_redirect("web.loans.new_loan_page")
 
     try:

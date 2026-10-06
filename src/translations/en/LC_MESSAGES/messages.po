@@ -487,8 +487,11 @@ msgstr "Platform user id (optional)"
 msgid "Borrower name"
 msgstr "Borrower name"
 
-msgid "Required unless a platform user id is given above"
-msgstr "Required unless a platform user id is given above"
+msgid "Required - the display name, even for a platform user id above"
+msgstr "Required - the display name, even for a platform user id above"
+
+msgid "A display name is required for a platform user."
+msgstr "A display name is required for a platform user."
 
 msgid "Lend"
 msgstr "Lend"

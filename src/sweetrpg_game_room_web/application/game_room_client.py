@@ -145,10 +145,13 @@ class GameRoomClient:
     def create_loan(
         self, user_id: str, volume_id: str, borrower_user_id: str | None = None, borrower_name: str | None = None
     ):
+        # borrower_name travels alongside borrower_user_id, not instead of it - the API requires
+        # both together for a platform-linked borrower (it stores the name as a display snapshot;
+        # see game-room-api's createLoan validation).
         payload = {"volume_id": volume_id}
         if borrower_user_id:
             payload["borrower_user_id"] = borrower_user_id
-        else:
+        if borrower_name:
             payload["borrower_name"] = borrower_name
         return self._request("POST", f"/users/{user_id}/loans", json=payload)
 
