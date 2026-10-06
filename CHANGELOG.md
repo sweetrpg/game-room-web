@@ -1,3 +1,12 @@
+## [0.15.0] - 2026-10-06
+
+### 🚀 Features
+
+- *(loans)* Initiate lending from the library page
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.14.0
 ## [0.14.0] - 2026-10-06
 
 ### 🚀 Features

@@ -51,8 +51,18 @@ def get_loans_page():
 
 @blueprint.route("/new", methods=["GET"])
 def new_loan_page():
-    """Show the create-loan form: pick a volume and a borrower (platform user or free-form name)."""
+    """Show the create-loan form: pick a volume and a borrower (platform user or free-form name).
+
+    volume_id/volume_title may arrive pre-filled via query string - used by the library page's
+    per-entry "Lend" action, which already knows which volume the lender picked.
+    """
     context = get_context()
+    context.update(
+        {
+            "prefill_volume_id": request.args.get("volume_id", ""),
+            "prefill_volume_title": request.args.get("volume_title", ""),
+        }
+    )
     return render_page("apps/game-room/loans/form.html", context=context)
 
 
@@ -90,6 +100,49 @@ def create_loan():
         flash(_("Unable to record that loan right now."))
         return local_redirect("web.loans.new_loan_page")
     return local_redirect("web.loans.get_loans_page")
+
+
+@blueprint.route("/bulk", methods=["POST"])
+def create_bulk_loan():
+    """Lend every selected library volume to one borrower at once, from the library page's
+    multi-select bulk action.
+
+    Same borrower rules as the single-create form (name always required, alongside a platform
+    user ID when one is given). One loan is created per selected volume; a volume that fails
+    doesn't block the rest - mirrors the library bulk-visibility action's partial-failure
+    handling.
+    """
+    context = get_context()
+    user_id = context["user"]["id"]
+    raw = request.form.get("volume_ids") or ""
+    volume_ids = [v for v in (s.strip() for s in raw.split(",")) if v]
+    borrower_user_id = request.form.get("borrower_user_id", "").strip()
+    borrower_name = request.form.get("borrower_name", "").strip()
+
+    if not volume_ids:
+        flash(_("Select at least one volume first."))
+        return local_redirect("web.library.get_library_page")
+    if not borrower_user_id and not borrower_name:
+        flash(_("A borrower - either a platform user or a name - is required."))
+        return local_redirect("web.library.get_library_page")
+    if borrower_user_id and not borrower_name:
+        flash(_("A display name is required for a platform user."))
+        return local_redirect("web.library.get_library_page")
+
+    failed = []
+    for volume_id in volume_ids:
+        try:
+            _client().create_loan(
+                user_id, volume_id, borrower_user_id=borrower_user_id or None, borrower_name=borrower_name or None
+            )
+        except Exception:
+            current_app.logger.exception("Unable to create loan for volume %s (user %s)!", volume_id, user_id)
+            failed.append(volume_id)
+    if failed:
+        flash(_("Unable to lend some volumes right now."))
+        return local_redirect("web.library.get_library_page", failed=",".join(failed))
+    flash(_("Volumes lent."))
+    return local_redirect("web.library.get_library_page")
 
 
 @blueprint.route("/<loan_id>/return", methods=["POST"])
