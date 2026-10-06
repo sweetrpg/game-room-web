@@ -1,3 +1,12 @@
+## [0.16.0] - 2026-10-06
+
+### 🚀 Features
+
+- *(metrics)* Expose Prometheus /metrics endpoint
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.15.0
 ## [0.15.0] - 2026-10-06
 
 ### 🚀 Features
