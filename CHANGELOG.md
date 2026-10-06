@@ -1,3 +1,17 @@
+## [0.14.0] - 2026-10-06
+
+### 🚀 Features
+
+- *(loans)* Add volume lending/borrowing UI
+
+### 🐛 Bug Fixes
+
+- Refresh interval
+- *(loans)* Send borrower_name alongside borrower_user_id
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.13.0
 ## [0.13.0] - 2026-09-03
 
 ### 🚀 Features

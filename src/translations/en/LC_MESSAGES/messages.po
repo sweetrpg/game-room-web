@@ -406,3 +406,104 @@ msgstr "Visibility override"
 
 msgid "Give this item a visibility different from the library default."
 msgstr "Give this item a visibility different from the library default."
+
+# -- loans (add-volume-lending-borrowing) --
+
+msgid "Unable to load your loans right now."
+msgstr "Unable to load your loans right now."
+
+msgid "Unable to load your borrowed volumes right now."
+msgstr "Unable to load your borrowed volumes right now."
+
+msgid "A borrower - either a platform user or a name - is required."
+msgstr "A borrower - either a platform user or a name - is required."
+
+msgid "Loan recorded."
+msgstr "Loan recorded."
+
+msgid "Unable to record that loan right now."
+msgstr "Unable to record that loan right now."
+
+msgid "Loan marked as returned."
+msgstr "Loan marked as returned."
+
+msgid "Unable to mark that loan as returned right now."
+msgstr "Unable to mark that loan as returned right now."
+
+msgid "Loan deleted."
+msgstr "Loan deleted."
+
+msgid "Unable to delete that loan right now."
+msgstr "Unable to delete that loan right now."
+
+msgid "Loans"
+msgstr "Loans"
+
+msgid "Returned"
+msgstr "Returned"
+
+msgid "Lent"
+msgstr "Lent"
+
+msgid "Volume unavailable"
+msgstr "Volume unavailable"
+
+msgid "Lend a volume"
+msgstr "Lend a volume"
+
+msgid "Log in to see your loans."
+msgstr "Log in to see your loans."
+
+msgid "Lent out"
+msgstr "Lent out"
+
+msgid "Borrower"
+msgstr "Borrower"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Mark returned"
+msgstr "Mark returned"
+
+msgid "Delete loan"
+msgstr "Delete loan"
+
+msgid "You haven't lent anything out yet."
+msgstr "You haven't lent anything out yet."
+
+msgid "Borrowed"
+msgstr "Borrowed"
+
+msgid "Lender"
+msgstr "Lender"
+
+msgid "You haven't borrowed anything yet."
+msgstr "You haven't borrowed anything yet."
+
+msgid "Platform user id (optional)"
+msgstr "Platform user id (optional)"
+
+msgid "Borrower name"
+msgstr "Borrower name"
+
+msgid "Required - the display name, even for a platform user id above"
+msgstr "Required - the display name, even for a platform user id above"
+
+msgid "A display name is required for a platform user."
+msgstr "A display name is required for a platform user."
+
+msgid "Lend"
+msgstr "Lend"
+
+msgid "Selected:"
+msgstr "Selected:"
+
+msgid "Pick a volume from the search results first."
+msgstr "Pick a volume from the search results first."
+
+msgid "Browse Loans"
+msgstr "Browse Loans"
+
+msgid "Volumes lent out"
+msgstr "Volumes lent out"

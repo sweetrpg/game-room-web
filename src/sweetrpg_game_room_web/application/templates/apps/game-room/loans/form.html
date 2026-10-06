@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Lend a volume') }}{% endblock %}
+{% block content %}
+<style>
+  .search-results { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow-y: auto; }
+  .search-result-btn {
+    display: block; width: 100%; text-align: left; background: none; border: 1px solid transparent;
+    border-radius: 4px; padding: 6px 8px; cursor: pointer; font: inherit; color: inherit;
+  }
+  .search-result-btn:hover { background: var(--color-neutral-300); }
+  .search-result-btn[aria-selected="true"] { border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+  #loan-form { display: flex; flex-direction: column; gap: var(--space-3); max-width: 480px; }
+  .form-label { text-align: left; padding-top: 0; }
+</style>
+<div class="page-header">
+    <h2>{{ _('Lend a volume') }}</h2>
+</div>
+
+<form id="loan-form" method="post" action="{{ base_path }}/loans/">
+    <label class="form-label" for="loan-volume-search">{{ _('Volume') }}</label>
+    <input type="search" id="loan-volume-search" class="input" placeholder="{{ _('Search for a volume by title') }}" autocomplete="off" data-1p-ignore data-lpignore="true">
+    <ul id="loan-volume-results" class="search-results"></ul>
+    <input type="hidden" name="volume_id" id="loan-volume-id" required>
+    <div id="loan-volume-selected" class="empty-state-inline"></div>
+
+    <label class="form-label" for="loan-borrower-user-id">{{ _('Platform user id (optional)') }}</label>
+    <input type="text" id="loan-borrower-user-id" name="borrower_user_id" class="input" autocomplete="off" data-1p-ignore data-lpignore="true">
+
+    <label class="form-label" for="loan-borrower-name">{{ _('Borrower name') }}</label>
+    <input type="text" id="loan-borrower-name" name="borrower_name" class="input" autocomplete="off" data-1p-ignore data-lpignore="true" placeholder="{{ _('Required - the display name, even for a platform user id above') }}">
+
+    <div class="dialog-actions">
+        <a class="btn btn-ghost" href="{{ base_path }}/loans/">{{ _('Cancel') }}</a>
+        <button type="submit" class="btn btn-primary">{{ _('Lend') }}</button>
+    </div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  var searchInput = document.getElementById('loan-volume-search');
+  var resultsList = document.getElementById('loan-volume-results');
+  var volumeIdInput = document.getElementById('loan-volume-id');
+  var selectedLabel = document.getElementById('loan-volume-selected');
+  var searchTimer = null;
+  var MIN_QUERY_LENGTH = 3;
+
+  function renderResults(volumes) {
+    resultsList.innerHTML = '';
+    volumes.forEach(function (volume) {
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'search-result-btn';
+      btn.textContent = volume.title;
+      btn.setAttribute('aria-selected', 'false');
+      btn.addEventListener('click', function () {
+        resultsList.querySelectorAll('.search-result-btn').forEach(function (b) {
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.setAttribute('aria-selected', 'true');
+        volumeIdInput.value = volume.id;
+        selectedLabel.textContent = '{{ _('Selected:') }} ' + volume.title;
+      });
+      li.appendChild(btn);
+      resultsList.appendChild(li);
+    });
+  }
+
+  searchInput.addEventListener('input', function () {
+    var query = searchInput.value.trim();
+    clearTimeout(searchTimer);
+    if (query.length < MIN_QUERY_LENGTH) {
+      resultsList.innerHTML = '';
+      return;
+    }
+    searchTimer = setTimeout(function () {
+      fetch('{{ base_path }}/loans/volume-search?q=' + encodeURIComponent(query))
+        .then(function (r) { return r.json(); })
+        .then(renderResults)
+        .catch(function () { resultsList.innerHTML = ''; });
+    }, 350);
+  });
+
+  document.getElementById('loan-form').addEventListener('submit', function (event) {
+    if (!volumeIdInput.value) {
+      event.preventDefault();
+      alert('{{ _('Pick a volume from the search results first.') }}');
+    }
+  });
+})();
+</script>
+{% endblock %}
