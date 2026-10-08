@@ -107,6 +107,9 @@ msgstr "Down for maintenance"
 msgid "Effective visibility"
 msgstr "Effective visibility"
 
+msgid "Feedback"
+msgstr "Feedback"
+
 msgid "Friends"
 msgstr "Friends"
 

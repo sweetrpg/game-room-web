@@ -48,11 +48,14 @@
             {% if user.is_admin %}
             <a class="avatar-menu-item" href="/admin">{{ _('Administration') }}</a>
             {% endif %}
+            <button type="button" id="feedback-trigger" class="avatar-menu-item">{{ _('Feedback') }}</button>
             <hr class="avatar-menu-divider">
             <form action="/auth/logout?return_to={{ request.path }}" method="post" class="avatar-menu-item-form">
                 <button type="submit" class="avatar-menu-item avatar-menu-item-danger">{{ _('Log out') }}</button>
             </form>
             {% else %}
+            <button type="button" id="feedback-trigger" class="avatar-menu-item">{{ _('Feedback') }}</button>
+            <hr class="avatar-menu-divider">
             <a class="avatar-menu-item" href="/auth/login?return_to={{ request.path }}">{{ _('Log in') }}</a>
             {% endif %}
             <hr class="avatar-menu-divider">
