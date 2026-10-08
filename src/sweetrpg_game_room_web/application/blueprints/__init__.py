@@ -120,6 +120,11 @@ def render_page(page, context={}):
     context.update({"showCookieMessage": show_cookie_message})
     context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
     context.setdefault("catalog_url", os.environ.get(constants.CATALOG_WEB_URL, "http://localhost:8080/catalog"))
+    # Path-only default: every API on this platform is exposed under the same dev.sweetrpg.com
+    # host as every frontend (see docs/deployment-conventions.md's "API Ingress path
+    # versioning"), so this is same-origin from the browser, not cross-origin - see main-web's
+    # config.rs for the identical pattern.
+    context.setdefault("feedback_api_url", os.environ.get(constants.FEEDBACK_API_URL, "/api/0/admin/feedback"))
     context.setdefault("version", __version__)
     context.setdefault("build_timestamp", build_timestamp)
     context.setdefault("build_hash", build_hash)
