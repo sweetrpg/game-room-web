@@ -41,7 +41,7 @@ def _render_tables_list(context: dict, user_id: str):
         tables = _client().list_tables(user_id) or []
     except Exception:
         current_app.logger.exception("Unable to list tables for user %s!", user_id)
-        flash(_("Unable to load these tables right now."))
+        flash(_("Unable to load these tables right now."), "error")
     context.update(
         {
             "tables": tables,
@@ -68,14 +68,14 @@ def create_table():
     name = request.form.get("name", "").strip()
     visibility = request.form.get("visibility") or "private"
     if not name:
-        flash(_("A table name is required."))
+        flash(_("A table name is required."), "error")
         return local_redirect("web.tables.new_table_page")
     try:
         table = _client().create_table(user_id, name, visibility)
         return local_redirect("web.tables.get_table_page", id=table["id"])
     except Exception:
         current_app.logger.exception("Unable to create table %r for user %s!", name, user_id)
-        flash(_("Unable to create that table right now."))
+        flash(_("Unable to create that table right now."), "error")
         return local_redirect("web.tables.new_table_page")
 
 
@@ -99,7 +99,7 @@ def _render_table(context: dict, owner_id: str, id: str):
         table = _client().get_table(owner_id, id)
     except Exception:
         current_app.logger.exception("Unable to fetch table %s for user %s!", id, owner_id)
-        flash(_("Unable to load that table right now."))
+        flash(_("Unable to load that table right now."), "error")
     context.update(
         {
             "table": table,
@@ -118,10 +118,10 @@ def update_table(id: str):
     if request.form.get("_method") == "DELETE":
         try:
             _client().delete_table(user_id, id)
-            flash(_("Table deleted."))
+            flash(_("Table deleted."), "success")
         except Exception:
             current_app.logger.exception("Unable to delete table %s for user %s!", id, user_id)
-            flash(_("Unable to delete that table right now."))
+            flash(_("Unable to delete that table right now."), "error")
         return local_redirect("web.tables.get_tables_page")
 
     # The detail page saves name and visibility independently (instant edit, no Save button),
@@ -136,14 +136,14 @@ def update_table(id: str):
     name = name.strip() if name is not None else (current.get("name") or "")
     visibility = request.form.get("visibility") or current.get("visibility") or "private"
     if not name:
-        flash(_("A table name is required."))
+        flash(_("A table name is required."), "error")
         return local_redirect("web.tables.get_table_page", id=id)
     try:
         _client().update_table(user_id, id, name, visibility)
-        flash(_("Table updated."))
+        flash(_("Table updated."), "success")
     except Exception:
         current_app.logger.exception("Unable to update table %s for user %s!", id, user_id)
-        flash(_("Unable to update that table right now."))
+        flash(_("Unable to update that table right now."), "error")
     return local_redirect("web.tables.get_table_page", id=id)
 
 
@@ -159,7 +159,7 @@ def add_volume(id: str):
             _client().add_table_volume(user_id, id, volume_id, volume_title)
         except Exception:
             current_app.logger.exception("Unable to add volume %s to table %s!", volume_id, id)
-            flash(_("Unable to add that volume right now."))
+            flash(_("Unable to add that volume right now."), "error")
     return local_redirect("web.tables.get_table_page", id=id)
 
 
@@ -173,5 +173,5 @@ def remove_volume(id: str, volume_id: str):
             _client().remove_table_volume(user_id, id, volume_id)
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from table %s!", volume_id, id)
-            flash(_("Unable to remove that volume right now."))
+            flash(_("Unable to remove that volume right now."), "error")
     return local_redirect("web.tables.get_table_page", id=id)

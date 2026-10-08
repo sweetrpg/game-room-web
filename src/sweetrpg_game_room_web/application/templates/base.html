@@ -21,11 +21,17 @@
 </head>
 <body>
     {% include "partials/header.html" %}
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="banner-region">
-        {% for message in messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="banner banner-error" role="alert">{{ message }}</div>
+        {% elif category == 'success' %}
+        <div class="banner banner-success" role="status">{{ message }}</div>
+        {% else %}
         <div class="banner banner-info" role="status">{{ message }}</div>
+        {% endif %}
         {% endfor %}
     </div>
     {% endif %}
