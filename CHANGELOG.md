@@ -1,3 +1,16 @@
+## [0.17.0] - 2026-10-08
+
+### 🚀 Features
+
+- *(feedback)* Embed shared-web feedback widget in avatar menu
+
+### 🐛 Bug Fixes
+
+- *(ui)* Shorten feedback menu label to match platform convention
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.16.1
 ## [0.16.1] - 2026-10-06
 
 ### 🐛 Bug Fixes
