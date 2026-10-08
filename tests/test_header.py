@@ -37,7 +37,7 @@ def test_feedback_item_renders_for_logged_in_user(app):
     html = render_header(app, user={"id": "u1", "name": "Alex", "is_admin": False})
 
     assert 'id="feedback-trigger"' in html
-    assert ">Feedback<" in html
+    assert ">Feedback...<" in html
     # Positioned directly above the logout divider, below any admin link - not the
     # standalone floating-button variant the widget would otherwise inject.
     assert html.index('id="feedback-trigger"') < html.index("Log out")
