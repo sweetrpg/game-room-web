@@ -522,3 +522,18 @@ msgstr "Volumes lent."
 
 msgid "Unable to lend some volumes right now."
 msgstr "Unable to lend some volumes right now."
+
+msgid "Pilgrimage Software"
+msgstr "Pilgrimage Software"
+
+msgid "GitHub"
+msgstr "GitHub"
+
+msgid "Terms of Service"
+msgstr "Terms of Service"
+
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+msgid "Support"
+msgstr "Support"
