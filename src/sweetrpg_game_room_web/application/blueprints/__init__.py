@@ -125,6 +125,9 @@ def render_page(page, context={}):
     # versioning"), so this is same-origin from the browser, not cross-origin - see main-web's
     # config.rs for the identical pattern.
     context.setdefault("feedback_api_url", os.environ.get(constants.FEEDBACK_API_URL, "/api/0/admin/feedback"))
+    # Site root for the footer's legal links: never the app's base_path (/terms lives on main-web).
+    context.setdefault("main_url", os.environ.get(constants.MAIN_URL, "").rstrip("/"))
+    context.setdefault("current_year", datetime.datetime.now(datetime.timezone.utc).year)
     context.setdefault("version", __version__)
     context.setdefault("build_timestamp", build_timestamp)
     context.setdefault("build_hash", build_hash)

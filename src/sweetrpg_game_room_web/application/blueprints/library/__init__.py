@@ -54,7 +54,7 @@ def _render_library(context: dict, user_id: str):
         library = _client().get_library(user_id)
     except Exception:
         current_app.logger.exception("Unable to fetch library for user %s!", user_id)
-        flash(_("Unable to load this library right now."))
+        flash(_("Unable to load this library right now."), "error")
     context.update(
         {
             "library": library,
@@ -88,10 +88,10 @@ def set_default_visibility():
     overrides = request.form.get("overrides")
     try:
         _client().set_library_default_visibility(user_id, visibility, overrides)
-        flash(_("Library default visibility updated."))
+        flash(_("Library default visibility updated."), "success")
     except Exception:
         current_app.logger.exception("Unable to set default visibility for user %s!", user_id)
-        flash(_("Unable to update your library's default visibility right now."))
+        flash(_("Unable to update your library's default visibility right now."), "error")
     return local_redirect("web.library.get_library_page")
 
 
@@ -107,7 +107,7 @@ def set_entry_visibility(volume_id: str):
         current_app.logger.exception(
             "Unable to set visibility override for volume %s (user %s)!", volume_id, user_id
         )
-        flash(_("Unable to update that entry's visibility right now."))
+        flash(_("Unable to update that entry's visibility right now."), "error")
     return local_redirect("web.library.get_library_page")
 
 
@@ -120,7 +120,7 @@ def set_bulk_entry_visibility():
     raw = request.form.get("volume_ids") or ""
     volume_ids = [v for v in (s.strip() for s in raw.split(",")) if v]
     if not volume_ids:
-        flash(_("Select at least one entry first."))
+        flash(_("Select at least one entry first."), "error")
         return local_redirect("web.library.get_library_page")
     failed = []
     for volume_id in volume_ids:
@@ -132,9 +132,9 @@ def set_bulk_entry_visibility():
             )
             failed.append(volume_id)
     if failed:
-        flash(_("Unable to update visibility for some entries right now."))
+        flash(_("Unable to update visibility for some entries right now."), "error")
         return local_redirect("web.library.get_library_page", failed=",".join(failed))
-    flash(_("Entry visibility updated."))
+    flash(_("Entry visibility updated."), "success")
     return local_redirect("web.library.get_library_page")
 
 
@@ -194,5 +194,5 @@ def remove_entry(volume_id: str):
             _client().remove_library_entry(user_id, volume_id)
         except Exception:
             current_app.logger.exception("Unable to remove volume %s from library (user %s)!", volume_id, user_id)
-            flash(_("Unable to remove that volume right now."))
+            flash(_("Unable to remove that volume right now."), "error")
     return local_redirect("web.library.get_library_page")

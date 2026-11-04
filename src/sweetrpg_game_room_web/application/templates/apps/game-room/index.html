@@ -184,7 +184,8 @@
 {% endblock %}
 {% block footer %}
 <div class="landing-footer">
-    <span class="landing-footer-line">&copy; 2026 Pilgrimage Software &middot; <a href="https://github.com/sweetrpg" target="_blank" rel="noopener">GitHub</a></span>
+    <span class="landing-footer-line">&copy; {{ current_year }} {{ _('Pilgrimage Software') }} &middot; <a href="https://github.com/sweetrpg" target="_blank" rel="noopener">{{ _('GitHub') }}</a></span>
+    <span class="landing-footer-line"><a href="{{ main_url }}/terms">{{ _('Terms of Service') }}</a> &middot; <a href="{{ main_url }}/privacy">{{ _('Privacy Policy') }}</a> &middot; <a href="{{ main_url }}/support">{{ _('Support') }}</a></span>
     <span class="landing-footer-line">v{{ version }} &middot; built {{ build_timestamp }} / {{ build_hash }}</span>
 </div>
 {% endblock %}
