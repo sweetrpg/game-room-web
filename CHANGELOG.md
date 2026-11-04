@@ -1,3 +1,16 @@
+## [0.18.0] - 2026-11-04
+
+### 🚀 Features
+
+- *(footer)* Use the standard three-line site footer
+
+### 🐛 Bug Fixes
+
+- *(flash)* Render flash messages with correct severity styling
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.17.0
 ## [0.17.0] - 2026-10-08
 
 ### 🚀 Features
