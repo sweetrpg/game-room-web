@@ -1,3 +1,12 @@
+## [0.19.0] - 2026-11-23
+
+### 🚀 Features
+
+- *(catalog)* Show covers, link volumes, offer move on wishlist conflict
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.18.0
 ## [0.18.0] - 2026-11-04
 
 ### 🚀 Features
