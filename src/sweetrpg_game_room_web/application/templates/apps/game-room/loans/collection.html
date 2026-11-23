@@ -1,14 +1,16 @@
 {% extends "base.html" %}
+{% from "apps/game-room/partials/_volume_link.html" import volume_link, volume_link_styles %}
 {% block title %}{{ _('Loans') }}{% endblock %}
 {% macro state_label(loan) %}{% if loan.status == 'returned' %}{{ _('Returned') }}{% else %}{{ _('Lent') }}{% endif %}{% endmacro %}
-{% macro volume_link(loan) %}
+{% macro loan_volume(loan) %}
     {% if loan.volume_id %}
-    <a href="{{ catalog_url }}/volumes/{{ loan.volume_id }}">{{ loan.volume_title or loan.volume_id }}</a>
+    {{ volume_link(loan.volume_id, loan.volume_title, catalog_url, assets_url, shared_url) }}
     {% else %}
     <span class="empty-state-inline">{{ _('Volume unavailable') }}</span>
     {% endif %}
 {% endmacro %}
 {% block content %}
+{{ volume_link_styles() }}
 <style>
   .loans-section { margin-top: 24px; }
   .loans-section h3 { margin-bottom: 8px; }
@@ -37,7 +39,7 @@
         <tbody>
             {% for loan in loans_out %}
             <tr>
-                <td>{{ volume_link(loan) }}</td>
+                <td>{{ loan_volume(loan) }}</td>
                 <td>{{ loan.borrower_name }}</td>
                 <td><span class="tag tag-outline">{{ state_label(loan) }}</span></td>
                 <td>
@@ -74,7 +76,7 @@
         <tbody>
             {% for loan in loans_borrowed %}
             <tr>
-                <td>{{ volume_link(loan) }}</td>
+                <td>{{ loan_volume(loan) }}</td>
                 <td>{{ loan.lender_user_id }}</td>
                 <td><span class="tag tag-outline">{{ state_label(loan) }}</span></td>
             </tr>

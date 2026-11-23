@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% from "apps/game-room/partials/_volume_link.html" import volume_link, volume_link_styles %}
 {% from "apps/game-room/partials/_visibility_picker.html" import visibility_menu, visibility_menu_script, visibility_styles, visibility_label %}
 {% from "apps/game-room/partials/_add_volume_dialog.html" import add_volume_trigger, add_volume_dialog, add_volume_dialog_styles, add_volume_dialog_script %}
 {% block title %}{{ table.name if table else _('Table') }}{% endblock %}
 {% block content %}
+{{ volume_link_styles() }}
 {{ visibility_styles() }}
 {{ add_volume_dialog_styles() }}
 <style>
@@ -59,7 +61,7 @@
         <tbody>
             {% for volume_id in table.volume_ids or [] %}
             <tr>
-                <td><a href="{{ catalog_url }}/volumes/{{ volume_id }}">{{ (table.volume_titles or {}).get(volume_id, volume_id) }}</a></td>
+                <td>{{ volume_link(volume_id, (table.volume_titles or {}).get(volume_id), catalog_url, assets_url, shared_url) }}</td>
                 {% if is_owner %}
                 <td>
                     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes/{{ volume_id }}">

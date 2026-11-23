@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% from "apps/game-room/partials/_volume_link.html" import volume_link, volume_link_styles %}
 {% from "apps/game-room/partials/_visibility_picker.html" import visibility_menu, visibility_menu_script, visibility_styles, visibility_label %}
 {% from "apps/game-room/partials/_add_volume_dialog.html" import add_volume_trigger, add_volume_dialog, add_volume_dialog_styles, add_volume_dialog_script %}
 {% block title %}{{ wishlist.name if wishlist else _('Wishlist') }}{% endblock %}
 {% block content %}
+{{ volume_link_styles() }}
 {{ visibility_styles() }}
 {{ add_volume_dialog_styles() }}
 <style>
@@ -32,6 +34,18 @@
     <span>{{ _('Back to wishlists') }}</span>
 </a>
 
+{% if conflict %}
+<div class="banner banner-error wishlist-conflict" role="alert">
+    <p>{{ _('"%(title)s" is already on your wishlist "%(name)s".', title=conflict.volume_title or conflict.volume_id, name=conflict.name) }}</p>
+    <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ conflict.volume_id }}/move">
+        <input type="hidden" name="from_wishlist_id" value="{{ conflict.id }}">
+        <input type="hidden" name="volume_title" value="{{ conflict.volume_title }}">
+        <button type="submit" class="btn btn-primary">{{ _('Move it here') }}</button>
+        <a class="btn btn-ghost" href="{{ base_path }}/wishlist/{{ wishlist.id }}">{{ _('Keep it there') }}</a>
+    </form>
+</div>
+{% endif %}
+
 <div class="detail-header-row">
     <h2>{{ wishlist.name }}</h2>
     {% if is_owner %}
@@ -59,7 +73,7 @@
         <tbody>
             {% for entry in wishlist.entries %}
             <tr>
-                <td><a href="{{ catalog_url }}/volumes/{{ entry.volume_id }}">{{ entry.volume_title or entry.volume_id }}</a></td>
+                <td>{{ volume_link(entry.volume_id, entry.volume_title, catalog_url, assets_url, shared_url) }}</td>
                 {% if is_owner %}
                 <td>
                     <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}/entries/{{ entry.volume_id }}">
