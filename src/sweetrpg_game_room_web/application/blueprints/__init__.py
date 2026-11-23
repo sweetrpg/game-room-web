@@ -119,6 +119,7 @@ def render_page(page, context={}):
     build_timestamp, build_hash = _load_build_info()
     context.update({"showCookieMessage": show_cookie_message})
     context.setdefault("shared_url", os.environ.get(constants.SHARED_URL, "http://localhost:8081"))
+    context.setdefault("assets_url", os.environ.get(constants.ASSETS_URL, "http://localhost:8082").rstrip("/"))
     context.setdefault("catalog_url", os.environ.get(constants.CATALOG_WEB_URL, "http://localhost:8080/catalog"))
     # Path-only default: every API on this platform is exposed under the same dev.sweetrpg.com
     # host as every frontend (see docs/deployment-conventions.md's "API Ingress path

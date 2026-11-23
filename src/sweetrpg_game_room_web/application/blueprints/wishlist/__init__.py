@@ -6,6 +6,7 @@ __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 from flask import Blueprint, current_app, request, flash
 from flask_babel import gettext as _
 from sweetrpg_game_room_web.application import constants
+from sweetrpg_game_room_web.application.game_room_client import wishlist_conflict
 from sweetrpg_web_core.helpers.context import get_context
 from sweetrpg_game_room_web.application.blueprints import (
     render_page,
@@ -96,7 +97,7 @@ def get_user_wishlist_page(user_id: str, wishlist_id: str):
     return _render_wishlist(context, user_id, wishlist_id)
 
 
-def _render_wishlist(context: dict, owner_id: str, wishlist_id: str):
+def _render_wishlist(context: dict, owner_id: str, wishlist_id: str, conflict: dict | None = None):
     wishlist = None
     try:
         wishlist = _client().get_wishlist(owner_id, wishlist_id)
@@ -108,6 +109,7 @@ def _render_wishlist(context: dict, owner_id: str, wishlist_id: str):
             "wishlist": wishlist,
             "is_owner": context["user"]["id"] == owner_id,
             "visibility_levels": constants.VISIBILITY_LEVELS,
+            "conflict": conflict,
         }
     )
     return render_page("apps/game-room/wishlist/detail.html", context=context)
@@ -149,12 +151,57 @@ def add_wishlist_entry(wishlist_id: str):
     if volume_id:
         try:
             _client().add_wishlist_entry(user_id, wishlist_id, volume_id, volume_title)
-        except Exception:
+        except Exception as exc:
+            existing = wishlist_conflict(exc)
+            if existing:
+                # Offer a move rather than a bare error; re-render in place so the choice
+                # survives without carrying the volume through a redirect.
+                conflict = {**existing, "volume_id": volume_id, "volume_title": volume_title}
+                return _render_wishlist(context, user_id, wishlist_id, conflict=conflict)
             current_app.logger.exception(
                 "Unable to add volume %s to wishlist %s!", volume_id, wishlist_id
             )
             flash(_("Unable to add that volume right now."), "error")
     return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
+
+
+@blueprint.route("/<wishlist_id>/entries/<volume_id>/move", methods=["POST"])
+def move_entry(wishlist_id: str, volume_id: str):
+    """Move a volume from the wishlist named in `from_wishlist_id` onto this one."""
+    context = get_context()
+    user_id = context["user"]["id"]
+    source_id = request.form.get("from_wishlist_id", "").strip()
+    volume_title = request.form.get("volume_title", "").strip()
+    if source_id and source_id != wishlist_id:
+        try:
+            _client().remove_wishlist_entry(user_id, source_id, volume_id)
+        except Exception:
+            current_app.logger.exception(
+                "Unable to remove volume %s from wishlist %s for move!", volume_id, source_id
+            )
+            flash(_("Unable to move that volume right now."), "error")
+            return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
+        try:
+            _client().add_wishlist_entry(user_id, wishlist_id, volume_id, volume_title)
+            flash(_("Volume moved."), "success")
+        except Exception:
+            current_app.logger.exception(
+                "Unable to add volume %s to wishlist %s for move; restoring it to %s!",
+                volume_id,
+                wishlist_id,
+                source_id,
+            )
+            _restore_entry(user_id, source_id, volume_id, volume_title)
+            flash(_("Unable to move that volume right now."), "error")
+    return local_redirect("web.wishlist.get_wishlist_page", wishlist_id=wishlist_id)
+
+
+def _restore_entry(user_id: str, wishlist_id: str, volume_id: str, volume_title: str) -> None:
+    """Best-effort put-back after a failed move, so a volume is never dropped from every list."""
+    try:
+        _client().add_wishlist_entry(user_id, wishlist_id, volume_id, volume_title)
+    except Exception:
+        current_app.logger.exception("Unable to restore volume %s to wishlist %s!", volume_id, wishlist_id)
 
 
 @blueprint.route("/<wishlist_id>/entries/<volume_id>", methods=["POST"])

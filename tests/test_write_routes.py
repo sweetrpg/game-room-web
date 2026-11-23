@@ -794,3 +794,91 @@ def test_logged_in_visitor_survives_client_errors(owner_client, client_mock):
 
     assert resp.status_code == 200
     assert "No volumes yet" in resp.get_data(as_text=True)
+
+
+# -- catalog integration: covers, links, wishlist conflict --
+
+
+def _conflict_error(status=409, body=None):
+    resp = MagicMock(status_code=status)
+    resp.json.return_value = body if body is not None else {"wishlist_id": "wl-old", "wishlist_name": "Holiday"}
+    exc = Exception("conflict")
+    exc.response = resp
+    return exc
+
+
+def _wishlist(entries=()):
+    return {"user_id": "user-1", "id": "wl-new", "name": "Birthday", "visibility": "private", "entries": list(entries)}
+
+
+@pytest.mark.parametrize(
+    "setup, path",
+    [
+        ("library", "/library/"),
+        ("wishlist", "/wishlist/wl-new"),
+        ("table", "/tables/t-1"),
+        ("loans", "/loans/"),
+    ],
+)
+def test_views_show_cover_and_catalog_link_for_each_volume(owner_client, client_mock, setup, path):
+    client_mock.get_library.return_value = {
+        "user_id": "user-1", "default_visibility": "private", "entries": [{"volume_id": "vol-9", "volume_title": "Core"}],
+    }
+    client_mock.get_wishlist.return_value = _wishlist([{"volume_id": "vol-9", "volume_title": "Core"}])
+    client_mock.get_table.return_value = {
+        "user_id": "user-1", "id": "t-1", "name": "T", "visibility": "private",
+        "volume_ids": ["vol-9"], "volume_titles": {"vol-9": "Core"},
+    }
+    client_mock.list_loans_lent.return_value = [
+        {"id": "l-1", "volume_id": "vol-9", "volume_title": "Core", "borrower_name": "Sam", "status": "lent"}
+    ]
+    client_mock.list_loans_borrowed.return_value = []
+    body = owner_client.get(path).get_data(as_text=True)
+    assert "/asset/cover/vol-9" in body
+    assert "/volumes/vol-9" in body
+    assert "cover-placeholder" in body
+
+
+def test_view_renders_when_volume_has_no_title_or_cover_data(owner_client, client_mock):
+    client_mock.get_wishlist.return_value = _wishlist([{"volume_id": "vol-bare"}])
+    resp = owner_client.get("/wishlist/wl-new")
+    assert resp.status_code == 200
+    assert ">vol-bare</a>" in resp.get_data(as_text=True)
+
+
+def test_add_wishlist_entry_conflict_names_existing_wishlist_with_move_action(owner_client, client_mock):
+    client_mock.add_wishlist_entry.side_effect = _conflict_error()
+    client_mock.get_wishlist.return_value = _wishlist()
+    resp = owner_client.post("/wishlist/wl-new/entries", data={"volume_id": "vol-1", "volume_title": "Core"})
+    body = resp.get_data(as_text=True)
+    assert resp.status_code == 200
+    assert "&#34;Holiday&#34;" in body or '"Holiday"' in body
+    assert "/wishlist/wl-new/entries/vol-1/move" in body
+    assert 'name="from_wishlist_id" value="wl-old"' in body
+
+
+def test_add_wishlist_entry_other_409_shape_falls_back_to_generic_error(owner_client, client_mock):
+    client_mock.add_wishlist_entry.side_effect = _conflict_error(body={"error": "dup"})
+    resp = owner_client.post("/wishlist/wl-new/entries", data={"volume_id": "vol-1"})
+    assert resp.status_code == 302
+
+
+def test_move_entry_removes_from_source_then_adds_to_target(owner_client, client_mock):
+    resp = owner_client.post(
+        "/wishlist/wl-new/entries/vol-1/move", data={"from_wishlist_id": "wl-old", "volume_title": "Core"}
+    )
+    assert resp.status_code == 302
+    client_mock.remove_wishlist_entry.assert_called_once_with("user-1", "wl-old", "vol-1")
+    client_mock.add_wishlist_entry.assert_called_once_with("user-1", "wl-new", "vol-1", "Core")
+
+
+def test_move_entry_restores_source_when_add_fails(owner_client, client_mock):
+    client_mock.add_wishlist_entry.side_effect = [Exception("boom"), None]
+    owner_client.post("/wishlist/wl-new/entries/vol-1/move", data={"from_wishlist_id": "wl-old"})
+    assert client_mock.add_wishlist_entry.call_args_list[-1].args == ("user-1", "wl-old", "vol-1", "")
+
+
+def test_move_entry_keeps_volume_in_place_when_remove_fails(owner_client, client_mock):
+    client_mock.remove_wishlist_entry.side_effect = Exception("boom")
+    owner_client.post("/wishlist/wl-new/entries/vol-1/move", data={"from_wishlist_id": "wl-old"})
+    client_mock.add_wishlist_entry.assert_not_called()

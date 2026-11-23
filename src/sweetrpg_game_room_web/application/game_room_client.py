@@ -15,6 +15,25 @@ from flask import session
 from sweetrpg_game_room_web.application import constants
 
 
+def wishlist_conflict(exc: Exception) -> dict | None:
+    """The wishlist a volume is already on, from a 409 add-to-wishlist error.
+
+    game-room-api refuses a second wishlist for a volume with a 409 whose JSON body names the
+    existing wishlist as `wishlist_id` and `wishlist_name`. Returns None for any other failure,
+    so callers fall through to their generic error.
+    """
+    resp = getattr(exc, "response", None)
+    if resp is None or resp.status_code != 409:
+        return None
+    try:
+        body = resp.json()
+    except ValueError:
+        return None
+    if not isinstance(body, dict) or not body.get("wishlist_id"):
+        return None
+    return {"id": body["wishlist_id"], "name": body.get("wishlist_name") or body["wishlist_id"]}
+
+
 class GameRoomClient:
     def __init__(self, base_url: str):
         self.base_url = base_url.rstrip("/")
