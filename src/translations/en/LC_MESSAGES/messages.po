@@ -537,3 +537,18 @@ msgstr "Privacy Policy"
 
 msgid "Support"
 msgstr "Support"
+
+msgid "\"%(title)s\" is already on your wishlist \"%(name)s\"."
+msgstr "\"%(title)s\" is already on your wishlist \"%(name)s\"."
+
+msgid "Move it here"
+msgstr "Move it here"
+
+msgid "Keep it there"
+msgstr "Keep it there"
+
+msgid "Volume moved."
+msgstr "Volume moved."
+
+msgid "Unable to move that volume right now."
+msgstr "Unable to move that volume right now."
