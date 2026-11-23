@@ -1,3 +1,12 @@
+## [0.19.1] - 2026-11-23
+
+### 🐛 Bug Fixes
+
+- *(wishlist)* Show the conflict banner when the add dialog gets a 409
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.19.0
 ## [0.19.0] - 2026-11-23
 
 ### 🚀 Features
