@@ -157,7 +157,7 @@ def add_wishlist_entry(wishlist_id: str):
                 # Offer a move rather than a bare error; re-render in place so the choice
                 # survives without carrying the volume through a redirect.
                 conflict = {**existing, "volume_id": volume_id, "volume_title": volume_title}
-                return _render_wishlist(context, user_id, wishlist_id, conflict=conflict)
+                return _render_wishlist(context, user_id, wishlist_id, conflict=conflict), 409
             current_app.logger.exception(
                 "Unable to add volume %s to wishlist %s!", volume_id, wishlist_id
             )

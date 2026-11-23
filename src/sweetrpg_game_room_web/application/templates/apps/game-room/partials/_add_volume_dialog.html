@@ -123,7 +123,18 @@
         body: 'volume_id=' + encodeURIComponent(selected.id) +
               '&volume_title=' + encodeURIComponent(selected.title || '')
       })
-        .then(function () { window.location.reload(); })
+        .then(function (r) {
+          // 409 carries the rendered conflict banner with its "Move it here" action; a reload
+          // would drop it, so show that page instead.
+          if (r.status === 409) {
+            return r.text().then(function (html) {
+              document.open();
+              document.write(html);
+              document.close();
+            });
+          }
+          window.location.reload();
+        })
         .catch(function () { confirmBtn.disabled = false; });
     });
   });
