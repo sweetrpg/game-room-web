@@ -851,7 +851,7 @@ def test_add_wishlist_entry_conflict_names_existing_wishlist_with_move_action(ow
     client_mock.get_wishlist.return_value = _wishlist()
     resp = owner_client.post("/wishlist/wl-new/entries", data={"volume_id": "vol-1", "volume_title": "Core"})
     body = resp.get_data(as_text=True)
-    assert resp.status_code == 200
+    assert resp.status_code == 409
     assert "&#34;Holiday&#34;" in body or '"Holiday"' in body
     assert "/wishlist/wl-new/entries/vol-1/move" in body
     assert 'name="from_wishlist_id" value="wl-old"' in body
@@ -882,3 +882,12 @@ def test_move_entry_keeps_volume_in_place_when_remove_fails(owner_client, client
     client_mock.remove_wishlist_entry.side_effect = Exception("boom")
     owner_client.post("/wishlist/wl-new/entries/vol-1/move", data={"from_wishlist_id": "wl-old"})
     client_mock.add_wishlist_entry.assert_not_called()
+
+
+def test_add_volume_dialog_script_renders_conflict_response_instead_of_reloading(owner_client, client_mock):
+    # The add dialog submits with fetch(); it must show the 409 page, not just reload.
+    client_mock.get_wishlist.return_value = _wishlist()
+    body = owner_client.get("/wishlist/wl-new").get_data(as_text=True)
+    assert "r.status === 409" in body
+    assert "document.write(html)" in body
+    assert body.index("r.status === 409") < body.index("window.location.reload()")
