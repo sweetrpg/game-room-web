@@ -10,6 +10,9 @@
     position: absolute; top: 8px; right: 8px; z-index: 2;
     padding: 4px; cursor: pointer;
   }
+  /* .card clips overflow, so this tooltip opens down and inward instead of above. */
+  .wishlist-card-delete .tooltip { top: calc(100% + 8px); bottom: auto; left: auto; right: 0; transform: none !important; }
+  .wishlist-card-delete .tooltip::after { display: none; }
   .wishlist-card-meta {
     display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 8px;
   }
@@ -40,8 +43,9 @@
         {% if is_owner %}
         <form method="post" action="{{ base_path }}/wishlist/{{ wishlist.id }}" class="wishlist-card-delete">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete wishlist') }}" aria-label="{{ _('Delete wishlist') }}" data-wishlist-name="{{ wishlist.name }}">
+            <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Delete wishlist') }}" data-wishlist-name="{{ wishlist.name }}">
                 <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+                <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Delete wishlist') }}</span></span>
             </button>
         </form>
         {% endif %}
