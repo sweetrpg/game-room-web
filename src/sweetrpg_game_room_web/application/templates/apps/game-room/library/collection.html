@@ -136,8 +136,9 @@
             <td>
                 <form method="post" action="{{ base_path }}/library/entries/{{ entry.volume_id }}" class="entry-remove">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Remove') }}" aria-label="{{ _('Remove') }}" data-volume-title="{{ entry.volume_title or entry.volume_id }}">
+                    <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Remove') }}" data-volume-title="{{ entry.volume_title or entry.volume_id }}">
                         <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+                        <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Remove') }}</span></span>
                     </button>
                 </form>
             </td>

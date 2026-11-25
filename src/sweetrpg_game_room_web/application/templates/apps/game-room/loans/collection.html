@@ -50,8 +50,9 @@
                     {% endif %}
                     <form method="post" action="{{ base_path }}/loans/{{ loan.id }}" class="loan-delete-form">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="icon-btn icon-btn-danger" title="{{ _('Delete loan') }}" aria-label="{{ _('Delete loan') }}">
+                        <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Delete loan') }}">
                             <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
+                            <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Delete loan') }}</span></span>
                         </button>
                     </form>
                 </td>

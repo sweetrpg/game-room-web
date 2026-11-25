@@ -41,7 +41,7 @@
         <form method="post" action="{{ base_path }}/tables/{{ table.id }}">
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Delete table') }}">
-                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
                 <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Delete table') }}</span></span>
             </button>
         </form>
@@ -67,7 +67,7 @@
                     <form method="post" action="{{ base_path }}/tables/{{ table.id }}/volumes/{{ volume_id }}">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="icon-btn icon-btn-danger tooltip-host" aria-label="{{ _('Remove') }}">
-                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash-alt.svg');"></span>
+                            <span class="icon-mask" style="mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg'); -webkit-mask-image: url('{{ shared_url }}/static/svgs/fontawesome/solid/trash.svg');"></span>
                             <span class="tooltip" role="tooltip"><span class="tooltip-title">{{ _('Remove') }}</span></span>
                         </button>
                     </form>
